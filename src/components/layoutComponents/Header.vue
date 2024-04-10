@@ -1,0 +1,54 @@
+<template>
+  <!-- 상단메뉴 -->
+  <nav class="flex justify-between items-center h-[80px] mx-auto font-basic"
+      :class="getHeaderType[0]">
+
+    <!-- 상단메뉴 -->
+    <div :class="getHeaderType[1]">
+      <span class="hover:cursor-pointer" @click="goToPage('/')">Q-MEET LOGO</span>
+    </div>
+
+    <!-- 상단중간 메뉴 -->
+    <ul class="flex text-base bg-white"
+      :class="getHeaderType[2]">
+
+      <li class="mr-10 hover:cursor-pointer" @click="goToPage('/project-list')">프로젝트 찾기</li>
+      <li class="mx-10 hover:cursor-pointer">프로젝트 등록</li>
+      <li class="mx-10 hover:cursor-pointer">큐밋이란?</li>
+      <li class="mx-10 hover:cursor-pointer">고객센터</li>
+    </ul>
+
+    <!-- 로그인 회원가입 -->
+    <ul class="flex grow basis-[14%]"
+      :class="getHeaderType[3]">
+
+      <li class="mr-5 bg-main-0">로그인</li>
+      <li class="mr-5">|</li>
+      <li>회원가입</li>
+    </ul>
+  </nav>
+</template>
+<script>
+export default {
+  props: ['headerType'],
+  methods: {
+    goToPage(url){
+      this.$router.push(url)
+    }
+  },
+  computed: {
+    getHeaderType()
+    {
+      //헤더 Width, 각요소 basis      
+      if(this.headerType == '1')
+      {        
+        return ['w-[1060px]', 'basis-[22%]', 'basis-[64%]', 'basis-[14%]']
+      }
+      else
+      {
+        return ['w-[1440px]', 'basis-[16%]', 'basis-[73%]', 'basis-[11%]']
+      }      
+    }
+  }
+}
+</script>

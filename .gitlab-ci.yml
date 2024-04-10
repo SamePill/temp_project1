@@ -1,0 +1,48 @@
+stages:
+  - build
+  - deploy
+ 
+dev_build:
+  stage: build
+  variables:
+    GIT_CLEAN_FLAGS: none
+  script:                
+    - git config --global url."https://".insteadOf git://    
+    - npm install
+    - npm run build
+
+  tags:
+    - qmeet-dev-runner
+ 
+  only:
+    - master
+    - main
+
+dev_deploy:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+
+  script:
+    - sudo cp -rf dist /home/lwork/qmeet/front
+
+  tags:
+    - qmeet-dev-runner
+ 
+  only:
+    - master
+    - main
+
+live_build:
+  stage: build
+  variables:
+    GIT_CLEAN_FLAGS: none
+  script:
+    - npm install
+    - npm run build
+
+  tags: 
+    - live-runner 
+ 
+  only:
+    - tags
