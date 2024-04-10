@@ -1,7 +1,7 @@
 <template>    
 
   <!-- 헤더 -->
-  <Header headerType="2" />
+  <!-- <Header headerType="2" /> -->
 
   <!-- 배너 -->
   <div
@@ -82,17 +82,17 @@
   </p>
 
   <!-- 푸더 -->
-  <Footer />
+  <!-- <Footer /> -->
 </template>
 
 <script>
-import Header from '@/components/layoutComponents/Header.vue'
-import Footer from '@/components/layoutComponents/Footer.vue'
-import QaProject from '@/components/baseComponents/QaProject.vue'
+// import Header from '@/components/layoutComponents/Header.vue'
+// import Footer from '@/components/layoutComponents/Footer.vue'
+// import QaProject from '@/components/baseComponents/QaProject.vue'
 
 export default {
   components: {
-    Header, Footer, QaProject
+    // Header, Footer, QaProject
   },
   methods: {
     goToPage(path){

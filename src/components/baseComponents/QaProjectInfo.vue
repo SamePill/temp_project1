@@ -3,8 +3,8 @@
         <span class="text-[28px]">[대기업] 농협은행 (내부 직원용) 인사관련 프로그램 QA</span>
 
         <div class="mt-3">
-            <TypeText class="mr-[10px]" color="blue-0" text="기간제 상주"/>
-            <TypeText color="red-0" text="초급가능"/>
+            <!-- <TypeText class="mr-[10px]" color="blue-0" text="기간제 상주"/>
+            <TypeText color="red-0" text="초급가능"/> -->
         </div>
 
         <!-- 프로젝트 -->
@@ -77,11 +77,11 @@
     </div>
 </template>
 <script>
-import TypeText from '@/components/uiComponents/TypeText.vue'
+// import TypeText from '@/components/uiComponents/TypeText.vue'
 
 export default {
     components: {
-        TypeText
+        // TypeText
     }    
 }
 </script>

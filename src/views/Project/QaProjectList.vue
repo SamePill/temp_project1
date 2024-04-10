@@ -1,16 +1,16 @@
 <template>
   <!-- 헤더 -->
-  <Header headerType="1"/>
+  <!-- <Header headerType="1"/> -->
 
   <div class="w-[1060px] h-10 my-10 mx-auto font-basic ">
 
     <!-- 상단 검색 -->
     <div class="flex items-center justify-between w-full">
-      <div>
+      <!-- <div>
         <DropDown class="mr-5"/>
         <DropDown class="mr-5"/>
         <DropDown />
-      </div>
+      </div> -->
 
       <!--검색 -->
       <div class="w-[300px] py-[10px] px-[10px] border border-line-1 rounded box-border flex justify-between items-center hover:border-main-0 " >
@@ -29,13 +29,15 @@
   </div>
 </template>
 <script>
-import Header from '@/components/layoutComponents/Header.vue'
-import DropDown from '@/components/uiComponents/DrowDown.vue'
+// import Header from '@/components/layoutComponents/Header.vue'
+// import DropDown from '@/components/uiComponents/DrowDown.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
 
 export default {
   components: {
-    Header, DropDown, QaProject
+    // Header, 
+    // DropDown, 
+    QaProject
   },
   data() {
     return {      
