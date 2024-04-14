@@ -22,9 +22,15 @@
     <ul class="flex grow basis-[14%]"
       :class="getHeaderType[3]">
 
-      <li class="mr-5 bg-main-0">로그인</li>
+      <li class="mr-5 bg-main-0">
+        <button>
+          로그인
+        </button>
+      </li>
       <li class="mr-5">|</li>
-      <li>회원가입</li>
+        <button>
+          회원가입
+        </button>
     </ul>
   </nav>
 </template>

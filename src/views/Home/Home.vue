@@ -16,9 +16,7 @@
       <span class="text-lg text-text-1">쉽고 빠르게 테스트 인력을 구할 수 있습니다.</span>
 
       <!-- 공고 등록하기 -->
-      <div class="w-[210px] h-14 bg-main-0 rounded-full mt-10 flex justify-center items-center">
-        <button class="text-white">공고 등록하기</button>
-      </div>
+      <button class="w-[210px] h-14 bg-main-0 rounded-full mt-10 flex justify-center items-center text-white">공고 등록하기</button>
     </div>
     <img class="mr-[100px]" src="@/assets/rafiki.png" width="300px" height="286px" alt="">
   </div>

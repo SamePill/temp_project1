@@ -2,25 +2,40 @@
 <div>
   <!-- 헤더 -->
   <Header headerType="1"/>
-  <div  class="flex justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 px-[700px] pt-10 pb-[100px] bg-[#fefefe]">
-    <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-[30px]">
-      <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative gap-2.5">
-        <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
-          <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
+  <div  class="px-[700px] pt-10 pb-[100px] bg-[#fefefe]">
+      <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative relative ">
+        <div class="flex justify-between w-[520px] mb-[10px]">
+          <p class="text-2xl font-medium text-left text-[#191919] ">
             프로젝트 등록하기
           </p>
           <p class="flex-grow-0 flex-shrink-0 text-left">
-            <span class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-[#191919]">{{pageNo}}</span>
-            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#777]">{{"/"}}{{totPageNo}}</span>
+            <span class="text-2xl font-bold text-left text-[#191919]">{{pageNo}} </span>
+            <span class="text-2xl text-left text-[#777]">/</span>
+            <span class="text-xl text-left text-[#777]">{{totPageNo}}</span>
           </p>
         </div>
-        <div class="mb-10 flex-grow-0 flex-shrink-0 w-[519px] h-px bg-[#191919]"></div>
-        <PrjtRegiPage1 :info="PrjtRegiPage1Info"/>
-        <button class="flex justify-center w-[520px] py-4 rounded bg-[#1ba494] text-white">
-          다음 단계로 넘어가기
-        </button>
+        <div class="flex-grow-0 flex-shrink-0 w-[520px] h-px bg-[#191919]"></div>
+        <div v-show="pageNo==1 ? 'true' : false">
+          <PrjtRegiPage1 ref="page1" :info="PrjtRegiPage1Info"/>
+        </div>
+        <div v-show="pageNo==2 ? 'true' : false">
+          <PrjtRegiPage2 ref="page2"/>
+        </div>
+        <div v-show="pageNo==3 ? 'true' : false">
+          <PrjtRegiPage3 ref="page3"/>
+        </div>
+        <div v-show="pageNo==4 ? 'true' : false">
+          <PrjtRegiPage4 ref="page4"/>
+        </div>
+        <div class="w-[520px] mt-[60px] flex" :class="1 < pageNo ? 'justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5' :'gap-5'">
+          <button @click="movePage('pre')" v-if="pageNo > 1" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494] text-[#1ba494]">
+            이전 단계로 이동              
+          </button>
+          <button @click="movePage(pageNo == totPageNo ? 'regiCmplt': 'next')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white">
+            {{pageNo == totPageNo ? '등록완료': '다음 단계로 넘어가기'}}
+          </button>
+        </div>
       </div>
-    </div>
   </div>
 </div>
 
@@ -28,16 +43,23 @@
 </template>
 <script>
 import Header    from '@/components/layoutComponents/Header.vue'
-import PrjtRegiPage1 from '@/components/baseComponents/PrjtRegiPage1.vue'
+import PrjtRegiPage1 from '@/views/Prjt/PrjtRegiPage1.vue'
+import PrjtRegiPage2 from '@/views/Prjt/PrjtRegiPage2.vue'
+import PrjtRegiPage3 from '@/views/Prjt/PrjtRegiPage3.vue'
+import PrjtRegiPage4 from '@/views/Prjt/PrjtRegiPage4.vue'
 
 export default {
   components: {
     Header
    ,PrjtRegiPage1
+   ,PrjtRegiPage2
+   ,PrjtRegiPage3
+   ,PrjtRegiPage4
   },
   data() {
     return {    
-      pageNo: '1'
+      pageNo: 4
+     ,totPageNo: 4
      ,PrjtRegiPage1Info:{
        occuInfo : {valList:[ {cdVal:'a',cdNm:'#제조',chkVal:true}
                             ,{cdVal:'b',cdNm:'#IT'  ,chkVal:false}
@@ -68,7 +90,19 @@ export default {
     };
   }
     ,methods:{
-   
+      movePage(div){
+        if(div == 'next'){
+          this.pageNo = this.pageNo +1;
+        }else if(div == 'pre'){
+          this.pageNo = this.pageNo -1;
+        }else if(div == 'regiCmplt'){
+          let page1Info = this.$refs.page1.getInfo();
+          let params = this.$refs.page2.getInfo();
+          let page3Info = this.$refs.page3.getInfo();
+          let page4Info = this.$refs.page4.getInfo();
+          console.log(page1Info,params,page3Info,page4Info)
+        }
+      }
     }
 }
 </script>
