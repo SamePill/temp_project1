@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import TypeText from '@/components/uIComponents/TypeText.vue'
+import TypeText from '@/components/uiComponents/TypeText.vue'
 
 export default {
   components:{

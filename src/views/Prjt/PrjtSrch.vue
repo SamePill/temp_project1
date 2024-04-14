@@ -30,7 +30,7 @@
 </template>
 <script>
 import Header from '@/components/layoutComponents/Header.vue'
-import DropDown from '@/components/uIComponents/DrowDown.vue'
+import DropDown from '@/components/uiComponents/DrowDown.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
 
 export default {
