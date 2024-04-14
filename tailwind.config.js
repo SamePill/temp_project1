@@ -23,6 +23,7 @@ module.exports = {
         'text-2': '#777',
         'text-3': '#999999',
         'tag-0': '#F2F4F7',
+        'border-0' : '#76c8bf'
       },
       fontFamily: {
         basic: ["Pretendard-Regular"],

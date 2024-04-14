@@ -1,20 +1,22 @@
 <template>
-    <!-- 헤더 -->
-    <Header headerType="1" />
+    <div>
+        <!-- 헤더 -->
+        <Header headerType="1" />
 
-    <!-- QA프로젝트 정보 -->
-    <div class="w-[1060px] flex justify-between mx-auto mt-10 font-basic">
-        <QaProjectInfo />
-        <div>
-            <!-- 현재 지원가능한 인원 -->
-            <SupportAvailableEmployee class="hidden"/>
-            
-            <!-- 지원현황 -->
-            <QaProjectSupportCurrentInfo class="hidden"/> 
+        <!-- QA프로젝트 정보 -->
+        <div class="w-[1060px] flex justify-between mx-auto mt-10 font-basic">
+            <QaProjectInfo />
+            <div>
+                <!-- 현재 지원가능한 인원 -->
+                <SupportAvailableEmployee class="hidden"/>
+                
+                <!-- 지원현황 -->
+                <QaProjectSupportCurrentInfo class="hidden"/> 
 
-            <!-- 지원서 작성 -->
-            <QaProjectSupportWrite />
+                <!-- 지원서 작성 -->
+                <QaProjectSupportWrite />
 
+            </div>
         </div>
     </div>
 </template>
