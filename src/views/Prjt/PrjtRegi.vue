@@ -5,7 +5,7 @@
   <div  class="px-[700px] pt-10 pb-[100px] bg-[#fefefe]">
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative relative ">
         <div class="flex justify-between w-[520px] mb-[10px]">
-          <p class="text-2xl font-medium text-left text-[#191919] ">
+          <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
             프로젝트 등록하기
           </p>
           <p class="flex-grow-0 flex-shrink-0 text-left">
@@ -58,7 +58,7 @@ export default {
   },
   data() {
     return {    
-      pageNo: 4
+      pageNo: ''
      ,totPageNo: 4
      ,PrjtRegiPage1Info:{
        occuInfo : {valList:[ {cdVal:'a',cdNm:'#제조',chkVal:true}
@@ -90,19 +90,26 @@ export default {
     };
   }
     ,methods:{
-      movePage(div){
+      init(){
+        this.pageNo = 1;
+      }
+     ,movePage(div){
         if(div == 'next'){
           this.pageNo = this.pageNo +1;
         }else if(div == 'pre'){
           this.pageNo = this.pageNo -1;
         }else if(div == 'regiCmplt'){
           let page1Info = this.$refs.page1.getInfo();
-          let params = this.$refs.page2.getInfo();
+          let page2Info = this.$refs.page2.getInfo();
           let page3Info = this.$refs.page3.getInfo();
           let page4Info = this.$refs.page4.getInfo();
-          console.log(page1Info,params,page3Info,page4Info)
+          console.log(page1Info,page2Info,page3Info,page4Info)
+          this.confirm('저장이 완료되었습니다')
         }
       }
+    }
+    ,mounted(){
+      this.init();
     }
 }
 </script>

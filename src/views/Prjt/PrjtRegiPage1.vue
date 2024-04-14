@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-[30px]">
-      <p class="text-xl text-left text-[#191919] mb-5">직군 
+      <p class="text-xl font-medium text-left text-[#191919] mb-5">직군 
         <span class="text-xl text-left text-[#ff5252]">*</span>
       </p>
       <Chipset :info="info.occuInfo"/>
