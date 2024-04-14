@@ -103,9 +103,11 @@ export default {
           let page2Info = this.$refs.page2.getInfo();
           let page3Info = this.$refs.page3.getInfo();
           let page4Info = this.$refs.page4.getInfo();
-          console.log(page1Info,page2Info,page3Info,page4Info)
-          this.confirm('저장이 완료되었습니다')
+          console.log(page1Info,page2Info,page3Info,page4Info);
         }
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth' });
       }
     }
     ,mounted(){

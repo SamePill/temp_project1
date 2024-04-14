@@ -18,18 +18,17 @@
           <span class="text-xl text-left text-[#ff5252]">*</span>
         </p>
         <p class="text-sm text-left">
-          <span class="text-sm text-left text-[#1ba494]">1</span
-          ><span class="text-sm font-bold text-left text-[#191919]">
-          </span
-          ><span class="text-sm text-left text-[#777]">/100</span>
+          <span class="text-sm text-left text-[#1ba494]">1</span>
+          <span class="text-sm font-bold text-left text-[#191919]"></span>
+          <span class="text-sm text-left text-[#777]">/100</span>
         </p>
       </div>
-      <input tye="text" class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트명을 입력주세요."/>
+      <input tye="text" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트명을 입력주세요."/>
     </div>
     <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
       <p class="text-xl text-left text-[#191919]">희망 시작일 <span class="text-[#ff5252]">*</span></p>
       <div class="flex flex-col justify-center items-start gap-2">
-        <input type="date" class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트 시작 희망일을 선택해 주세요."/>
+        <input type="date" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트 시작 희망일을 선택해 주세요."/>
         <div class="flex justify-start items-center relative gap-0.5">
           <input type="checkbox" class="w-[15px] h-[15px]"/>
           <p class="text-base px-1 text-left text-[#777]">협의가능</p>
@@ -44,7 +43,7 @@
         <div class="flex justify-between items-center w-40 h-[51px] relative  p-4 rounded border border-[#ddd]">
           <p class="text-base text-left text-[#191919]">월 단위</p>
         </div>
-        <input type="text" class="w-[340px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="예상 근무기간을 입력해주세요."/>
+        <input type="text" class="w-[340px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="예상 근무기간을 입력해주세요."/>
       </div>
     </div>
     <div class="flex flex-col justify-start items-start mt-[30px]">
