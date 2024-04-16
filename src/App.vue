@@ -2,10 +2,9 @@
   <div id="app">
 
     <!-- 헤더 -->
-    <!-- <template
+    <template
       v-if="
         this.$route.path.indexOf('/login') >= 0 ||
-        this.$route.path == null ||
         this.$route.path.indexOf('/resetPassword') >= 0 ||
         this.$route.path.indexOf('/regiUser') >= 0 
       "
@@ -14,8 +13,17 @@
     </template>
     <template v-else>
       <Header />
-    </template> -->
-
+    </template>
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+import Header from '@/components/layoutComponents/Header.vue'
+export default {
+  components: {
+    Header
+  },
+}
+</script>
+

@@ -8,7 +8,7 @@ import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
 // import { store } from "@/store";
 
-var g2Mixin = {
+var qmeetMixin = {
   data: function() {
     return {
       TRUE_VALUE: "Y",
@@ -82,4 +82,4 @@ var g2Mixin = {
   }
 };
 
-export default g2Mixin;
+export default qmeetMixin;
