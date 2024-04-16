@@ -1,7 +1,5 @@
 <template>    
 
-  <!-- 헤더 -->
-  <Header headerType="2" />
 
   <!-- 배너 -->
   <div
