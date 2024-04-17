@@ -35,7 +35,10 @@
   </nav>
 </template>
 <script>
+// import baseMixin from "@/utils/baseMixin.js";
+
 export default {
+  // mixins: [baseMixin],
   props: ['headerType'],
   methods: {
     goToPage(url){

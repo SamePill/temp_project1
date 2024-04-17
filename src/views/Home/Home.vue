@@ -1,7 +1,5 @@
 <template>    
 
-  <!-- 헤더 -->
-  <Header headerType="2" />
 
   <!-- 배너 -->
   <div
@@ -79,23 +77,40 @@
     <span class="font-bold">5200명</span>
   </p>
 
+  <button  v-on:click="myFunction()">Click me</button>
   <!-- 푸더 -->
   <Footer />
 </template>
 
 <script>
-import Header from '@/components/layoutComponents/Header.vue'
+import baseMixin from "@/utils/baseMixin.js";
+//import Header from '@/components/layoutComponents/Header.vue'
 import Footer from '@/components/layoutComponents/Footer.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
 
 export default {
+  mixins: [baseMixin],
   components: {
-    Header, Footer, QaProject
+    //Header, 
+    Footer, QaProject
   },
   methods: {
     goToPage(path){
       this.$router.push(path)
     },
+    async myFunction(){
+      alert("test");
+      var api = "/v1/common/code";
+      var postParams = "";
+      //var loading = "";
+      //var isErr = "";
+      let res = await this.gfn_utils.axiosPost(
+        api,
+        postParams
+      );
+
+      console.log(res);
+    }
   },
   data() {
     return {
