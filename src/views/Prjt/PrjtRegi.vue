@@ -36,13 +36,15 @@
           </button>
         </div>
       </div>
+    <ModalTest ref="ModalTest"/>
   </div>
 </div>
 
 
 </template>
 <script>
-import Header    from '@/components/layoutComponents/Header.vue'
+import Header        from '@/components/layoutComponents/Header.vue'
+import ModalTest     from '@/views/Prjt//ModalTest.vue'
 import PrjtRegiPage1 from '@/views/Prjt/PrjtRegiPage1.vue'
 import PrjtRegiPage2 from '@/views/Prjt/PrjtRegiPage2.vue'
 import PrjtRegiPage3 from '@/views/Prjt/PrjtRegiPage3.vue'
@@ -55,6 +57,7 @@ export default {
    ,PrjtRegiPage2
    ,PrjtRegiPage3
    ,PrjtRegiPage4
+   ,ModalTest
   },
   data() {
     return {    
@@ -94,17 +97,24 @@ export default {
         this.pageNo = 1;
       }
      ,movePage(div){
+        // this.test();
         if(div == 'next'){
           this.pageNo = this.pageNo +1;
+          this.scrollToTop();
         }else if(div == 'pre'){
           this.pageNo = this.pageNo -1;
+          this.scrollToTop();
         }else if(div == 'regiCmplt'){
           let page1Info = this.$refs.page1.getInfo();
           let page2Info = this.$refs.page2.getInfo();
           let page3Info = this.$refs.page3.getInfo();
           let page4Info = this.$refs.page4.getInfo();
+          
+          this.$refs.ModalTest.openPopup();
           console.log(page1Info,page2Info,page3Info,page4Info);
         }
+      }
+      ,scrollToTop(){
         window.scrollTo({
         top: 0,
         behavior: 'smooth' });
