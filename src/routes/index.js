@@ -7,6 +7,9 @@ import PrjtSrchDetl from "@/views/Prjt/PrjtSrchDetl.vue";
 import Login from "@/views/User/Login.vue";
 import FindId from "@/views/User/FindId.vue";
 import ResetPassword from "@/views/User/ResetPassword.vue";
+import Test from "@/views/Prjt/Test.vue";
+
+import TestPage from "@/views/Test/TestPage.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -51,6 +54,20 @@ export default createRouter({
     },
 
     /*********************** 마이페이지 ***********************/
+    
+    //비밀번호초기화
+    {
+      path: '/test',
+      component: Test,
+    },
+
+
+
+    //테스트 페이지
+    {
+      path: '/testPage',
+      component: TestPage,
+    },
     
   ],
 });

@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- 헤더 -->
-  <Header headerType="1"/>
+  <!-- <Header headerType="1"/> -->
   <div  class="px-[700px] pt-10 pb-[100px] bg-[#fefefe]">
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative relative ">
         <div class="flex justify-between w-[520px] mb-[10px]">
@@ -43,7 +43,7 @@
 
 </template>
 <script>
-import Header        from '@/components/layoutComponents/Header.vue'
+// import Header        from '@/components/layoutComponents/Header.vue'
 import ModalTest     from '@/views/Prjt//ModalTest.vue'
 import PrjtRegiPage1 from '@/views/Prjt/PrjtRegiPage1.vue'
 import PrjtRegiPage2 from '@/views/Prjt/PrjtRegiPage2.vue'
@@ -52,8 +52,8 @@ import PrjtRegiPage4 from '@/views/Prjt/PrjtRegiPage4.vue'
 
 export default {
   components: {
-    Header
-   ,PrjtRegiPage1
+    // Header
+    PrjtRegiPage1
    ,PrjtRegiPage2
    ,PrjtRegiPage3
    ,PrjtRegiPage4

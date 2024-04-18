@@ -101,7 +101,7 @@ export default {
     async myFunction(){
       alert("test");
       var api = "/v1/common/code";
-      var postParams = "";
+      var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
       //var loading = "";
       //var isErr = "";
       let res = await this.gfn_utils.axiosPost(

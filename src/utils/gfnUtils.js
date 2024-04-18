@@ -81,11 +81,11 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   console.log("api post url::::" + apiUrl);
   console.log("-------param-------");
   console.log(postParams);
-  console.log(window.$cookies.get("loginAccToken"));
-  if (window.$cookies.get("loginAccToken") != null) {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + window.$cookies.get("loginAccToken") || "";
-  }
+  //console.log(window.$cookies.get("loginAccToken"));
+  // if (window.$cookies.get("loginAccToken") != null) {
+  //   axios.defaults.headers.common["Authorization"] =
+  //     "Bearer " + window.$cookies.get("loginAccToken") || "";
+  // }
 
   return new Promise(function(resolve, reject) {
     //axiosHttp.post(apiUrl, {body: postParams}).then(
@@ -134,6 +134,7 @@ export const axiosPost = (api, postParams, loading, isErr) => {
             //   "ERROR",
             //   "오류가 발생하였습니다. (" + err.response + ")"
             // );
+            alert(err.response.status);
           }
         }
 
