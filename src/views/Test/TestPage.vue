@@ -36,6 +36,19 @@
                 </td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td><input type="text" v-model="testId" /></td>
+            </tr>
+            <tr>
+                <td>PASSWORD</td>
+                <td><input type="text" v-model="testPw" /></td>
+            </tr>
+            <tr>
+                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="Login()">Login</button>
+            </tr>
+        </table>
     </div>
 </template>
 <script>
@@ -48,6 +61,8 @@ export default {
             apiUrl:"/v1/common/code",
             apiParam: JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}),
             apiResult:"",
+            testId:"",
+            testPw:""
         }        
     },
     methods: {
@@ -66,6 +81,16 @@ export default {
             api,
             postParams
             );
+            console.log(res);
+            this.apiResult = JSON.stringify(res);
+        },
+        async Login(){
+            var api = this.apiUrl;
+            var postParams = {id: this.testId, pw: this.testPw};
+            let res = await this.gfn_utils.axiosPost(
+                                                        api,
+                                                        postParams
+                                                        );
             console.log(res);
             this.apiResult = JSON.stringify(res);
         }
