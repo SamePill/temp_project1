@@ -97,16 +97,16 @@ export const axiosPost = (api, postParams, loading, isErr) => {
         console.log("-------result-------");
         console.log(resData);
 
-        // if (resData.rtnCd == "00") {
-        //   store.commit("setLoading", false);
-        //   resolve(resData.rtnData);
-        // } else {
-        //   store.commit("setLoading", false);
-        //   console.log("오류");
-        //   store.commit("setAlertDialog", true);
-        //   openAlertDiaolog("ERROR", resData.rtnMsg);
-        //   reject(res);
-        // }
+        if (resData.rtnCd == "00") {
+          //store.commit("setLoading", false);
+          resolve(resData.rtnData);
+        } else {
+          //store.commit("setLoading", false);
+          console.log("오류");
+          //store.commit("setAlertDialog", true);
+          //openAlertDiaolog("ERROR", resData.rtnMsg);
+          reject(res);
+        }
       })
       .catch(err => {
         if (loading) {

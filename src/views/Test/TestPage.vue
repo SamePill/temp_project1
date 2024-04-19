@@ -1,6 +1,14 @@
 <template>
     <div>
-        <table>
+        <table border="1" width="250">
+            <tr>
+                <td colspan="2">
+                    <pre>
+                    var api = "/v1/common/code";
+                    var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
+                    </pre>
+                </td>
+            </tr>
             <tr>
                 <td>
                     API
@@ -11,51 +19,20 @@
             </tr>
             <tr>
                 <td>
-                    파라메터 1
+                    파라메터
                 </td>
                 <td>
-                    <input type="text" v-model="apiKey1" />
-                </td>
-                <td>
-                    <input type="text" v-model="apiVl1" />
+                    <input type="text" v-model="apiParam" />
                 </td>
             </tr>
             <tr>
-                <td>
-                    파라메터 2
-                </td>
-                <td>
-                    <input type="text" v-model="apiKey2"/>
-                </td>
-                <td>
-                    <input type="text" v-model="apiVl2"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    파라메터 3
-                </td>
-                <td>
-                    <input type="text" v-model="apiKey3"/>
-                </td>
-                <td>
-                    <input type="text" v-model="apiVl3"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    파라메터 4
-                </td>
-                <td>
-                    <input type="text" v-model="apiKey4"/>
-                </td>
-                <td>
-                    <input type="text" v-model="apiVl4"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
+                <td colspan="2">
                     <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="Test()">Click me</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea v-model="apiResult"></textarea>
                 </td>
             </tr>
         </table>
@@ -68,15 +45,9 @@ export default {
     mixins: [baseMixin],
     data(){
         return{
-            apiUrl:"",
-            apiKey1:"",
-            apiKey2:"",
-            apiKey3:"",
-            apiKey4:"",
-            apiVl1:"",
-            apiVl2:"",
-            apiVl3:"",
-            apiVl4:"",
+            apiUrl:"/v1/common/code",
+            apiParam: JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}),
+            apiResult:"",
         }        
     },
     methods: {
@@ -85,15 +56,9 @@ export default {
         },
         async Test(){
             var api = this.apiUrl;
-            
-            // let val = this.apiKey1==null?'':{[this.apiKey1]:this.apiVl1};
-            // let val2 = this.apiKey2==null?'':{[this.apiKey1]:this.apiVl1};
-            // let val3 = this.apiKey3==null?'':{[this.apiKey1]:this.apiVl1};
-            // let val4 = this.apiKey4==null?'':{[this.apiKey1]:this.apiVl1};
-
-            var postParams = {
-            
-            };
+            var postParams = JSON.parse(this.apiParam);
+            //var postParams = this.apiParam;
+            console.log("val ::"+postParams);
 
             //var loading = "";
             //var isErr = "";
@@ -102,7 +67,7 @@ export default {
             postParams
             );
             console.log(res);
-
+            this.apiResult = JSON.stringify(res);
         }
     }
 }
