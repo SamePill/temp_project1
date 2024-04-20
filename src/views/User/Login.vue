@@ -14,12 +14,12 @@
                 <div class="flex-grow-0 flex-shrink-0 w-[430px] h-px bg-[#191919]"></div>
             </div>
             <div class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
-                <input type="text" v-model="params.email" class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keydown="btnStatChng()" @blur="ruleChk()" placeholder="이메일" />
-                <input type="password" v-model="params.pswd"  class="mb-[70px] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keydown="btnStatChng()" placeholder="비밀번호" />
+                <input type="text" v-model="params.email" class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keyup="btnStatChng()" @blur="ruleChk()" placeholder="이메일" />
+                <input type="password" v-model="params.pswd"  class="mb-[70px] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keyup="btnStatChng()" placeholder="비밀번호" />
             </div>
         </div>
         <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-20">
-            <button class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white" :class="params.btnIsActv ? 'bg-[#1BA494]': ''">로그인 하기</button>
+            <button class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white" :class="params.btnIsActv=='' ? 'bg-[#1BA494]': ''">로그인 하기</button>
             <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-10">
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5">
                 <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">회원가입</button>
@@ -110,14 +110,13 @@ export default {
     }
     ,methods:{
         btnStatChng(){
-            if(this.params.email != '' && this.params.pswd != ''){
-                this.params.btnIsActv = true;
-            }else{
+            if(this.params.email == '' || this.params.pswd == ''){
                 this.params.btnIsActv = false;
+            }else{
+                this.params.btnIsActv = true;
             }
         }
        ,ruleChk(){
-            console.log('체크');
             console.log(this.gfn_rules.validEmail(this.params.email));
        }
     }

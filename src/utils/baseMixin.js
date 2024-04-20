@@ -47,7 +47,7 @@ var qmeetMixin = {
       this.$router.replace({ name: "Login" });
     }
 
-    console.log(":::::::: mixin beforeCreate ::::::::");
+    // console.log(":::::::: mixin beforeCreate ::::::::");
     // if (!store.getters.hasCommCode) {
     //   gfnUtils.getCommCodeList();
     // }
