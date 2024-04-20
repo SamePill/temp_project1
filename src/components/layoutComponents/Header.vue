@@ -25,7 +25,7 @@
       :class="getHeaderType[3]">
 
       <li class="mr-5 bg-main-0">
-        <button>
+        <button @click="goToPage('/login')">
           로그인
         </button>
       </li>
