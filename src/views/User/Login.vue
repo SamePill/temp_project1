@@ -14,7 +14,7 @@
                 <div class="flex-grow-0 flex-shrink-0 w-[430px] h-px bg-[#191919]"></div>
             </div>
             <div class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
-                <input type="text" v-model="params.email" class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keydown="btnStatChng()" placeholder="이메일" />
+                <input type="text" v-model="params.email" class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keydown="btnStatChng()" @blur="ruleChk()" placeholder="이메일" />
                 <input type="password" v-model="params.pswd"  class="mb-[70px] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keydown="btnStatChng()" placeholder="비밀번호" />
             </div>
         </div>
@@ -116,6 +116,10 @@ export default {
                 this.params.btnIsActv = false;
             }
         }
+       ,ruleChk(){
+            console.log('체크');
+            console.log(this.gfn_rules.validEmail(this.params.email));
+       }
     }
 }
 </script>

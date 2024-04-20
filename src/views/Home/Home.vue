@@ -83,15 +83,11 @@
 </template>
 
 <script>
-import baseMixin from "@/utils/baseMixin.js";
-//import Header from '@/components/layoutComponents/Header.vue'
 import Footer from '@/components/layoutComponents/Footer.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
 
 export default {
-  mixins: [baseMixin],
   components: {
-    //Header, 
     Footer, QaProject
   },
   methods: {
