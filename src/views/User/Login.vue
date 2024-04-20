@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-20">
-            <button class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white" :class="params.btnIsActv=='' ? 'bg-[#1BA494]': ''">로그인 하기</button>
+            <button class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white" :class="params.btnIsActv ? 'bg-[#1BA494]': ''">로그인 하기</button>
             <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-10">
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5">
                 <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">회원가입</button>
@@ -110,6 +110,8 @@ export default {
     }
     ,methods:{
         btnStatChng(){
+            console.log(this.params.email == '')
+            console.log(this.params.pswd == '')
             if(this.params.email == '' || this.params.pswd == ''){
                 this.params.btnIsActv = false;
             }else{
@@ -117,6 +119,7 @@ export default {
             }
         }
        ,ruleChk(){
+            console.log('체크');
             console.log(this.gfn_rules.validEmail(this.params.email));
        }
     }
