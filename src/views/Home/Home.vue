@@ -110,33 +110,4 @@ async function myFunction(){
 }
 
 
-
-// export default {
-//   components: {
-//     Footer, QaProject
-//   },
-//   methods: {
-//     goToPage(path){
-//       this.$router.push(path)
-//     },
-//     async myFunction(){
-//       alert("test");
-//       var api = "/v1/common/code";
-//       var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
-//       //var loading = "";
-//       //var isErr = "";
-//       let res = await this.gfn_utils.axiosPost(
-//         api,
-//         postParams
-//       );
-
-//       console.log(res);
-//     }
-//   },
-//   data() {
-//     return {
-//     }
-//   }
-// }
-
 </script>

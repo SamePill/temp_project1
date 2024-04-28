@@ -81,11 +81,11 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   console.log("api post url::::" + apiUrl);
   console.log("-------param-------");
   console.log(postParams);
-  //console.log(window.$cookies.get("loginAccToken"));
-  // if (window.$cookies.get("loginAccToken") != null) {
-  //   axios.defaults.headers.common["Authorization"] =
-  //     "Bearer " + window.$cookies.get("loginAccToken") || "";
-  // }
+  console.log(window.$cookies.get("loginAccToken"));
+  if (window.$cookies.get("loginAccToken") != null) {
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + window.$cookies.get("loginAccToken") || "";
+  }
 
   return new Promise(function(resolve, reject) {
     //axiosHttp.post(apiUrl, {body: postParams}).then(
@@ -118,15 +118,16 @@ export const axiosPost = (api, postParams, loading, isErr) => {
           // console.log(err.response.status);
           // console.log(err.response.headers);
           if (err.response.status == "404") {
+            // goto 404 page
             //응답코드별 처리...
             // openAlertDiaolog(
             //   "ERROR",
             //   "오류가 발생하였습니다. (" + err.response.status + ")"
             // );
           } else if (err.response.status == "403") {
-            if ("Landing" != router.currentRoute.name) {
-              // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
-            }
+            // if ("Landing" != router.currentRoute.name) {
+            //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+            // }
 
             router.replace({ name: "Login" });
           } else {
