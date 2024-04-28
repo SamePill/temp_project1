@@ -5,7 +5,10 @@ import "./index.css";
 import router from "./routes/index.js";
 import VueCookies from "vue-cookies";
 import { createPinia } from 'pinia'
-import baseMixin from "@/utils/baseMixin.js";
+//import baseMixin from "@/utils/baseMixin.js";
+//.mixin(baseMixin)
 
-createApp(App).mixin(baseMixin).use(router).use(VueCookies).use(createPinia).mount("#app");
+const pinia = createPinia()
+
+createApp(App).use(router).use(VueCookies).use(pinia).mount("#app");
 

@@ -49,10 +49,21 @@
                 <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="Login()">Login</button>
             </tr>
         </table>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td><input type="text" v-model="testId" /></td>
+            </tr>
+            <tr>
+                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="test1()">Login</button>
+            </tr>
+        </table>
     </div>
 </template>
 <script>
 import baseMixin from "@/utils/baseMixin.js";
+import { commonStore } from "@/stores";
+//import { storeToRefs } from "pinia";
 
 export default {
     mixins: [baseMixin],
@@ -62,12 +73,17 @@ export default {
             apiParam: JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}),
             apiResult:"",
             testId:"",
-            testPw:""
+            testPw:"",
+            store: commonStore().common
         }        
     },
     methods: {
         goToPage(path){
             this.$router.push(path)
+        },
+        test1(){
+            this.store.setId("xxxx");
+            //console.log( this.store.getId());
         },
         async Test(){
             var api = this.apiUrl;

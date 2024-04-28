@@ -10,6 +10,7 @@ import ResetPassword from "@/views/User/ResetPassword.vue";
 import Test from "@/views/Prjt/Test.vue";
 
 import TestPage from "@/views/Test/TestPage.vue";
+import TestPageSetup from "@/views/Test/TestPageSetup.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -62,11 +63,16 @@ export default createRouter({
     },
 
 
-
+   /*********************** 테스트 페이지 ***********************/
+    
     //테스트 페이지
     {
       path: '/testPage',
       component: TestPage,
+    },
+    {
+      path: '/testPageSetup',
+      component: TestPageSetup,
     },
     
   ],

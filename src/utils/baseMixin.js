@@ -6,7 +6,8 @@
 
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
-// import { store } from "@/store";
+// import { common } from "@/store/common";
+// import { storeToRefs } from "pinia";
 
 var qmeetMixin = {
   data: function() {
@@ -14,6 +15,7 @@ var qmeetMixin = {
       TRUE_VALUE: "Y",
       FALSE_VALUE: "N",
       // CODES: store.getters.commCode,
+      //ID :  storeToRefs(common().getId()),
       gfn_utils: gfnUtils,
       gfn_rules: gfnRules
     };

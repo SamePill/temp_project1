@@ -82,61 +82,36 @@
   <Footer />
 </template>
 
-<script setup>
+<script>
 import Footer from '@/components/layoutComponents/Footer.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
-import * as gfnUtils from "@/utils/gfnUtils.js";
 
-// const gfn_utils = gfnUtils();
-// const Footer = Footer();
-// const QaProject = QaProject();
+export default {
+  components: {
+    Footer, QaProject
+  },
+  methods: {
+    goToPage(path){
+      this.$router.push(path)
+    },
+    async myFunction(){
+      alert("test");
+      var api = "/v1/common/code";
+      var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
+      //var loading = "";
+      //var isErr = "";
+      let res = await this.gfn_utils.axiosPost(
+        api,
+        postParams
+      );
 
-function goToPage(path){
-  this.$router.push(path)
+      console.log(res);
+    }
+  },
+  data() {
+    return {
+    }
+  }
 }
-
-async function myFunction(){
-  alert("test");
-  var api = "/v1/common/code";
-  var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
-  //var loading = "";
-  //var isErr = "";
-  let res = await gfnUtils.axiosPost(
-    api,
-    postParams
-  );
-
-  console.log(res);
-}
-
-
-
-// export default {
-//   components: {
-//     Footer, QaProject
-//   },
-//   methods: {
-//     goToPage(path){
-//       this.$router.push(path)
-//     },
-//     async myFunction(){
-//       alert("test");
-//       var api = "/v1/common/code";
-//       var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
-//       //var loading = "";
-//       //var isErr = "";
-//       let res = await this.gfn_utils.axiosPost(
-//         api,
-//         postParams
-//       );
-
-//       console.log(res);
-//     }
-//   },
-//   data() {
-//     return {
-//     }
-//   }
-// }
 
 </script>
