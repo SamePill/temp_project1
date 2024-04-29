@@ -5,6 +5,7 @@ import PrjtRegi from "@/views/Prjt/PrjtRegi.vue";
 import PrjtSrchDetl from "@/views/Prjt/PrjtSrchDetl.vue";
 
 import Login from "@/views/User/Login.vue";
+import SignUp from "@/views/User/SignUp.vue";
 import FindId from "@/views/User/FindId.vue";
 import ResetPassword from "@/views/User/ResetPassword.vue";
 import Test from "@/views/Prjt/Test.vue";
@@ -42,6 +43,11 @@ export default createRouter({
     {
       path: '/login',
       component: Login,
+    },
+    //회원가입
+    {
+      path: '/signUp',
+      component: SignUp,
     },
     //아이디찾기
     {

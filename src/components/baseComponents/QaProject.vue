@@ -22,11 +22,10 @@
     <p class="mt-5 text-xl font-medium text-text-0">[대기업] 농협은행 (내부 직원용) 인사관련 프로그램 QA</p>
 
     <!-- 해시테그 -->
-    <div class="mt-4" :class="getHashTagViewType">
-
-      <button class="">
-        <span class="text-1 py-2 px-4 bg-tag-0 rounded-[100px] text-text-1 mr-3"># 웹사이트</span>
-      </button>
+    <div class="mt-4" :class="getHashTagViewType" >   
+        <button class="" v-for="(item, index) in props.prj.jobDivCdNmList" :key="index" >
+          <span class="text-1 py-2 px-4 bg-tag-0 rounded-[100px] text-text-1 mr-3">{{item.taskDivCdNm}}</span>
+        </button>
     </div>
 
     <!-- 하단정보 -->
@@ -42,41 +41,124 @@
     <span class="mt-3 text-sm text-text-1">서울특별시 강남구</span>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    qaProjectViewInfo: Object
-  },
-  methods: {
-    goToPage(url){
-      this.$router.push(url)
-    }        
-  },
-  computed: {
-    getVieType() {
-      if (this.qaProjectViewInfo.size == 'small') {
-        return ['w-[520px]', this.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];
-      }
-      else {
-        return ['w-full'];
-      }
-    },
-    getHashTagViewType() {
-      if (this.qaProjectViewInfo.size == 'small') {
-        return ['w-96', 'flex-wrap', 'content-start']
-      }
-      else {
-        return ['w-full']
-      }
-    },
-    getBottomViewType() {
-      if (this.qaProjectViewInfo.size == 'small') {
-        return "flex items-center"
-      }
-      else {
-        return ""
-      }
-    }
+<script setup>
+import { computed, defineProps } from 'vue'
+
+const props = defineProps({
+  qaProjectViewInfo : { position : "", size : "",},
+  prj : [{
+          "projId": "C00001P00001",
+          "workDivCd": "10",
+          "projTitl": "김락영의 테스트 공고 입니다._001",
+          "engrCnt": "5",
+          "pirdVal": "24",
+          "strtDay": "20240314",
+          "expcPric": 8000000,
+          "workAddr": "서울 강서구 초록마을로 171",
+          "projStatCd": "10",
+          "regDttm": "20240314150000",
+          "projSprtSeq": null,
+          "engrRtngInfo": {
+              "bgnrEngrCnt": 3,
+              "bgnrEngrUnitPric": 2000000,
+              "intrEngrCnt": 0,
+              "intrEngrUnitPric": 0,
+              "advnEngrCnt": 2,
+              "advnEngrUnitPric": 6000000,
+              "spclEngrCnt": 0,
+              "spclEngrUnitPric": 0
+          },
+          "jobDivCdNmList": [
+              {
+                  "jobDivCdNm": "#제조",
+                  "jobDivCd": "10"
+              }
+          ],
+          "taskDivCdNmList": [
+              {
+                  "taskDivCdNm": "#WEB",
+                  "taskDivCd": "10"
+              },
+              {
+                  "taskDivCdNm": "#APP",
+                  "taskDivCd": "20"
+              },
+              {
+                  "taskDivCdNm": "#IOT",
+                  "taskDivCd": "30"
+              }
+          ]
+        }]
+})
+
+
+
+
+
+
+
+
+
+const getVieType = computed(() => {
+  if (props.qaProjectViewInfo.size == 'small') {
+    return ['w-[520px]', props.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];
+  }  else {
+    return ['w-full'];
   }
-}
+})
+
+const getHashTagViewType = computed(() =>  {
+  if (props.qaProjectViewInfo.size == 'small') {
+    return ['w-96', 'flex-wrap', 'content-start']
+  }
+  else {
+    return ['w-full']
+  }
+})
+
+const getBottomViewType = computed(() =>  {
+  if (props.qaProjectViewInfo.size == 'small') {
+    return "flex items-center"
+  }
+  else {
+    return ""
+  }
+})
+
+// export default {
+//   props: {
+//     qaProjectViewInfo: Object
+//   },
+//   methods: {
+//     goToPage(url){
+//       this.$router.push(url)
+//     }        
+//   },
+//   computed: {
+//     getVieType() {
+//       if (this.qaProjectViewInfo.size == 'small') {
+//         return ['w-[520px]', this.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];
+//       }
+//       else {
+//         return ['w-full'];
+//       }
+//     },
+//     getHashTagViewType() {
+//       if (this.qaProjectViewInfo.size == 'small') {
+//         return ['w-96', 'flex-wrap', 'content-start']
+//       }
+//       else {
+//         return ['w-full']
+//       }
+//     },
+//     getBottomViewType() {
+//       if (this.qaProjectViewInfo.size == 'small') {
+//         return "flex items-center"
+//       }
+//       else {
+//         return ""
+//       }
+//     }
+//   }
+// }
 </script>

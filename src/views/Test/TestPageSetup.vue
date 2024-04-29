@@ -105,6 +105,12 @@ import { commonStore } from '@/stores'
         console.log(testValue);
         store.setId(testValue.value);
         console.log(store.getId);
+
+        console.log("-------------------------------------");
+        console.log(window.$cookies.get("loginUserId"));
+        window.$cookies.config("1d");
+        window.$cookies.set("loginUserId", "test");
+        console.log(window.$cookies.get("loginUserId"));
     }
 
 

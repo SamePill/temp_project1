@@ -4,7 +4,7 @@ import moment from "moment";
 import router from "@/routes";
 
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
-const baseUrl = "";
+const baseUrl = "http://dev.l-walk.com:29080" ;
 
 /**
  *
@@ -70,10 +70,10 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   }
 
   //var apiUrl = baseUrl + api + ".app";
-  //var apiUrl = baseUrl + api;
+  var apiUrl = baseUrl + api;
 
   //var apiUrl = "http://localhost:28080" + api;//dev
-  var apiUrl = "http://dev.l-walk.com:29080" + api;//dev
+  //var apiUrl = "http://dev.l-walk.com:29080" + api;//dev
   //var apiUrl = "https://geteyes.l-walk.com:29080" + api;//live
 
   console.log("gogo");
@@ -82,11 +82,13 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   console.log("-------param-------");
   console.log(postParams);
   console.log(window.$cookies.get("loginAccToken"));
+
+  axios.defaults.headers.common["Content-Type"] = "application/json"
   if (window.$cookies.get("loginAccToken") != null) {
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + window.$cookies.get("loginAccToken") || "";
   }
-
+  
   return new Promise(function(resolve, reject) {
     //axiosHttp.post(apiUrl, {body: postParams}).then(
     // axios.post(apiUrl,  JSON.stringify(postParams) ).then(
@@ -135,7 +137,15 @@ export const axiosPost = (api, postParams, loading, isErr) => {
             //   "ERROR",
             //   "오류가 발생하였습니다. (" + err.response + ")"
             // );
-            alert(err.response.status);
+            
+            console.log("Error -----------------------")
+            console.log(err.response.data)
+            console.log(err.response.status)
+            //alert(err.response.status);     
+            console.log("오류");
+            console.log(err.response.data.rtnMsg)
+            console.log(err.response.data.rtnData)
+            reject(err.response.data);     
           }
         }
 
@@ -144,7 +154,7 @@ export const axiosPost = (api, postParams, loading, isErr) => {
         // 상세alert 예제
         // openAlertDiaologWithDetail("ERROR","오류가 발생하였습니다. (" + err.response.status + ")", err.response.data.path);
         //console.log(err);
-        reject(err);
+        //reject(err);
         //alert(err)
       });
   });

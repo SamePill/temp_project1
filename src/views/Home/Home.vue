@@ -25,10 +25,10 @@
 
     <div class="w-[1060px] flex justify-start flex-wrap mx-auto">
       <!-- 공고 card -->
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left' }" />
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right' }" />
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left' }" />
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right' }" />
+      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : { size: 'small', position: 'left'} , projList } " />
+      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" />
+      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'left'} , projList }" />
+      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" />
 
     </div>
   </div>
@@ -86,10 +86,56 @@
 import Footer from '@/components/layoutComponents/Footer.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import { onMounted, ref } from 'vue'
 
-// const gfn_utils = gfnUtils();
-// const Footer = Footer();
-// const QaProject = QaProject();
+onMounted(() => {
+  loadData();
+})
+
+const projList = ref([{
+                      "projId": "C00001P00001",
+                      "workDivCd": "10",
+                      "projTitl": "김락영의 테스트 공고 입니다._001",
+                      "engrCnt": "5",
+                      "pirdVal": "24",
+                      "strtDay": "20240314",
+                      "expcPric": 8000000,
+                      "workAddr": "서울 강서구 초록마을로 171",
+                      "projStatCd": "10",
+                      "regDttm": "20240314150000",
+                      "projSprtSeq": null,
+                      "engrRtngInfo": {
+                          "bgnrEngrCnt": 3,
+                          "bgnrEngrUnitPric": 2000000,
+                          "intrEngrCnt": 0,
+                          "intrEngrUnitPric": 0,
+                          "advnEngrCnt": 2,
+                          "advnEngrUnitPric": 6000000,
+                          "spclEngrCnt": 0,
+                          "spclEngrUnitPric": 0
+                      },
+                      "jobDivCdNmList": [
+                          {
+                              "jobDivCdNm": "#제조",
+                              "jobDivCd": "10"
+                          }
+                      ],
+                      "taskDivCdNmList": [
+                          {
+                              "taskDivCdNm": "#WEB",
+                              "taskDivCd": "10"
+                          },
+                          {
+                              "taskDivCdNm": "#APP",
+                              "taskDivCd": "20"
+                          },
+                          {
+                              "taskDivCdNm": "#IOT",
+                              "taskDivCd": "30"
+                          }
+                      ]
+                   }])
+
 
 function goToPage(path){
   this.$router.push(path)
@@ -107,6 +153,18 @@ async function myFunction(){
   );
 
   console.log(res);
+}
+
+async function loadData(){
+  var api = "/v1/home/info";
+  var postParams = {};
+  let res = await gfnUtils.axiosGet(
+    api,
+    postParams
+  );
+  
+  console.log(res);
+  projList.value = res.projList
 }
 
 

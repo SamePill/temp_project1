@@ -14,15 +14,15 @@
                 <div class="flex-grow-0 flex-shrink-0 w-[430px] h-px bg-[#191919]"></div>
             </div>
             <div class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
-                <input type="text" v-model="params.email" class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keyup="btnStatChng()" @blur="ruleChk()" placeholder="이메일" />
-                <input type="password" v-model="params.pswd"  class="mb-[70px] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keyup="btnStatChng()" placeholder="비밀번호" />
+                <input type="text" v-model="email" class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keyup="btnStatChng()" @blur="ruleChk()" placeholder="이메일" />
+                <input type="password" v-model="pswd"  class="mb-[70px] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]" @keyup="btnStatChng()" placeholder="비밀번호" />
             </div>
         </div>
         <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-20">
-            <button class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white" :class="params.btnIsActv ? 'bg-[#1BA494]': ''">로그인 하기</button>
+            <button class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white" :class="btnIsActv ? 'bg-[#1BA494]': ''"  @click="reqLogin()">로그인 하기</button>
             <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-10">
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5">
-                <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">회원가입</button>
+                <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]" @click="signUp()">회원가입</button>
                 <svg
                 width="1"
                 height="13"
@@ -34,7 +34,7 @@
                 >
                 <path d="M0.5 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
                 </svg>
-                <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">이메일 찾기</button>
+                <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]" @click="findId()">이메일 찾기</button>
                 <svg
                 width="1"
                 height="13"
@@ -46,7 +46,7 @@
                 >
                 <path d="M0.5 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
                 </svg>
-                <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">비밀번호 찾기</button>
+                <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]" @click="resetPassword()">비밀번호 찾기</button>
             </div>
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
                 <button class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]">이용약관</button>
@@ -97,33 +97,96 @@
         </div>
     </div>
 </template>
-<script>
-export default {
-    data() {
-        return{
-            params:{
-                email:''
-               ,pswd:''
-               ,btnIsActv : false
-            }
-        }
-    }
-    ,methods:{
-        btnStatChng(){
-            console.log(this.params.email == '')
-            console.log(this.params.pswd == '')
-            if(this.params.email == '' || this.params.pswd == ''){
-                this.params.btnIsActv = false;
-            }else{
-                this.params.btnIsActv = true;
-            }
-        }
-       ,ruleChk(){
-            console.log('체크');
-            console.log(this.gfn_rules.validEmail(this.params.email));
-       }
+<script setup>
+import {  ref } from "vue";
+import * as gfnRules from "@/utils/gfnRules.js";
+import * as gfnUtils from "@/utils/gfnUtils.js";
+import { useRouter } from 'vue-router'
+// import { useRoute, useRouter } from 'vue-router'
+
+const router = useRouter()
+// const route = useRoute()
+const email = ref("")
+const pswd = ref("")
+const btnIsActv = ref(false)
+// const postParams = reactive({userMail : "" , pass: ""})
+
+
+function btnStatChng(){
+    console.log(email.value == '')
+    console.log(pswd.value == '')
+    if(email.value == '' || pswd.value == ''){
+        btnIsActv.value = false;
+    }else{
+        btnIsActv.value = true;
     }
 }
+function ruleChk(){
+    console.log('체크');
+    console.log(gfnRules.validEmail(email.value));
+}
+
+async function reqLogin(){
+    console.log(email.value);
+    console.log(pswd.value);
+
+    var api = "/v1/auth/login";
+    var postParams = {userMail : email.value , pass: pswd.value}
+
+    console.log("val ::"+postParams);
+
+    //var loading = "";
+    //var isErr = "";
+    let res = await gfnUtils.axiosPost(
+            api,
+            postParams
+        );
+    console.log(res);
+    this.apiResult = JSON.stringify(res);
+}
+
+function resetPassword(){
+    router.push("/resetPassword")
+}
+
+function findId(){
+    router.push("/findId")
+}
+
+
+function signUp(){
+    router.push("/signUp")
+}
+
+
+
+
+// export default {
+//     data() {
+//         return{
+//             params:{
+//                 email:''
+//                ,pswd:''
+//                ,btnIsActv : false
+//             }
+//         }
+//     }
+//     ,methods:{
+//         btnStatChng(){
+//             console.log(this.params.email == '')
+//             console.log(this.params.pswd == '')
+//             if(this.params.email == '' || this.params.pswd == ''){
+//                 this.params.btnIsActv = false;
+//             }else{
+//                 this.params.btnIsActv = true;
+//             }
+//         }
+//        ,ruleChk(){
+//             console.log('체크');
+//             console.log(this.gfn_rules.validEmail(this.params.email));
+//        }
+//     }
+// }
 </script>
 <style scoped>
 </style>

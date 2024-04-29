@@ -18,12 +18,8 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Header from '@/components/layoutComponents/Header.vue'
-export default {
-  components: {
-    Header
-  },
-}
+
 </script>
 
