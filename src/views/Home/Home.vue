@@ -25,10 +25,10 @@
 
     <div class="w-[1060px] flex justify-start flex-wrap mx-auto">
       <!-- 공고 card -->
-      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : { size: 'small', position: 'left'} , projList } " />
+      <!-- <QaProject :qaProjectViewInfo="{qaProjectViewInfo : { size: 'small', position: 'left'} , projList } " />
       <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" />
       <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'left'} , projList }" />
-      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" />
+      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" /> -->
 
     </div>
   </div>
@@ -84,14 +84,16 @@
 
 <script setup>
 import Footer from '@/components/layoutComponents/Footer.vue'
-import QaProject from '@/components/baseComponents/QaProject.vue'
+// import QaProject from '@/components/baseComponents/QaProject.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 onMounted(() => {
   loadData();
 })
 
+const router = useRouter()
 const projList = ref([{
                       "projId": "C00001P00001",
                       "workDivCd": "10",
@@ -138,7 +140,7 @@ const projList = ref([{
 
 
 function goToPage(path){
-  this.$router.push(path)
+  router.push(path)
 }
 
 async function myFunction(){

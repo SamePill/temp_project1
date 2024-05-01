@@ -92,13 +92,6 @@ const props = defineProps({
 })
 
 
-
-
-
-
-
-
-
 const getVieType = computed(() => {
   if (props.qaProjectViewInfo.size == 'small') {
     return ['w-[520px]', props.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];

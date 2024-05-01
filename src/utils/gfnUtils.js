@@ -1,10 +1,22 @@
 import axios from "axios";
 import moment from "moment";
 // import { store } from "@/store";
-import router from "@/routes";
+//import router from "@/routes";
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
 const baseUrl = "http://dev.l-walk.com:29080" ;
+
+
+export const routerPush = (uri) => {
+  router.push(uri)
+}
+
+export const routerReplace = (uri) => {
+  router.replace(uri)
+}
 
 /**
  *

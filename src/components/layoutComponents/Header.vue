@@ -36,30 +36,54 @@
     </ul>
   </nav>
 </template>
-<script>
+<script setup>
 // import baseMixin from "@/utils/baseMixin.js";
+//import * as gfnUtils from "@/utils/gfnUtils.js";
+import { useRouter } from 'vue-router'
+import { computed, ref, defineProps } from 'vue'
 
-export default {
-  // mixins: [baseMixin],
-  props: ['headerType'],
-  methods: {
-    goToPage(url){
-      this.$router.push(url)
-    }
-  },
-  computed: {
-    getHeaderType()
-    {
-      //헤더 Width, 각요소 basis      
-      if(this.headerType == '1')
-      {        
-        return ['w-[1060px]', 'basis-[22%]', 'basis-[64%]', 'basis-[14%]']
-      }
-      else
-      {
-        return ['w-[1440px]', 'basis-[16%]', 'basis-[73%]', 'basis-[11%]']
-      }      
-    }
-  }
+const router = useRouter()
+const props = defineProps({
+  headerType : ref("1")
+})
+
+function goToPage(url){
+  router.push(url)
 }
+
+const getHeaderType = computed(() => {
+  //헤더 Width, 각요소 basis      
+  if(props.headerType == '1')
+  {        
+    return ['w-[1060px]', 'basis-[22%]', 'basis-[64%]', 'basis-[14%]']
+  }
+  else
+  {
+    return ['w-[1440px]', 'basis-[16%]', 'basis-[73%]', 'basis-[11%]']
+  }      
+})
+
+// export default {
+//   // mixins: [baseMixin],
+//   props: ['headerType'],
+//   methods: {
+//     goToPage(url){
+//       gfnUtils.routerPush.push(url)
+//     }
+//   },
+//   computed: {
+//     getHeaderType()
+//     {
+//       //헤더 Width, 각요소 basis      
+//       if(this.headerType == '1')
+//       {        
+//         return ['w-[1060px]', 'basis-[22%]', 'basis-[64%]', 'basis-[14%]']
+//       }
+//       else
+//       {
+//         return ['w-[1440px]', 'basis-[16%]', 'basis-[73%]', 'basis-[11%]']
+//       }      
+//     }
+//   }
+// }
 </script>
