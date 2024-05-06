@@ -24,11 +24,16 @@
     <p class="text-center text-[28px] font-bold">마감 직전 공고</p>
 
     <div class="w-[1060px] flex justify-start flex-wrap mx-auto">
+      {{ projList[0] }}
       <!-- 공고 card -->
-      <!-- <QaProject :qaProjectViewInfo="{qaProjectViewInfo : { size: 'small', position: 'left'} , projList } " />
-      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" />
-      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'left'} , projList }" />
-      <QaProject :qaProjectViewInfo="{qaProjectViewInfo : {  size: 'small', position: 'right'} , projList }" /> -->
+      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="projList[0]"  />
+      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right'}" :prj="projList[0]"  />
+      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="projList[0]"  />
+      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right'}" :prj="projList[0]"  />
+      {{ projList[1] }}
+      <!-- <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right'}" :prj="projList[1]"  /> 
+      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" , :prj="projList[2]" />
+      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right'}" , :prj="projList[3]" />  -->
 
     </div>
   </div>
@@ -84,7 +89,7 @@
 
 <script setup>
 import Footer from '@/components/layoutComponents/Footer.vue'
-// import QaProject from '@/components/baseComponents/QaProject.vue'
+import QaProject from '@/components/baseComponents/QaProject.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'

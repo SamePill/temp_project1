@@ -19,11 +19,11 @@
       </button>
     </div>
     <!-- 제목 -->
-    <p class="mt-5 text-xl font-medium text-text-0">[대기업] 농협은행 (내부 직원용) 인사관련 프로그램 QA</p>
+    <p class="mt-5 text-xl font-medium text-text-0">{{props.prj.projTitl}}</p>
 
     <!-- 해시테그 -->
     <div class="mt-4" :class="getHashTagViewType" >   
-        <button class="" v-for="(item, index) in props.prj.jobDivCdNmList" :key="index" >
+        <button class="" v-for="(item, index) in props.prj.taskDivCdNmList" :key="index" >
           <span class="text-1 py-2 px-4 bg-tag-0 rounded-[100px] text-text-1 mr-3">{{item.taskDivCdNm}}</span>
         </button>
     </div>
@@ -34,11 +34,11 @@
       <span>예상금액 : 600만원~800만원</span>
       <span class="py-[2px] px-1 border-solid border border-line-0 rounded-sm" :class="dd"> 월단위</span>
       <span>|</span>
-      <span>투입기간 : 40일</span>
+      <span>투입기간 : {{props.prj.pirdVal}}개월</span>
       <span>|</span>
-      <span>필요인원 : 10명</span>
+      <span>필요인원 : {{props.prj.engrCnt}}명</span>
     </div>
-    <span class="mt-3 text-sm text-text-1">서울특별시 강남구</span>
+    <span class="mt-3 text-sm text-text-1">{{props.prj.workAddr}}</span>
   </div>
 </template>
 <script setup>
@@ -46,49 +46,49 @@ import { computed, defineProps } from 'vue'
 
 const props = defineProps({
   qaProjectViewInfo : { position : "", size : "",},
-  prj : [{
-          "projId": "C00001P00001",
-          "workDivCd": "10",
-          "projTitl": "김락영의 테스트 공고 입니다._001",
-          "engrCnt": "5",
-          "pirdVal": "24",
-          "strtDay": "20240314",
-          "expcPric": 8000000,
-          "workAddr": "서울 강서구 초록마을로 171",
-          "projStatCd": "10",
-          "regDttm": "20240314150000",
-          "projSprtSeq": null,
-          "engrRtngInfo": {
-              "bgnrEngrCnt": 3,
-              "bgnrEngrUnitPric": 2000000,
-              "intrEngrCnt": 0,
-              "intrEngrUnitPric": 0,
-              "advnEngrCnt": 2,
-              "advnEngrUnitPric": 6000000,
-              "spclEngrCnt": 0,
-              "spclEngrUnitPric": 0
-          },
-          "jobDivCdNmList": [
-              {
-                  "jobDivCdNm": "#제조",
-                  "jobDivCd": "10"
-              }
-          ],
-          "taskDivCdNmList": [
-              {
-                  "taskDivCdNm": "#WEB",
-                  "taskDivCd": "10"
-              },
-              {
-                  "taskDivCdNm": "#APP",
-                  "taskDivCd": "20"
-              },
-              {
-                  "taskDivCdNm": "#IOT",
-                  "taskDivCd": "30"
-              }
-          ]
-        }]
+  prj : {
+          // "projId": "C00001P00001",
+          // "workDivCd": "10",
+          // "projTitl": "김락영의 테스트 공고 입니다._001",
+          // "engrCnt": "5",
+          // "pirdVal": "24",
+          // "strtDay": "20240314",
+          // "expcPric": 8000000,
+          // "workAddr": "서울 강서구 초록마을로 171",
+          // "projStatCd": "10",
+          // "regDttm": "20240314150000",
+          // "projSprtSeq": null,
+          // "engrRtngInfo": {
+          //     "bgnrEngrCnt": 3,
+          //     "bgnrEngrUnitPric": 2000000,
+          //     "intrEngrCnt": 0,
+          //     "intrEngrUnitPric": 0,
+          //     "advnEngrCnt": 2,
+          //     "advnEngrUnitPric": 6000000,
+          //     "spclEngrCnt": 0,
+          //     "spclEngrUnitPric": 0
+          // },
+          // "jobDivCdNmList": [
+          //     {
+          //         "jobDivCdNm": "#제조",
+          //         "jobDivCd": "10"
+          //     }
+          // ],
+          // "taskDivCdNmList": [
+          //     {
+          //         "taskDivCdNm": "#WEB",
+          //         "taskDivCd": "10"
+          //     },
+          //     {
+          //         "taskDivCdNm": "#APP",
+          //         "taskDivCd": "20"
+          //     },
+          //     {
+          //         "taskDivCdNm": "#IOT",
+          //         "taskDivCd": "30"
+          //     }
+          // ]
+        }
 })
 
 
