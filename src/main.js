@@ -14,5 +14,5 @@ import "vue-awesome-paginate/dist/style.css";
 
 const pinia = createPinia()
 
-createApp(App).use(router).use(VueCookies).use(pinia).user(VueAwesomePaginate).mount("#app");
+createApp(App).use(router).use(VueCookies).use(pinia).use(VueAwesomePaginate).mount("#app");
 
