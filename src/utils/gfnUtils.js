@@ -30,6 +30,13 @@ export const axiosGet = (api, getParams) => {
   console.log("api post url::::" + apiUrl);
   console.log("-------param-------");
   console.log(getParams);
+
+  axios.defaults.headers.common["Content-Type"] = "application/json"
+  if (window.$cookies.get("loginAccToken") != null) {
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + window.$cookies.get("loginAccToken") || "";
+  }
+  
   return new Promise(function(resolve, reject) {
     axios
       .get(apiUrl, { params: getParams })
@@ -102,8 +109,6 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   }
   
   return new Promise(function(resolve, reject) {
-    //axiosHttp.post(apiUrl, {body: postParams}).then(
-    // axios.post(apiUrl,  JSON.stringify(postParams) ).then(
     axios
       .post(apiUrl, postParams)
       .then(res => {

@@ -14,17 +14,15 @@
 
       <!--검색 -->
       <div class="w-[300px] py-[10px] px-[10px] border border-line-1 rounded box-border flex justify-between items-center hover:border-main-0 " >
-        <input class="outline-none placeholder:text-sm placeholder:text-text-3" type="text" placeholder="키워드를 입력해 주세요">
-        <img class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="">
+        <input class="outline-none placeholder:text-sm placeholder:text-text-3" type="text" placeholder="키워드를 입력해 주세요" v-mode="srchKeyWord">
+        <img class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
       </div>
     </div>
   </div>
 
   <!-- 프로젝트 리스트 -->
-  <div class="w-[1060px] flex-col mx-auto">        
-    <template v-for="(item, index) in jobDivCdNmList" :key="index">
-      <QaProject :qaProjectViewInfo="{size:'big', item}" />
-    </template>    
+  <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
+      <QaProject :qaProjectViewInfo="{size:'big'}" :prj="el"  />
   </div>
 </template>
 
@@ -34,6 +32,8 @@ import QaProject from '@/components/baseComponents/QaProject.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 
+const pageNo = ref(1)
+const srchKeyWord = ref("")
 const projList = ref([{
                       "projId": "C00001P00001",
                       "workDivCd": "10",
@@ -86,8 +86,8 @@ onMounted(() => {
 
 
 async function loadData(){
-  var api = "/v1/home/info";
-  var postParams = {};
+  var api = "/v1/project/list";
+  var postParams = {workDivCd:"", workPirdDivCd:"", engrRtngDivCd:"", pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
   let res = await gfnUtils.axiosGet(
     api,
     postParams
@@ -98,14 +98,4 @@ async function loadData(){
 }
 
 
-
-// export default {
-//   components: {
-//     Header, DropDown, QaProject
-//   },
-//   data() {
-//     return {      
-//     };
-//   }
-// }
 </script>
