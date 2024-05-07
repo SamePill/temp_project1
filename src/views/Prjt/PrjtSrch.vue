@@ -24,6 +24,44 @@
   <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
       <QaProject :qaProjectViewInfo="{size:'big'}" :prj="el"  />
   </div>
+
+  <div class="example-six">
+    <vue-awesome-paginate
+      :total-items=totalCnt
+      v-model="pageNo"
+      :items-per-page="10"
+      :max-pages-shown="10"
+      :on-click="loadData"
+    >
+      <template #prev-button>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="black"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+          >
+            <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
+          </svg>
+        </span>
+      </template>
+
+      <template #next-button>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="black"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+          >
+            <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
+          </svg>
+        </span>
+      </template>
+    </vue-awesome-paginate>
+  </div>  
 </template>
 
 <script setup>
@@ -33,6 +71,7 @@ import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 
 const pageNo = ref(1)
+const totalCnt = ref(100)
 const srchKeyWord = ref("")
 const projList = ref([{
                       "projId": "C00001P00001",
@@ -85,7 +124,11 @@ onMounted(() => {
 })
 
 
-async function loadData(){
+async function loadData(selPage){
+  console.log(selPage)
+  if(selPage != null){
+    pageNo.value = selPage;
+  }
   var api = "/v1/project/list";
   var postParams = {workDivCd:"", workPirdDivCd:"", engrRtngDivCd:"", pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
   let res = await gfnUtils.axiosGet(
@@ -99,3 +142,54 @@ async function loadData(){
 
 
 </script>
+
+<style>
+.example-six .pagination-container {
+  column-gap: 10px;
+  align-items: center;
+}
+.example-six .paginate-buttons {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.example-six .back-button,
+.example-six .next-button {
+  background-color: white;
+  color: white;
+  border-radius: 8px;
+  height: 45px;
+  width: 45px;
+}
+.example-six .active-page {
+  background-color: #e5e5e5;
+}
+.example-six .paginate-buttons:hover {
+  background-color: #f5f5f5;
+}
+.example-six .active-page:hover {
+  background-color: #e5e5e5;
+}
+
+.example-six .back-button svg {
+  transform: rotate(180deg) translateY(-2px);
+}
+.example-six .next-button svg {
+  transform: translateY(2px);
+}
+
+/* .example-six .back-button:hover,
+.example-six .next-button:hover {
+  background-color: rgb(45, 45, 45);
+} */
+
+.example-six .back-button:active,
+.example-six .next-button:active {
+  background-color: rgb(85, 85, 85);
+}
+</style>
