@@ -2,33 +2,71 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 export const commonStore = defineStore('common', () => {
-    //state ==> ref or  reactive
-    const userNm = ref(false)
-    const companyNm = ref("")
-    const id = ref("") 
-    
+   
+    const loginCompId = ref('')
+    const loginUserMail = ref('')
+    const loginUserNm = ref('')
+    const loginHp = ref('')
+    const loginMrktMailRcptYn = ref('')
+    const loginMrktSmsRcptYn = ref('')
+    const loginCompNm = ref('')
+    const loginTokn = ref('')
+
     //getters ==> computed
-    const getUserNm = computed(() => {
-        return userNm;
+    const getLoginCompId = computed(() => {
+        return loginCompId;
     });
-    const getCompanyNm = computed(() => {
-        return companyNm;
+    const getLoginUserMail = computed(() => {
+        return loginUserMail;
     });
-    const getId = computed(() => {
-        return id;
+    const getLoginUserNm = computed(() => {
+        return loginUserNm;
+    });
+    const getLoginHp = computed(() => {
+        return loginHp;
+    });
+    const getLoginMrktMailRcptYn = computed(() => {
+        return loginMrktMailRcptYn;
+    });
+    const getLoginMrktSmsRcptYn = computed(() => {
+        return loginMrktSmsRcptYn;
+    });
+    const getLoginCompNm = computed(() => {
+        return loginCompNm;
+    });
+    const getLoginTokn = computed(() => {
+        return loginTokn;
     });
  
     //actions ==> function
-    function setUserNm(val) {
-        this.userNm = val;
+    function setLoginCompId(val) {
+        this.loginCompId = val;
     }
-    function setCompanyNm(val) {
-        this.companyNm = val;
+    function setLoginUserMail(val) {
+        this.loginUserMail = val;
     }
-    function setId(val) {
-        this.id = val;
+    function setLoginUserNm(val) {
+        this.loginUserNm = val;
+    }
+    function setLoginHp(val) {
+        this.loginHp = val;
+    }
+    function setLoginMrktMailRcptYn(val) {
+        this.loginMrktMailRcptYn = val;
+    }
+    function setLoginMrktSmsRcptYn(val) {
+        this.loginMrktSmsRcptYn = val;
+    }
+    function setLoginCompNm(val) {
+        this.loginCompNm = val;
+    }
+    function setLoginTokn(val) {
+        this.loginTokn = val;
     }
 
-    return { userNm, companyNm, id, getUserNm, getCompanyNm, getId, setUserNm, setCompanyNm, setId }
+    return { loginCompId, loginUserMail, loginUserNm, loginHp, loginMrktMailRcptYn, loginMrktSmsRcptYn, loginCompNm, loginTokn,
+        getLoginCompId, getLoginUserMail, getLoginUserNm, getLoginHp, getLoginMrktMailRcptYn, getLoginMrktSmsRcptYn, getLoginCompNm, getLoginTokn,
+        setLoginCompId, setLoginUserMail, setLoginUserNm, setLoginHp, setLoginMrktMailRcptYn, setLoginMrktSmsRcptYn, setLoginCompNm, setLoginTokn
+    }
     
 })

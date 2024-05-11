@@ -74,13 +74,20 @@
     <span class="font-bold">5200명</span>
   </p>
 
-  <button  v-on:click="myFunction()">Click me</button>
-  <!-- 푸더 -->
-  <Footer />
+  <!-- 푸터 -->
+  <!-- <Footer /> -->
+  <div class="mt-20 bg-sub-2 w-full">
+      <div class="w-[1060px] mx-auto flex flex-col py-10">
+        <div class="text-text-0 font-bold text-[28px]">큐밋로고</div>
+        <span class="text-xs text-text-1 mt-5">리드워크 l 대표이사 : {{ siteInfo.reprNm }}</span>
+        <span class="text-xs text-text-1">주소 : {{siteInfo.compAddr}}</span>
+        <span class="text-xs text-text-1">메일 : {{siteInfo.compMail}} 전화 : {{siteInfo.compNo}} 팩스 : {{siteInfo.faxNo}}</span>
+      </div>
+    </div>
 </template>
 
 <script setup>
-import Footer from '@/components/layoutComponents/Footer.vue'
+// import Footer from '@/components/layoutComponents/Footer.vue'
 import QaProject from '@/components/baseComponents/QaProject.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
@@ -90,27 +97,37 @@ onMounted(() => {
   loadData();
 })
 
+const loginYn = ref(window.$cookies.get("loginYn"));
 const router = useRouter()
 const projList = ref([])
+const siteInfo = ref({reprNm:"", compAddr:"", compNo:"", csctNo:"", faxNo:""})
+  
 
 
 function goToPage(path){
+
+  if(loginYn.value != "Y"){
+    if(path == '/project-regi' ){
+      path = "/login";
+    }
+  }
+
   router.push(path)
 }
 
-async function myFunction(){
-  alert("test");
-  var api = "/v1/common/code";
-  var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
-  //var loading = "";
-  //var isErr = "";
-  let res = await gfnUtils.axiosPost(
-    api,
-    postParams
-  );
+// async function myFunction(){
+//   alert("test");
+//   var api = "/v1/common/code";
+//   var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
+//   //var loading = "";
+//   //var isErr = "";
+//   let res = await gfnUtils.axiosPost(
+//     api,
+//     postParams
+//   );
 
-  console.log(res);
-}
+//   console.log(res);
+// }
 
 async function loadData(){
   var api = "/v1/home/info";
@@ -122,6 +139,10 @@ async function loadData(){
   
   console.log(res);
   projList.value = res.projList
+  siteInfo.value = res.footerInfo
+  console.log(projList.value);
+  console.log("footerInfo");
+  console.log(siteInfo.value);
 }
 
 

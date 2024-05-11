@@ -137,12 +137,11 @@ async function reqLogin(){
 
     //var loading = "";
     //var isErr = "";
-    let res = await gfnUtils.axiosPost(
+    await gfnUtils.axiosPost(
             api,
             postParams
         );
-    console.log(res);
-    this.apiResult = JSON.stringify(res);
+    router.replace("/")
 }
 
 function resetPassword(){

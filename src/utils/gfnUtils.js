@@ -9,6 +9,15 @@ const router = useRouter()
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
 const baseUrl = "http://dev.l-walk.com:29080" ;
 
+export const chkLogin = () => {
+  var chk = "N"
+  if ( window.$cookies.get("loginYn") == 'Y' ) {
+    chk = "Y"
+  } else{
+    chk = "N"
+  }
+  return chk;
+}
 
 export const routerPush = (uri) => {
   router.push(uri)
@@ -118,6 +127,13 @@ export const axiosPost = (api, postParams, loading, isErr) => {
 
         if (resData.rtnCd == "00") {
           //store.commit("setLoading", false);
+          if(api == "/v1/auth/login"){
+            setCookiesLoginUserInfo(resData.rtnData)
+            console.log("login success")
+            console.log(window.$cookies.get("loginAccToken"))
+            console.log(window.$cookies.get("loginYn"))
+            console.log(window.$cookies)
+          } 
           resolve(resData.rtnData);
         } else {
           //store.commit("setLoading", false);
@@ -307,15 +323,14 @@ export const axiosPost = (api, postParams, loading, isErr) => {
  * @param {*} bgcolor //바탕색 (생략시 primary)
  */
 export const setCookiesLoginUserInfo = item => {
-  window.$cookies.config("7d");
-  window.$cookies.set("loginUserId", item.adminId);
+  window.$cookies.config("1d");
+  window.$cookies.set("loginYn", "Y");
+  window.$cookies.set("loginCompId", item.compId);
   window.$cookies.set("loginUserNm", item.userNm);
-  window.$cookies.set("loginNick", item.nick);
+  window.$cookies.set("loginUserMail", item.userMail);
   window.$cookies.set("loginHp", item.hp);
-  window.$cookies.set("loginEmal", item.emal);
-  //파라메터의 소문자확인
-  window.$cookies.set("loginAccToken", item.acctoken);
-  window.$cookies.set("clientId", item.clientid);
+  window.$cookies.set("loginCompNm", item.compNm);
+  window.$cookies.set("loginAccToken", item.tokn);
 };
 
 // export const storeLoginUserInfo = () => {
@@ -329,14 +344,16 @@ export const setCookiesLoginUserInfo = item => {
 // };
 
 export const clearCookiesLoginUserInfo = () => {
-  window.$cookies.remove("loginUserId");
+  window.$cookies.remove("loginYn");
+  window.$cookies.remove("loginCompId");
   window.$cookies.remove("loginUserNm");
-  window.$cookies.remove("loginNick");
+  window.$cookies.remove("loginUserMail");
   window.$cookies.remove("loginHp");
   window.$cookies.remove("loginEmal");
-  window.$cookies.remove("loginAccToken");
-  window.$cookies.remove('clientId');
-
+  window.$cookies.remove("loginCompNm");
+  window.$cookies.remove('loginAccToken');
+  console.log("logout")
+  console.log( window.$cookies.get("loginYn"))
   // store.commit("setLoginUserId", "");
   // store.commit("setLoginUserNm", "");
   // store.commit("setLoginNick", "");

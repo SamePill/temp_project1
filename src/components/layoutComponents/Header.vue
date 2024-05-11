@@ -21,10 +21,14 @@
     </ul>
 
     <!-- 로그인 회원가입 -->
+   
     <ul class="flex grow basis-[14%]"
-      :class="getHeaderType[3]">
-
-      <li class="mr-5 bg-main-0">
+      :class="getHeaderType[3]"
+      v-if="loginYn == null"
+      >
+      
+      {{ loginYn }}
+      <li class="mr-5">
         <button @click="goToPage('/login')">
           로그인
         </button>
@@ -34,6 +38,16 @@
           회원가입
         </button>
     </ul>
+    <ul class="flex grow basis-[14%]"
+      :class="getHeaderType[3]"
+      v-else>
+
+      <li class="mr-5">
+        <button @click="logout">
+          로그아웃
+        </button>
+      </li>
+    </ul>
   </nav>
 </template>
 <script setup>
@@ -41,14 +55,30 @@
 //import * as gfnUtils from "@/utils/gfnUtils.js";
 import { useRouter } from 'vue-router'
 import { computed, ref, defineProps } from 'vue'
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const router = useRouter()
+const loginYn = ref(window.$cookies.get("loginYn"));
 const props = defineProps({
-  headerType : ref("1")
-})
+  headerType : ref("1")})
 
 function goToPage(url){
+  if(loginYn.value != "Y"){
+    if(url == '/project-regi' ){
+      url = "/login";
+    }
+    if(url == '/test' ){
+      url = "/login";
+    }
+  }
+
   router.push(url)
+}
+
+function logout(){
+  gfnUtils.clearCookiesLoginUserInfo();
+  loginYn.value = window.$cookies.get("loginYn");
+  router.push("/")
 }
 
 const getHeaderType = computed(() => {
