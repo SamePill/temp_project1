@@ -96,49 +96,7 @@ onMounted(() => {
 })
 
 const router = useRouter()
-const projList = ref([{
-                      "projId": "C00001P00001",
-                      "workDivCd": "10",
-                      "projTitl": "김락영의 테스트 공고 입니다._001",
-                      "engrCnt": "5",
-                      "pirdVal": "24",
-                      "strtDay": "20240314",
-                      "expcPric": 8000000,
-                      "workAddr": "서울 강서구 초록마을로 171",
-                      "projStatCd": "10",
-                      "regDttm": "20240314150000",
-                      "projSprtSeq": null,
-                      "engrRtngInfo": {
-                          "bgnrEngrCnt": 3,
-                          "bgnrEngrUnitPric": 2000000,
-                          "intrEngrCnt": 0,
-                          "intrEngrUnitPric": 0,
-                          "advnEngrCnt": 2,
-                          "advnEngrUnitPric": 6000000,
-                          "spclEngrCnt": 0,
-                          "spclEngrUnitPric": 0
-                      },
-                      "jobDivCdNmList": [
-                          {
-                              "jobDivCdNm": "#제조",
-                              "jobDivCd": "10"
-                          }
-                      ],
-                      "taskDivCdNmList": [
-                          {
-                              "taskDivCdNm": "#WEB",
-                              "taskDivCd": "10"
-                          },
-                          {
-                              "taskDivCdNm": "#APP",
-                              "taskDivCd": "20"
-                          },
-                          {
-                              "taskDivCdNm": "#IOT",
-                              "taskDivCd": "30"
-                          }
-                      ]
-                   }])
+const projList = ref([])
 
 
 function goToPage(path){

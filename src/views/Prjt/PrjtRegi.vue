@@ -42,86 +42,153 @@
 
 
 </template>
-<script>
+<script setup>
 // import Header        from '@/components/layoutComponents/Header.vue'
 import ModalTest     from '@/views/Prjt//ModalTest.vue'
 import PrjtRegiPage1 from '@/views/Prjt/PrjtRegiPage1.vue'
 import PrjtRegiPage2 from '@/views/Prjt/PrjtRegiPage2.vue'
 import PrjtRegiPage3 from '@/views/Prjt/PrjtRegiPage3.vue'
 import PrjtRegiPage4 from '@/views/Prjt/PrjtRegiPage4.vue'
+import { onMounted } from 'vue'
 
-export default {
-  components: {
-    // Header
-    PrjtRegiPage1
-   ,PrjtRegiPage2
-   ,PrjtRegiPage3
-   ,PrjtRegiPage4
-   ,ModalTest
-  },
-  data() {
-    return {    
-      pageNo: ''
-     ,totPageNo: 4
-     ,PrjtRegiPage1Info:{
-       occuInfo : {valList:[ {cdVal:'a',cdNm:'#제조',chkVal:true}
-                            ,{cdVal:'b',cdNm:'#IT'  ,chkVal:false}
-                            ,{cdVal:'c',cdNm:'#금융',chkVal:true}
-                            ,{cdVal:'d',cdNm:'#미디어/디자인',chkVal:false}
-                            ,{cdVal:'e',cdNm:'#교육',chkVal:true}
-                            ,{cdVal:'f',cdNm:'#의료',chkVal:true}
-                            ,{cdVal:'g',cdNm:'#판매/유통',chkVal:false}
-                            ,{cdVal:'h',cdNm:'#건설',chkVal:false}
-                            ,{cdVal:'i',cdNm:'#기관/협회',chkVal:false}
-                            ,{cdVal:'j',cdNm:'#기타',chkVal:true}
-                  ]}
-       ,jobInfo : {valList:[ {cdVal:'a',cdNm:'#Web',chkVal:true}
-                            ,{cdVal:'b',cdNm:'#App',chkVal:true}
-                            ,{cdVal:'c',cdNm:'#IOT',chkVal:true}
-                            ,{cdVal:'d',cdNm:'#증강현실',chkVal:true}
-                            ,{cdVal:'e',cdNm:'#금융',chkVal:true}
-                            ,{cdVal:'f',cdNm:'#AI',chkVal:true}
-                            ,{cdVal:'g',cdNm:'#블록체인',chkVal:true}
-                            ,{cdVal:'h',cdNm:'#자동차',chkVal:true}
-                            ,{cdVal:'i',cdNm:'#하드웨어',chkVal:true}
-                            ,{cdVal:'j',cdNm:'#임베디드',chkVal:true}
-                            ,{cdVal:'j',cdNm:'#메타버스',chkVal:true}
-                            ,{cdVal:'j',cdNm:'#플랫폼',chkVal:true}
-                            ,{cdVal:'j',cdNm:'#기타',chkVal:true}
-                  ]}
-      }
-    };
-  }
-    ,methods:{
-      init(){
-        this.pageNo = 1;
-      }
-     ,movePage(div){
-        // this.test();
-        if(div == 'next'){
-          this.pageNo = this.pageNo +1;
-          this.scrollToTop();
-        }else if(div == 'pre'){
-          this.pageNo = this.pageNo -1;
-          this.scrollToTop();
-        }else if(div == 'regiCmplt'){
-          let page1Info = this.$refs.page1.getInfo();
-          let page2Info = this.$refs.page2.getInfo();
-          let page3Info = this.$refs.page3.getInfo();
-          let page4Info = this.$refs.page4.getInfo();
-          
-          this.$refs.ModalTest.openPopup();
-          console.log(page1Info,page2Info,page3Info,page4Info);
-        }
-      }
-      ,scrollToTop(){
-        window.scrollTo({
-        top: 0,
-        behavior: 'smooth' });
-      }
-    }
-    ,mounted(){
-      this.init();
-    }
+onMounted(() => {
+  init();
+})
+
+const pageNo =  ref('')
+const totPageNo = ref(4)
+const PrjtRegiPage1Info = ref({
+                            occuInfo : {valList:[ {cdVal:'a',cdNm:'#제조',chkVal:true}
+                                                ,{cdVal:'b',cdNm:'#IT'  ,chkVal:false}
+                                                ,{cdVal:'c',cdNm:'#금융',chkVal:true}
+                                                ,{cdVal:'d',cdNm:'#미디어/디자인',chkVal:false}
+                                                ,{cdVal:'e',cdNm:'#교육',chkVal:true}
+                                                ,{cdVal:'f',cdNm:'#의료',chkVal:true}
+                                                ,{cdVal:'g',cdNm:'#판매/유통',chkVal:false}
+                                                ,{cdVal:'h',cdNm:'#건설',chkVal:false}
+                                                ,{cdVal:'i',cdNm:'#기관/협회',chkVal:false}
+                                                ,{cdVal:'j',cdNm:'#기타',chkVal:true}
+                                      ]}
+                            ,jobInfo : {valList:[ {cdVal:'a',cdNm:'#Web',chkVal:true}
+                                                ,{cdVal:'b',cdNm:'#App',chkVal:true}
+                                                ,{cdVal:'c',cdNm:'#IOT',chkVal:true}
+                                                ,{cdVal:'d',cdNm:'#증강현실',chkVal:true}
+                                                ,{cdVal:'e',cdNm:'#금융',chkVal:true}
+                                                ,{cdVal:'f',cdNm:'#AI',chkVal:true}
+                                                ,{cdVal:'g',cdNm:'#블록체인',chkVal:true}
+                                                ,{cdVal:'h',cdNm:'#자동차',chkVal:true}
+                                                ,{cdVal:'i',cdNm:'#하드웨어',chkVal:true}
+                                                ,{cdVal:'j',cdNm:'#임베디드',chkVal:true}
+                                                ,{cdVal:'j',cdNm:'#메타버스',chkVal:true}
+                                                ,{cdVal:'j',cdNm:'#플랫폼',chkVal:true}
+                                                ,{cdVal:'j',cdNm:'#기타',chkVal:true}
+                                      ]}
+                          })
+
+
+function init(){
+  pageNo = 1;
 }
+
+function movePage(div){
+  // this.test();
+  if(div == 'next'){
+    pageNo = pageNo.value +1;
+    scrollToTop();
+  }else if(div == 'pre'){
+    this.pageNo = this.pageNo -1;
+    this.scrollToTop();
+  }else if(div == 'regiCmplt'){
+    let page1Info = this.$refs.page1.getInfo();
+    let page2Info = this.$refs.page2.getInfo();
+    let page3Info = this.$refs.page3.getInfo();
+    let page4Info = this.$refs.page4.getInfo();
+    
+    this.$refs.ModalTest.openPopup();
+    console.log(page1Info,page2Info,page3Info,page4Info);
+  }
+}
+
+function scrollToTop(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth' });
+}
+
+
+
+// export default {
+//   components: {
+//     // Header
+//     PrjtRegiPage1
+//    ,PrjtRegiPage2
+//    ,PrjtRegiPage3
+//    ,PrjtRegiPage4
+//    ,ModalTest
+//   },
+//   data() {
+//     return {    
+//       pageNo: ''
+//      ,totPageNo: 4
+//      ,PrjtRegiPage1Info:{
+//        occuInfo : {valList:[ {cdVal:'a',cdNm:'#제조',chkVal:true}
+//                             ,{cdVal:'b',cdNm:'#IT'  ,chkVal:false}
+//                             ,{cdVal:'c',cdNm:'#금융',chkVal:true}
+//                             ,{cdVal:'d',cdNm:'#미디어/디자인',chkVal:false}
+//                             ,{cdVal:'e',cdNm:'#교육',chkVal:true}
+//                             ,{cdVal:'f',cdNm:'#의료',chkVal:true}
+//                             ,{cdVal:'g',cdNm:'#판매/유통',chkVal:false}
+//                             ,{cdVal:'h',cdNm:'#건설',chkVal:false}
+//                             ,{cdVal:'i',cdNm:'#기관/협회',chkVal:false}
+//                             ,{cdVal:'j',cdNm:'#기타',chkVal:true}
+//                   ]}
+//        ,jobInfo : {valList:[ {cdVal:'a',cdNm:'#Web',chkVal:true}
+//                             ,{cdVal:'b',cdNm:'#App',chkVal:true}
+//                             ,{cdVal:'c',cdNm:'#IOT',chkVal:true}
+//                             ,{cdVal:'d',cdNm:'#증강현실',chkVal:true}
+//                             ,{cdVal:'e',cdNm:'#금융',chkVal:true}
+//                             ,{cdVal:'f',cdNm:'#AI',chkVal:true}
+//                             ,{cdVal:'g',cdNm:'#블록체인',chkVal:true}
+//                             ,{cdVal:'h',cdNm:'#자동차',chkVal:true}
+//                             ,{cdVal:'i',cdNm:'#하드웨어',chkVal:true}
+//                             ,{cdVal:'j',cdNm:'#임베디드',chkVal:true}
+//                             ,{cdVal:'j',cdNm:'#메타버스',chkVal:true}
+//                             ,{cdVal:'j',cdNm:'#플랫폼',chkVal:true}
+//                             ,{cdVal:'j',cdNm:'#기타',chkVal:true}
+//                   ]}
+//       }
+//     };
+//   }
+//     ,methods:{
+//       init(){
+//         this.pageNo = 1;
+//       }
+//      ,movePage(div){
+//         // this.test();
+//         if(div == 'next'){
+//           this.pageNo = this.pageNo +1;
+//           this.scrollToTop();
+//         }else if(div == 'pre'){
+//           this.pageNo = this.pageNo -1;
+//           this.scrollToTop();
+//         }else if(div == 'regiCmplt'){
+//           let page1Info = this.$refs.page1.getInfo();
+//           let page2Info = this.$refs.page2.getInfo();
+//           let page3Info = this.$refs.page3.getInfo();
+//           let page4Info = this.$refs.page4.getInfo();
+          
+//           this.$refs.ModalTest.openPopup();
+//           console.log(page1Info,page2Info,page3Info,page4Info);
+//         }
+//       }
+//       ,scrollToTop(){
+//         window.scrollTo({
+//         top: 0,
+//         behavior: 'smooth' });
+//       }
+//     }
+//     ,mounted(){
+//       this.init();
+//     }
+// }
 </script>
