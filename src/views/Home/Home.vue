@@ -22,16 +22,11 @@
   <!-- 마감 직전 공고 -->
   <div class="font-basic">
     <p class="text-center text-[28px] font-bold">마감 직전 공고</p>
-
-    <div class="w-[1060px] flex justify-start flex-wrap mx-auto" v-for="el in projList" :key="el" >
-      {{ projList[0] }}
+    <div class="w-[1060px] flex justify-start flex-wrap mx-auto">
       <!-- 공고 card -->
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="el"  />
-      {{ projList[1] }}
-      <!-- <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right'}" :prj="projList[1]"  /> 
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" , :prj="projList[2]" />
-      <QaProject :qaProjectViewInfo="{ size: 'small', position: 'right'}" , :prj="projList[3]" />  -->
-
+      <div v-for="el in projList" :key="el">
+        <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="el"  />
+      </div>
     </div>
   </div>
 
