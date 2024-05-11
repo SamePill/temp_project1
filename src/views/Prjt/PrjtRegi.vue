@@ -2,7 +2,7 @@
 <div>
   <!-- 헤더 -->
   <!-- <Header headerType="1"/> -->
-  <div  class="px-[700px] pt-10 pb-[100px] bg-[#fefefe]">
+  <div style="display: flex; justify-content: center;" class="pt-10 pb-[100px] bg-[#fefefe]">
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative relative ">
         <div class="flex justify-between w-[520px] mb-[10px]">
           <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
@@ -49,7 +49,7 @@ import PrjtRegiPage1 from '@/views/Prjt/PrjtRegiPage1.vue'
 import PrjtRegiPage2 from '@/views/Prjt/PrjtRegiPage2.vue'
 import PrjtRegiPage3 from '@/views/Prjt/PrjtRegiPage3.vue'
 import PrjtRegiPage4 from '@/views/Prjt/PrjtRegiPage4.vue'
-import { onMounted } from 'vue'
+import { onMounted,ref } from 'vue'
 
 onMounted(() => {
   init();
@@ -87,13 +87,13 @@ const PrjtRegiPage1Info = ref({
 
 
 function init(){
-  pageNo = 1;
+  pageNo.value = 1;
 }
 
 function movePage(div){
   // this.test();
   if(div == 'next'){
-    pageNo = pageNo.value +1;
+    pageNo.value = pageNo.value +1;
     scrollToTop();
   }else if(div == 'pre'){
     this.pageNo = this.pageNo -1;
