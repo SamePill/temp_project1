@@ -4,13 +4,13 @@
       <p class="text-xl font-medium text-left text-[#191919] mb-5">직군 
         <span class="text-xl text-left text-[#ff5252]">*</span>
       </p>
-      <Chipset :info="info.occuInfo"/>
+      <Chipset :cdList="params.jobDivCdList"/>
     </div>
     <div class="mt-[40px]">
       <p class="text-xl text-left text-[#191919] mb-5">업무영역 
         <span class="text-xl text-left text-[#ff5252]">*</span>
       </p>
-      <Chipset :info="info.jobInfo"/>
+      <Chipset :cdList="params.taskDivCdList"/>
     </div>
     <div class="mt-[40px] flex flex-col justify-start items-start gap-5">
       <div class="flex justify-between items-center w-[520px] relative">
@@ -112,29 +112,48 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
 import Chipset from '@/components/baseComponents/Chipset.vue'
-export default {
-  components:{
-    Chipset
-  } 
- ,props: {
-    info : {}
+import { onMounted,ref } from 'vue'
+import * as gfnUtils from "@/utils/gfnUtils.js";
+
+onMounted(() => {
+  initData();
+})
+
+function initData(){
+  loadData();
+}
+const params = ref({
+  jobDivCdList :[]
+  ,taskDivCdList:[]
+})
+
+async function loadData(){  
+  let api = "/v1/common/code";
+  let postParams = {codeGrpList:['JOB_DIV_CD','TASK_DIV_CD']};
+ 
+  let res = await gfnUtils.axiosPost(
+    api,
+    postParams
+  );
+  if(res.codeList.JOB_DIV_CD.length > 0){
+    res.codeList.JOB_DIV_CD.forEach(el => {
+      el['chkVal'] = false;
+      params.value.jobDivCdList.push(el)
+    }); 
   }
-  ,data(){
-    return {
-      params:{
-        info : ''
-      }
-    }
-  }
-  ,methods:{
-    getInfo(){
-      this.params.info = this.$props.info;
-      return this.params;
-    }
-  }
-  ,mounted(){
+
+  if(res.codeList.TASK_DIV_CD.length > 0){
+    res.codeList.TASK_DIV_CD.forEach(el => {
+      el['chkVal'] = false;
+      params.value.taskDivCdList.push(el)
+    }); 
   }
 }
+  
+// function getInfo(){
+//   params.info = props.info;
+//   return this.params;
+// }
 </script>

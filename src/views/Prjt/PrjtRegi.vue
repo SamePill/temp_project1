@@ -52,7 +52,7 @@ import PrjtRegiPage4 from '@/views/Prjt/PrjtRegiPage4.vue'
 import { onMounted,ref } from 'vue'
 
 onMounted(() => {
-  init();
+  initData();
 })
 
 const pageNo =  ref('')
@@ -86,10 +86,9 @@ const PrjtRegiPage1Info = ref({
                           })
 
 
-function init(){
+function initData(){
   pageNo.value = 1;
 }
-
 function movePage(div){
   // this.test();
   if(div == 'next'){
