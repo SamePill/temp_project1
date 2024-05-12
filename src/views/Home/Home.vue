@@ -99,7 +99,8 @@ onMounted(() => {
 
 const loginYn = ref(window.$cookies.get("loginYn"));
 const router = useRouter()
-const projList = ref([])
+//const projList = ref([])
+let projList = []
 const siteInfo = ref({reprNm:"", compAddr:"", compNo:"", csctNo:"", faxNo:""})
   
 
@@ -132,15 +133,17 @@ function goToPage(path){
 async function loadData(){
   var api = "/v1/home/info";
   var postParams = {};
-  let res = await gfnUtils.axiosGet(
+  let rtn = await gfnUtils.axiosGet(
     api,
     postParams
   );
   
-  console.log(res);
-  projList.value = res.projList
+  console.log(rtn);
+  var res = rtn.rtnData;
+  projList = res.projList
+  //projList.value = res.projList
   siteInfo.value = res.footerInfo
-  console.log(projList.value);
+  //console.log(projList.value);
   console.log("footerInfo");
   console.log(siteInfo.value);
 }

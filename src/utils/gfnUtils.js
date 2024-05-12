@@ -46,7 +46,11 @@ export const axiosGet = (api, getParams) => {
       "Bearer " + window.$cookies.get("loginAccToken") || "";
   }
   
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject, isErr) {
+    if (typeof isErr == "undefined") {
+      isErr = true;
+    }
+    
     axios
       .get(apiUrl, { params: getParams })
       .then(res => {
@@ -57,24 +61,56 @@ export const axiosGet = (api, getParams) => {
 
           if (resData.rtnCd == "00") {
             // store.commit("setLoading", false);
-            resolve(resData.rtnData);
+            // resolve(resData.rtnData);
+            resolve(resData);
           } else {
             // openAlertDiaolog("ERROR", resData.rtnMsg);
             // store.commit("setLoading", false);
-            reject();
+            reject(resData);
             console.log("오류");
           }
         }
       })
       .catch(err => {
-        // store.commit("setLoading", false);
-        console.log("오류");
-        console.log(err);
-        // openAlertDiaolog(
-        //   "ERROR",
-        //   "오류가 발생하였습니다. (" + err.response.status + ")"
-        // );
-        //alert(err);
+        // if (loading) {
+        //   // store.commit("setLoading", false);
+        // }
+        console.log(err.response.data);
+        if (isErr) {
+          console.log("Error -----------------------")
+          console.log(err.response.data)
+          console.log(err.response.status)
+          //alert(err.response.status);     
+          console.log("오류");
+          console.log(err.response.data.rtnMsg)
+          console.log(err.response.data.rtnData)
+          if (err.response.status == "404") {
+            // goto 404 page
+            //응답코드별 처리...
+            // openAlertDiaolog(
+            //   "ERROR",
+            //   "오류가 발생하였습니다. (" + err.response.status + ")"
+            // );
+          } else if (err.response.status == "403") {
+            // if ("Landing" != router.currentRoute.name) {
+            //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+            // }
+
+            router.replace({ name: "Login" });
+          } else if (err.response.status == "400") {
+            // if ("Landing" != router.currentRoute.name) {
+            //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+            // }
+            resolve(err.response.data);
+          } else {
+            // openAlertDiaolog(
+            //   "ERROR",
+            //   "오류가 발생하였습니다. (" + err.response + ")"
+            // );
+            //reject(err.response.data);     
+            resolve(err.response.data);            
+          }
+        }
       });
   });
 };
@@ -134,24 +170,29 @@ export const axiosPost = (api, postParams, loading, isErr) => {
             console.log(window.$cookies.get("loginYn"))
             console.log(window.$cookies)
           } 
-          resolve(resData.rtnData);
+          //resolve(resData.rtnData);
+          resolve(resData);
         } else {
           //store.commit("setLoading", false);
           console.log("오류");
           //store.commit("setAlertDialog", true);
           //openAlertDiaolog("ERROR", resData.rtnMsg);
-          reject(res);
+          reject(resData);
         }
       })
       .catch(err => {
         if (loading) {
           // store.commit("setLoading", false);
         }
-
+        console.log(err.response.data);
         if (isErr) {
-          // console.log(err.response.data);
-          // console.log(err.response.status);
-          // console.log(err.response.headers);
+          console.log("Error -----------------------")
+          console.log(err.response.data)
+          console.log(err.response.status)
+          //alert(err.response.status);     
+          console.log("오류");
+          console.log(err.response.data.rtnMsg)
+          console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
             //응답코드별 처리...
@@ -165,20 +206,18 @@ export const axiosPost = (api, postParams, loading, isErr) => {
             // }
 
             router.replace({ name: "Login" });
+          } else if (err.response.status == "400") {
+            // if ("Landing" != router.currentRoute.name) {
+            //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+            // }
+            resolve(err.response.data);
           } else {
             // openAlertDiaolog(
             //   "ERROR",
             //   "오류가 발생하였습니다. (" + err.response + ")"
             // );
-            
-            console.log("Error -----------------------")
-            console.log(err.response.data)
-            console.log(err.response.status)
-            //alert(err.response.status);     
-            console.log("오류");
-            console.log(err.response.data.rtnMsg)
-            console.log(err.response.data.rtnData)
-            reject(err.response.data);     
+            //reject(err.response.data);     
+            resolve(err.response.data);            
           }
         }
 

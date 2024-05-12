@@ -133,10 +133,11 @@ async function loadData(){
   let api = "/v1/common/code";
   let postParams = {codeGrpList:['JOB_DIV_CD','TASK_DIV_CD']};
  
-  let res = await gfnUtils.axiosPost(
+  let rtn = await gfnUtils.axiosPost(
     api,
     postParams
   );
+  let res = rtn.rtnData
   if(res.codeList.JOB_DIV_CD.length > 0){
     res.codeList.JOB_DIV_CD.forEach(el => {
       el['chkVal'] = false;

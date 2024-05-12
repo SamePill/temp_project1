@@ -131,12 +131,13 @@ async function loadData(selPage){
   }
   var api = "/v1/project/list";
   var postParams = {workDivCd:"", workPirdDivCd:"", engrRtngDivCd:"", pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
-  let res = await gfnUtils.axiosGet(
+  let rtn = await gfnUtils.axiosGet(
     api,
     postParams
   );
   
-  console.log(res);
+  console.log(rtn);
+  let res = rtn.rtnData
   projList.value = res.projList
 }
 

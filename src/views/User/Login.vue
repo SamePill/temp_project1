@@ -137,11 +137,15 @@ async function reqLogin(){
 
     //var loading = "";
     //var isErr = "";
-    await gfnUtils.axiosPost(
+    var rtn = await gfnUtils.axiosPost(
             api,
             postParams
         );
-    router.replace("/")
+    if(rtn.rtnCd == "00"){
+        router.replace("/")
+    }else{
+        console.log("에러처리...")
+    }    
 }
 
 function resetPassword(){
@@ -157,35 +161,6 @@ function signUp(){
     router.push("/signUp")
 }
 
-
-
-
-// export default {
-//     data() {
-//         return{
-//             params:{
-//                 email:''
-//                ,pswd:''
-//                ,btnIsActv : false
-//             }
-//         }
-//     }
-//     ,methods:{
-//         btnStatChng(){
-//             console.log(this.params.email == '')
-//             console.log(this.params.pswd == '')
-//             if(this.params.email == '' || this.params.pswd == ''){
-//                 this.params.btnIsActv = false;
-//             }else{
-//                 this.params.btnIsActv = true;
-//             }
-//         }
-//        ,ruleChk(){
-//             console.log('체크');
-//             console.log(this.gfn_rules.validEmail(this.params.email));
-//        }
-//     }
-// }
 </script>
 <style scoped>
 </style>
