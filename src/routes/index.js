@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '@/views/Home/Home.vue'
-import PrjtSrch from "@/views/Prjt/PrjtSrch.vue";
 import PrjtRegi from "@/views/Prjt/PrjtRegi.vue";
-import PrjtSrchDetl from "@/views/Prjt/PrjtSrchDetl.vue";
+
+import PrjtSrch from "@/views/PrjtList/PrjtSrch.vue";
+import PrjtSrchDetl from "@/views/PrjtList/PrjtSrchDetl.vue";
 
 import Login from "@/views/User/Login.vue";
 import SignUp from "@/views/User/SignUp.vue";
