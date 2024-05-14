@@ -25,7 +25,7 @@
     <div class="w-[1060px] flex justify-start flex-wrap mx-auto">
       <!-- 공고 card -->
       <div v-for="el in projList" :key="el">
-        <QaProject :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="el"  />
+        <QaProjectItem :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="el"  />
       </div>
     </div>
   </div>
@@ -88,7 +88,7 @@
 
 <script setup>
 // import Footer from '@/components/layoutComponents/Footer.vue'
-import QaProject from '@/components/baseComponents/QaProject.vue'
+import QaProjectItem from '@/components/baseComponents/QaProjectItem.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'

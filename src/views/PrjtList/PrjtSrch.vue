@@ -22,7 +22,7 @@
 
   <!-- 프로젝트 리스트 -->
   <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
-      <QaProject :qaProjectViewInfo="{size:'big'}" :prj="el"  />
+      <QaProjectItem :qaProjectViewInfo="{size:'big'}" :prj="el"  />
   </div>
 
   <div class="example-six">
@@ -66,7 +66,7 @@
 
 <script setup>
 import DropDown from '@/components/uiComponents/DropDown.vue'
-import QaProject from '@/components/baseComponents/QaProject.vue'
+import QaProjectItem from '@/components/baseComponents/QaProjectItem.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 

@@ -1,85 +1,7 @@
 <div class="flex-grow-0 flex-shrink-0 w-[1920px] h-[1232px] relative overflow-hidden bg-[#fefefe]">
-    <div class="flex flex-col justify-start items-start absolute left-[430px] top-10 gap-5">
-      <div class="flex justify-between items-end self-stretch flex-grow-0 flex-shrink-0 relative">
-        <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">
-          <span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]"
-            >김현성님</span
-          ><br /><span
-            class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]"
-            >안녕하세요</span
-          >
-        </p>
-        <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[30px]">
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">기업명 : 리드워크</p>
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">엔지니어 수 : 173명</p>
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
-            지원한 프로젝트 : 10개
-          </p>
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">진행중 프로젝트 : 2개</p>
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
-            완료된 프로젝트 : 10개
-          </p>
-        </div>
-      </div>
-      <div class="flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
-    </div>
+    <SubHeader/>
     <div class="flex justify-start items-start absolute left-[430px] top-[149px] gap-5">
-      <div
-        class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 pb-1 rounded-[10px] bg-white border border-[#ddd]"
-      >
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">클라이언트</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">등록한 프로젝트</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">QA 파트너스</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">
-            지원한 프로젝트
-          </p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">엔지니어 관리</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">계정관리</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">내 정보</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">약관</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">이용약관</p>
-        </div>
-        <div
-          class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개인정보 처리방침</p>
-        </div>
-      </div>
+      <SideMenu/>
       <div
         class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-10 pt-5"
       >
@@ -768,3 +690,9 @@
       </div>
     </div>
   </div>
+
+  
+<script setup>
+import SubHeader from '@/components/layoutComponents/SubHeader.vue'
+import SideMenu from '@/components/layoutComponents/SideMenu.vue'
+</script>
