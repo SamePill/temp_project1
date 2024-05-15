@@ -392,13 +392,12 @@
           </div>
         </div>
         <div class="flex justify-center items-start flex-grow-0 flex-shrink-0 gap-5">
-          <div
-            class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[205px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-white border border-[#1ba494]"
+          <button
+          @click="prevPage()"
+            class="text-base font-medium text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[205px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-white border border-[#1ba494]"
           >
-            <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
               이전 단계로 이동
-            </p>
-          </div>
+          </button>
           <div
             class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[205px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
           >
@@ -461,30 +460,32 @@
 </template>
 
 <script setup>
-// import { ref, defineProps } from "vue";
-import { useRouter } from 'vue-router';
+// import {  defineProps } from "vue";
+import { useRouter, onBeforeRouteLeave  } from 'vue-router';
 
 const router = useRouter()
+const { dataObj } = history.state; // 이렇게 받는다.
+console.log(dataObj); 
 
-// const props = defineProps({
-//   paramData : {
-//       type : Object
-//   }
-// });
-console.log(router.params)
+function prevPage(){
 
-// const { dataObj } = history.state; 
-// const { dataObj } = window.history?.state || ""
-// const signUpApply = ref(props.paramData)
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+  console.log(dataObj)
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+  //const signUpdData = signUp.value.map(item => item);
+  router.push({ name: "signUp"
+             ,state : {
+                        //dataObj : { a:1, b:'string', c:true },
+                        dataObj : dataObj,
+                      }
+            });
+}
 
-// console.log(history.state.data);
-// console.log(dataObj)
-// console.log("---------------------------------------------------------------")
-// console.log(signUpApply)
-// console.log("---------------------------------------------------------------")
-// console.log(props)
-// console.log(props.paramData)
-// console.log(signUpApply.value.joinTwoStep.joinTwoStep.value)
-// v-model="signUpApply.joinTwoStep.joinTwoStep"
-
+onBeforeRouteLeave((to, from, next) => {
+  //next(false);  //뒤로가기 무력화
+  console.log(to);
+  console.log(from);
+  console.log(next);
+  next(false);
+});
 </script>

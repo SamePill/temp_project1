@@ -49,6 +49,7 @@ export default createRouter({
     //회원가입 steo1
     {
       path: '/signUp',
+      name: 'signUp',
       component: SignUp,
     },
     //회원가입 step2
@@ -56,6 +57,7 @@ export default createRouter({
       path: '/signUpApply',
       name: 'signUpApply',
       component: SignUpApply,
+      //props : true,
     },
     //아이디찾기
     {

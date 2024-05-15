@@ -207,6 +207,9 @@ import {  ref } from "vue";
 // import * as gfnUtils from "@/utils/gfnUtils.js";
 import { useRouter } from 'vue-router';
 
+const { dataObj } = history.state; 
+console.log(dataObj); 
+
 const router = useRouter()
 const authNo = ref('')
 const signUp = ref(
@@ -234,12 +237,18 @@ function nextPage(){
   console.log(authNo.value)
 
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  console.log(signUp.value)
+  console.log(signUp.value.joinOneStep)
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  // const signUpdData = signUp.value.map(item => item);
+  //const signUpdData = signUp.value.map(item => item);
   router.push({ name: "signUpApply"
              // ,state: { data : signUp.value}
-               ,params: {  paramData : signUp }
+            //  ,param: {
+            //             dataObj : { a:1, b:'string', c:true },
+            //           }
+             ,state : {
+                        //dataObj : { a:1, b:'string', c:true },
+                        dataObj : JSON.stringify(signUp.value),
+                      }
             });
 }
 </script>
