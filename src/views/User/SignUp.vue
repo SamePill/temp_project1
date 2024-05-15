@@ -55,20 +55,22 @@
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
           >
-            <p
+            <input
+              type="text"
               class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-            >
-              qmeet@naver.com
-            </p>
+              placeholder="이메일"
+              v-model="signUp.joinOneStep.userMail"
+            />
           </div>
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
           >
-            <p
+            <input
+              type="text"
               class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-            >
-              김큐밋
-            </p>
+              placeholder="이름"
+              v-model="signUp.joinOneStep.userNm"
+            />
           </div>
           <div
             class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5"
@@ -79,20 +81,21 @@
               <div
                 class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
               >
-                <p
+                <input
+                  type="text"
                   class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-                >
-                  010-1234-5678
-                </p>
+                  placeholder="휴대폰번호"
+                  v-model="signUp.joinOneStep.userHp"
+                />
               </div>
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
               >
-                <p
+                <button
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
                 >
                   인증번호 재전송
-                </p>
+                </button>
               </div>
             </div>
             <div
@@ -101,45 +104,48 @@
               <div
                 class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
               >
-                <p
+                <input
+                  type="text"
                   class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-                >
-                  121245
-                </p>
+                  placeholder="인증번호"
+                  v-model="authNo"
+                />                
                 <p
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"
                 >
-                  04:59
+                  {{  }}
                 </p>
               </div>
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#1ba494]"
               >
-                <p
+                <button
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"
                 >
                   인증번호 확인
-                </p>
+                </button>
               </div>
             </div>
           </div>
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
           >
-            <p
+            <input
+              type="password"
               class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-            >
-              **********
-            </p>
+              placeholder="비밀번호"
+              v-model="signUp.joinOneStep.pass"
+            />
           </div>
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
           >
-            <p
+            <input
+              type="password"
               class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-            >
-              **********
-            </p>
+              placeholder="비밀번호"
+              v-model="signUp.joinOneStep.confirmPass"
+            />
           </div>
         </div>
         <div
@@ -218,5 +224,31 @@
 </template>
 
 <script setpup>
+// import {  ref } from "vue";
+// import * as gfnRules from "@/utils/gfnRules.js";
+// import * as gfnUtils from "@/utils/gfnUtils.js";
+// import { useRouter } from 'vue-router';
+
+// const authNo = ref('')
+// const signUp = ref(
+//                   {
+//                     joinOneStep: {
+//                         userMail: "",
+//                         pass: "",
+//                         confirmPass: "",
+//                         userNm: "",
+//                         hp: ""
+//                     },
+//                     joinTwoStep: {
+//                       privTrmsYn: "",
+//                       useTrmsYn: "",
+//                       mrktMailRcptYn: "",
+//                       mrktSmsRcptYn: "",
+//                       compNm: "",
+//                       compBaseAddr: "",
+//                       compDtlAddr: "",
+//                       bizRegNo: ""
+//                     }
+//                   })
 
 </script>

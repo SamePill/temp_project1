@@ -61,9 +61,6 @@
             <tr>
                 <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="test1()">Login</button>
             </tr>
-            <tr>
-                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="saveFile()">savefile</button>
-            </tr>
         </table>
         <br>
         <br>
@@ -83,20 +80,25 @@
             activated	onActivated 컴포넌트가 활성화될 때 실행됩니다.
             deactivated	onDeactivated   컴포넌트가 비활성화될 때 실행됩니다.
         </pre>
+        <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="saveFile()">savefile</button>
+
+        <testComp ref="xx"/>
     </div>
     </template>
     <script setup>
-    import { reactive, ref } from "vue";
+    import {  ref } from "vue";
     import * as gfnUtils from "@/utils/gfnUtils.js";
     import { commonStore } from '@/stores'
+    import testComp from '@/views/Test/testComponent.vue'
 
+    const xx = ref()
     const store = commonStore()
 
     const apiUrl = ref("/v1/common/code");
     const apiResult = ref("");
     const testId = ref("");
     const testPw = ref("");
-    const apiParam =  reactive(JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}));
+    const apiParam =  ref(JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}));
 
     const testValue = ref("");
 
@@ -147,6 +149,8 @@
     }
 
     async function saveFile(){
+        xx.value.test();
+
         var params = this.popitem;
 
         let formData = new FormData();
