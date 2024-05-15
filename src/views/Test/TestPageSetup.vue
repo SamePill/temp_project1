@@ -138,7 +138,7 @@
         this.apiResult = JSON.stringify(res);
     }
     async function Login(){
-        var api = this.apiUrl;
+        var api = this.apiUrl;          
         var postParams = {id: this.testId, pw: this.testPw};
         let res = await gfnUtils.axiosPost(
                                                     api,
