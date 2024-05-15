@@ -283,42 +283,54 @@ export const axiosPost = (api, postParams, loading, isErr) => {
 //         console.log(resData);
 
 //         if (resData.rtnCd == "00") {
-//           store.commit("setLoading", false);
-//           resolve(resData.rtnData);
+//           // store.commit("setLoading", false);
+//           resolve(resData);
 //         } else {
-//           store.commit("setLoading", false);
+//           // store.commit("setLoading", false);
 //           console.log("오류");
-//           store.commit("setAlertDialog", true);
-//           openAlertDiaolog("ERROR", resData.rtnMsg);
-//           reject(res);
+//           // store.commit("setAlertDialog", true);
+//           // openAlertDiaolog("ERROR", resData.rtnMsg);
+//           reject(resData);
 //         }
 //       })
 //       .catch(err => {
 //         if (loading) {
-//           store.commit("setLoading", false);
+//           // store.commit("setLoading", false);
 //         }
-
+//         console.log(err.response.data);
 //         if (isErr) {
-//           // console.log(err.response.data);
-//           // console.log(err.response.status);
-//           // console.log(err.response.headers);
+//           console.log("Error -----------------------")
+//           console.log(err.response.data)
+//           console.log(err.response.status)
+//           //alert(err.response.status);     
+//           console.log("오류");
+//           console.log(err.response.data.rtnMsg)
+//           console.log(err.response.data.rtnData)
 //           if (err.response.status == "404") {
+//             // goto 404 page
 //             //응답코드별 처리...
-//             openAlertDiaolog(
-//               "ERROR",
-//               "오류가 발생하였습니다. (" + err.response.status + ")"
-//             );
+//             // openAlertDiaolog(
+//             //   "ERROR",
+//             //   "오류가 발생하였습니다. (" + err.response.status + ")"
+//             // );
 //           } else if (err.response.status == "403") {
-//             if ("Landing" != router.currentRoute.name) {
-//               openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
-//             }
+//             // if ("Landing" != router.currentRoute.name) {
+//             //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+//             // }
 
 //             router.replace({ name: "Login" });
+//           } else if (err.response.status == "400") {
+//             // if ("Landing" != router.currentRoute.name) {
+//             //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+//             // }
+//             resolve(err.response.data);
 //           } else {
-//             openAlertDiaolog(
-//               "ERROR",
-//               "오류가 발생하였습니다. (" + err.response + ")"
-//             );
+//             // openAlertDiaolog(
+//             //   "ERROR",
+//             //   "오류가 발생하였습니다. (" + err.response + ")"
+//             // );
+//             //reject(err.response.data);     
+//             resolve(err.response.data);            
 //           }
 //         }
 
@@ -327,7 +339,7 @@ export const axiosPost = (api, postParams, loading, isErr) => {
 //         // 상세alert 예제
 //         // openAlertDiaologWithDetail("ERROR","오류가 발생하였습니다. (" + err.response.status + ")", err.response.data.path);
 //         //console.log(err);
-//         reject(err);
+//         //reject(err);
 //         //alert(err)
 //       });
 //   });

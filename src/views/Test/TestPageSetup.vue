@@ -1,4 +1,4 @@
-<template>
+    <template>
     <div>
         <table border="1" width="250">
             <tr>
@@ -61,6 +61,9 @@
             <tr>
                 <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="test1()">Login</button>
             </tr>
+            <tr>
+                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="savefile()">savefile</button>
+            </tr>
         </table>
         <br>
         <br>
@@ -81,11 +84,11 @@
             deactivated	onDeactivated   컴포넌트가 비활성화될 때 실행됩니다.
         </pre>
     </div>
-</template>
-<script setup>
-import { reactive, ref } from "vue";
-import * as gfnUtils from "@/utils/gfnUtils.js";
-import { commonStore } from '@/stores'
+    </template>
+    <script setup>
+    import { reactive, ref } from "vue";
+    import * as gfnUtils from "@/utils/gfnUtils.js";
+    import { commonStore } from '@/stores'
 
     const store = commonStore()
 
@@ -94,10 +97,10 @@ import { commonStore } from '@/stores'
     const testId = ref("");
     const testPw = ref("");
     const apiParam =  reactive(JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}));
- 
+
     const testValue = ref("");
 
-    
+
     // store 사용 예시
     function test1(){
 
@@ -143,10 +146,43 @@ import { commonStore } from '@/stores'
         this.apiResult = JSON.stringify(res);
     }
 
+    async function saveFile(){
+        var params = this.popitem;
 
-</script>
-<style scoped>
-input {
+        let formData = new FormData();
+        // 파일이 다건인 경우
+        for (var idx in this.attchfiles) {
+            console.log(this.attchfiles[idx].type);
+            console.log(this.attchfiles[idx].name);
+            formData.append("attchFiles", this.attchfiles[idx]);
+        }
+        formData.append("banner", this.physFile);
+        formData.append(
+            "params",
+            new Blob([JSON.stringify(params)], { type: "application/json" })
+        );
+
+        // 파일이 단건인 경우
+        // formData.append("file", this.physFile);
+        // formData.append(
+        // "params",
+        // new Blob([JSON.stringify(params)], { type: "application/json" })
+        // );
+
+        console.log(formData);
+
+        let res = await this.gfn_utils.axiosPost(
+            "/admin/app/regiEvent",
+            formData
+        );         
+        console.log(res);
+        
+    }
+
+
+    </script>
+    <style scoped>
+    input {
     border: 1px solid #000
-}
-</style>
+    }
+    </style>
