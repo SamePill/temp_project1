@@ -34,7 +34,7 @@
         </button>
       </li>
       <li class="mr-5">|</li>
-        <button>
+        <button @click="goToPage('/signUp')">
           회원가입
         </button>
     </ul>
@@ -43,7 +43,7 @@
       v-else>
 
       <li class="mr-5">
-        <button @click="logout">
+        <button @click="logout()">
           로그아웃
         </button>
       </li>

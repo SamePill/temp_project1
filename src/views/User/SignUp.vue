@@ -52,42 +52,30 @@
         <div
           class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5"
         >
-          <div
-            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          >
-            <input
-              type="text"
-              class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-              placeholder="이메일"
-              v-model="signUp.joinOneStep.userMail"
-            />
-          </div>
-          <div
-            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          >
-            <input
-              type="text"
-              class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-              placeholder="이름"
-              v-model="signUp.joinOneStep.userNm"
-            />
-          </div>
+          <input
+            class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            type="text"
+            placeholder="이메일"
+            v-model="signUp.joinOneStep.userMail"
+          />         
+          <input
+            class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            type="text"
+            placeholder="이름"
+            v-model="signUp.joinOneStep.userNm"
+            />          
           <div
             class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5"
           >
             <div
               class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-2.5"
             >
-              <div
-                class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-              >
-                <input
-                  type="text"
-                  class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-                  placeholder="휴대폰번호"
-                  v-model="signUp.joinOneStep.userHp"
+              <input
+                type="text"
+                class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                placeholder="휴대폰번호"
+                v-model="signUp.joinOneStep.userHp"
                 />
-              </div>
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
               >
@@ -101,21 +89,18 @@
             <div
               class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-2.5"
             >
-              <div
-                class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-              >
-                <input
-                  type="text"
-                  class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-                  placeholder="인증번호"
-                  v-model="authNo"
-                />                
-                <p
+              <input
+                type="text"
+                class="text-base font-medium text-left text-[#191919] flex justify-between items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+                placeholder="인증번호"
+                v-model="authNo"
+              />                
+                <!-- <p
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"
                 >
                   {{  }}
-                </p>
-              </div>
+                </p> -->
+
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#1ba494]"
               >
@@ -127,35 +112,28 @@
               </div>
             </div>
           </div>
-          <div
-            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          >
-            <input
-              type="password"
-              class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-              placeholder="비밀번호"
-              v-model="signUp.joinOneStep.pass"
+          <input
+            class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            type="password"
+            placeholder="비밀번호"
+            v-model="signUp.joinOneStep.pass"
             />
-          </div>
-          <div
-            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          >
-            <input
-              type="password"
-              class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
-              placeholder="비밀번호"
-              v-model="signUp.joinOneStep.confirmPass"
+          <input
+            class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            type="password"
+            placeholder="비밀번호"
+            v-model="signUp.joinOneStep.confirmPass"
             />
-          </div>
         </div>
         <div
           class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
         >
-          <p
+          <button
             class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white"
+            @click="nextPage()"
           >
             다음 단계로 넘어가기
-          </p>
+          </button>
         </div>
       </div>
       <div
@@ -223,32 +201,45 @@
   </div>
 </template>
 
-<script setpup>
-// import {  ref } from "vue";
+<script setup>
+import {  ref } from "vue";
 // import * as gfnRules from "@/utils/gfnRules.js";
 // import * as gfnUtils from "@/utils/gfnUtils.js";
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-// const authNo = ref('')
-// const signUp = ref(
-//                   {
-//                     joinOneStep: {
-//                         userMail: "",
-//                         pass: "",
-//                         confirmPass: "",
-//                         userNm: "",
-//                         hp: ""
-//                     },
-//                     joinTwoStep: {
-//                       privTrmsYn: "",
-//                       useTrmsYn: "",
-//                       mrktMailRcptYn: "",
-//                       mrktSmsRcptYn: "",
-//                       compNm: "",
-//                       compBaseAddr: "",
-//                       compDtlAddr: "",
-//                       bizRegNo: ""
-//                     }
-//                   })
+const router = useRouter()
+const authNo = ref('')
+const signUp = ref(
+                  {
+                    joinOneStep: {
+                        userMail: "",
+                        pass: "",
+                        confirmPass: "",
+                        userNm: "",
+                        hp: ""
+                    },
+                    joinTwoStep: {
+                      privTrmsYn: "",
+                      useTrmsYn: "",
+                      mrktMailRcptYn: "",
+                      mrktSmsRcptYn: "",
+                      compNm: "",
+                      compBaseAddr: "",
+                      compDtlAddr: "",
+                      bizRegNo: ""
+                    }
+                  })
 
+function nextPage(){
+  console.log(authNo.value)
+
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+  console.log(signUp.value)
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+  // const signUpdData = signUp.value.map(item => item);
+  router.push({ name: "signUpApply"
+             // ,state: { data : signUp.value}
+               ,params: {  paramData : signUp }
+            });
+}
 </script>
