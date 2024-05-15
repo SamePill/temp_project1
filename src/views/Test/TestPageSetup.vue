@@ -62,7 +62,7 @@
                 <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="test1()">Login</button>
             </tr>
             <tr>
-                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="savefile()">savefile</button>
+                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="saveFile()">savefile</button>
             </tr>
         </table>
         <br>
