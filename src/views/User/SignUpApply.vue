@@ -29,20 +29,16 @@
   <div class="flex flex-col justify-end items-center flex-grow-0 flex-shrink-0 gap-20">
     <div class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 gap-10">
       <div class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
-        <div
-          class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
-            리드워크
-          </p>
-        </div>
-        <div
-          class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
-            111-111-11111
-          </p>
-        </div>
+        <input
+          type="text"
+          class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+          placeholder="회사명"
+          />
+        <input
+          type="text"
+          class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+          placeholder="사업자등록번호"
+        />
         <div
           class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
         >
@@ -70,7 +66,7 @@
         <input
           class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
           type="text"
-          
+          placeholder="상세주소"
         />
         <div
           class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[430px] gap-5"
@@ -82,30 +78,33 @@
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
                 회사 로고를 추가해주세요. (PNG,JPG)
               </p>
+              <input type="file" id="upload-log" hidden/>
             </div>
-            <div
-              class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
-            >
-              <svg
-                width="16"
-                height="17"
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M8.63337 3.16667C8.63337 2.79848 8.34236 2.5 7.98337 2.5C7.62439 2.5 7.33337 2.79848 7.33337 3.16667V13.8333C7.33337 14.2015 7.62439 14.5 7.98337 14.5C8.34236 14.5 8.63337 14.2015 8.63337 13.8333V3.16667Z"
-                  fill="#555555"
-                ></path>
-                <path
-                  d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
-                  fill="#555555"
-                ></path>
-              </svg>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">파일추가</p>
-            </div>
+            <label for="upload-log">
+              <div
+                class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
+              >              
+                <svg
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M8.63337 3.16667C8.63337 2.79848 8.34236 2.5 7.98337 2.5C7.62439 2.5 7.33337 2.79848 7.33337 3.16667V13.8333C7.33337 14.2015 7.62439 14.5 7.98337 14.5C8.34236 14.5 8.63337 14.2015 8.63337 13.8333V3.16667Z"
+                    fill="#555555"
+                  ></path>
+                  <path
+                    d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
+                    fill="#555555"
+                  ></path>
+                </svg>
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">파일추가</p>
+              </div>
+            </label>
           </div>
           <div
             class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[430px] gap-3"
@@ -154,30 +153,34 @@
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
                 사업자 등록증을 추가해주세요.
               </p>
+              <input type="file" id="upload-docu" hidden/>
             </div>
-            <div
-              class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
-            >
-              <svg
-                width="16"
-                height="17"
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                preserveAspectRatio="none"
+            <label for="upload-docu">
+              <div
+                class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
               >
-                <path
-                  d="M8.63337 3.16667C8.63337 2.79848 8.34236 2.5 7.98337 2.5C7.62439 2.5 7.33337 2.79848 7.33337 3.16667V13.8333C7.33337 14.2015 7.62439 14.5 7.98337 14.5C8.34236 14.5 8.63337 14.2015 8.63337 13.8333V3.16667Z"
-                  fill="#555555"
-                ></path>
-                <path
-                  d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
-                  fill="#555555"
-                ></path>
-              </svg>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">파일추가</p>
-            </div>
+
+                <svg
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M8.63337 3.16667C8.63337 2.79848 8.34236 2.5 7.98337 2.5C7.62439 2.5 7.33337 2.79848 7.33337 3.16667V13.8333C7.33337 14.2015 7.62439 14.5 7.98337 14.5C8.34236 14.5 8.63337 14.2015 8.63337 13.8333V3.16667Z"
+                    fill="#555555"
+                  ></path>
+                  <path
+                    d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
+                    fill="#555555"
+                  ></path>
+                </svg>
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">파일추가</p>
+              </div>
+            </label>
           </div>
           <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
             <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]"
@@ -245,6 +248,7 @@
                   stroke="#DBDBDB"
                   stroke-width="1.5"
                 ></rect>
+                <!-- 체크 표시 -->
                 <path
                   d="M9 16L14 21L22 13L23 12"
                   stroke="#191919"
@@ -282,6 +286,7 @@
                   stroke="#DBDBDB"
                   stroke-width="1.5"
                 ></rect>
+                <!-- 체크 표시 -->
                 <path
                   d="M9 16L14 21L22 13L23 12"
                   stroke="#191919"
@@ -320,6 +325,7 @@
                     stroke="#DBDBDB"
                     stroke-width="1.5"
                   ></rect>
+                  <!-- 체크 표시 -->
                   <path
                     d="M9 16L14 21L22 13L23 12"
                     stroke="#191919"
@@ -340,6 +346,7 @@
                 <div
                   class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1"
                 >
+                  <!-- 선택 -->
                   <svg
                     width="24"
                     height="24"
@@ -348,6 +355,52 @@
                     xmlns="http://www.w3.org/2000/svg"
                     class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
                     preserveAspectRatio="none"
+                  >
+                    <circle cx="12" cy="12" r="10" fill="#1BA494" @click="selEmail()"></circle>
+                    <path
+                      d="M8 11.4L10.8464 14.8156C10.9263 14.9116 11.0737 14.9116 11.1536 14.8156L16 9"
+                      stroke="white"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                  </svg>
+                  <!-- 미선택 -->
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                    preserveAspectRatio="none"
+                  >
+                    <circle cx="12" cy="12" r="10" fill="white" stroke="#1BA494" stroke-width="1" ></circle>
+                    <path
+                      d="M8 11.4L10.8464 14.8156C10.9263 14.9116 11.0737 14.9116 11.1536 14.8156L16 9"
+                      stroke="#1BA494"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                  </svg>
+                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">이메일</p>
+                </div>                
+              </div>
+              <div
+                class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 gap-0.5"
+              >
+                <div
+                  class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1"
+                >
+                  <!-- 선택 -->
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                    preserveAspectRatio="none"
+      
                   >
                     <circle cx="12" cy="12" r="10" fill="#1BA494"></circle>
                     <path
@@ -357,15 +410,7 @@
                       stroke-linecap="round"
                     ></path>
                   </svg>
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">이메일</p>
-                </div>
-              </div>
-              <div
-                class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 gap-0.5"
-              >
-                <div
-                  class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1"
-                >
+                  <!-- 미선택 -->
                   <svg
                     width="24"
                     height="24"
@@ -375,10 +420,10 @@
                     class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
                     preserveAspectRatio="none"
                   >
-                    <circle cx="12" cy="12" r="10" fill="#1BA494"></circle>
+                    <circle cx="12" cy="12" r="10" fill="white" stroke="#1BA494" stroke-width="1" ></circle>
                     <path
                       d="M8 11.4L10.8464 14.8156C10.9263 14.9116 11.0737 14.9116 11.1536 14.8156L16 9"
-                      stroke="white"
+                      stroke="#1BA494"
                       stroke-width="1.5"
                       stroke-linecap="round"
                     ></path>
@@ -460,12 +505,19 @@
 </template>
 
 <script setup>
-// import {  defineProps } from "vue";
+import { ref } from "vue";
 import { useRouter, onBeforeRouteLeave  } from 'vue-router';
 
 const router = useRouter()
 const { dataObj } = history.state; // 이렇게 받는다.
+const signUp = ref(dataObj);
+
 console.log(dataObj); 
+console.log(signUp.value)
+
+function selEmail(){
+  console.log("check!!!!!!!!!!!!!!!!!!")
+}
 
 function prevPage(){
 
