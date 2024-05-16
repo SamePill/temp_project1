@@ -1,3 +1,4 @@
+<template>
 <div
   class="flex justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 px-[700px] pt-10 pb-[100px] bg-[#fefefe]"
 >
@@ -442,3 +443,4 @@
     </div>
   </div>
 </div>
+</template>

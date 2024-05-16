@@ -1,10 +1,32 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '@/views/Home/Home.vue'
+
+//프로젝트 등록
 import PrjtRegi from "@/views/Prjt/PrjtRegi.vue";
 
+//프로젝트 찾기
 import PrjtSrch from "@/views/PrjtList/PrjtSrch.vue";
 import PrjtSrchDetl from "@/views/PrjtList/PrjtSrchDetl.vue";
 
+//마이페이지
+import MyCompanyInfo from "@/views/MyPage/Account/MyCompanyInfo.vue";
+import MyIdDeactivation from "@/views/MyPage/Account/MyIdDeactivation.vue";
+import MyInformation from "@/views/MyPage/Account/MyInformation.vue";
+import MyPasswordMng from "@/views/MyPage/Account/MyPasswordMng.vue";
+
+//클라이언트
+import RegisteredProjectList from "@/views/MyPage/Client/RegisteredProjectList.vue";
+import SelEngineerList from "@/views/MyPage/Client/SelEngineerList.vue";
+
+//파트너
+import AddEngineerCareerInfo from "@/views/MyPage/Partner/AddEngineerCareerInfo.vue";
+import AddEngineerCareerList from "@/views/MyPage/Partner/AddEngineerCareerList.vue";
+import AddEngineerInfo from "@/views/MyPage/Partner/AddEngineerInfo.vue";
+import AppliedEngineerList from "@/views/MyPage/Partner/AppliedEngineerList.vue";
+import AppliedProjectList from "@/views/MyPage/Partner/AppliedProjectList.vue";
+import ManageEngineer from "@/views/MyPage/Partner/ManageEngineer.vue";
+
+//로그인
 import Login from "@/views/User/Login.vue";
 import SignUp from "@/views/User/SignUp.vue";
 import SignUpApply from "@/views/User/SignUpApply.vue";
@@ -71,13 +93,75 @@ export default createRouter({
     },
 
     /*********************** 마이페이지 ***********************/
-    
     //비밀번호초기화
     {
-      path: '/test',
-      component: Test,
+      path: '/MyCompanyInfo',
+      component: MyCompanyInfo,
     },
 
+    {
+      path: '/MyInformation',
+      component: MyInformation,
+    },
+
+    {
+      path: '/MyPasswordMng',
+      component: MyPasswordMng,
+    },
+    
+    {
+      path: '/MyIdDeactivation',
+      component: MyIdDeactivation,
+    },
+    
+
+    /*--------- 클라이언트 ----------*/
+    {
+      path: '/RegisteredProjectList',
+      component: RegisteredProjectList,
+    },
+
+    {
+      path: '/SelEngineerList',
+      component: SelEngineerList,
+    },
+
+    /*--------- 파트너 ----------*/
+    {
+      path: '/AddEngineerCareerInfo',
+      component: AddEngineerCareerInfo,
+    },
+
+    {
+      path: '/AddEngineerCareerList',
+      component: AddEngineerCareerList,
+    },
+
+    {
+      path: '/AddEngineerInfo',
+      component: AddEngineerInfo,
+    },
+
+    {
+      path: '/AppliedEngineerList',
+      component: AppliedEngineerList,
+    },
+
+    {
+      path: '/AppliedProjectList',
+      component: AppliedProjectList,
+    },
+
+    {
+      path: '/ManageEngineer',
+      component: ManageEngineer,
+    },
+
+
+    {
+      path: '/Test',
+      component: Test,
+    },
 
    /*********************** 테스트 페이지 ***********************/
     

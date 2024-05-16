@@ -1,3 +1,4 @@
+<template>
 <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-5 px-[430px] pt-10 pb-[100px] bg-[#fefefe]" >
   <SubHeader/>
   <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -196,7 +197,7 @@
         <div
           class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] gap-3"
         >
-          <EngineerItem>
+          <EngineerItem/>
           
           
         </div>
@@ -254,7 +255,7 @@
     </div>
   </div>
 </div>
-
+</template>
 <script setup>
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'

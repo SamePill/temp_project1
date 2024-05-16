@@ -1,4 +1,5 @@
-<div class="flex-grow-0 flex-shrink-0 w-[1920px] h-[1232px] relative overflow-hidden bg-[#fefefe]">
+<template>
+  <div class="flex-grow-0 flex-shrink-0 w-[1920px] h-[1232px] relative overflow-hidden bg-[#fefefe]">
     <SubHeader/>
     <div class="flex justify-start items-start absolute left-[430px] top-[149px] gap-5">
       <SideMenu/>
@@ -690,9 +691,9 @@
       </div>
     </div>
   </div>
-
+</template>
   
 <script setup>
-import SubHeader from '@/components/layoutComponents/SubHeader.vue'
-import SideMenu from '@/components/layoutComponents/SideMenu.vue'
+// import SubHeader from '@/components/layoutComponents/SubHeader.vue'
+// import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 </script>

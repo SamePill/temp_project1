@@ -4,9 +4,9 @@
     <!-- 헤더 -->
     <template
       v-if="
-        this.$route.path.indexOf('/login') >= 0
-        // this.$route.path.indexOf('/resetPassword') >= 0 ||
-        // this.$route.path.indexOf('/regiUser') >= 0 
+        this.$route.path.indexOf('/login') >= 0 ||
+        this.$route.path.indexOf('/signUp') >= 0 ||
+        this.$route.path.indexOf('/signUpApply') >= 0 
       "
     >
 
