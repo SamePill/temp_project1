@@ -25,7 +25,7 @@
       <QaProjectItem :qaProjectViewInfo="{size:'big'}" :prj="el"  />
   </div>
 
-  <div class="example-six">
+  <div class="paginationDiv">
     <vue-awesome-paginate
       :total-items=totalCnt
       v-model="pageNo"
@@ -69,6 +69,11 @@ import DropDown from '@/components/uiComponents/DropDown.vue'
 import QaProjectItem from '@/components/baseComponents/QaProjectItem.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
+
+
+onMounted(() => {
+  loadData();
+})
 
 const pageNo = ref(1)
 const totalCnt = ref(100)
@@ -118,12 +123,6 @@ const projList = ref([{
                    }])
 
 
-
-onMounted(() => {
-  loadData();
-})
-
-
 async function loadData(selPage){
   console.log(selPage)
   if(selPage != null){
@@ -145,11 +144,11 @@ async function loadData(selPage){
 </script>
 
 <style>
-.example-six .pagination-container {
+.paginationDiv .pagination-container {
   column-gap: 10px;
   align-items: center;
 }
-.example-six .paginate-buttons {
+.paginationDiv .paginate-buttons {
   height: 35px;
   width: 35px;
   cursor: pointer;
@@ -159,38 +158,38 @@ async function loadData(selPage){
   color: black;
 }
 
-.example-six .back-button,
-.example-six .next-button {
+.paginationDiv .back-button,
+.paginationDiv .next-button {
   background-color: white;
   color: white;
   border-radius: 8px;
   height: 45px;
   width: 45px;
 }
-.example-six .active-page {
+.paginationDiv .active-page {
   background-color: #e5e5e5;
 }
-.example-six .paginate-buttons:hover {
+.paginationDiv .paginate-buttons:hover {
   background-color: #f5f5f5;
 }
-.example-six .active-page:hover {
+.paginationDiv .active-page:hover {
   background-color: #e5e5e5;
 }
 
-.example-six .back-button svg {
+.paginationDiv .back-button svg {
   transform: rotate(180deg) translateY(-2px);
 }
-.example-six .next-button svg {
+.paginationDiv .next-button svg {
   transform: translateY(2px);
 }
 
-/* .example-six .back-button:hover,
-.example-six .next-button:hover {
+/* .paginationDiv .back-button:hover,
+.paginationDiv .next-button:hover {
   background-color: rgb(45, 45, 45);
 } */
 
-.example-six .back-button:active,
-.example-six .next-button:active {
+.paginationDiv .back-button:active,
+.paginationDiv .next-button:active {
   background-color: rgb(85, 85, 85);
 }
 </style>

@@ -95,65 +95,65 @@ export default createRouter({
     /*********************** 마이페이지 ***********************/
     //비밀번호초기화
     {
-      path: '/MyCompanyInfo',
+      path: '/myCompanyInfo',
       component: MyCompanyInfo,
     },
 
     {
-      path: '/MyInformation',
+      path: '/myInformation',
       component: MyInformation,
     },
 
     {
-      path: '/MyPasswordMng',
+      path: '/myPasswordMng',
       component: MyPasswordMng,
     },
     
     {
-      path: '/MyIdDeactivation',
+      path: '/myIdDeactivation',
       component: MyIdDeactivation,
     },
     
 
     /*--------- 클라이언트 ----------*/
     {
-      path: '/RegisteredProjectList',
+      path: '/registeredProjectList',
       component: RegisteredProjectList,
     },
 
     {
-      path: '/SelEngineerList',
+      path: '/selEngineerList',
       component: SelEngineerList,
     },
 
     /*--------- 파트너 ----------*/
     {
-      path: '/AddEngineerCareerInfo',
+      path: '/addEngineerCareerInfo',
       component: AddEngineerCareerInfo,
     },
 
     {
-      path: '/AddEngineerCareerList',
+      path: '/addEngineerCareerList',
       component: AddEngineerCareerList,
     },
 
     {
-      path: '/AddEngineerInfo',
+      path: '/addEngineerInfo',
       component: AddEngineerInfo,
     },
 
     {
-      path: '/AppliedEngineerList',
+      path: '/appliedEngineerList',
       component: AppliedEngineerList,
     },
 
     {
-      path: '/AppliedProjectList',
+      path: '/appliedProjectList',
       component: AppliedProjectList,
     },
 
     {
-      path: '/ManageEngineer',
+      path: '/manageEngineer',
       component: ManageEngineer,
     },
 
