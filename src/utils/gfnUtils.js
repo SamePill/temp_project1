@@ -250,26 +250,27 @@ export const loadCommCode = async (cdName) => {
   // WORK_PIRD_DIV_CD / 업무기간구분코드
   const cmmnStore = commonStore()
 
-  var api = "/v1/common/code";
-  var postParams = {codeGrpList:['EDCT_DIV_CD','ENGN_RTNG_DIV_CD','ENGR_INPT_STAT_CD','ENGR_SPRT_STAT_CD'
-                                 ,'JOB_DIV_CD','PIRD_DIV_CD','PROJ_STAT_CD','SMS_DIV_CD','SRVD_STAT_CD'
-                                 ,'TASK_DIV_CD','WORK_DIV_CD','WORK_PIRD_DIV_CD']};
-  //var loading = "";
-  //var isErr = "";
-  let rtn = await axiosPost(
-    api,
-    postParams
-  );
-  // console.log(rtn)
-  // console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' + rtn.rtnCd)
-  // console.log(cmmnStore.getCodeList.value)
-  if(rtn.rtnCd == "00"){
-    cmmnStore.setCodeList(rtn.rtnData.codeList)
-    return cmmnStore.getCodeList.value[cdName]
-  }else{
-    console.log("err")    
+  if(cmmnStore.getCodeList.value == undefined || cmmnStore.getCodeList.length == 0  ){
+    var api = "/v1/common/code";
+    var postParams = {codeGrpList:['EDCT_DIV_CD','ENGN_RTNG_DIV_CD','ENGR_INPT_STAT_CD','ENGR_SPRT_STAT_CD'
+                                  ,'JOB_DIV_CD','PIRD_DIV_CD','PROJ_STAT_CD','SMS_DIV_CD','SRVD_STAT_CD'
+                                  ,'TASK_DIV_CD','WORK_DIV_CD','WORK_PIRD_DIV_CD']};
+    //var loading = "";
+    //var isErr = "";
+    let rtn = await axiosPost(
+      api,
+      postParams
+    );
+    // console.log(rtn)
+    // console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' + rtn.rtnCd)
+    // console.log(cmmnStore.getCodeList.value)
+    if(rtn.rtnCd == "00"){
+      cmmnStore.setCodeList(rtn.rtnData.codeList)
+      return cmmnStore.getCodeList.value[cdName]
+    }else{
+      console.log("err")    
+    }
   }
- 
 };
 
 

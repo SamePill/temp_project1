@@ -65,7 +65,10 @@
                 <td><input type="text" v-model="testValue" /></td>
             </tr>
             <tr>
-                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="test1()">Login</button>
+                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="test1()">코드 조회테스트</button>
+            </tr>
+            <tr>
+                <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="filtered()">필터테스트</button>
             </tr>
         </table>
         <br>
@@ -93,7 +96,7 @@
     </template>
     <script setup>
    
-    import {  ref } from "vue";
+    import {  ref, computed } from "vue";
     import * as gfnUtils from "@/utils/gfnUtils.js";
     import { commonStore } from '@/stores'
     import testComp from '@/views/Test/testComponent.vue'
@@ -108,10 +111,28 @@
     const apiParam =  ref(JSON.stringify({codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']}));
 
     const testValue = ref("");
+    const codelist = ref();
+    const filteredNm = computed( () => {
+            //문자열 비교
+            let filter = testValue.value
+            console.log(filter)
+            console.log(filter.toLowerCase())
+            if (!filter.length) return codelist.value;
 
+            return codelist.value.filter( item => 
+                item.cdNm.toLowerCase().includes(filter.toLowerCase())
+            )
+        })
+    const filteredCd = computed( () => {
+            let filter = true
+            return codelist.value.filter( item => 
+                item.checked == filter
+            )
+        })
 
     // store 사용 예시
-    function test1(){
+    async function test1(){
+        
         console.log("Stores-------------------------------------");
         store.setLoginCompId("xxxx");
         console.log("bf:" + store.getLoginCompId.value);
@@ -124,9 +145,19 @@
         window.$cookies.config("1d");
         window.$cookies.set("loginUserId", "test");
         console.log(window.$cookies.get("loginUserId"));
+        console.log("Utils...-------------------------------------");
+
+        codelist.value = await gfnUtils.getCommCode("ENGN_RTNG_DIV_CD");
+
+        codelist.value[0].checked = true;
+        console.log(codelist.value);
+
     }
 
-
+    function filtered (){
+        console.log(filteredNm.value);
+        console.log(filteredCd.value);
+    }
     async function Test(){
         
         console.log("XXXXXXXXXXXXXXXX");
