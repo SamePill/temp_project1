@@ -38,9 +38,9 @@ export const axiosGet = (api, getParams) => {
   // store.commit("setLoading", true);
   // var apiUrl = baseUrl + api+ ".sys";
   var apiUrl = baseUrl + api;
-  console.log("api post url::::" + apiUrl);
-  console.log("-------param-------");
-  console.log(getParams);
+  // console.log("api post url::::" + apiUrl);
+  // console.log("-------param-------");
+  // console.log(getParams);
 
   axios.defaults.headers.common["Content-Type"] = "application/json"
   if (window.$cookies.get("loginAccToken") != null) {
@@ -58,8 +58,8 @@ export const axiosGet = (api, getParams) => {
       .then(res => {
         if (res.status === 200) {
           var resData = res.data;
-          console.log("-------result-------");
-          console.log(resData.data);
+          // console.log("-------result-------");
+          // console.log(resData.data);
 
           if (resData.rtnCd == "00") {
             // store.commit("setLoading", false);
@@ -69,7 +69,7 @@ export const axiosGet = (api, getParams) => {
             // openAlertDiaolog("ERROR", resData.rtnMsg);
             // store.commit("setLoading", false);
             reject(resData);
-            console.log("오류");
+            // console.log("오류");
           }
         }
       })
@@ -79,13 +79,13 @@ export const axiosGet = (api, getParams) => {
         // }
         console.log(err.response.data);
         if (isErr) {
-          console.log("Error -----------------------")
-          console.log(err.response.data)
-          console.log(err.response.status)
+          // console.log("Error -----------------------")
+          // console.log(err.response.data)
+          // console.log(err.response.status)
           //alert(err.response.status);     
-          console.log("오류");
-          console.log(err.response.data.rtnMsg)
-          console.log(err.response.data.rtnData)
+          // console.log("오류");
+          // console.log(err.response.data.rtnMsg)
+          // console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
             //응답코드별 처리...
@@ -142,12 +142,12 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   //var apiUrl = "http://dev.l-walk.com:29080" + api;//dev
   //var apiUrl = "https://geteyes.l-walk.com:29080" + api;//live
 
-  console.log("gogo");
-  console.log(api);
-  console.log("api post url::::" + apiUrl);
-  console.log("-------param-------");
-  console.log(postParams);
-  console.log(window.$cookies.get("loginAccToken"));
+  // console.log("gogo");
+  // console.log(api);
+  // console.log("api post url::::" + apiUrl);
+  // console.log("-------param-------");
+  // console.log(postParams);
+  // console.log(window.$cookies.get("loginAccToken"));
 
   axios.defaults.headers.common["Content-Type"] = "application/json"
   if (window.$cookies.get("loginAccToken") != null) {
@@ -160,23 +160,23 @@ export const axiosPost = (api, postParams, loading, isErr) => {
       .post(apiUrl, postParams)
       .then(res => {
         var resData = res.data;
-        console.log("-------result-------");
-        console.log(resData);
+        // console.log("-------result-------");
+        // console.log(resData);
 
         if (resData.rtnCd == "00") {
           //store.commit("setLoading", false);
           if(api == "/v1/auth/login"){
             setCookiesLoginUserInfo(resData.rtnData)
-            console.log("login success")
-            console.log(window.$cookies.get("loginAccToken"))
-            console.log(window.$cookies.get("loginYn"))
-            console.log(window.$cookies)
+            // console.log("login success")
+            // console.log(window.$cookies.get("loginAccToken"))
+            // console.log(window.$cookies.get("loginYn"))
+            // console.log(window.$cookies)
           } 
           //resolve(resData.rtnData);
           resolve(resData);
         } else {
           //store.commit("setLoading", false);
-          console.log("오류");
+          // console.log("오류");
           //store.commit("setAlertDialog", true);
           //openAlertDiaolog("ERROR", resData.rtnMsg);
           reject(resData);
@@ -188,13 +188,13 @@ export const axiosPost = (api, postParams, loading, isErr) => {
         }
         console.log(err.response.data);
         if (isErr) {
-          console.log("Error -----------------------")
-          console.log(err.response.data)
-          console.log(err.response.status)
+          // console.log("Error -----------------------")
+          // console.log(err.response.data)
+          // console.log(err.response.status)
           //alert(err.response.status);     
-          console.log("오류");
-          console.log(err.response.data.rtnMsg)
-          console.log(err.response.data.rtnData)
+          // console.log("오류");
+          // console.log(err.response.data.rtnMsg)
+          // console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
             //응답코드별 처리...
