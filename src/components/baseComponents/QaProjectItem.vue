@@ -2,7 +2,7 @@
   <div
     class="pt-[34px] pr-[30px] pb-[30px] pl-[30px] mt-5 border-solid border-line-1 border-[1px] rounded-[10px] font-basic hover:cursor-pointer"
     @click="goToPage('/project-detail')"
-    :class="getVieType">
+    :class="getViewType">
 
     <!-- 상단 -->
     <div class="flex justify-between">
@@ -92,7 +92,7 @@ const props = defineProps({
 })
 
 
-const getVieType = computed(() => {
+const getViewType = computed(() => {
   if (props.qaProjectViewInfo.size == 'small') {
     return ['w-[520px]', props.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];
   }  else {

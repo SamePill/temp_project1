@@ -1,5 +1,8 @@
     <template>
     <div>
+        <FontAwesomeIcon icon="less-than" />
+        <font-awesome-icon icon="left-long" />
+        <font-awesome-icon icon="less-than" />
         <table border="1" width="250">
             <tr>
                 <td colspan="2">
@@ -52,6 +55,9 @@
             </tr>
         </table>
         <br>
+
+
+
         <br>
         <table>
             <tr>
@@ -86,6 +92,7 @@
     </div>
     </template>
     <script setup>
+   
     import {  ref } from "vue";
     import * as gfnUtils from "@/utils/gfnUtils.js";
     import { commonStore } from '@/stores'
@@ -105,13 +112,14 @@
 
     // store 사용 예시
     function test1(){
+        console.log("Stores-------------------------------------");
+        store.setLoginCompId("xxxx");
+        console.log("bf:" + store.getLoginCompId.value);
+        console.log("vl:" + testValue.value);
+        store.setLoginCompId(testValue.value);
+        console.log("af:" + store.getLoginCompId.value);
 
-        console.log(store.getId);
-        console.log(testValue);
-        store.setId(testValue.value);
-        console.log(store.getId);
-
-        console.log("-------------------------------------");
+        console.log("Cookies-------------------------------------");
         console.log(window.$cookies.get("loginUserId"));
         window.$cookies.config("1d");
         window.$cookies.set("loginUserId", "test");

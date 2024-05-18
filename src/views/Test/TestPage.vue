@@ -82,7 +82,7 @@ export default {
             this.$router.push(path)
         },
         test1(){
-            this.store.setId("xxxx");
+            //this.store.setId("xxxx");
             //console.log( this.store.getId());
         },
         async Test(){

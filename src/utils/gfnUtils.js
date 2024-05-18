@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 
+
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
 const baseUrl = "http://dev.l-walk.com:29080" ;
 
@@ -231,6 +232,21 @@ export const axiosPost = (api, postParams, loading, isErr) => {
       });
   });
 };
+
+
+
+
+// export const setCommCode = (codes) => {
+//   console.log("logout")
+//   console.log( window.$cookies.get("loginYn"))
+//   cmmnStore.setCodeList = codes
+// };
+
+
+
+
+
+
 
 /**
  *

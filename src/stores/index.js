@@ -11,6 +11,7 @@ export const commonStore = defineStore('common', () => {
     const loginMrktSmsRcptYn = ref('')
     const loginCompNm = ref('')
     const loginTokn = ref('')
+    const codeList = ref()
 
     //getters ==> computed
     const getLoginCompId = computed(() => {
@@ -37,7 +38,11 @@ export const commonStore = defineStore('common', () => {
     const getLoginTokn = computed(() => {
         return loginTokn;
     });
- 
+    const getCodeList = computed(() => {
+        return codeList;
+    });
+    
+    
     //actions ==> function
     function setLoginCompId(val) {
         this.loginCompId = val;
@@ -63,10 +68,15 @@ export const commonStore = defineStore('common', () => {
     function setLoginTokn(val) {
         this.loginTokn = val;
     }
+    function setCodeList(val) {
+        this.codeList = val;
+    }
 
-    return { loginCompId, loginUserMail, loginUserNm, loginHp, loginMrktMailRcptYn, loginMrktSmsRcptYn, loginCompNm, loginTokn,
+    return { loginCompId, loginUserMail, loginUserNm, loginHp, loginMrktMailRcptYn, loginMrktSmsRcptYn, loginCompNm, loginTokn, codeList,
         getLoginCompId, getLoginUserMail, getLoginUserNm, getLoginHp, getLoginMrktMailRcptYn, getLoginMrktSmsRcptYn, getLoginCompNm, getLoginTokn,
-        setLoginCompId, setLoginUserMail, setLoginUserNm, setLoginHp, setLoginMrktMailRcptYn, setLoginMrktSmsRcptYn, setLoginCompNm, setLoginTokn
+        getCodeList,
+        setLoginCompId, setLoginUserMail, setLoginUserNm, setLoginHp, setLoginMrktMailRcptYn, setLoginMrktSmsRcptYn, setLoginCompNm, setLoginTokn,
+        setCodeList
     }
     
 })

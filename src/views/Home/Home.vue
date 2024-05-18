@@ -93,7 +93,11 @@ import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { commonStore } from '@/stores'
+const cmmnStore = commonStore()
+
 onMounted(() => {
+  loadCode();
   loadData();
 })
 
@@ -102,8 +106,6 @@ const router = useRouter()
 const projList = ref([])
 //let projList = []
 const siteInfo = ref({reprNm:"", compAddr:"", compNo:"", csctNo:"", faxNo:""})
-  
-
 
 function goToPage(path){
 
@@ -116,21 +118,47 @@ function goToPage(path){
   router.push(path)
 }
 
-// async function myFunction(){
-//   alert("test");
-//   var api = "/v1/common/code";
-//   var postParams = {codeGrpList:['EDCT_DIV_CD','SRVD_STAT_CD']};
-//   //var loading = "";
-//   //var isErr = "";
-//   let res = await gfnUtils.axiosPost(
-//     api,
-//     postParams
-//   );
 
-//   console.log(res);
-// }
+async function loadCode() {
+  // EDCT_DIV_CD / 학력구분코드
+  // ENGN_RTNG_DIV_CD / 엔지니어등급구분코드
+  // ENGR_INPT_STAT_CD / 엔지니어투입상태코드
+  // ENGR_SPRT_STAT_CD / 엔지니어지원상태코드
+  // JOB_DIV_CD / 직군구분코드
+  // PIRD_DIV_CD / 기간구분코드
+  // PROJ_STAT_CD / 프로젝트상태코드
+  // SMS_DIV_CD / SMS구분코드
+  // SRVD_STAT_CD / 재직상태코드
+  // TASK_DIV_CD / 업무구분코드
+  // WORK_DIV_CD / 근무구분코드
+  // WORK_PIRD_DIV_CD / 업무기간구분코드
+  var api = "/v1/common/code";
+  var postParams = {codeGrpList:['EDCT_DIV_CD','ENGN_RTNG_DIV_CD','ENGR_INPT_STAT_CD','ENGR_SPRT_STAT_CD'
+                                 ,'JOB_DIV_CD','PIRD_DIV_CD','PROJ_STAT_CD','SMS_DIV_CD','SRVD_STAT_CD'
+                                 ,'TASK_DIV_CD','WORK_DIV_CD','WORK_PIRD_DIV_CD']};
+  //var loading = "";
+  //var isErr = "";
+  let rtn = await gfnUtils.axiosPost(
+    api,
+    postParams
+  );
+  console.log(rtn)
+  console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' + rtn.rtnCd)
+  console.log(cmmnStore.getCodeList.value)
+  if(rtn.rtnCd == "00"){
+    cmmnStore.setCodeList(rtn.rtnData.codeList)
+  }else{
+    console.log("err")    
+  }
+  console.log(cmmnStore.getCodeList.value)
+  console.log(cmmnStore.getCodeList.value.ENGN_RTNG_DIV_CD)
+
+}
+
 
 async function loadData(){
+
+  // let rtn = '';
   var api = "/v1/home/info";
   var postParams = {};
   let rtn = await gfnUtils.axiosGet(

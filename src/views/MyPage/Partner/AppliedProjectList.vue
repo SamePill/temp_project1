@@ -334,45 +334,29 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- pagenation -->
-            <div class="paginationDiv">
-              <vue-awesome-paginate
-                :total-items=totalCnt
-                v-model="pageNo"
-                :items-per-page="10"
-                :max-pages-shown="10"
-                :on-click="loadData"
-              >
+              <!-- pagenation -->
+              <div class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
+                <vue-awesome-paginate
+                  :total-items=totalCnt
+                  v-model="pageNo"
+                  :items-per-page="10"
+                  :max-pages-shown="10"
+                  :on-click="loadData"
+                >
                 <template #prev-button>
                   <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="black"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
-                    </svg>
+                    <font-awesome-icon icon="chevron-right" color="black" />
                   </span>
                 </template>
-
                 <template #next-button>
                   <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="black"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
-                    </svg>
+                    <font-awesome-icon icon="chevron-right" color="black" />
                   </span>
                 </template>
-              </vue-awesome-paginate>
+                </vue-awesome-paginate>
+              </div>
             </div>
+            
           </div>
         </div>
       </div>

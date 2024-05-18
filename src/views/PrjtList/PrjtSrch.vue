@@ -20,7 +20,10 @@
     <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
         <QaProjectItem :qaProjectViewInfo="{size:'big'}" :prj="el"  />
     </div>
+
+    
     <div class="paginationDiv w-[1060px] h-10 my-10 mx-auto font-basic" style="text-align:center">
+      
         <vue-awesome-paginate
           :total-items=totalCnt
           v-model="pageNo"
@@ -30,30 +33,12 @@
         >
           <template #prev-button>
             <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="black"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
-              </svg>
+              <font-awesome-icon icon="chevron-right" color="black" />
             </span>
           </template>
-          <font-awesome-icon icon="less-than" />
           <template #next-button>
             <span>
-              
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="black"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
-              </svg>
+              <font-awesome-icon icon="chevron-right" color="black" />
             </span>
           </template>
         </vue-awesome-paginate>
