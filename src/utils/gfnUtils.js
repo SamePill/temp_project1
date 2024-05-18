@@ -235,7 +235,7 @@ export const axiosPost = (api, postParams, loading, isErr) => {
 };
 
 
-export const loadCommCode = async () => {
+export const loadCommCode = async (cdName) => {
   // EDCT_DIV_CD / 학력구분코드
   // ENGN_RTNG_DIV_CD / 엔지니어등급구분코드
   // ENGR_INPT_STAT_CD / 엔지니어투입상태코드
@@ -260,24 +260,28 @@ export const loadCommCode = async () => {
     api,
     postParams
   );
-  console.log(rtn)
-  console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' + rtn.rtnCd)
-  console.log(cmmnStore.getCodeList.value)
+  // console.log(rtn)
+  // console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' + rtn.rtnCd)
+  // console.log(cmmnStore.getCodeList.value)
   if(rtn.rtnCd == "00"){
     cmmnStore.setCodeList(rtn.rtnData.codeList)
+    return cmmnStore.getCodeList.value[cdName]
   }else{
     console.log("err")    
   }
-  console.log(cmmnStore.getCodeList.value)
-  console.log(cmmnStore.getCodeList.value.ENGN_RTNG_DIV_CD)
-  getCommCode("ENGN_RTNG_DIV_CD");
+ 
 };
 
 
-export const getCommCode = (cdName) => {
-  console.log("cdName ::::::::::::" + cdName)
+export const getCommCode = async (cdName) => {
   const cmmnStore = commonStore()
-  console.log(cmmnStore.getCodeList.value[cdName])
+  
+  if(cmmnStore.getCodeList.value == undefined || cmmnStore.getCodeList.length == 0  ){
+    return loadCommCode(cdName)
+  }else{
+    return cmmnStore.getCodeList.value[cdName]
+  }
+  
 };
 
 // export const setCommCode = (codes) => {
