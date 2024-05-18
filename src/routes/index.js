@@ -3,9 +3,9 @@ import Home from '@/views/Home/Home.vue'
 
 //프로젝트 등록
 import PrjtRegiPage1 from "@/views/Prjt/PrjtRegiPage1.vue";
-import PrjtRegiPage2 from "@/views/Prjt/PrjtRegiPage1.vue";
-import PrjtRegiPage3 from "@/views/Prjt/PrjtRegiPage1.vue";
-import PrjtRegiPage4 from "@/views/Prjt/PrjtRegiPage1.vue";
+import PrjtRegiPage2 from "@/views/Prjt/PrjtRegiPage2.vue";
+import PrjtRegiPage3 from "@/views/Prjt/PrjtRegiPage3.vue";
+import PrjtRegiPage4 from "@/views/Prjt/PrjtRegiPage4.vue";
 
 //프로젝트 찾기
 import PrjtSrch from "@/views/PrjtList/PrjtSrch.vue";
@@ -53,13 +53,15 @@ export default createRouter({
     {
       path: '/project-regi-1',
       component: PrjtRegiPage1,
-      name:'PrjtRegiPage1'
+      name:'PrjtRegiPage1',
+      props:true
     },
     //프로젝트 등록 2단계
     {
       path: '/project-regi-2',
       component: PrjtRegiPage2,
-      name:'PrjtRegiPage2'
+      name:'PrjtRegiPage2',
+      props:true
     },
     //프로젝트 등록 3단계
     {
