@@ -11,6 +11,12 @@ import { commonStore } from '@/stores'
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
 const baseUrl = "http://dev.l-walk.com:29080" ;
 
+export const getToday = () => {
+  var today = new Date();
+  return today.getFullYear() + '-' + ((today.getMonth() + 1).toString().padStart(2,'0')) + '-' + today.getDate()
+}
+
+
 export const chkLogin = () => {
   var chk = "N"
   if ( window.$cookies.get("loginYn") == 'Y' ) {
