@@ -41,9 +41,10 @@
               </svg>
             </span>
           </template>
-
+          <font-awesome-icon icon="less-than" />
           <template #next-button>
             <span>
+              
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="black"
