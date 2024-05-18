@@ -2,7 +2,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '@/views/Home/Home.vue'
 
 //프로젝트 등록
-import PrjtRegi from "@/views/Prjt/PrjtRegi.vue";
+import PrjtRegiPage1 from "@/views/Prjt/PrjtRegiPage1.vue";
+import PrjtRegiPage2 from "@/views/Prjt/PrjtRegiPage1.vue";
+import PrjtRegiPage3 from "@/views/Prjt/PrjtRegiPage1.vue";
+import PrjtRegiPage4 from "@/views/Prjt/PrjtRegiPage1.vue";
 
 //프로젝트 찾기
 import PrjtSrch from "@/views/PrjtList/PrjtSrch.vue";
@@ -46,20 +49,41 @@ export default createRouter({
     },
     
     /*********************** 프로젝트 ***********************/
-    //프로젝트 등록
+    //프로젝트 등록 1단계
     {
-      path: '/project-regi',
-      component: PrjtRegi,
+      path: '/project-regi-1',
+      component: PrjtRegiPage1,
+      name:'PrjtRegiPage1'
+    },
+    //프로젝트 등록 2단계
+    {
+      path: '/project-regi-2',
+      component: PrjtRegiPage2,
+      name:'PrjtRegiPage2'
+    },
+    //프로젝트 등록 3단계
+    {
+      path: '/project-regi-3',
+      component: PrjtRegiPage3,
+      name:'PrjtRegiPage3'
+    },
+    //프로젝트 등록 4단계
+    {
+      path: '/project-regi-4',
+      component: PrjtRegiPage4,
+      name:'PrjtRegiPage4'
     },
     //프로젝트 찾기
     {
       path: '/project-list',
       component: PrjtSrch,
+      name: 'PrjtSrch'
     },
     //프로젝트 찾기 상세
     {
       path: '/project-detail',
       component: PrjtSrchDetl,
+      name: 'PrjtSrchDetl'
     },
 
     /*********************** 사용자 ***********************/
@@ -67,6 +91,7 @@ export default createRouter({
     {
       path: '/login',
       component: Login,
+      name: 'Login'
     },
     //회원가입 steo1
     {
@@ -85,11 +110,13 @@ export default createRouter({
     {
       path: '/findId',
       component: FindId,
+      name: 'FindId'
     },
     //비밀번호초기화
     {
       path: '/resetPassword',
       component: ResetPassword,
+      name: 'ResetPassword'
     },
 
     /*********************** 마이페이지 ***********************/
@@ -97,21 +124,25 @@ export default createRouter({
     {
       path: '/myCompanyInfo',
       component: MyCompanyInfo,
+      name: 'MyCompanyInfo'
     },
 
     {
       path: '/myInformation',
       component: MyInformation,
+      name: 'MyInformation'
     },
 
     {
       path: '/myPasswordMng',
       component: MyPasswordMng,
+      name: 'MyPasswordMng'
     },
     
     {
       path: '/myIdDeactivation',
       component: MyIdDeactivation,
+      name: 'MyIdDeactivation'
     },
     
 
@@ -119,48 +150,57 @@ export default createRouter({
     {
       path: '/registeredProjectList',
       component: RegisteredProjectList,
+      name: 'RegisteredProjectList'
     },
 
     {
       path: '/selEngineerList',
       component: SelEngineerList,
+      name: 'SelEngineerList'
     },
 
     /*--------- 파트너 ----------*/
     {
       path: '/addEngineerCareerInfo',
       component: AddEngineerCareerInfo,
+      name: 'AddEngineerCareerInfo'
     },
 
     {
       path: '/addEngineerCareerList',
       component: AddEngineerCareerList,
+      name: 'AddEngineerCareerList'
     },
 
     {
       path: '/addEngineerInfo',
       component: AddEngineerInfo,
+      name: 'AddEngineerInfo'
     },
 
     {
       path: '/appliedEngineerList',
       component: AppliedEngineerList,
+      name: 'AppliedEngineerList'
     },
 
     {
       path: '/appliedProjectList',
       component: AppliedProjectList,
+      name: 'AppliedProjectList'
     },
 
     {
       path: '/manageEngineer',
       component: ManageEngineer,
+      name: 'ManageEngineer'
     },
 
 
     {
       path: '/Test',
       component: Test,
+      name: Test,
     },
 
    /*********************** 테스트 페이지 ***********************/
@@ -169,10 +209,12 @@ export default createRouter({
     {
       path: '/testPage',
       component: TestPage,
+      name: 'TestPage'
     },
     {
       path: '/testPageSetup',
       component: TestPageSetup,
+      name: 'TestPageSetup'
     },
     
   ],
