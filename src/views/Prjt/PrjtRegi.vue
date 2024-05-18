@@ -16,16 +16,16 @@
         </div>
         <div class="flex-grow-0 flex-shrink-0 w-[520px] h-px bg-[#191919]"></div>
         <div v-show="pageNo==1 ? 'true' : false">
-          <PrjtRegiPage1 ref="page1" :info="PrjtRegiPage1Info"/>
+          <PrjtRegiPage1 ref="prjtRegiPage1" @returnData="getData"/>
         </div>
         <div v-show="pageNo==2 ? 'true' : false">
-          <PrjtRegiPage2 ref="page2"/>
+          <PrjtRegiPage2 ref="page2" @returnData="getData"/>
         </div>
         <div v-show="pageNo==3 ? 'true' : false">
-          <PrjtRegiPage3 ref="page3"/>
+          <PrjtRegiPage3 ref="page3" @returnData="getData"/>
         </div>
         <div v-show="pageNo==4 ? 'true' : false">
-          <PrjtRegiPage4 ref="page4"/>
+          <PrjtRegiPage4 ref="page4" @returnData="getData"/>
         </div>
         <div class="w-[520px] mt-[60px] flex" :class="1 < pageNo ? 'justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5' :'gap-5'">
           <button @click="movePage('pre')" v-if="pageNo > 1" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494] text-[#1ba494]">
@@ -57,55 +57,42 @@ onMounted(() => {
 
 const pageNo =  ref('')
 const totPageNo = ref(4)
-const PrjtRegiPage1Info = ref({
-                            occuInfo : {valList:[ {cdVal:'a',cdNm:'#제조',chkVal:true}
-                                                ,{cdVal:'b',cdNm:'#IT'  ,chkVal:false}
-                                                ,{cdVal:'c',cdNm:'#금융',chkVal:true}
-                                                ,{cdVal:'d',cdNm:'#미디어/디자인',chkVal:false}
-                                                ,{cdVal:'e',cdNm:'#교육',chkVal:true}
-                                                ,{cdVal:'f',cdNm:'#의료',chkVal:true}
-                                                ,{cdVal:'g',cdNm:'#판매/유통',chkVal:false}
-                                                ,{cdVal:'h',cdNm:'#건설',chkVal:false}
-                                                ,{cdVal:'i',cdNm:'#기관/협회',chkVal:false}
-                                                ,{cdVal:'j',cdNm:'#기타',chkVal:true}
-                                      ]}
-                            ,jobInfo : {valList:[ {cdVal:'a',cdNm:'#Web',chkVal:true}
-                                                ,{cdVal:'b',cdNm:'#App',chkVal:true}
-                                                ,{cdVal:'c',cdNm:'#IOT',chkVal:true}
-                                                ,{cdVal:'d',cdNm:'#증강현실',chkVal:true}
-                                                ,{cdVal:'e',cdNm:'#금융',chkVal:true}
-                                                ,{cdVal:'f',cdNm:'#AI',chkVal:true}
-                                                ,{cdVal:'g',cdNm:'#블록체인',chkVal:true}
-                                                ,{cdVal:'h',cdNm:'#자동차',chkVal:true}
-                                                ,{cdVal:'i',cdNm:'#하드웨어',chkVal:true}
-                                                ,{cdVal:'j',cdNm:'#임베디드',chkVal:true}
-                                                ,{cdVal:'j',cdNm:'#메타버스',chkVal:true}
-                                                ,{cdVal:'j',cdNm:'#플랫폼',chkVal:true}
-                                                ,{cdVal:'j',cdNm:'#기타',chkVal:true}
-                                      ]}
-                          })
+const projOneStep = ref({})
+const projTwoStep = ref({})
+const projThreeStep = ref({})
+const projFourStep = ref({})
+
+const prjtRegiPage1 = ref()
 
 
 function initData(){
   pageNo.value = 1;
 }
+
 function movePage(div){
-  // this.test();
   if(div == 'next'){
+    
+    //유효성체크 함수를 호출
+    prjtRegiPage1.value.childMethod()
+
+
     pageNo.value = pageNo.value +1;
     scrollToTop();
   }else if(div == 'pre'){
     this.pageNo = this.pageNo -1;
     this.scrollToTop();
   }else if(div == 'regiCmplt'){
-    let page1Info = this.$refs.page1.getInfo();
-    let page2Info = this.$refs.page2.getInfo();
-    let page3Info = this.$refs.page3.getInfo();
-    let page4Info = this.$refs.page4.getInfo();
+    projOneStep.value = this.$refs.page1.getInfo();
+    projTwoStep.value = this.$refs.page2.getInfo();
+    projThreeStep.value = this.$refs.page3.getInfo();
+    projFourStep.value = this.$refs.page4.getInfo();
     
     this.$refs.ModalTest.openPopup();
-    console.log(page1Info,page2Info,page3Info,page4Info);
   }
+}
+
+function getData(data){
+  console.log(data)
 }
 
 function scrollToTop(){
@@ -113,6 +100,42 @@ function scrollToTop(){
   top: 0,
   behavior: 'smooth' });
 }
+
+
+// async function saveFile(){
+//         var params = this.popitem;
+
+//         let formData = new FormData();
+//         // 파일이 다건인 경우
+//         for (var idx in this.attchfiles) {
+//             console.log(this.attchfiles[idx].type);
+//             console.log(this.attchfiles[idx].name);
+//             formData.append("attchFiles", this.attchfiles[idx]);
+//         }
+//         formData.append("banner", this.physFile);
+//         formData.append(
+//             "params",
+//             new Blob([JSON.stringify(params)], { type: "application/json" })
+//         );
+
+//         // 파일이 단건인 경우
+//         // formData.append("file", this.physFile);
+//         // formData.append(
+//         // "params",
+//         // new Blob([JSON.stringify(params)], { type: "application/json" })
+//         // );
+
+//         console.log(formData);
+
+//         let res = await this.gfn_utils.axiosPost(
+//             "/admin/app/regiEvent",
+//             formData
+//         );         
+//         console.log(res);
+        //메일가져오기
+//      const loginYn = ref(window.$cookies.get("loginUserMail"));
+
+//     }
 
 
 

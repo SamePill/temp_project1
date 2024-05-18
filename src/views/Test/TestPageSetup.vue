@@ -80,7 +80,7 @@
             activated	onActivated 컴포넌트가 활성화될 때 실행됩니다.
             deactivated	onDeactivated   컴포넌트가 비활성화될 때 실행됩니다.
         </pre>
-        <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="saveFile()">savefile</button>
+        <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="savefile()">savefile</button>
 
         <testComp ref="xx"/>
     </div>
@@ -148,7 +148,7 @@
         this.apiResult = JSON.stringify(res);
     }
 
-    async function saveFile(){
+    async function savefile(){
         xx.value.test();
 
         var params = this.popitem;

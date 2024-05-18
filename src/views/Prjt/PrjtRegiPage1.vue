@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="mt-[30px]">
+    <button id="btn">얌</button>
+    <div class="mt-[30px]" @click="test">
       <p class="text-xl font-medium text-left text-[#191919] mb-5">직군 
         <span class="text-xl text-left text-[#ff5252]">*</span>
       </p>
@@ -12,7 +13,7 @@
       </p>
       <Chipset :cdList="params.taskDivCdList"/>
     </div>
-    <div class="mt-[40px] flex flex-col justify-start items-start gap-5">
+    <div class="mt-[40px] flex flex-col justify-start items-start">
       <div class="flex justify-between items-center w-[520px] relative">
         <p class="text-xl text-left text-[#191919]">프로젝트명 
           <span class="text-xl text-left text-[#ff5252]">*</span>
@@ -23,12 +24,12 @@
           <span class="text-sm text-left text-[#777]">/100</span>
         </p>
       </div>
-      <input tye="text" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트명을 입력주세요."/>
+      <input v-model="projTitl"  v-valid="{val:'프로젝트명을',div:'slct'}" type="text" class="mt-[20px] w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트명을 입력주세요."/>
     </div>
     <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
       <p class="text-xl text-left text-[#191919]">희망 시작일 <span class="text-[#ff5252]">*</span></p>
-      <div class="flex flex-col justify-center items-start gap-2">
-        <input type="date" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트 시작 희망일을 선택해 주세요."/>
+      <div style="position:relative" class="flex flex-col justify-center items-start gap-2">
+        <input type="date" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" v-valid="{val:'희망시작일',div:'slct'}" placeholder="프로젝트 시작 희망일을 선택해 주세요."/>
         <div class="flex justify-start items-center relative gap-0.5">
           <input type="checkbox" class="w-[15px] h-[15px]"/>
           <p class="text-base px-1 text-left text-[#777]">협의가능</p>
@@ -114,12 +115,33 @@
 </template>
 <script setup>
 import Chipset from '@/components/baseComponents/Chipset.vue'
-import { onMounted,ref } from 'vue'
+import { onMounted,ref,defineExpose } from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import { defineEmits } from "vue";
+
+
+defineExpose({
+  childMethod
+});
+
+const emit = defineEmits([
+  'returnData'
+]);
 
 onMounted(() => {
   initData();
-})
+})  
+  // const jobDivCdList  = ref('');  //직군코드
+  // const taskDivCdList  = ref(''); //업무영역코드
+const projTitl   = ref('');     //프로젝트명
+  // const strtDay   = ref('');      //희망시작일
+  // const strtDayCnslYn = ref('');  //협의 가능(Y or N) 
+  // const pirdVal   = ref('');      //예상 기간 개월"      
+  // const workDivCd = ref('');      //근무방식 코드(상주/비상주)    
+  // const workAddr  = ref('');      //근무 주소    
+  // const workDtlAddr = ref('');    //근무주소 상세     
+  // const atndTime  = ref('');      //근무시작 시간(HHmm)    
+  // const lvwkTime  = ref('');      //근무 종료 시간(HHmm)    
 
 function initData(){
   loadData();
@@ -139,20 +161,44 @@ async function loadData(){
   );
   let res = rtn.rtnData
   if(res.codeList.JOB_DIV_CD.length > 0){
-    res.codeList.JOB_DIV_CD.forEach(el => {
+    res.codeList.JOB_DIV_CD.forEach((el,i) => {
+      if(i==0){
+        el['chkVal'] = true;
+      }
       el['chkVal'] = false;
       params.value.jobDivCdList.push(el)
     }); 
   }
 
   if(res.codeList.TASK_DIV_CD.length > 0){
-    res.codeList.TASK_DIV_CD.forEach(el => {
+    res.codeList.TASK_DIV_CD.forEach((el,i) => {
+      if(i==0){
+        el['chkVal'] = true;
+      }
       el['chkVal'] = false;
       params.value.taskDivCdList.push(el)
     }); 
   }
 }
+
+
+
+//정합성체크
+function childMethod(){
+
   
+  // var api = "/v1/auth/login";
+  let params = {}
+
+  gfnUtils.axiosPost("/v1/project/submit/step1/validate",params).then(function(res){
+    console.log(res);
+  })
+
+  let data = 'aaa'
+  console.log('gggg')
+  emit('returnData',data)
+
+}
 // function getInfo(){
 //   params.info = props.info;
 //   return this.params;

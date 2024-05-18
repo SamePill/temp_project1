@@ -1,4 +1,4 @@
-<template>
+층<template>
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[519px]">
         <div>
             <button v-for="el in props.cdList" :key="el.cd" @click="el.chkVal = !el.chkVal "

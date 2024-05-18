@@ -1,8 +1,5 @@
 <template>
-  <!-- 헤더 -->
-  <Header headerType="1"/>
-
-  <div class="w-[1060px] h-10 my-10 mx-auto font-basic ">
+  <div class="w-[1060px] h-10 my-10 mx-auto font-basic">
 
     <!-- 상단 검색 -->
     <div class="flex items-center justify-between w-full">
@@ -18,50 +15,49 @@
         <img class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
       </div>
     </div>
-  </div>
 
-  <!-- 프로젝트 리스트 -->
-  <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
-      <QaProjectItem :qaProjectViewInfo="{size:'big'}" :prj="el"  />
-  </div>
+    <!-- 프로젝트 리스트 -->
+    <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
+        <QaProjectItem :qaProjectViewInfo="{size:'big'}" :prj="el"  />
+    </div>
+    <div class="paginationDiv w-[1060px] h-10 my-10 mx-auto font-basic" style="text-align:center">
+        <vue-awesome-paginate
+          :total-items=totalCnt
+          v-model="pageNo"
+          :items-per-page="10"
+          :max-pages-shown="10"
+          :on-click="loadData"
+        >
+          <template #prev-button>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="black"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
+              </svg>
+            </span>
+          </template>
 
-  <div class="paginationDiv">
-    <vue-awesome-paginate
-      :total-items=totalCnt
-      v-model="pageNo"
-      :items-per-page="10"
-      :max-pages-shown="10"
-      :on-click="loadData"
-    >
-      <template #prev-button>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="black"
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-          >
-            <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
-          </svg>
-        </span>
-      </template>
-
-      <template #next-button>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="black"
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-          >
-            <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
-          </svg>
-        </span>
-      </template>
-    </vue-awesome-paginate>
-  </div>  
+          <template #next-button>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="black"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" />
+              </svg>
+            </span>
+          </template>
+        </vue-awesome-paginate>
+      </div> 
+  </div> 
 </template>
 
 <script setup>
