@@ -10,8 +10,11 @@ import VueAwesomePaginate from "vue-awesome-paginate";
 import { ValidationDirective } from './directive/ValidationDirective.js'
 // import the necessary css file
 import "vue-awesome-paginate/dist/style.css";
-/* import font awesome icon component */
-import { FontAwesomeIcon } from 'vue-fontawesome'
+// fontawesom import
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+library.add(fas);
 
 //import baseMixin from "@/utils/baseMixin.js";
 //.mixin(baseMixin)
