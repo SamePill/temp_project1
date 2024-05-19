@@ -15,7 +15,7 @@
           <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]"
             >프로젝트 상태 : </span
           ><span class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#1ba494]"
-            >모집 중 {{ props }}</span
+            >모집 중 {{ props.regProjList.projStatCd }}</span
           >
         </p>
         <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
@@ -34,7 +34,7 @@
             class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative"
           >
             <!--TODO 모집 종료 : 모집 상태에 따라 표시 -->
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5" v-if="props.regProjList.projStatCd == 10">
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#999]"
               >
@@ -46,7 +46,7 @@
               </div>
             </div>
             <!--TODO 모집 중 : 모집 상태에 따라 표시 -->
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5" v-else>
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#1ba494]"
               >
@@ -148,7 +148,7 @@
               <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
             </svg>
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-              투입기간 : 4개월
+              투입기간 : {{props.regProjList.pirdVal}}개월
             </p>
             <svg
               width="2"
@@ -162,7 +162,7 @@
               <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
             </svg>
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-              필요인원 : 10명
+              필요인원 : {{props.regProjList.engrCnt}}명
             </p>
             <svg
               width="2"
@@ -176,7 +176,7 @@
               <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
             </svg>
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-              서울특별시 강남구
+              {{props.regProjList.workAddr}}
             </p>
           </div>
         </div>
@@ -196,7 +196,7 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#555]"
               >
-                124명
+                {{props.regProjList.totSprtEngrCnt}}명
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                 지원 엔지니어
@@ -219,7 +219,7 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#555]"
               >
-                12명
+              {{props.regProjList.passEngrCnt}}명
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                 선정 엔지니어
@@ -242,7 +242,7 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#555]"
               >
-                30명
+              {{props.regProjList.waitEngrCnt}}명
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                 대기 엔지니어
@@ -265,7 +265,7 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#555]"
               >
-                30명
+                {{props.regProjList.failEngrCnt}}명
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                 불합격 엔지니어
