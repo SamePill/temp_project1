@@ -80,6 +80,9 @@
                   </p>
                 </div>
               </div>
+
+
+
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
                 <div
                   class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] overflow-hidden gap-[30px] p-[30px] rounded-[10px] bg-white border border-[#ddd]"
@@ -334,6 +337,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- pagenation -->
               <div class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
                 <vue-awesome-paginate

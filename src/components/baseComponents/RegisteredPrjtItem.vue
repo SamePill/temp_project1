@@ -33,6 +33,19 @@
           <div
             class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative"
           >
+            <!--TODO 모집 종료 : 모집 상태에 따라 표시 -->
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
+              <div
+                class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#999]"
+              >
+                <p
+                  class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-white"
+                >
+                  모집종료
+                </p>
+              </div>
+            </div>
+            <!--TODO 모집 중 : 모집 상태에 따라 표시 -->
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
               <div
                 class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#1ba494]"
@@ -274,9 +287,34 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  qaProjectViewInfo : { position : "", size : "",},
+  regProjList : [
+                  {
+                    // "projId": "프로젝트 id",
+                    // "workDivCd": "근무방식 코드",
+                    // "projTitl": "프로젝트 제목",
+                    // "engrCnt": "필요 엔지니어 인원",
+                    // "pirdVal": "예상 기간 개월",
+                    // "strtDay": "프로젝트 시작일(yyyyMMdd)",
+                    // "expcPric": 0,
+                    // "workAddr": "근무 주소",
+                    // "projStatCd": "프로젝트 상태 코드",
+                    // "regDttm": "프로젝트 등록 날짜",
+                    // "engrRtngInfo": "엔지니어 등급 수,단가 정보",
+                    // "projSprtSeq": "프로젝트 지원 순번",
+                    // "jobDivCdNmList": "직군 코드 list",
+                    // "taskDivCdNmList": "업무 코드 list",
+                    // "engrCntInfo": {
+                    //   "totSprtEngrCnt": 0,
+                    //   "passEngrCnt": 0,
+                    //   "waitEngrCnt": 0,
+                    //   "meetWillEngrCnt": 0,
+                    //   "failEngrCnt": 0
+                    // }
+                  }
+                ],
   prj : {
   }
+
 })
 
 </script>
