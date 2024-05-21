@@ -46,6 +46,7 @@ export default createRouter({
     {
       path: '/',
       component: Home,
+      name:"Home"
     },
     
     /*********************** 프로젝트 ***********************/

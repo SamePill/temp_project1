@@ -225,15 +225,15 @@ async function reqLogin() {
 }
 
 function resetPassword() {
-  router.push("/resetPassword");
+  router.push({name: 'ResetPassword'});
 }
 
 function findId() {
-  router.push("/findId");
+  router.push({name: 'FindId'});
 }
 
 function signUp() {
-  router.push("/signUp");
+  router.push({name: 'signUp'});
 }
 </script>
 <style scoped>

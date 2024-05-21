@@ -28,11 +28,11 @@ export const chkLogin = () => {
 }
 
 export const routerPush = (uri) => {
-  router.push(uri)
+  router.push({name :uri})
 }
 
 export const routerReplace = (uri) => {
-  router.replace(uri)
+  router.replace({name :uri})
 }
 
 /**

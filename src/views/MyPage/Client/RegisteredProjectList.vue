@@ -58,8 +58,8 @@
             <div class="flex-grow-0 flex-shrink-0 w-[790px] h-px bg-[#ededed]"></div>
 
             <!-- 프로젝트 리스트 반복부 -->
-            <div v-for="el in projList" :key="el">
-              <RegisteredPrjtItem/>
+            <div v-for="el in regProjList" :key="el">
+              <RegisteredPrjtItem :regProjList="el" />
             </div>
             
 
@@ -100,10 +100,41 @@
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const pageNo = ref(1)
 const totalCnt = ref(100)
+const userMail = ref(window.$cookies.get("loginUserMail"));
+const sortDiv = ref(20)
+const regProjList = ref([])
+
+onMounted(() => {
+  loadData();
+})
+
+async function loadData(selPage){
+  
+  console.log(selPage)
+  if(selPage != null){
+    pageNo.value = selPage;
+  }
+
+  var api = "/v1/my/reg-project-list";
+  var postParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:sortDiv.value};
+  let rtn = await gfnUtils.axiosGet(
+    api,
+    postParams
+  );
+  
+  console.log(rtn);
+  let res = rtn.rtnData
+  console.log(res);
+
+  regProjList.value = res.regProjList
+}
+
+
 </script>
 
 

@@ -14,7 +14,7 @@
       <span class="text-lg text-text-1">쉽고 빠르게 테스트 인력을 구할 수 있습니다.</span>
 
       <!-- 공고 등록하기 -->
-      <button class="w-[210px] h-14 bg-main-0 rounded-full mt-10 flex justify-center items-center text-white" @click="goToPage('/project-regi')">공고 등록하기</button>
+      <button class="w-[210px] h-14 bg-main-0 rounded-full mt-10 flex justify-center items-center text-white" @click="goToPage('PrjtRegiPage1')">공고 등록하기</button>
     </div>
     <img class="mr-[100px]" src="@/assets/rafiki.png" width="300px" height="286px" alt="">
   </div>
@@ -110,12 +110,12 @@ const siteInfo = ref({reprNm:"", compAddr:"", compNo:"", csctNo:"", faxNo:""})
 function goToPage(path){
 
   if(loginYn.value != "Y"){
-    if(path == '/project-regi' ){
-      path = "/login";
+    if(path == 'PrjtRegiPage1' ){
+      path = "Login";
     }
   }
 
-  router.push(path)
+  router.push({name :path})
 }
 
 

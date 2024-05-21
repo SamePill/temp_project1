@@ -287,34 +287,34 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  regProjList : [
-                  {
-                    // "projId": "프로젝트 id",
-                    // "workDivCd": "근무방식 코드",
-                    // "projTitl": "프로젝트 제목",
-                    // "engrCnt": "필요 엔지니어 인원",
-                    // "pirdVal": "예상 기간 개월",
-                    // "strtDay": "프로젝트 시작일(yyyyMMdd)",
-                    // "expcPric": 0,
-                    // "workAddr": "근무 주소",
-                    // "projStatCd": "프로젝트 상태 코드",
-                    // "regDttm": "프로젝트 등록 날짜",
-                    // "engrRtngInfo": "엔지니어 등급 수,단가 정보",
-                    // "projSprtSeq": "프로젝트 지원 순번",
-                    // "jobDivCdNmList": "직군 코드 list",
-                    // "taskDivCdNmList": "업무 코드 list",
-                    // "engrCntInfo": {
-                    //   "totSprtEngrCnt": 0,
-                    //   "passEngrCnt": 0,
-                    //   "waitEngrCnt": 0,
-                    //   "meetWillEngrCnt": 0,
-                    //   "failEngrCnt": 0
-                    // }
-                  }
-                ],
-  prj : {
-  }
+  regProjList : {
+                  // "projId": "프로젝트 id",
+                  // "workDivCd": "근무방식 코드",
+                  // "projTitl": "프로젝트 제목",
+                  // "engrCnt": "필요 엔지니어 인원",
+                  // "pirdVal": "예상 기간 개월",
+                  // "strtDay": "프로젝트 시작일(yyyyMMdd)",
+                  // "expcPric": 0,
+                  // "workAddr": "근무 주소",
+                  // "projStatCd": "프로젝트 상태 코드",
+                  // "regDttm": "프로젝트 등록 날짜",
+                  // "engrRtngInfo": "엔지니어 등급 수,단가 정보",
+                  // "projSprtSeq": "프로젝트 지원 순번",
+                  // "jobDivCdNmList": "직군 코드 list",
+                  // "taskDivCdNmList": "업무 코드 list",
+                  // "engrCntInfo": {
+                  //   "totSprtEngrCnt": 0,
+                  //   "passEngrCnt": 0,
+                  //   "waitEngrCnt": 0,
+                  //   "meetWillEngrCnt": 0,
+                  //   "failEngrCnt": 0
+                  // }
+                }
+
 
 })
+
+
+
 
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div
     class="pt-[34px] pr-[30px] pb-[30px] pl-[30px] mt-5 border-solid border-line-1 border-[1px] rounded-[10px] font-basic hover:cursor-pointer"
-    @click="goToPage('/project-detail')"
+    @click="goToPage('PrjtSrchDetl')"
     :class="getViewType">
 
     <!-- 상단 -->

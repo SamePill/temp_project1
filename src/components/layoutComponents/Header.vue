@@ -5,17 +5,17 @@
 
     <!-- 상단메뉴 -->
     <div :class="getHeaderType[1]">
-      <span class="hover:cursor-pointer" @click="goToPage('/')">Q-MEET LOGO</span>
+      <span class="hover:cursor-pointer" @click="goToPage('Home')">Q-MEET LOGO</span>
     </div>
 
     <!-- 상단중간 메뉴 -->
     <ul class="flex text-base bg-white"
       :class="getHeaderType[2]">
 
-      <li class="mr-10 hover:cursor-pointer" @click="goToPage('/project-list')">프로젝트 찾기</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('/project-regi-1')">프로젝트 등록</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('/appliedProjectList')">마이페이지</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('/testPageSetup')">Test페이지</li>
+      <li class="mr-10 hover:cursor-pointer" @click="goToPage('PrjtSrch')">프로젝트 찾기</li>
+      <li class="mx-10 hover:cursor-pointer" @click="goToPage('PrjtRegiPage1')">프로젝트 등록</li>
+      <li class="mx-10 hover:cursor-pointer" @click="goToPage('AppliedProjectList')">마이페이지</li>
+      <li class="mx-10 hover:cursor-pointer" @click="goToPage('TestPageSetup')">Test페이지</li>
       <li class="mx-10 hover:cursor-pointer">큐밋이란?</li>
       <li class="mx-10 hover:cursor-pointer">고객센터</li>
     </ul>
@@ -64,21 +64,24 @@ const props = defineProps({
 
 function goToPage(url){
   if(loginYn.value != "Y"){
-    if(url == '/project-regi' ){
-      url = "/login";
+    if(url == 'PrjtRegiPage1' ){
+      url = "Login";
     }
-    if(url == '/test' ){
-      url = "/login";
+    if(url == 'AppliedProjectList' ){
+      url = "Login";
+    }    
+    if(url == 'Test' ){
+      url = "Login";
     }
   }
 
-  router.push(url)
+  router.push({name: url})
 }
 
 function logout(){
   gfnUtils.clearCookiesLoginUserInfo();
   loginYn.value = window.$cookies.get("loginYn");
-  router.push("/")
+  router.push({name: "Home"})
 }
 
 const getHeaderType = computed(() => {
