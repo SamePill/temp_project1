@@ -33,8 +33,7 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
     >
-      <p v-if="this.$route.path.indexOf('/myCompanyInfo') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">계정관리</p>
-      <button v-else @click="goToPage('MyCompanyInfo')" class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">계정관리</button>
+      <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">계정관리</p>
     </div>
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
@@ -45,19 +44,19 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
     >
-      <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">약관</p>
+      <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">약관</p>
     </div>
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/manageEngineer') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">이용약관</p>
-      <button v-else @click="goToPage('ManageEngineer')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">이용약관</button>
+      <p v-if="this.$route.path.indexOf('/xx') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">이용약관</p>
+      <button v-else @click="goToPage('')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">이용약관</button>
     </div>
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/manageEngineer') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">개인정보 처리방침</p>
-      <button v-else @click="goToPage('ManageEngineer')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개인정보 처리방침</button>
+      <p v-if="this.$route.path.indexOf('/xx') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">개인정보 처리방침</p>
+      <button v-else @click="goToPage('')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개인정보 처리방침</button>
     </div>
   </div>
 </template>

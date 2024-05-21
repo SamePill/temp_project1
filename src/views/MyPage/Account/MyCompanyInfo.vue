@@ -2,19 +2,7 @@
   <div
     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-5 px-[430px] pt-10 pb-[100px] bg-[#fefefe]"
   >
-    <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
-      <div
-        class="flex justify-start items-end self-stretch flex-grow-0 flex-shrink-0 relative gap-[41px]"
-      >
-        <p class="flex-grow-0 flex-shrink-0 text-[28px] text-left text-black">
-          <span class="flex-grow-0 flex-shrink-0 text-[28px] text-left text-black">김현성님</span
-          ><br /><span class="flex-grow-0 flex-shrink-0 text-[28px] text-left text-black"
-            >안녕하세요</span
-          >
-        </p>
-      </div>
-      <div class="flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
-    </div>
+    <SubHeader/>
     <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
       <SideMenu/>
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10 pt-5">

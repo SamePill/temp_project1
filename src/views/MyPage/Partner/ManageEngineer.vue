@@ -195,18 +195,36 @@
               <p class="flex-grow-0 flex-shrink-0 w-[99px] text-sm text-left text-[#555]">주소</p>
               <p class="flex-grow-0 flex-shrink-0 w-[52px] text-sm text-left text-[#555]">투입여부</p>
             </div>
+            <!-- 반복부 -->
             <div
               class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] gap-3"
+              
             >
               <EngineerItem/>
-              
-              
             </div>
           </div>
           <div
-            class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[790px] relative gap-5"
+            class="paginationDiv flex justify-center items-center flex-grow-0 flex-shrink-0 w-[790px] relative gap-5"
           >
-            <svg
+            <vue-awesome-paginate
+              :total-items=totalCnt
+              v-model="pageNo"
+              :items-per-page="10"
+              :max-pages-shown="10"
+              :on-click="loadData"
+            >
+              <template #prev-button>
+                <span>
+                  <font-awesome-icon icon="chevron-right" color="black" />
+                </span>
+              </template>
+              <template #next-button>
+                <span>
+                  <font-awesome-icon icon="chevron-right" color="black" />
+                </span>
+              </template>
+            </vue-awesome-paginate>
+            <!-- <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -251,7 +269,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               ></path>
-            </svg>
+            </svg> -->
           </div>
         </div>
       </div>
@@ -262,4 +280,94 @@
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import EngineerItem from '@/components/baseComponents/EngineerItem.vue'
+import { ref, onMounted } from 'vue'
+//import * as gfnUtils from "@/utils/gfnUtils.js";
+
+const pageNo = ref(1)
+const totalCnt = ref(100)
+// const userMail = ref(window.$cookies.get("loginUserMail"));
+// const sortDiv = ref(20)
+//const engineerList = ref([])
+
+onMounted(() => {
+  //loadData();
+})
+/*
+async function loadData(selPage){
+  
+  console.log(selPage)
+  if(selPage != null){
+    pageNo.value = selPage;
+  }
+
+  var api = "";
+  var postParams = {};
+  let rtn = await gfnUtils.axiosGet(
+    api,
+    postParams
+  );
+  
+  console.log(rtn);
+  let res = rtn.rtnData
+  console.log(res);
+
+  engineerList.value = res.engineerList
+}
+*/
+
+
 </script>
+
+
+
+
+<style>
+.paginationDiv .pagination-container {
+  column-gap: 10px;
+  align-items: center;
+}
+.paginationDiv .paginate-buttons {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.paginationDiv .back-button,
+.paginationDiv .next-button {
+  background-color: white;
+  color: white;
+  border-radius: 8px;
+  height: 45px;
+  width: 45px;
+}
+.paginationDiv .active-page {
+  background-color: #e5e5e5;
+}
+.paginationDiv .paginate-buttons:hover {
+  background-color: #f5f5f5;
+}
+.paginationDiv .active-page:hover {
+  background-color: #e5e5e5;
+}
+
+.paginationDiv .back-button svg {
+  transform: rotate(180deg) translateY(-2px);
+}
+.paginationDiv .next-button svg {
+  transform: translateY(2px);
+}
+
+/* .paginationDiv .back-button:hover,
+.paginationDiv .next-button:hover {
+  background-color: rgb(45, 45, 45);
+} */
+
+.paginationDiv .back-button:active,
+.paginationDiv .next-button:active {
+  background-color: rgb(85, 85, 85);
+}
+</style>
