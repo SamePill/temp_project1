@@ -21,11 +21,17 @@
       경상 마산
     </p>
     <p class="flex-grow-0 flex-shrink-0 w-[52px] text-sm text-left text-[#1ba494]">
-      투입 가능
+      투입 가능 {{ props.engineerInfo }}
     </p>
   </div>
 </template>
 
 <script setup>
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  engineerInfo:{}
+})
+
 
 </script>

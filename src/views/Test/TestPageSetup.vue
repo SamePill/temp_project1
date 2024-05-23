@@ -3,6 +3,15 @@
         <FontAwesomeIcon icon="less-than" />
         <font-awesome-icon icon="left-long" />
         <font-awesome-icon icon="less-than" />
+        
+        <h1>POP-UP 샘플...</h1>
+        <!-- popup 샘플-->
+        <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="openPopup()">open..!!!!</button>
+        <modal ref="modalShow" :width="340">
+            <confirmPopup message="테스트" btnOk="OK" btnCancel="Close" @cancel="cancel" @confirm="confirm" />
+        </modal>
+
+        <br><br><br><br>
         <table border="1" width="250">
             <tr>
                 <td colspan="2">
@@ -92,6 +101,9 @@
         <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="savefile()">savefile</button>
 
         <testComp ref="xx"/>
+
+        <br><br><br><br><br><br>
+
     </div>
     </template>
     <script setup>
@@ -100,9 +112,27 @@
     import * as gfnUtils from "@/utils/gfnUtils.js";
     import { commonStore } from '@/stores'
     import testComp from '@/views/Test/testComponent.vue'
-
+    import Modal from '@/components/baseComponents/Modal.vue'
+    import confirmPopup from '@/components/popupComponents/confirmPopup.vue'
+    
     const xx = ref()
     const store = commonStore()
+
+    //모달 테스트
+    const modalShow = ref(null)
+    const show = () => {
+        modalShow.value.open()            
+    }
+    //취소버튼
+    const cancel = function (){
+        modalShow.value.close()
+        alert("Cancel")
+    }
+    //확인버튼
+    const confirm = function (){
+        modalShow.value.close()
+        alert("OK")
+    }
 
     const apiUrl = ref("/v1/common/code");
     const apiResult = ref("");
@@ -129,6 +159,10 @@
                 item.checked == filter
             )
         })
+
+    function openPopup(){  
+        show();
+    }
 
     // store 사용 예시
     async function test1(){

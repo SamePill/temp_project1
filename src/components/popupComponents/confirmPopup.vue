@@ -9,12 +9,12 @@
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">{{props.btnOk}}</p>
+        <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]" @click="$emit('confirm')">{{props.btnOk}}</button>
       </div>
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-[#1ba494] border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-white">{{props.btnCancel}}</p>
+        <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-white" @click="$emit('cancel')">{{props.btnCancel}}</button>
       </div>
     </div>
   </div>
@@ -24,9 +24,15 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  message:""
-  ,btnOk:""
-  ,btnCancel:""
+  message: {
+    default: "",
+  }
+  ,btnOk: {
+    default: "확인",
+  }
+  ,btnCancel: {
+    default: "취소",
+  }
 })
 
 </script>

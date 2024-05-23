@@ -65,14 +65,17 @@
                 (주)리드워크
               </p>
             </div>
-            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">
+            <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">
               이력서 다운받기
-            </p>
+            </button>
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-4">
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
               <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">상태</p>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">선정대기</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">선정탈락</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">선정합격</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">미팅예정</p>
             </div>
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
               <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">생년월일</p>
@@ -131,6 +134,7 @@
       <div
         class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-[30px]"
       >
+        <!-- 반복내용 1 -->
         <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[30px]">
           <p class="flex-grow-0 flex-shrink-0 w-[150px] text-base font-bold text-left text-[#191919]">
             프로젝트 수행 이력
@@ -183,7 +187,9 @@
             </div>
           </div>
         </div>
+        <!-- 구분선 -->
         <div class="flex-grow-0 flex-shrink-0 w-[540px] h-px bg-[#ddd]"></div>
+        <!-- 반복내용 2 -->
         <div
           class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[540px] gap-4"
         >
@@ -227,63 +233,150 @@
             </div>
           </div>
         </div>
+        <!-- 구분선 -->
+        <div class="flex-grow-0 flex-shrink-0 w-[540px] h-px bg-[#ddd]"></div>
+        <!-- 반복내용 3 -->
+        <div
+          class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[540px] gap-4"
+        >
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">프로젝트 명</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">초급 엔지니어</p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">수행기간</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+              2022.01.01 ~ 2022.02.03
+            </p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">직군</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">Web</p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">클라이언트</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">배달의 민족</p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">업무 영역</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">모바일</p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">활용 Tool</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+              엑셀, 지라, 레드마인
+            </p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+            <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">업무 내용</p>
+            <div
+              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[5px]"
+            >
+              <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+                <div
+                  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5"
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#333]">
+                    프로젝트 설명 및 주요 담당 업무
+                  </p>
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+                    <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
+                      >현재상황은 시나리오 및 기획서만 만들어져 있는 상태입니다.</span
+                    ><br /><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
+                      >TC 및 테스트와 관련된 문서는 없습니다.</span
+                    >
+                  </p>
+                </div>
+                <div
+                  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5"
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#333]">
+                    업무스킬
+                  </p>
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+                    <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
+                      >현재상황은 시나리오 및 기획서만 만들어져 있는 상태입니다.</span
+                    ><br /><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
+                      >TC 및 테스트와 관련된 문서는 없습니다.</span
+                    >
+                  </p>
+                </div>
+                <div
+                  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5"
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#333]">
+                    기타 사항
+                  </p>
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+                    <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
+                      >현재상황은 시나리오 및 기획서만 만들어져 있는 상태입니다.</span
+                    ><br /><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
+                      >TC 및 테스트와 관련된 문서는 없습니다.</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">접기</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- 지원취소 -->
-    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
+    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '10'">
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">
           지원취소
-        </p>
+        </button>
       </div>
     </div>
 
     <!-- 수정하기 -->
-    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
+    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '20'">
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">수정하기</p>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">수정하기</button>
       </div>
     </div>
 
 
     <!-- 선정후 -->
-    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
+    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '30'">
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">불합격</p>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">불합격</button>
       </div>
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white">미팅요청</p>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white" @click="$emit('popBtn2')">미팅요청</button>
       </div>
     </div>
 
     <!-- 선정전 -->
-    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
+    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '40'">
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">불합격</p>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">불합격</button>
       </div>
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white">선정하기</p>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white" @click="$emit('popBtn2')">선정하기</button>
       </div>
     </div>
 
     <!-- 선정대기 -->
-    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5">
+    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '50'">
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
       >
-        <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">선정대기</p>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">선정대기</button>
       </div>
     </div>
 
@@ -293,8 +386,11 @@
 
 <script setup>
 import { defineProps } from 'vue'
-
 const props = defineProps({
+  mode:{default:"01"},
+  profile:{},
+  pojectList:[{}]
+
 })
 
 </script>
