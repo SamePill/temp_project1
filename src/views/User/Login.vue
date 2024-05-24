@@ -218,6 +218,7 @@ async function reqLogin() {
   //var isErr = "";
   var rtn = await gfnUtils.axiosPost(api, postParams);
   if (rtn.rtnCd == "00") {
+    console.log(rtn)
     router.replace("/");
   } else {
     console.log("에러처리...");

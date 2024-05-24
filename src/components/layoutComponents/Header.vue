@@ -29,12 +29,12 @@
       
       {{ loginYn }}
       <li class="mr-5">
-        <button @click="goToPage('/login')">
+        <button @click="goToPage('Login')">
           로그인
         </button>
       </li>
       <li class="mr-5">|</li>
-        <button @click="goToPage('/signUp')">
+        <button @click="goToPage('SignUp')">
           회원가입
         </button>
     </ul>

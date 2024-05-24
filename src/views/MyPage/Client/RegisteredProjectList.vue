@@ -50,7 +50,7 @@
                   <div
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1"
                   >
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">모집종료</p>
+                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">모집종료</button>
                   </div>
                 </div>
               </div>

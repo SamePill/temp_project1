@@ -38,7 +38,7 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/myInformation') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">내 정보</p>
+      <p v-if="this.$route.path.indexOf('/myInformation') >= 0 || this.$route.path.indexOf('/myCompanyInfo') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">내 정보</p>
       <button v-else @click="goToPage('MyInformation')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">내 정보</button>
     </div>
     <div

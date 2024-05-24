@@ -72,10 +72,11 @@ export const axiosGet = (api, getParams) => {
             // resolve(resData.rtnData);
             resolve(resData);
           } else {
+            console.log("에러!!!!!!!!!!!!!!!!");
             // openAlertDiaolog("ERROR", resData.rtnMsg);
             // store.commit("setLoading", false);
-            reject(resData);
-            // console.log("오류");
+            // reject(resData);
+            resolve(resData);
           }
         }
       })
@@ -83,6 +84,7 @@ export const axiosGet = (api, getParams) => {
         // if (loading) {
         //   // store.commit("setLoading", false);
         // }
+        console.log("err catch 에러!!!!!!!!!!!!!!!!" + isErr);
         console.log(err.response.data);
         if (isErr) {
           // console.log("Error -----------------------")
@@ -90,7 +92,7 @@ export const axiosGet = (api, getParams) => {
           // console.log(err.response.status)
           //alert(err.response.status);     
           // console.log("오류");
-          // console.log(err.response.data.rtnMsg)
+          console.log(err.response.data.rtnMsg)
           // console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
@@ -118,6 +120,8 @@ export const axiosGet = (api, getParams) => {
             //reject(err.response.data);     
             resolve(err.response.data);            
           }
+        }else{
+          resolve(err.response.data);            
         }
       });
   });
@@ -186,6 +190,7 @@ export const axiosPost = (api, postParams, loading, isErr) => {
           //store.commit("setAlertDialog", true);
           //openAlertDiaolog("ERROR", resData.rtnMsg);
           reject(resData);
+          // resolve(resData);
         }
       })
       .catch(err => {

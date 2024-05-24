@@ -10,9 +10,9 @@
               <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
                 엔지니어 관리
               </p>
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">
+              <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">
                 엔지니어 추가하기
-              </p>
+              </button>
             </div>
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">총 인원 : 180명</p>

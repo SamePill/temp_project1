@@ -108,9 +108,9 @@
                   >
                     회사 로고를 추가해주세요. (PNG,JPG)
                   </p>
-                  <input type="file" id="upload-log" hidden />
+                  <input type="file" id="upload-logo" hidden />
                 </div>
-                <label for="upload-log">
+                <label for="upload-logo">
                   <div
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
                   >
@@ -724,6 +724,14 @@ function checkBoxMrkt(id){
       signUp.value.joinTwoStep.mrktSmsRcptYn = "Y";
     }
 
+  }
+
+  if(signUp.value.joinTwoStep.mrktMailRcptYn == "Y" || signUp.value.joinTwoStep.mrktSmsRcptYn == "Y"){
+    signUp.value.joinTwoStep.mrktYn = "Y"
+  }
+
+  if(signUp.value.joinTwoStep.mrktMailRcptYn != "Y" && signUp.value.joinTwoStep.mrktSmsRcptYn != "Y"){
+    signUp.value.joinTwoStep.mrktYn = "N"
   }
 }
 
