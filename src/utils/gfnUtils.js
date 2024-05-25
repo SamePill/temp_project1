@@ -133,7 +133,7 @@ export const axiosGet = (api, getParams) => {
  * @param {*} postParams //파라메터
  * @param {*} loading //로딩바(프로그레스바) 표시 여부
  */
-export const axiosPost = (api, postParams, loading, isErr) => {
+export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
   if (typeof loading == "undefined") {
     loading = true;
   }
@@ -143,6 +143,9 @@ export const axiosPost = (api, postParams, loading, isErr) => {
 
   if (typeof isErr == "undefined") {
     isErr = true;
+  }
+  if (typeof queryParam == "undefined") {
+    queryParam = "";
   }
 
   //var apiUrl = baseUrl + api + ".app";
@@ -167,7 +170,7 @@ export const axiosPost = (api, postParams, loading, isErr) => {
   
   return new Promise(function(resolve, reject) {
     axios
-      .post(apiUrl, postParams)
+      .post(apiUrl, postParams , { params: queryParam })
       .then(res => {
         var resData = res.data;
         // console.log("-------result-------");

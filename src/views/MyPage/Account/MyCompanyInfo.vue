@@ -59,15 +59,16 @@
                   </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-                  <div
-                    class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[360px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                  >
-                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                      png, jpg 만 첨부가능합니다.
-                    </p>
-                    <input type="file" id="upload-cert" hidden />
-                  </div>
-                  <label for="upload-cert">
+                  <input
+                    type="text"
+                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[360px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                    placeholder="png, jpg 만 첨부가능합니다."
+                    readonly
+                    v-model="bizRegFileNm"
+                  />
+                  <input type="file" id="bizRegFile" hidden  accept="image/*, .pdf"  @change="showFileName('bizReg')"/>
+                  
+                  <label for="bizRegFile">
                     <div
                       class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
                     >
@@ -100,7 +101,7 @@
                     class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-2"
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1585d7]">
-                      사업자등록증.pdf
+                      {{companyInfo.bizRegFileNm}}
                     </p>
                     <svg
                       width="16"
@@ -110,6 +111,7 @@
                       xmlns="http://www.w3.org/2000/svg"
                       class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                       preserveAspectRatio="none"
+                      @click="delFile('bizReg')"
                     >
                       <rect width="16" height="16" transform="translate(0 0.5)" fill="white"></rect>
                       <path
@@ -138,15 +140,15 @@
                   </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-                  <div
-                    class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[360px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                  >
-                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                      png, jpg 만 첨부가능합니다.
-                    </p>
-                    <input type="file" id="upload-log0" hidden />
-                  </div>
-                  <label for="upload-cert">
+                  <input
+                    type="text"
+                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[360px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                    placeholder="png, jpg 만 첨부가능합니다."
+                    readonly
+                    v-model="compLogoFileNm"
+                  />
+                  <input id ="compLogoFile" type="file" hidden  accept="image/*, .pdf"  @change="showFileName('compLogo')"/>
+                  <label for="compLogoFile">
                     <div
                       class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
                     >
@@ -179,7 +181,7 @@
                     class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-2"
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1585d7]">
-                      회사로고 이미지.png
+                      {{companyInfo.compLogoFileNm}}
                     </p>
                     <svg
                       width="16"
@@ -189,6 +191,7 @@
                       xmlns="http://www.w3.org/2000/svg"
                       class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                       preserveAspectRatio="none"
+                      @click="delFile('compLogo')"
                     >
                       <rect width="16" height="16" transform="translate(0 0.5)" fill="white"></rect>
                       <path
@@ -251,6 +254,26 @@ const companyInfo = ref({
   compLogoFileNm: ""
 })
 
+const bizRegFile = ref(File | null)
+const compLogoFile = ref(File | null)
+const bizRegFileNm =ref('')
+const compLogoFileNm = ref('')
+
+function showFileName(div){
+  if(div == "bizReg"){
+    let input = document.getElementById('bizRegFile');
+    let fileName = input.files[0].name;
+    bizRegFileNm.value = fileName;
+    bizRegFile.value = input.files[0]
+  }else if(div == "compLogo"){
+    let input = document.getElementById('compLogoFile');
+    let fileName = input.files[0].name;
+    compLogoFileNm.value = fileName;
+    compLogoFile.value = input.files[0]
+  }
+
+}
+
 function myInfo(){
 
   router.push({name :"MyInformation"})
@@ -258,39 +281,88 @@ function myInfo(){
 
 async function loadData(){
 
-var api = "/v1/my/comp-info";
-var postParams = {userMail: userMail.value, compId: compId.value};
-let rtn = await gfnUtils.axiosGet(
-  api,
-  postParams
-);
+  var api = "/v1/my/comp-info";
+  var postParams = {userMail: userMail.value, compId: compId.value};
+  let rtn = await gfnUtils.axiosGet(
+    api,
+    postParams
+  );
 
-console.log(rtn);
+  console.log(rtn);
 
-if(rtn.rtnCd == "00"){
-  companyInfo.value = rtn.rtnData
+  if(rtn.rtnCd == "00"){
+    companyInfo.value = rtn.rtnData
 
-}else{
-  alert(rtn.rtnMsg);
-}
+  }else{
+    alert(rtn.rtnMsg);
+  }
 
 }
 
 async function saveInfo(){
 
-  var api = "/v1/my/myinfo";
-  var postParams = {};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    postParams
-  );
-  
-  console.log(rtn);
-  
-  if(rtn.rtnCd == "00"){
-    console.log("x")
+  let formData = new FormData();
+  // 파일이 다건인 경우
+  // for (var idx in this.attchfiles) {
+  //     console.log(this.attchfiles[idx].type);
+  //     console.log(this.attchfiles[idx].name);
+  //     formData.append("attchFiles", this.attchfiles[idx]);
+  // }
+  // formData.append("banner", this.physFile);
+  // formData.append(
+  //     "params",
+  //     new Blob([JSON.stringify(params)], { type: "application/json" })
+  // );
+
+  // 파일이 단건인 경우
+
+  if(bizRegFile.value != null ){
+    console.log("회사 사업자등록증 있음....")
+    formData.append("bizReqMultiFile", bizRegFile.value);
+    companyInfo.value.bizRegFileUrl = ""
+    companyInfo.value.bizRegFileSeq = ""
+    companyInfo.value.bizRegFileNm = bizRegFileNm.value
+  }
+  if(compLogoFile.value != null  ){
+    console.log("회사 로그 있음....")
+    formData.append("compLogoMultiFile", bizRegFile.value);
+    companyInfo.value.compLogoFileSeq = ""
+    companyInfo.value.compLogoFileUrl = ""
+    companyInfo.value.compLogoFileNm = compLogoFileNm.value
+  }
+  formData.append("userMail", userMail.value )
+  formData.append("modifyCompInfoInputJson ",  JSON.stringify(companyInfo.value) )
+  // formData.append(
+  //   "params",
+  //   new Blob([JSON.stringify(params)], { type: "application/json" })
+  // );
+
+  // FormData 내용 확인하기
+  // for (let key of formData.keys()) {
+  //   console.log(key, ":", formData.get(key));
+  // }
+  // console.log(formData);
+
+  let res = await this.gfn_utils.axiosPost(
+      "/v1/my/modify/comp-info",
+      formData
+  );         
+  console.log(res);
+  if(res.rtnCd == "00"){
+    companyInfo.value = res.rtnData
+
   }else{
-    alert(rtn.rtnMsg)
+    alert(res.rtnMsg);
+  }
+  
+}
+
+function delFile(div){
+
+  if(div == "bizReg"){
+    console.log("")
+  }else if(div == "compLogo"){
+    console.log("")
   }
 
 }
