@@ -2,27 +2,43 @@
   <div class="w-[1060px] h-10 my-10 mx-auto font-basic">
 
     <!-- 상단 검색 -->
-    <div class="flex items-center justify-between w-full">
-      <div>
-        <DropDown class="mr-5"/>
-        <DropDown class="mr-5"/>
-        <DropDown />
+    <div class="flex items-center justify-between w-full" style="position: relative;">
+      <!-- <div style="position:absolute; top:0px"> -->
+      <div style="position:absolute; z-index: 999;  ">
+        <DropDown :cdVal="post.workDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
+        <DropDown :cdVal="workPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
+        <DropDown :cdVal="engrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
       </div>
 
       <!--검색 -->
-      <div class="w-[300px] py-[10px] px-[10px] border border-line-1 rounded box-border flex justify-between items-center hover:border-main-0 " >
-        <input class="outline-none placeholder:text-sm placeholder:text-text-3" type="text" placeholder="키워드를 입력해 주세요" v-mode="srchKeyWord">
-        <img class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
-      </div>
+      <!-- <div class="w-[1060px]" style="text-align: right;"> -->
+        <div class="w-[1060px]" style="position: relative; text-align: right">
+          <input class="w-[300px]  py-[10px]  px-[10px] justify-between border-line-1 border rounded box-border placeholder:text-sm placeholder:text-text-3" type="text" placeholder="키워드를 입력해 주세요" v-model="srchKeyWord" @keyup.enter="loadData()">
+          <img style="cursor: pointer; position:absolute; right:10px; top:14px;" class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
+        </div>
+      <!-- </div> -->
     </div>
 
     <!-- 프로젝트 리스트 -->
-    <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
-        <QaProjectItem :qaProjectViewInfo="{size:'big'}" :prj="el"  />
+    <div v-if="projList.length  > 0" >
+      <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
+          <QaProjectItem :qaProjectViewInfo="{div:'list'}" :prj="el"  />
+      </div>
     </div>
+    <div v-else class="mt-[350px]">
+      <p class="text-lg font-bold text-center text-[#555]">찾으시는 프로젝트를 찾지 못했습니다.</p>
+      <p class="text-sm font-medium text-center text-[#777] mt-[10px]">
+      <span class="text-sm font-medium text-center text-[#777]"
+        >찾으시는 프로젝트를 찾지 못했습니다.</span
+      ><br /><span class="text-sm font-medium text-center text-[#777]"
+        >찾으시는 프로젝트의 검색어가 맞는지 다시 한번 확인해주세요.</span
+      >
+    </p>
+    </div>
+    
 
     
-    <div class="paginationDiv w-[1060px] h-10 my-10 mx-auto font-basic" style="text-align:center">
+    <div v-if="projList.length  > 0" class="paginationDiv w-[1060px] h-10 my-10 mx-auto font-basic" style="text-align:center">
       
         <vue-awesome-paginate
           :total-items=totalCnt
@@ -56,7 +72,7 @@ import { onMounted, ref } from 'vue'
 onMounted(() => {
   loadData();
 })
-
+const post ={workDivCd:""}
 const pageNo = ref(1)
 const totalCnt = ref(100)
 const srchKeyWord = ref("")
@@ -112,6 +128,7 @@ async function loadData(selPage){
   }
   var api = "/v1/project/list";
   var postParams = {workDivCd:"", workPirdDivCd:"", engrRtngDivCd:"", pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
+  console.log( postParams);
   let rtn = await gfnUtils.axiosGet(
     api,
     postParams

@@ -25,7 +25,7 @@
     <div class="w-[1060px] flex justify-start flex-wrap mx-auto">
       <!-- 공고 card -->
       <div v-for="el in projList" :key="el">
-        <QaProjectItem :qaProjectViewInfo="{ size: 'small', position: 'left'}" :prj="el"  />
+        <QaProjectItem :qaProjectViewInfo="{ div: 'card'}" :prj="el"  />
       </div>
     </div>
   </div>

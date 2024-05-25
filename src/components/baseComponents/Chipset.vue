@@ -2,8 +2,8 @@
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[519px]">
         <div>
             <button v-for="(el,i) in cdList" :key="el.cd" @click="chipClick(el,i)"
-            class="gap-10 px-4 py-2 rounded-[100px] bg-white border" :class="el.chkVal== true ? 'border-border-0' :  'border-[#ddd]' "  
-            style="display:inline-block !important; margin-bottom:10px;" >
+            class="gap-10 px-4 py-1 rounded-[100px] bg-white border" :class="el.chkVal== true ? 'border-border-0' :  'border-[#ddd]' "  
+            style="display:inline-block !important; margin-top:10px;" >
                 <p :class="el.chkVal== true ? 'text-main-0' :  'border-[#777777]' ">{{el.cdNm}}</p>
             </button>
         </div>
@@ -32,6 +32,8 @@ const filteredCdList = computed( () => {
 
 async function loadData(){
   cdList.value = await gfnUtils.getCommCode(props.listDivCd);
+  cdList.value = await gfnUtils.getCommCode("ENGR_RTNG_DIV_CD");
+  console.log(cdList.value);
   cdList.value[0].chkVal = true;
 }
 

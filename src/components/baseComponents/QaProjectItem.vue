@@ -27,25 +27,26 @@
           <span class="text-1 py-2 px-4 bg-tag-0 rounded-[100px] text-text-1 mr-3">{{item.taskDivCdNm}}</span>
         </button>
     </div>
-
     <!-- 하단정보 -->
     <div class="justify-between mt-4 text-sm text-text-1" :class="getBottomViewType">
-
-      <span>예상금액 : 600만원~800만원</span>
-      <span class="py-[2px] px-1 border-solid border border-line-0 rounded-sm" :class="dd"> 월단위</span>
-      <span>|</span>
+      
+      <span>예상금액 : {{props.prj.expcPric}}만원</span>
+      <span class="ml-2 py-[2px] px-1 border-solid border border-line-0 text-[10px] text-[#555] rounded-sm"> 월 단위 </span>
+      <span class="px-2">|</span>
       <span>투입기간 : {{props.prj.pirdVal}}개월</span>
-      <span>|</span>
+      <span class="px-2">|</span>
       <span>필요인원 : {{props.prj.engrCnt}}명</span>
+      <span class="px-2">|</span>
+      <span v-if="qaProjectViewInfo.div == 'list'" class="mt-3 text-sm text-text-1">{{props.prj.workAddr}}</span>
     </div>
-    <span class="mt-3 text-sm text-text-1">{{props.prj.workAddr}}</span>
+    <span v-if="qaProjectViewInfo.div != 'list'"  class="mt-3 text-sm text-text-1">{{props.prj.workAddr}}</span>
   </div>
 </template>
 <script setup>
 import { computed, defineProps } from 'vue'
 
 const props = defineProps({
-  qaProjectViewInfo : { position : "", size : "",},
+  qaProjectViewInfo : { div:""},
   prj : {
           // "projId": "C00001P00001",
           // "workDivCd": "10",
@@ -93,19 +94,27 @@ const props = defineProps({
 
 
 const getViewType = computed(() => {
-  if (props.qaProjectViewInfo.size == 'small') {
-    return ['w-[520px]', props.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];
-  }  else {
+  if (props.qaProjectViewInfo.div == 'card') {
+    return ['w-[520px] mr-[5px] ml-[5px]'];
+  } 
+  if (props.qaProjectViewInfo.div == 'list') {
+    return ['w-full h-[216px]'];
+  } 
+  else {
     return ['w-full'];
   }
 })
+
+
+
+
 
 const getHashTagViewType = computed(() =>  {
   if (props.qaProjectViewInfo.size == 'small') {
     return ['w-96', 'flex-wrap', 'content-start']
   }
   else {
-    return ['w-full']
+    return ['w-full]']
   }
 })
 
