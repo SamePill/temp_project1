@@ -97,7 +97,7 @@ async function modifyPass(){
   var api = "/v1/my/modify/pass";
   var queryParams = { userMail: userMail.value };
   var postParams =  password.value;
-  let rtn = await gfnUtils.axiosGet(
+  let rtn = await gfnUtils.axiosPost(
     api,
     postParams,
     queryParams
