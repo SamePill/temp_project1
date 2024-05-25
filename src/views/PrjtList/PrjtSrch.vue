@@ -21,7 +21,7 @@
 
     <!-- 프로젝트 리스트 -->
     <div v-if="projList.length  > 0" >
-      <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
+    <div class="w-[1060px] flex-col mx-auto"  v-for="el in projList" :key="el">        
           <QaProjectItem :qaProjectViewInfo="{div:'list'}" :prj="el"  />
       </div>
     </div>
@@ -59,6 +59,7 @@
           </template>
         </vue-awesome-paginate>
       </div> 
+      <div class="h-[40px]"></div>
   </div> 
 </template>
 

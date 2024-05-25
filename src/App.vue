@@ -4,17 +4,18 @@
     <!-- 헤더 -->
     <template
       v-if="
-        this.$route.path.indexOf('/login') >= 0 ||
-        this.$route.path.indexOf('/signUp') >= 0 ||
-        this.$route.path.indexOf('/signUpApply') >= 0 
+        $route.path.indexOf('/login') >= 0 ||
+        $route.path.indexOf('/signUp') >= 0 ||
+        $route.path.indexOf('/signUpApply') >= 0 
       "
     >
-
     </template>
-    <template v-else>
-      <Header />
+    <template v-else >
+      <Header/>
     </template>
-    <router-view></router-view>
+      <div style=" height:calc(100vh - 80px); overflow-y: scroll;">
+        <router-view ></router-view>
+      </div>
   </div>
 </template>
 
@@ -22,4 +23,10 @@
 import Header from '@/components/layoutComponents/Header.vue'
 
 </script>
+<style>
+body{
+  scroll:none;
+  overflow: hidden; 
+}
+</style>
 

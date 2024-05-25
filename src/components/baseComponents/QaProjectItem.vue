@@ -1,7 +1,7 @@
 <template>
   <div
     class="pt-[34px] pr-[30px] pb-[30px] pl-[30px] mt-5 border-solid border-line-1 border-[1px] rounded-[10px] font-basic hover:cursor-pointer"
-    @click="goToPage('PrjtSrchDetl')"
+    @click="goToPage()"
     :class="getViewType">
 
     <!-- 상단 -->
@@ -19,7 +19,7 @@
                 초급 엔지니어
               </p>
             </div>
-            <div v-show="props.prj.engrRtngInfo['intrEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 h-7 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dbe9fa]">
+            <div v-show="props.prj.engrRtngInfo['intrEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dbe9fa]">
               <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#0b6bdc]">
                 중급 엔지니어
               </p>
@@ -41,13 +41,13 @@
     <p class="mt-3 text-xl font-medium text-text-0">{{props.prj.projTitl}}</p>
 
     <!-- 해시테그 -->
-    <div class="mt-4" :class="getHashTagViewType" >   
+    <div class="mt-4" >   
         <button class="" v-for="(item, index) in props.prj.taskDivCdNmList" :key="index" >
           <span class="text-1 py-2 px-4 bg-tag-0 rounded-[100px] text-text-1 mr-3">{{item.taskDivCdNm}}</span>
         </button>
     </div>
     <!-- 하단정보 -->
-    <div class="justify-between mt-4 text-sm text-text-1" :class="getBottomViewType">
+    <div class="justify-between mt-4 text-sm text-text-1">
       
       <span>예상금액 : {{props.prj.expcPric/10000}}만원</span>
       <span class="ml-2 py-[2px] px-1 border-solid border border-line-0 text-[10px] text-[#555] rounded-sm"> 월 단위 </span>
@@ -63,7 +63,9 @@
 </template>
 <script setup>
 import { computed, defineProps } from 'vue'
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const props = defineProps({
   qaProjectViewInfo : { div:""},
   prj : {
@@ -124,45 +126,12 @@ const getViewType = computed(() => {
   }
 })
 
-
-
-
-
-
-// export default {
-//   props: {
-//     qaProjectViewInfo: Object
-//   },
-//   methods: {
-//     goToPage(url){
-//       this.$router.push(url)
-//     }        
-//   },
-//   computed: {
-//     getVieType() {
-//       if (this.qaProjectViewInfo.size == 'small') {
-//         return ['w-[520px]', this.qaProjectViewInfo.position == 'left' ? 'mr-[10px]' : 'ml-[10px]'];
-//       }
-//       else {
-//         return ['w-full'];
-//       }
-//     },
-//     getHashTagViewType() {
-//       if (this.qaProjectViewInfo.size == 'small') {
-//         return ['w-96', 'flex-wrap', 'content-start']
-//       }
-//       else {
-//         return ['w-full']
-//       }
-//     },
-//     getBottomViewType() {
-//       if (this.qaProjectViewInfo.size == 'small') {
-//         return "flex items-center"
-//       }
-//       else {
-//         return ""
-//       }
-//     }
-//   }
-// }
+function goToPage(){
+  router.push({ 
+    name: "PrjtSrchDetl"
+    ,state : {
+              dataObj : props.prj.projId
+            }
+  });
+}
 </script>
