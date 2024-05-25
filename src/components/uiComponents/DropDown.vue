@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div v-if="isShow" style="position: absolute" class="pl-4 mt-2 w-[172px] border-solid border border-line-1 rounded text-base flex-col bg-[#fff]">
+    <div v-if="isShow" style="position: absolute" @mouseleave="noShowItem()" class="pl-4 mt-2 w-[172px] border-solid border border-line-1 rounded text-base flex-col bg-[#fff]">
       <div class="my-3 text-sm mr-[10px] hover:cursor-pointer" :class="cdVal =='' ? 'text-main-0' : ''" @click="selectVal({cd:'',cdNm:'전체'})" >{{'전체'}}</div>
       <div v-for="(el) in cdList" :key="el.cd" :value="el.cd" :class="cdVal == el.cd ? 'text-main-0' : ''" class="my-3 text-sm mr-[10px] hover:cursor-pointer" @click="selectVal(el)">{{ el.cdNm }}</div>
     </div>
@@ -18,8 +18,8 @@
 </template>
 <script setup>
 
-import { ref, defineProps, onMounted}  from 'vue'
-import * as gfnUtils              from "@/utils/gfnUtils.js";
+import { ref, defineProps, onMounted, defineEmits}  from 'vue'
+import * as gfnUtils from "@/utils/gfnUtils.js";
 onMounted(() => {
   loadData();
 })
@@ -27,6 +27,9 @@ const props = defineProps({
   title : String
   ,listDivCd : String
 })
+const emit = defineEmits([
+  'setData'
+]);
 
 const title =ref(props.title)
 const cdList = ref({});
@@ -41,13 +44,18 @@ function selectVal(el){
   cdVal.value = el.cd;
   cdNm.value = el.cdNm;
   isShow.value = !isShow.value
+  emit('setData',el.cd);
 }
 const isShow = ref(false);
 
 function showItem(){
+
   isShow.value = !isShow.value
 }
 
+function noShowItem(){
+  isShow.value = false;
+}
 
 
 </script>

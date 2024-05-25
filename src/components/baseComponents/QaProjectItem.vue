@@ -7,19 +7,38 @@
     <!-- 상단 -->
     <div class="flex justify-between">
       <div class="flex items-center">
-        <div class="py-[4px] px-2 bg-blue-0 bg-opacity-[.15] rounded mr-[10px]">
-          <span class="text-xs text-blue-0">기간제 상주</span>
-        </div>
-        <div class="py-[4px] px-2 bg-red-0 bg-opacity-[.15] rounded mr-[10px]">
-          <span class="text-xs text-red-0">초급가능</span>
-        </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
+            <div v-if="props.prj.workDivCd =='10'" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dd6431]" >
+              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-white">상주</p>
+            </div>
+            <div v-if="props.prj.workDivCd =='20'" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dd6431]" >
+              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-white">비상주</p>
+            </div> 
+           <div v-show="props.prj.engrRtngInfo['bgnrEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#ddf2ef]" >
+              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]">
+                초급 엔지니어
+              </p>
+            </div>
+            <div v-show="props.prj.engrRtngInfo['intrEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 h-7 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dbe9fa]">
+              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#0b6bdc]">
+                중급 엔지니어
+              </p>
+            </div>
+            <div v-show="props.prj.engrRtngInfo['advnEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#fadbe6]" >
+              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc0b56]">
+                고급 엔지니어
+              </p>
+            </div>
+            <div v-show="props.prj.engrRtngInfo['spclEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#faf1db]">
+              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc630b]">
+                특급 엔지니어
+              </p>
+            </div>
+          </div>
       </div>
-      <button>
-        <img class="w-8 h-8" src="@/assets/ic_book_mark.png" alt="">
-      </button>
     </div>
     <!-- 제목 -->
-    <p class="mt-5 text-xl font-medium text-text-0">{{props.prj.projTitl}}</p>
+    <p class="mt-3 text-xl font-medium text-text-0">{{props.prj.projTitl}}</p>
 
     <!-- 해시테그 -->
     <div class="mt-4" :class="getHashTagViewType" >   
@@ -30,7 +49,7 @@
     <!-- 하단정보 -->
     <div class="justify-between mt-4 text-sm text-text-1" :class="getBottomViewType">
       
-      <span>예상금액 : {{props.prj.expcPric}}만원</span>
+      <span>예상금액 : {{props.prj.expcPric/10000}}만원</span>
       <span class="ml-2 py-[2px] px-1 border-solid border border-line-0 text-[10px] text-[#555] rounded-sm"> 월 단위 </span>
       <span class="px-2">|</span>
       <span>투입기간 : {{props.prj.pirdVal}}개월</span>
@@ -109,23 +128,6 @@ const getViewType = computed(() => {
 
 
 
-const getHashTagViewType = computed(() =>  {
-  if (props.qaProjectViewInfo.size == 'small') {
-    return ['w-96', 'flex-wrap', 'content-start']
-  }
-  else {
-    return ['w-full]']
-  }
-})
-
-const getBottomViewType = computed(() =>  {
-  if (props.qaProjectViewInfo.size == 'small') {
-    return "flex items-center"
-  }
-  else {
-    return ""
-  }
-})
 
 // export default {
 //   props: {

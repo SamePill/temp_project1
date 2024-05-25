@@ -5,9 +5,9 @@
     <div class="flex items-center justify-between w-full" style="position: relative;">
       <!-- <div style="position:absolute; top:0px"> -->
       <div style="position:absolute; z-index: 999;  ">
-        <DropDown :cdVal="post.workDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
-        <DropDown :cdVal="workPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
-        <DropDown :cdVal="engrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
+        <DropDown @setData="getWorkDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
+        <DropDown @setData="getWorkPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
+        <DropDown @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
       </div>
 
       <!--검색 -->
@@ -72,9 +72,11 @@ import { onMounted, ref } from 'vue'
 onMounted(() => {
   loadData();
 })
-const post ={workDivCd:""}
 const pageNo = ref(1)
 const totalCnt = ref(100)
+const workDivCd = ref("")
+const workPirdDivCd = ref("")
+const engrRtngDivCd = ref("")
 const srchKeyWord = ref("")
 const projList = ref([{
                       "projId": "C00001P00001",
@@ -122,12 +124,11 @@ const projList = ref([{
 
 
 async function loadData(selPage){
-  console.log(selPage)
   if(selPage != null){
     pageNo.value = selPage;
   }
   var api = "/v1/project/list";
-  var postParams = {workDivCd:"", workPirdDivCd:"", engrRtngDivCd:"", pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
+  var postParams = {workDivCd:workDivCd.value, workPirdDivCd:workPirdDivCd.value, engrRtngDivCd:engrRtngDivCd.value, pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
   console.log( postParams);
   let rtn = await gfnUtils.axiosGet(
     api,
@@ -137,9 +138,20 @@ async function loadData(selPage){
   console.log(rtn);
   let res = rtn.rtnData
   projList.value = res.projList
+  totalCnt.value = res.projTotlCnt
 }
 
+function getWorkDivCd(data){
+  workDivCd.value = data;
+}
 
+function getWorkPirdDivCd(data){
+  workPirdDivCd.value = data;
+}
+
+function getEngrRtngDivCd(data){
+  engrRtngDivCd.value = data;
+}
 </script>
 
 <style>
