@@ -190,7 +190,7 @@
     projOneStep.value.workDivCd = cdVal;
   }
 </script>
-<style>
+<style scoped>
 input[type="checkbox"]{
   display: none;
 }

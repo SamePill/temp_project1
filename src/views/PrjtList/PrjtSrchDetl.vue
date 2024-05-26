@@ -17,7 +17,7 @@
 
             <!-- 모집중,로그인 Y,프로젝트찾기에서 넘어온 경우 -->
             <div v-if="!dataObj.pageDiv != 'projSrch' && !gfnRules.isNull(userMail)"  class="w-[340px]">
-                <QaProjectInfoSide />
+                <QaProjectInfoSide :prj = projInfo />
             </div>
         </div>
     </div>

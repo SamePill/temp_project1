@@ -25,7 +25,7 @@ import Header from '@/components/layoutComponents/Header.vue'
 </script>
 <style>
 body{
-  scroll:none;
+  overflow-y:none;
   overflow: hidden; 
 }
 </style>
