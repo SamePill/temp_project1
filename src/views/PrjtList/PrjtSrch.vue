@@ -5,9 +5,9 @@
     <div class="flex items-center justify-between w-full" style="position: relative;">
       <!-- <div style="position:absolute; top:0px"> -->
       <div style="position:absolute; z-index: 999;  ">
-        <DropDown @setData="getWorkDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
-        <DropDown @setData="getWorkPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
-        <DropDown @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
+        <DropDown @click="documentClick('WorkDivCd','dropDown')" id="WorkDivCd" ref="$WorkDivCd" @setData="getWorkDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
+        <DropDown @click="documentClick('WorkPirdDivCd','dropDown')" id="WorkPirdDivCd" ref="$WorkPirdDivCd" @setData="getWorkPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
+        <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
       </div>
 
       <!--검색 -->
@@ -67,11 +67,16 @@
 import DropDown from '@/components/uiComponents/DropDown.vue'
 import QaProjectItem from '@/components/baseComponents/QaProjectItem.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 
 onMounted(() => {
   loadData();
+  document.addEventListener('click', documentClick)
+})
+
+onUnmounted(()=>{
+  document.removeEventListener('click', documentClick)
 })
 const pageNo = ref(1)
 const totalCnt = ref(100)
@@ -122,7 +127,9 @@ const projList = ref([{
                           }
                       ]
                    }])
-
+const $WorkDivCd = ref()
+const $WorkPirdDivCd = ref()
+const $EngrRtngDivCd = ref()
 
 async function loadData(selPage){
   if(selPage != null){
@@ -130,13 +137,11 @@ async function loadData(selPage){
   }
   var api = "/v1/project/list";
   var postParams = {workDivCd:workDivCd.value, workPirdDivCd:workPirdDivCd.value, engrRtngDivCd:engrRtngDivCd.value, pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
-  console.log( postParams);
   let rtn = await gfnUtils.axiosGet(
     api,
     postParams
   );
   
-  console.log(rtn);
   let res = rtn.rtnData
   projList.value = res.projList
   totalCnt.value = res.projTotlCnt
@@ -152,6 +157,20 @@ function getWorkPirdDivCd(data){
 
 function getEngrRtngDivCd(data){
   engrRtngDivCd.value = data;
+}
+
+function documentClick(div,eventTarget){
+  if(eventTarget == 'dropDown'){
+    if(div != 'WorkDivCd'){
+      $WorkDivCd.value.noShowItem();
+    }
+    if(div != 'WorkPirdDivCd'){
+      $WorkPirdDivCd.value.noShowItem();
+    }
+    if(div != 'EngrRtngDivCd'){
+      $EngrRtngDivCd.value.noShowItem();
+    }
+  }
 }
 </script>
 

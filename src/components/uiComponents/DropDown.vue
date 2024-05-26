@@ -18,8 +18,9 @@
 </template>
 <script setup>
 
-import { ref, defineProps, onMounted, defineEmits}  from 'vue'
+import { ref, defineProps, onMounted, defineEmits, defineExpose }  from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
+defineExpose({noShowItem}) 
 onMounted(() => {
   loadData();
 })
@@ -35,6 +36,7 @@ const title =ref(props.title)
 const cdList = ref({});
 const cdVal = ref('');
 const cdNm = ref('전체');
+const isShow = ref(false);
 
 async function loadData(){
   cdList.value = await gfnUtils.getCommCode(props.listDivCd);
@@ -46,7 +48,6 @@ function selectVal(el){
   isShow.value = !isShow.value
   emit('setData',el.cd);
 }
-const isShow = ref(false);
 
 function showItem(){
 
