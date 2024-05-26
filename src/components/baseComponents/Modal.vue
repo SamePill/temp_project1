@@ -1,5 +1,5 @@
 <template>
-    <div v-show="true" class="popup-mask">
+    <div v-show="isVisible" class="popup-mask">
         <div  class="popup-wrap">
             <div class="popup-container" style="display: flex; justify-content: center;" :style="style">
                 <slot>
