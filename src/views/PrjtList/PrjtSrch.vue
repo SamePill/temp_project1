@@ -72,11 +72,9 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 onMounted(() => {
   loadData();
-  document.addEventListener('click', documentClick)
 })
 
 onUnmounted(()=>{
-  document.removeEventListener('click', documentClick)
 })
 const pageNo = ref(1)
 const totalCnt = ref(100)

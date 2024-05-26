@@ -62,3 +62,36 @@ export const engNum = value => {
   const pattern = /[^a-zA-Z0-9]/;
   return !pattern.test(value) || "영문과 숫자만 입력가능 합니다.";
 };
+
+export const isNull = str => {
+  var type = typeof str;
+
+  if (type === undefined || str === null) {
+    return true;
+  }
+
+  if (type === "string" && str.trim() == "") {
+      return true;
+  }
+
+  return false;
+};
+
+
+export const isEmptyList = arr => {
+  var type = typeof arr;
+
+  if (!arr || type === "undefined" || arr === null) {
+    return true;
+  }
+
+  if (type !== 'object') {
+      return true;
+  }
+
+  if (arr.length > 0) {
+      return false;
+  }
+
+  return false;
+};

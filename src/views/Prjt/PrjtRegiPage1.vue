@@ -137,7 +137,7 @@
   </div>
 </template>
 <script setup>
-  import {  ref, onMounted } from "vue";
+  import {  ref, onMounted, onUnmounted } from "vue";
   import Chipset             from '@/components/baseComponents/Chipset.vue'
   import * as gfnUtils       from "@/utils/gfnUtils.js";
   import { useRouter } from 'vue-router';
@@ -165,6 +165,8 @@
     loadData();
   })
   
+  onUnmounted(()=>{
+  })
   const { dataObj } = history.state; 
   if(dataObj != undefined){
     console.log(ref(JSON.parse(dataObj))); 

@@ -541,7 +541,13 @@ export const openSnackbar = (msg, bgcolor) => {
  */
 export const formatDate = (date, formatString) => {
   //var apiUrl = baseUrl + api + ".app";
-  return moment(date).format(formatString);
+  if(date != null){
+    if(formatString == '년월일'){
+      return date.slice(0, 4)+'년 ' + date.slice(4, 6)+ '월 ' + date.slice(6, 8)+ '일'
+    }else{
+      return moment(date).format(formatString);
+    }
+  }
 };
 
 /**

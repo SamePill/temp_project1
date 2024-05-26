@@ -130,7 +130,8 @@ function goToPage(){
   router.push({ 
     name: "PrjtSrchDetl"
     ,state : {
-              dataObj : props.prj.projId
+              dataObj : {projId: props.prj.projId
+                        ,pageDiv : 'projSrch'}
             }
   });
 }
