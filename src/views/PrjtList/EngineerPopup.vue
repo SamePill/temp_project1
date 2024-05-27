@@ -77,7 +77,7 @@
                                     선정 엔지니어
                                 </p>
                                 <button class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]">
-                                    선정으로 이동
+                                    미선정으로 이동
                                 </button>
                             </div>
                             <div class="flex-grow-0 flex-shrink-0 w-[460px] h-px bg-[#ddd]"></div>

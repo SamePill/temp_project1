@@ -23,7 +23,7 @@
             </div>
         </div>
         <!-- 로그인 -->
-        <div v-if="!gfnRules.isNull(loginUserNm) && !isShowDetl"  class="w-[340px] ml-3">
+        <div v-if="!gfnRules.isNull(loginUserNm) && !isShowDetl"  class="w-[340px]">
             <div class="flex flex-col justify-between  flex-grow-0 flex-shrink-0  p-5 rounded-[10px] bg-white border border-[#ddd]" >
                 <p v-if="workDivCd =='90' || prj.projectSprtInfo == null" class="flex-grow-0 flex-shrink-0 text-xl font-medium text-left text-[#191919] mb-5">
                     <span class="flex-grow-0 flex-shrink-0 text-xl font-medium text-left text-[#191919]">김큐밋님 </span><br />
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div v-if="isShowDetl" class="flex flex-col justify-center items-start overflow-hidden gap-10 p-5 rounded-[10px] bg-white border border-[#ddd] ml-3">
+        <div v-if="isShowDetl" class="flex flex-col justify-center items-start overflow-hidden gap-10 p-5 rounded-[10px] bg-white border border-[#ddd] ">
             <div class="flex flex-col justify-center items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-5">
                 <div class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative">
                     <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">

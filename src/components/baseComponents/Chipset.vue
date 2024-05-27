@@ -40,6 +40,7 @@ async function loadData(){
   if(cdList.value != undefined){
     cdList.value[0].chkVal = true;
   }
+  console.log(cdList.value)
 }
 
 function chipClick(el){

@@ -3,7 +3,7 @@
     <div style="display: flex; justify-content: center;" class="pt-10 pb-[100px] bg-[#fefefe]">
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative relative ">
       <div class="flex justify-between w-[520px] mb-[10px]">
-        <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
+        <p class="flex-grow-0 flex-shrink-0 text-2xl text-left text-[#191919]" style="font-weight:bolder !important">
           프로젝트 등록하기
         </p>
         <p class="flex-grow-0 flex-shrink-0 text-left">
@@ -97,7 +97,7 @@
   </div>
 </template>
 <script setup>
-  import {  ref } from "vue";
+  import {  ref, onMounted } from "vue";
   import { useRouter } from 'vue-router';
 
   const router = useRouter()
@@ -110,7 +110,9 @@
   })
   const pageNo = ref(2)
   const totPageNo = ref(4) 
-      
+  onMounted(() => {
+    scrollToTop();
+})
   const { dataObj } = history.state; 
   console.log(JSON.parse(dataObj)); 
   
@@ -130,5 +132,10 @@
         },
       });
     }
+  }
+  function scrollToTop(){
+      window.scrollTo({
+      top: 0,
+      behavior: 'smooth' });
   }
 </script>

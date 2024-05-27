@@ -7,7 +7,7 @@
                     <div class="w-[700px]">
                         <QaProjectInfo :prj = projInfo />
                     </div>
-                    <div class="w-[340px]">
+                    <div class="w-[340px] ml-5">
                         <QaProjectInfoSide :prj = projInfo />
                     </div>
                 </div>
@@ -30,27 +30,25 @@ import QaProjectInfo from '@/components/baseComponents/QaProjectInfo.vue'
 import QaProjectInfoSide from '@/components/baseComponents/QaProjectInfoSide.vue'
 const { dataObj } = history.state; 
 
+const userMail = ref(window.$cookies.get("loginUserMail"));
+const workDivCd = ref();
+const projInfo = ref({});
 
 onMounted(() => {
 //   if(gfnRules.isNotNull(userMail.value)){
     loadData();
 //   }
 })
-const userMail = ref(window.$cookies.get("loginUserMail"));
-const workDivCd = ref();
-const projInfo = ref({});
 
 async function loadData(){
-    srchProjInfo();
-}
-
-async function srchProjInfo(){
   var getParams = {projId :dataObj.projId, userMail:userMail.value};
   await gfnUtils.axiosGet("/v1/project/detail",getParams).then(function(rtn){
     if(rtn.rtnCd == '00'){
         projInfo.value = rtn.rtnData;
-        workDivCd.value = rtn.rtnData.workDivCd;
+        workDivCd.value = rtn.rtnData['workDivCd'];
     }
   });
 }
+
+
 </script>
