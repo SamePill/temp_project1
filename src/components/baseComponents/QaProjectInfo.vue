@@ -183,7 +183,7 @@ const props = defineProps({prj:{}});
 const userMail = ref(window.$cookies.get("loginUserMail"));
 
 onMounted(() => {
-    console.log(props.prj)
+    // console.log(props.prj)
 });
 
 //프로젝트 설명 및 주요담당업무
