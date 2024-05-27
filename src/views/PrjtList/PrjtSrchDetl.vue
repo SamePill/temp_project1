@@ -41,7 +41,6 @@ const workDivCd = ref();
 const projInfo = ref({});
 
 async function loadData(){
-    console.log(dataObj)
     srchProjInfo();
 }
 
@@ -49,7 +48,6 @@ async function srchProjInfo(){
   var getParams = {projId :dataObj.projId, userMail:userMail.value};
   await gfnUtils.axiosGet("/v1/project/detail",getParams).then(function(rtn){
     if(rtn.rtnCd == '00'){
-        console.log(rtn.rtnData.projectSprtInfo)
         projInfo.value = rtn.rtnData;
         workDivCd.value = rtn.rtnData.workDivCd;
     }

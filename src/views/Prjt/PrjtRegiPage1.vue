@@ -19,13 +19,13 @@
           <p class="text-xl font-medium text-left text-[#191919]">직군 
             <span class="text-xl text-left text-[#ff5252]">*</span>
           </p>
-          <Chipset :listDivCd="'JOB_DIV_CD'" class="mt-[10px]"/>
+          <Chipset ref="$jobChipset" :listDivCd="'JOB_DIV_CD'" class="mt-[10px]"/>
         </div>
         <div class="mt-[40px]">
           <p class="text-xl text-left text-[#191919]">업무영역 
             <span class="text-xl text-left text-[#ff5252]">*</span>
           </p>
-          <Chipset :listDivCd="'TASK_DIV_CD'" class="mt-[10px]"/>
+          <Chipset ref="$taskChipset" :listDivCd="'TASK_DIV_CD'" class="mt-[10px]"/>
         </div>
         <div class="mt-[40px] flex flex-col justify-start items-start gap-5">
           <div class="flex justify-between items-center w-[520px] relative">
@@ -142,6 +142,9 @@
   import * as gfnUtils       from "@/utils/gfnUtils.js";
   import { useRouter } from 'vue-router';
 
+  const $jobChipset = ref(null);
+  const $taskChipset = ref(null);
+
   const router = useRouter()
   const projOneStep = ref({
       jobDivCdList:[]
@@ -163,13 +166,14 @@
   
   onMounted(() => {
     loadData();
+    $jobChipset.value.loadData();
+    $taskChipset.value.loadData();
   })
   
   onUnmounted(()=>{
   })
   const { dataObj } = history.state; 
   if(dataObj != undefined){
-    console.log(ref(JSON.parse(dataObj))); 
     projOneStep.value = JSON.parse(dataObj);
   }
   async function loadData(){
@@ -186,7 +190,6 @@
     });
   }
   function changeWorkDivCd(cdVal){
-    console.log(cdVal)
     projOneStep.value.workDivCd = cdVal;
   }
 </script>

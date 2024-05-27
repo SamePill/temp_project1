@@ -127,8 +127,6 @@ const getViewType = computed(() => {
 })
 
 function goToPage(){
-  console.log('props.prj.projId')
-  console.log(props.prj.projId)
   router.push({ 
     name: "PrjtSrchDetl"
     ,state : {

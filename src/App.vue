@@ -13,7 +13,7 @@
     <template v-else >
       <Header/>
     </template>
-      <div style=" height:calc(100vh - 80px); overflow-y: scroll;">
+      <div style=" height:calc(100vh - 80px); overflow-y: auto;">
         <router-view ></router-view>
       </div>
   </div>
@@ -26,7 +26,7 @@ import Header from '@/components/layoutComponents/Header.vue'
 <style>
 body{
   overflow-y:none;
-  overflow: hidden; 
+  overflow: hidden !important; 
 }
 </style>
 

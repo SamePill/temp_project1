@@ -10,12 +10,16 @@
     </div>
 </template>
 <script setup>
-import { defineProps }    from 'vue'
-import { onMounted , ref, computed} from 'vue'
+import { defineProps,defineExpose }    from 'vue'
+import { onMounted , ref, computed, onUnmounted} from 'vue'
 import * as gfnUtils      from "@/utils/gfnUtils.js";
+defineExpose({loadData}) 
 
 onMounted(() => {
   loadData();
+})
+
+onUnmounted(()=>{
 })
 
 const props = defineProps({
@@ -31,6 +35,7 @@ const filteredCdList = computed( () => {
 })
 
 async function loadData(){
+  cdList.value = '';
   cdList.value = await gfnUtils.getCommCode(props.listDivCd);
   if(cdList.value != undefined){
     cdList.value[0].chkVal = true;

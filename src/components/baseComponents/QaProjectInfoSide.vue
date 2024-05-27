@@ -89,7 +89,7 @@
                     <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
                         지원서 작성
                     </p>
-                <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#777]" @click="isShowDetl = false">뒤로가기</p>
+                <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#777]" style="cursor:pointer;" @click="isShowDetl = false">뒤로가기</p>
                 </div>
                 <div class="self-stretch flex-grow-0 flex-shrink-0 h-px bg-[#ddd]"></div>
                 <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
