@@ -35,12 +35,10 @@ const filteredCdList = computed( () => {
 })
 
 async function loadData(){
-  cdList.value = '';
-  cdList.value = await gfnUtils.getCommCode(props.listDivCd);
+  cdList.value = await gfnUtils.getCommCode(props.listDivCd)
   if(cdList.value != undefined){
     cdList.value[0].chkVal = true;
   }
-  console.log(cdList.value)
 }
 
 function chipClick(el){

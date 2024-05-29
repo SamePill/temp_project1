@@ -20,6 +20,7 @@
             <span class="text-xl text-left text-[#ff5252]">*</span>
           </p>
           <Chipset ref="$jobChipset" :listDivCd="'JOB_DIV_CD'" class="mt-[10px]"/>
+          <!-- <Chips :cdList=jobDivCdList class="mt-[10px]"/> -->
         </div>
         <div class="mt-[40px]">
           <p class="text-xl text-left text-[#191919]">업무영역 
@@ -138,9 +139,10 @@
 </template>
 <script setup>
   import {  ref, onMounted, onUnmounted } from "vue";
-  import Chipset             from '@/components/baseComponents/Chipset.vue'
+  import Chipset             from '@/components/uiComponents/Chipset.vue'
+  // import Chips             from '@/components/uiComponents/Chips.vue'
   import * as gfnUtils       from "@/utils/gfnUtils.js";
-  import { useRouter } from 'vue-router';
+  import { useRouter, onBeforeRouteLeave } from 'vue-router';
 
   const $jobChipset = ref(null);
   const $taskChipset = ref(null);
@@ -162,9 +164,11 @@
   const pageNo = ref(1)
   const totPageNo = ref(4) 
   const today = gfnUtils.getToday()
-  const workDivCdList = ref([]);
+  const workDivCdList = ref([])
+  const jobDivCdList = ref([])
   
   onMounted(() => {
+    jobDivCdList.value = []
     loadData();
     $jobChipset.value.loadData();
     $taskChipset.value.loadData();
@@ -172,6 +176,15 @@
   
   onUnmounted(()=>{
   })
+
+
+  onBeforeRouteLeave(async () => {
+    console.log("???????????????????")
+    workDivCdList.value = []
+    console.log(workDivCdList.value )
+  })
+
+
   const { dataObj } = history.state; 
   if(dataObj != undefined){
     projOneStep.value = JSON.parse(dataObj);
@@ -179,6 +192,8 @@
   async function loadData(){
     projOneStep.value.workDivCd = '10';
     workDivCdList.value = await gfnUtils.getCommCode('WORK_DIV_CD');
+    // jobDivCdList.value = await gfnUtils.getCommCode('JOB_DIV_CD');
+    // jobDivCdList.value[0].chkVal = true;
   }
   
   function nextPage(){
@@ -189,6 +204,7 @@
       },
     });
   }
+
   function changeWorkDivCd(cdVal){
     projOneStep.value.workDivCd = cdVal;
   }
