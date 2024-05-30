@@ -295,8 +295,14 @@ export const getCommCode = async (cdName) => {
     await loadCommCode(cdName)
   }
 
-  let vl = JSON.stringify(cmmnStore.getCodeList[cdName])
-  vl = JSON.parse(vl)
+  let vl =""
+  if(cmmnStore.getCodeList[cdName] == undefined){
+    console.log("!!!!!!!!!!!!! 코드 없음..... :: " + cdName)
+  }else{
+    vl = JSON.stringify(cmmnStore.getCodeList[cdName])
+    vl = JSON.parse(vl)
+  }
+  
   return vl
   
 };

@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center;" class="py-[40px]">
     <div class="flex flex-col justify-start items-center w-[1060px] gap-5 bg-white">
-      <SubHeader/>
+      <SubHeader :topInfo="topInfo"/>
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
         <SideMenu/>
         <div
@@ -406,22 +406,42 @@ onMounted(() => {
 
 
 const pageNo = ref(1)
-const totalCnt = ref(100)
+const totalCnt = ref(0)
 const boolSort = ref(false)
+const userMail = ref(window.$cookies.get("loginUserMail"))
+const sortDiv = ref()
+const projList = ref()
+const topInfo = ref({
+    compNm: "",
+    userNm: "",
+    sprtProjCnt: 0,
+    prgsProjCnt: 0,
+    cpltProjCnt: 0
+  })
+
 
 async function loadData(selPage){
   console.log(selPage)
   if(selPage != null){
     pageNo.value = selPage;
   }
-  var api = "/v1/project/list";
-  var postParams = {workDivCd:"", workPirdDivCd:"", engrRtngDivCd:"", pageNo: pageNo.value};
+  var api = "/v1/my/support-project-list";
+  var postParams = {userMail:userMail.value, sortDiv:sortDiv.value, pageNo: pageNo.value};
   let rtn = await gfnUtils.axiosGet(
     api,
     postParams
   )
 
-  console.log(rtn);
+  if(rtn.rtnCd == "00"){
+    console.log(rtn);
+    projList.value = rtn.rtnData.projList
+    topInfo.value = rtn.rtnData.topInfo
+  }else{
+    //TODO 공통Alert으로 변경 예정
+    alert(rtn.rtnMsg);
+  }
+
+  
 }
   
 

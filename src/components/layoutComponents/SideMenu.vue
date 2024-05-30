@@ -10,7 +10,7 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/registeredProjectList') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">등록한 프로젝트</p>
+      <p v-if="$route.path.indexOf('/registeredProjectList') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">등록한 프로젝트</p>
       <button v-else @click="goToPage('RegisteredProjectList')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">등록한 프로젝트</button>
     </div>
     <div
@@ -21,13 +21,13 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/appliedProjectList') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">지원한 프로젝트</p>
+      <p v-if="$route.path.indexOf('/appliedProjectList') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">지원한 프로젝트</p>
       <button v-else @click="goToPage('AppliedProjectList')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">지원한 프로젝트</button>
     </div>
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/manageEngineer') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">엔지니어 관리</p>
+      <p v-if="$route.path.indexOf('/manageEngineer') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">엔지니어 관리</p>
       <button v-else @click="goToPage('ManageEngineer')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">엔지니어 관리</button>
     </div>
     <div
@@ -38,7 +38,7 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/myInformation') >= 0 || this.$route.path.indexOf('/myCompanyInfo') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">내 정보</p>
+      <p v-if="$route.path.indexOf('/myInformation') >= 0 || $route.path.indexOf('/myCompanyInfo') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">내 정보</p>
       <button v-else @click="goToPage('MyInformation')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">내 정보</button>
     </div>
     <div
@@ -49,13 +49,13 @@
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/xx') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">이용약관</p>
+      <p v-if="$route.path.indexOf('/xx') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">이용약관</p>
       <button v-else @click="goToPage('')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">이용약관</button>
     </div>
     <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
     >
-      <p v-if="this.$route.path.indexOf('/xx') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">개인정보 처리방침</p>
+      <p v-if="$route.path.indexOf('/xx') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">개인정보 처리방침</p>
       <button v-else @click="goToPage('')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개인정보 처리방침</button>
     </div>
   </div>

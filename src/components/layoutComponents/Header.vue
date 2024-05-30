@@ -14,10 +14,10 @@
 
       <li class="mr-10 hover:cursor-pointer" @click="goToPage('PrjtSrch')">프로젝트 찾기</li>
       <li class="mx-10 hover:cursor-pointer" @click="goToPage('PrjtRegiPage1')">프로젝트 등록</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('AppliedProjectList')">마이페이지</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('TestPageSetup')">Test페이지</li>
+      <li class="mx-10 hover:cursor-pointer" @click="goToPage('MyInformation')">마이페이지</li>
       <li class="mx-10 hover:cursor-pointer">큐밋이란?</li>
       <li class="mx-10 hover:cursor-pointer">고객센터</li>
+      <li class="mx-10 hover:cursor-pointer" @click="goToPage('TestPageSetup')">Test페이지</li>
     </ul>
 
     <!-- 로그인 회원가입 -->

@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center;" class="py-[40px]">
     <div class="flex flex-col justify-start items-center w-[1060px] gap-5 bg-white">
-      <SubHeader/>
+      <SubHeader :topInfo="topInfo"/>
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
         <SideMenu/>
         <div
@@ -104,10 +104,17 @@ import { ref, onMounted } from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const pageNo = ref(1)
-const totalCnt = ref(100)
+const totalCnt = ref(0)
 const userMail = ref(window.$cookies.get("loginUserMail"));
 const sortDiv = ref(20)
 const regProjList = ref([])
+const topInfo = ref({
+    compNm: "",
+    userNm: "",
+    sprtProjCnt: 0,
+    prgsProjCnt: 0,
+    cpltProjCnt: 0
+  })
 
 onMounted(() => {
   loadData();
@@ -127,11 +134,21 @@ async function loadData(selPage){
     postParams
   );
   
-  console.log(rtn);
-  let res = rtn.rtnData
-  console.log(res);
+  if(rtn.rtnCd == "00"){
+    console.log(rtn);
+    let res = rtn.rtnData
+    console.log(res);
 
-  regProjList.value = res.regProjList
+    regProjList.value = res.regProjList
+    totalCnt.value = res.totalCnt
+    topInfo.value = res.regProjCntInfo
+  }else{
+    //TODO 공통Alert으로 변경 예정
+    alert(rtn.rtnMsg);
+  }
+  
+  
+
 }
 
 

@@ -7,7 +7,7 @@
       <div style="position:absolute; z-index: 999;  ">
         <DropDown @click="documentClick('WorkDivCd','dropDown')" id="WorkDivCd" ref="$WorkDivCd" @setData="getWorkDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
         <DropDown @click="documentClick('WorkPirdDivCd','dropDown')" id="WorkPirdDivCd" ref="$WorkPirdDivCd" @setData="getWorkPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
-        <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
+        <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGN_RTNG_DIV_CD'"/>
       </div>
 
       <!--검색 -->

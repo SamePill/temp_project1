@@ -4,7 +4,7 @@
       class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-5 px-[430px] pt-10 pb-[100px] bg-[#fefefe]"
     > -->
     <div class="flex flex-col justify-start items-center w-[1060px] gap-5 bg-white">
-      <SubHeader/>
+      <SubHeader :topInfo="topInfo"/>
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
         <SideMenu/>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10 pt-5">
@@ -273,6 +273,15 @@ const userInfo = ref({
   mrktYn: ""
 })
 
+const topInfo = ref({
+    compNm: "",
+    userNm: "",
+    sprtProjCnt: 0,
+    prgsProjCnt: 0,
+    cpltProjCnt: 0
+  })
+
+
 function goToPage(pageNm){
 
   router.push({name : pageNm})
@@ -302,6 +311,7 @@ async function loadData(){
       userInfo.value.mrktYn = "Y"
     }
   }else{
+    //TODO 공통Alert으로 변경 예정
     alert(rtn.rtnMsg);
   }
   
