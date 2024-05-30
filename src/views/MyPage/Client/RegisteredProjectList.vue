@@ -58,14 +58,15 @@
             <div class="flex-grow-0 flex-shrink-0 w-[790px] h-px bg-[#ededed]"></div>
 
             <!-- 프로젝트 리스트 반복부 -->
-            <div v-for="el in regProjList" :key="el">
+            <div v-show="totalCnt > 0" v-for="el in regProjList" :key="el">
               <RegisteredPrjtItem :regProjList="el" />
             </div>
             
-
+            <!-- 조회 내용이 없을 때 -->
+            <MyPageNodata v-show="totalCnt == 0" :showDiv="2"/>
             
             <!-- pagenation -->
-            <div class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
+            <div v-show="totalCnt > 0" class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
               <vue-awesome-paginate
                 :total-items=totalCnt
                 v-model="pageNo"
@@ -100,6 +101,7 @@
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
+import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
 import { ref, onMounted } from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
@@ -140,8 +142,9 @@ async function loadData(selPage){
     console.log(res);
 
     regProjList.value = res.regProjList
-    totalCnt.value = res.totalCnt
     topInfo.value = res.regProjCntInfo
+    totalCnt.value = res.totalCnt
+    totalCnt.value = 0
   }else{
     //TODO 공통Alert으로 변경 예정
     alert(rtn.rtnMsg);

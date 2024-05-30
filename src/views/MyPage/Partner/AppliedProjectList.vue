@@ -56,7 +56,9 @@
               </div>
             </div>
             <div class="flex-grow-0 flex-shrink-0 w-[790px] h-px bg-[#ededed]"></div>
-            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
+
+            <!-- 반복부 시작 -->
+            <div v-show="totalCnt > 0" class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
               <div
                 class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[790px] relative"
               >
@@ -83,7 +85,7 @@
 
 
 
-              <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
+              <div  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
                 <div
                   class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] overflow-hidden gap-[30px] p-[30px] rounded-[10px] bg-white border border-[#ddd]"
                 >
@@ -337,30 +339,33 @@
                   </div>
                 </div>
               </div>
-
-              <!-- pagenation -->
-              <div class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
-                <vue-awesome-paginate
-                  :total-items=totalCnt
-                  v-model="pageNo"
-                  :items-per-page="10"
-                  :max-pages-shown="10"
-                  :on-click="loadData"
-                >
-                <template #prev-button>
-                  <span>
-                    <font-awesome-icon icon="chevron-right" color="black" />
-                  </span>
-                </template>
-                <template #next-button>
-                  <span>
-                    <font-awesome-icon icon="chevron-right" color="black" />
-                  </span>
-                </template>
-                </vue-awesome-paginate>
-              </div>
             </div>
-            
+            <!-- 반복부 끝 -->
+
+            <!-- 조회 내용이 없을 때 -->
+            <MyPageNodata v-show="totalCnt == 0" :showDiv="1"/>
+
+            <!-- pagenation -->
+            <div v-show="totalCnt > 0" class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
+              <vue-awesome-paginate
+                :total-items=totalCnt
+                v-model="pageNo"
+                :items-per-page="10"
+                :max-pages-shown="10"
+                :on-click="loadData"
+              >
+              <template #prev-button>
+                <span>
+                  <font-awesome-icon icon="chevron-right" color="black" />
+                </span>
+              </template>
+              <template #next-button>
+                <span>
+                  <font-awesome-icon icon="chevron-right" color="black" />
+                </span>
+              </template>
+              </vue-awesome-paginate>
+            </div>            
           </div>
         </div>
       </div>
@@ -396,6 +401,7 @@
 <script setup>
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
+import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { onMounted, ref } from 'vue'
 
@@ -436,6 +442,7 @@ async function loadData(selPage){
     console.log(rtn);
     projList.value = rtn.rtnData.projList
     topInfo.value = rtn.rtnData.topInfo
+    totalCnt.value = 0;
   }else{
     //TODO 공통Alert으로 변경 예정
     alert(rtn.rtnMsg);

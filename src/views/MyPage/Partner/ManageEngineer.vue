@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center;" class="py-[40px]">
     <div class="flex flex-col justify-start items-center w-[1060px] gap-5 bg-white">
-      <SubHeader/>
+      <SubHeader :topInfo="topInfo"/>
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
         <SideMenu/>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10 pt-5">
@@ -197,13 +197,19 @@
             </div>
             <!-- 반복부 -->
             <div
+              v-show="totalCnt > 0"
               class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] gap-3"
               
             >
               <EngineerItem/>
             </div>
           </div>
-          <div
+
+                      
+          <!-- 조회 내용이 없을 때 -->
+          <MyPageNodata v-show="totalCnt == 0" :showDiv="3"/>
+
+          <div v-show="totalCnt > 0"
             class="paginationDiv flex justify-center items-center flex-grow-0 flex-shrink-0 w-[790px] relative gap-5"
           >
             <vue-awesome-paginate
@@ -280,19 +286,27 @@
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import EngineerItem from '@/components/baseComponents/EngineerItem.vue'
+import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
 import { ref, onMounted } from 'vue'
-//import * as gfnUtils from "@/utils/gfnUtils.js";
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const pageNo = ref(1)
 const totalCnt = ref(100)
-// const userMail = ref(window.$cookies.get("loginUserMail"));
+const userMail = ref(window.$cookies.get("loginUserMail"));
 // const sortDiv = ref(20)
-//const engineerList = ref([])
+const engineerList = ref([])
+const topInfo = ref({
+    compNm: "",
+    userNm: "",
+    sprtProjCnt: 0,
+    prgsProjCnt: 0,
+    cpltProjCnt: 0
+  })
 
 onMounted(() => {
-  //loadData();
+  loadData();
 })
-/*
+
 async function loadData(selPage){
   
   console.log(selPage)
@@ -300,20 +314,30 @@ async function loadData(selPage){
     pageNo.value = selPage;
   }
 
-  var api = "";
-  var postParams = {};
+  var api = "/v1/my/engineer/management";
+  var postParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:"", srvdStatCd:"", engrRtngDivCd:"", engrSortDiv:"", };
   let rtn = await gfnUtils.axiosGet(
     api,
     postParams
   );
   
-  console.log(rtn);
-  let res = rtn.rtnData
-  console.log(res);
+  if(rtn.rtnCd == "00"){
+    console.log(rtn);
+    let res = rtn.rtnData
+    console.log(res);
 
-  engineerList.value = res.engineerList
+    engineerList.value = res.engineerList
+    topInfo.value = res.topInfo
+    totalCnt.value = res.totalCnt
+    totalCnt.value = 0
+  }else{
+    //TODO 공통Alert으로 변경 예정
+    alert(rtn.rtnMsg);
+  }
+  
+  
+
 }
-*/
 
 
 </script>
