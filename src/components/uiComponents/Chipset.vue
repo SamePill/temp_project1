@@ -2,9 +2,9 @@
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[519px]">
         <div>
             <button v-for="(el,i) in cdList" :key="el.cd" @click="chipClick(el,i)"
-            class="gap-10 px-4 py-1 rounded-[100px] bg-white border" :class="el.chkVal== true ? 'border-border-0' :  'border-[#ddd]' "  
-            style="display:inline-block !important; margin-top:10px;" >
-                <p :class="el.chkVal== true ? 'text-main-0' :  'border-[#777777]' ">{{el.cdNm}}</p>
+            class="gap-10 px-4 py-1 rounded-[100px] bg-white border" :class="el.chkVal== true ? 'border-border-0' :  'border-[#DDDDDD]' "  
+            style="display:inline-block !important; margin-top:10px; margin-right:10px !important;">
+                <p :class="el.chkVal== true ? 'text-main-0' :  'text-text-2 border-[#DDDDDD]' ">{{el.cdNm}}</p>
             </button>
         </div>
     </div>

@@ -304,7 +304,7 @@ import {  ref } from "vue";
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const projTwoStep =ref({
+const projThreeStep =ref({
       bgnrEngrCnt:0
     ,bgnrEngrUnitPric:0
     ,intrEngrCnt:0
@@ -317,8 +317,6 @@ const projTwoStep =ref({
     ,projChck02yn:''
     ,projChck03yn:''
     ,projChck04yn:''
-    ,pageNo:3
-    ,totPageNo:4 
   })
 
   const pageNo = ref(3)
@@ -332,7 +330,7 @@ const projTwoStep =ref({
       router.push({ 
         name: "PrjtRegiPage4"
         ,state: {
-          dataObj : JSON.stringify(projTwoStep.value),
+          dataObj : JSON.stringify(projThreeStep.value),
         },
       });
     }else{

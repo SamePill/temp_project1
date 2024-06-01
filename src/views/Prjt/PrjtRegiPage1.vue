@@ -3,7 +3,7 @@
     <div style="display: flex; justify-content: center;" class="pt-10 bg-[#fefefe] mb-[100px]">
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative relative ">
       <div class="flex justify-between w-[520px] mb-[10px]">
-        <p class="flex-grow-0 flex-shrink-0 text-2xl text-left text-[#191919]" style="font-weight:5em !important">
+        <p class="flex-grow-0 flex-shrink-0 text-2xl text-left text-[#191919] font-medium">
           프로젝트 등록하기
         </p>
         <p class="flex-grow-0 flex-shrink-0 text-left">
@@ -36,7 +36,7 @@
             <p class="text-sm text-left">
               <span class="text-sm text-left text-[#1ba494]">{{projOneStep.projTitl != undefined ? projOneStep.projTitl.length : 0}}</span>
               <span class="text-sm font-bold text-left text-[#191919]"></span>
-              <span class="text-sm text-left text-[#777]">/100</span>
+              <span class="text-sm text-left text-[#777]">/50</span>
             </p>
           </div>
           <input maxlength='100' tye="text" v-model="projOneStep.projTitl" class="w-[520px] h-[51px] text-[#191919] p-4 rounded border border-[#ddd]" placeholder="프로젝트명을 입력주세요."/>
@@ -44,10 +44,30 @@
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
           <p class="text-xl text-left text-[#191919]">희망 시작일 <span class="text-[#ff5252]">*</span></p>
           <div class="flex flex-col justify-center items-start gap-2">
-            <input type="date" v-model="projOneStep.strtDay" :min="today" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="프로젝트 시작 희망일을 선택해 주세요."/>
+            <input type="date" v-model="projOneStep.strtDay" :min="today" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" dataplaceholder="프로젝트 시작 희망일을 선택해 주세요."/>
             <div class="flex justify-start items-center relative gap-0.5">
-              <input type="checkbox" class="w-[15px] h-[15px]"  true-value="Y" false-value="N" v-model="projOneStep.strtDayCnslYn"/>
-              <p class="text-base px-1 text-left text-[#777]">협의가능</p>
+              <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor: pointer;">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <rect x="4.75" y="4.75" width="22.5" height="22.5" stroke="#DBDBDB" stroke-width="1"></rect>
+                  <path
+                    d="M9 16L14 21L22 13L23 12"
+                    stroke="#191919"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-text-2">
+                    협의가능
+                  </p>
+              </div>
             </div>
           </div>
         </div>
@@ -68,7 +88,7 @@
               <span class="text-[#ff5252]">*</span>
             </p>
             <div class="mt-[15px]" style="display: inline-block; width:20%;" v-for="el in workDivCdList" :key="el.cd" >
-              <div class="flex justify-start items-center relative gap-1">
+              <div class="flex justify-start items-center relative gap-1" >
                 <input type="checkbox" :id="el.cd" :value="el.cd"  v-model="projOneStep.workDivCd">
                   <label style="width:200px" v-if="projOneStep.workDivCd != el.cd" for="el.cd" @click="changeWorkDivCd(el.cd)" >
                     <svg
@@ -130,7 +150,7 @@
       </div>
       <div class="w-[520px] mt-[60px] flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
         <button @click="nextPage()" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white">
-          다음 단계로 넘어가기
+          다음 단계로 이동하기
         </button>
       </div>
     </div>
