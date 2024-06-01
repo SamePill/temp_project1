@@ -14,7 +14,7 @@
   import { defineProps } from 'vue'
   
   const props = defineProps({
-    message:""
+    message:{}
   })
   
   </script>

@@ -83,7 +83,7 @@
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1"
                   >
                     <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]" 
-                    @click="finish">모집종료</button>
+                    @click="openPopup()">모집종료</button>
                   </div>
                 </div>
               </div>
@@ -128,6 +128,12 @@
         </div>
       </div>
     </div>
+    <modal ref="modalShow" :width="340">
+      <confirmPopup message="정말로 엔지니어 모집을 종료 하시겠습니까?" btnOk="확인" btnCancel="닫기" @cancel="cancel" @confirm="confirm" />
+    </modal>
+    <modal ref="alertShow" :width="340">
+      <messagePopup :message="alertMsg"  />
+    </modal>
   </div>
 </template>
 <script setup>
@@ -136,7 +142,13 @@ import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
 import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import Modal from '@/components/baseComponents/Modal.vue'
+import confirmPopup from '@/components/popupComponents/confirmPopup.vue'
+import messagePopup from '@/components/popupComponents/messagePopup.vue'
+
+const router = useRouter()
 
 const pageNo = ref(1)
 const totalCnt = ref(0)
@@ -150,7 +162,8 @@ const topInfo = ref({
     sprtProjCnt: 0,
     prgsProjCnt: 0,
     cpltProjCnt: 0
-  })
+})
+const alertMsg = ref("")
 
 onMounted(() => {
   loadData();
@@ -163,6 +176,45 @@ const filteredChkList = computed( () => {
     )
 })
 
+//확인창
+const modalShow = ref(null)
+const show = () => {
+  if(filteredChkList.value.length == 0){
+    return
+  }else{
+    modalShow.value.open() 
+  }             
+}
+//취소버튼
+const cancel = function (){
+    modalShow.value.close()
+    
+}
+//확인버튼
+const confirm = function (){
+    modalShow.value.close()
+    finish()
+}
+
+// Alert창 제어
+const alertShow = ref(null)
+const showAlert = () => {
+  if(filteredChkList.value.length > 0){
+    return
+  }else{
+    alertShow.value.open() 
+  }           
+}
+
+function openPopup(){  
+  show();
+}
+
+function openAlert(msg){  
+  alertMsg.value = msg
+  showAlert();
+}
+
 
 async function loadData(selPage){
   
@@ -172,10 +224,10 @@ async function loadData(selPage){
   }
 
   var api = "/v1/my/reg-project-list";
-  var postParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:sortDiv.value};
+  var getParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:sortDiv.value};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
   
   if(rtn.rtnCd == "00"){
@@ -222,13 +274,19 @@ function chkItemAll(){
 
 function showEngrDetail(idx){
   console.log(idx)
-
+  
+  router.push({name: "SelEngineerList"
+              ,state : {
+                //dataObj : { a:1, b:'string', c:true },
+                dataObj : JSON.stringify(regProjList.value[idx].projId),
+              }
+            })
 }
 
 async function finish(){
   console.log(filteredChkList);
 
-  var api = "/v1/my/reg-project-list";
+  var api = "/v1/my/update/project-recruitment-terminate";
   var postParams = {projIdList : filteredChkList};
   var queryParams = { userMail: userMail.value , sortDiv:sortDiv.value};
   let rtn = await gfnUtils.axiosPost(
@@ -239,10 +297,11 @@ async function finish(){
   
   if(rtn.rtnCd == "00"){
     console.log(rtn);
-
+    openAlert("엔지니어 모집이 종료되었습니다.")
   }else{
     //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
+    //alert(rtn.rtnMsg);
+    openAlert(rtn.rtnMsg)
   }
   
 

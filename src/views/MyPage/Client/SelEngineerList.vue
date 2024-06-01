@@ -8,9 +8,10 @@
           <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
             엔지니어 선정
           </p>
-          <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#777]">
+          <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#777]"
+            @click="goBack()">
             이전으로 가기
-          </p>
+          </button>
         </div>
         <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1060px]">
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -18,10 +19,10 @@
               class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3"
             >
               <p class="flex-grow-0 flex-shrink-0 text-lg font-semibold text-left text-[#191919]">
-                [대기업] 농협은행 (내부 직원용) 인사관련 프로그램 QA
+                {{ projInfo.projTitl }}
               </p>
               <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">필요인원 : 10명</p>
+                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">필요인원 : {{ projInfo.engrCnt }}명</p>
                 <svg
                   width="2"
                   height="13"
@@ -34,7 +35,7 @@
                   <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
                 </svg>
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-                  시작일 : 2023.12.25
+                  시작일 : {{ projInfo.strtDay }}
                 </p>
                 <svg
                   width="2"
@@ -48,7 +49,7 @@
                   <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
                 </svg>
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-                  예상금액 : 1,800만원
+                  예상금액 : {{ projInfo.expcPric }}
                 </p>
                 <svg
                   width="2"
@@ -62,7 +63,7 @@
                   <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
                 </svg>
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-                  투입기간 : 1개월
+                  투입기간 : {{ projInfo.pirdVal }}개월
                 </p>
                 <svg
                   width="2"
@@ -76,13 +77,13 @@
                   <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
                 </svg>
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
-                  서울특별시 강남구
+                  {{ projInfo.workAddr }}
                 </p>
               </div>
             </div>
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                총 지원 수 : 180명
+                총 지원 수 : {{ engrCntInfo.totSprtEngrCnt }}명
               </p>
               <svg
                 width="2"
@@ -107,7 +108,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                선정 엔지니어 : 8명
+                선정 엔지니어 : {{ engrCntInfo.passEngrCnt }}명
               </p>
               <svg
                 width="2"
@@ -121,7 +122,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                미팅예정 엔지니어 : 8명
+                미팅예정 엔지니어 : {{ engrCntInfo.meetWillEngrCnt }}명
               </p>
               <svg
                 width="2"
@@ -135,7 +136,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                불합격 엔지니어 : 20명
+                불합격 엔지니어 : {{ engrCntInfo.failEngrCnt }}명
               </p>
               <svg
                 width="2"
@@ -149,29 +150,30 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                대기 엔지니어 : 149명
+                대기 엔지니어 : {{ engrCntInfo.waitEngrCnt }}명
               </p>
             </div>
           </div>
           <!-- 매니저 배정후 -->  
           <div
+            v-if="qmMngrInfo != null"
             class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-2"
           >
             <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
               <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-[#191919]">
-                김큐밋
+                {{qmMngrInfo.qmMngrNm}}
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
                 담당 매니저
               </p>
             </div>
             <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#777]">
-              연락처 : 010-0000-0000
+              연락처 : {{qmMngrInfo.hp}}
             </p>
           </div>
-          <!-- 매니저 배정전 -->  
-          <!-- 
+          <!-- 매니저 배정전 -->            
           <div
+            v-else
             class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-2"
           >
             <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
@@ -182,8 +184,7 @@
             <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#777]">
               담당 매니저를 배정중입니다.
             </p>
-          </div> 
-          -->
+          </div>          
         </div>
       </div>
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
@@ -278,7 +279,13 @@
           </p>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
+          
+          
+          <div v-for="el, idx in engrList" :key="idx">
+            <SelEngineerItem :engineerInfo="el"/>
+          </div>
           <!-- 반복부 1-->
+          
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[1060px] relative gap-[100px]"
           >
@@ -306,6 +313,7 @@
             </div>
           </div>
           
+          <!-- 반복부 샘플 시작 -->
           
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[1060px] relative gap-[100px]"
@@ -791,58 +799,116 @@
               </p>
             </div>
           </div>
+          <!-- 반복부 샘플 끝 -->
+
         </div>
       </div>
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[1060px] relative gap-5"
       >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M15 5L9 12L15 19"
-            stroke="#191919"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-        <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
-          <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#191919]">1</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">2</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">3</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">4</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">5</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">6</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">7</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">8</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">9</p>
-          <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">10</p>
+        <!-- pagenation -->
+        <div v-show="totalCnt > 0" class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
+          <vue-awesome-paginate
+            :total-items=totalCnt
+            v-model="pageNo"
+            :items-per-page="10"
+            :max-pages-shown="10"
+            :on-click="loadData"
+          >
+          <template #prev-button>
+            <span>
+              <font-awesome-icon icon="chevron-right" color="black" />
+            </span>
+          </template>
+          <template #next-button>
+            <span>
+              <font-awesome-icon icon="chevron-right" color="black" />
+            </span>
+          </template>
+          </vue-awesome-paginate>
         </div>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M9 19L15 12L9 5"
-            stroke="#191919"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import * as gfnUtils from "@/utils/gfnUtils.js";
+import SelEngineerItem from '@/components/baseComponents/SelEngineerItem.vue'
+import { useRouter } from 'vue-router'
+
+onMounted(() => {
+  loadData();
+})
+const { dataObj } = history.state; 
+const projId = ref(JSON.parse(dataObj));
+
+const router = useRouter()
+const pageNo = ref(1)
+const totalCnt = ref(0)
+const userMail = ref(window.$cookies.get("loginUserMail"));
+
+const projInfo = ref({
+  // "projId": "string",
+  // "projTitl": "string",
+  // "engrCnt": "string",
+  // "strtDay": "yyyyMMdd",
+  // "expcPric": 0,
+  // "pirdVal": "string",
+  // "workAddr": "string"
+})
+const qmMngrInfo =  ref({
+  // "qmMngrNm": "string",
+  // "hp": "string"
+})
+const engrCntInfo =  ref({
+  // "totSprtEngrCnt": 0,
+  // "passEngrCnt": 0,
+  // "waitEngrCnt": 0,
+  // "meetWillEngrCnt": 0,
+  // "failEngrCnt": 0
+})
+const engrList =  ref([])
+
+
+
+async function loadData(selPage){
+  
+  console.log(selPage)
+  if(selPage != null){
+    pageNo.value = selPage;
+  }
+
+  var api = "/v1/my/select-engineer-info";
+  var getParams = {userMail: userMail.value, projId:projId.value, engrNm:"", engrRtngDivCd:"", engrSortDiv:"", pageNo:pageNo.value};
+  let rtn = await gfnUtils.axiosGet(
+    api,
+    getParams
+  );
+  console.log(rtn)
+  if(rtn.rtnCd == "00"){
+    let res = rtn.rtnData
+ 
+    projInfo.value = res.projInfo
+    qmMngrInfo.value = res.regProjCntInfo
+    engrCntInfo.value = res.engrCntInfo
+    engrList.value = res.engrList
+
+    console.log(engrList.value)
+
+    // TODO 총건수 필요..
+    totalCnt.value = 10
+ 
+  }else{
+    //TODO 공통Alert으로 변경 예정
+    alert(rtn.rtnMsg);
+  }
+  
+}
+
+function goBack(){
+  router.back()
+}
+
+</script>

@@ -432,10 +432,10 @@ async function loadData(selPage){
     pageNo.value = selPage;
   }
   var api = "/v1/my/support-project-list";
-  var postParams = {userMail:userMail.value, sortDiv:sortDiv.value, pageNo: pageNo.value};
+  var getParams = {userMail:userMail.value, sortDiv:sortDiv.value, pageNo: pageNo.value};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   )
 
   if(rtn.rtnCd == "00"){

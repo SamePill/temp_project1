@@ -315,10 +315,10 @@ async function loadData(selPage){
   }
 
   var api = "/v1/my/engineer/management";
-  var postParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:"", srvdStatCd:"", engrRtngDivCd:"", engrSortDiv:"", };
+  var getParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:"", srvdStatCd:"", engrRtngDivCd:"", engrSortDiv:"", };
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
   
   if(rtn.rtnCd == "00"){

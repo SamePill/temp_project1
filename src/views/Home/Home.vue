@@ -138,10 +138,10 @@ async function loadData(){
 
   // let rtn = '';
   var api = "/v1/home/info";
-  var postParams = {};
+  var getParams = {};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
   
   console.log(rtn);

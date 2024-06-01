@@ -134,10 +134,10 @@ async function loadData(selPage){
     pageNo.value = selPage;
   }
   var api = "/v1/project/list";
-  var postParams = {workDivCd:workDivCd.value, workPirdDivCd:workPirdDivCd.value, engrRtngDivCd:engrRtngDivCd.value, pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
+  var getParams = {workDivCd:workDivCd.value, workPirdDivCd:workPirdDivCd.value, engrRtngDivCd:engrRtngDivCd.value, pageNo: pageNo.value, srchKeyWord:srchKeyWord.value};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
   
   let res = rtn.rtnData

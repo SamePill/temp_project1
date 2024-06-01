@@ -289,10 +289,10 @@ function myInfo(){
 async function loadData(){
 
   var api = "/v1/my/comp-info";
-  var postParams = {userMail: userMail.value, compId: compId.value};
+  var getParams = {userMail: userMail.value, compId: compId.value};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
 
   console.log(rtn);

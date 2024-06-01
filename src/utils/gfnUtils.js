@@ -202,13 +202,13 @@ export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
         }
         console.log(err.response.data);
         if (isErr) {
-          // console.log("Error -----------------------")
-          // console.log(err.response.data)
-          // console.log(err.response.status)
+          console.log("Error -----------------------")
+          console.log(err.response.data)
+          console.log(err.response.status)
           //alert(err.response.status);     
           // console.log("오류");
-          // console.log(err.response.data.rtnMsg)
-          // console.log(err.response.data.rtnData)
+          console.log(err.response.data.rtnMsg)
+          console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
             //응답코드별 처리...

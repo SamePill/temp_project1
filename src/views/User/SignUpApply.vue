@@ -738,10 +738,10 @@ function checkBoxMrkt(id){
 async function regiUser(){
 
   var api = "/v1/project/list";
-  var postParams = {};
+  var getParams = {};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
 
   console.log(rtn)

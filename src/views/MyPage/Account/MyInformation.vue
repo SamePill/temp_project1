@@ -296,10 +296,10 @@ function myCompany(){
 async function loadData(){
 
   var api = "/v1/my/myinfo";
-  var postParams = {userMail: userMail.value};
+  var getParams = {userMail: userMail.value};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
   
   console.log(rtn);
@@ -349,10 +349,10 @@ function checkBoxMrkt(id){
 async function saveInfo(){
 
   var api = "/v1/my/myinfo";
-  var postParams = {userMail: userMail.value};
+  var getParams = {userMail: userMail.value};
   let rtn = await gfnUtils.axiosGet(
     api,
-    postParams
+    getParams
   );
   
   console.log(rtn);
