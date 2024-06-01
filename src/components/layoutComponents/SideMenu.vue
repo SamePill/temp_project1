@@ -42,6 +42,12 @@
       <button v-else @click="goToPage('MyInformation')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">내 정보</button>
     </div>
     <div
+      class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 py-4"
+    >
+      <p v-if="$route.path.indexOf('/myInformation') >= 0 || $route.path.indexOf('/myCompanyInfo') >= 0" class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">프로젝트 현황</p>
+      <button v-else @click="goToPage('ProjectStatus')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">프로젝트 현황</button>
+    </div>
+    <div
       class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[250px] relative overflow-hidden gap-2.5 px-5 pt-5 pb-2"
     >
       <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#555]">약관</p>

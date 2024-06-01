@@ -14,9 +14,41 @@
             <div class="flex justify-between items-end flex-grow-0 flex-shrink-0 w-[790px]">
               <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
                 <div class="flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden">
-                  <div
+                  <!-- <div
                     class="w-6 h-6 absolute left-[2.75px] top-[2.75px] border-[1.5px] border-[#ddd]"
-                  ></div>
+                  ></div> -->
+                  <div                    
+                    class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1"
+                  >
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="flex-grow-0 flex-shrink-0 w-8 h-8 relative"
+                      preserveAspectRatio="xMidYMid meet"
+                      @click="chkItemAll()"
+                    >
+                      <rect
+                        x="4.75"
+                        y="4.75"
+                        width="22.5"
+                        height="22.5"
+                        stroke="#DBDBDB"
+                        stroke-width="1.5"
+                      ></rect>
+                      <!-- 체크 표시 -->
+                      <path
+                        d="M9 16L14 21L22 13L23 12"
+                        stroke="#191919"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        v-show="chkAll == true"
+                      ></path>
+                    </svg>
+                  </div>
                 </div>
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">전체선택</p>
               </div>
@@ -50,7 +82,8 @@
                   <div
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1"
                   >
-                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">모집종료</button>
+                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]" 
+                    @click="finish">모집종료</button>
                   </div>
                 </div>
               </div>
@@ -58,8 +91,8 @@
             <div class="flex-grow-0 flex-shrink-0 w-[790px] h-px bg-[#ededed]"></div>
 
             <!-- 프로젝트 리스트 반복부 -->
-            <div v-show="totalCnt > 0" v-for="el in regProjList" :key="el">
-              <RegisteredPrjtItem :regProjList="el" />
+            <div v-show="totalCnt > 0" v-for="el,idx in regProjList" :key="el">
+              <RegisteredPrjtItem :regProjItem="el" @chkItem="chkItem(idx)" @showEngrDetail="showEngrDetail(idx)"/>
             </div>
             
             <!-- 조회 내용이 없을 때 -->
@@ -90,7 +123,7 @@
           <div
             class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[790px] relative gap-5"
           >
-            <!-- pagenation ???? here -->
+       
           </div>
         </div>
       </div>
@@ -102,13 +135,14 @@ import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
 import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const pageNo = ref(1)
 const totalCnt = ref(0)
 const userMail = ref(window.$cookies.get("loginUserMail"));
 const sortDiv = ref(20)
+const chkAll = ref(false)
 const regProjList = ref([])
 const topInfo = ref({
     compNm: "",
@@ -121,6 +155,14 @@ const topInfo = ref({
 onMounted(() => {
   loadData();
 })
+
+const filteredChkList = computed( () => {
+    let filter = true
+    return regProjList.value.filter( item => 
+        item.chkVal == filter
+    )
+})
+
 
 async function loadData(selPage){
   
@@ -143,13 +185,65 @@ async function loadData(selPage){
 
     regProjList.value = res.regProjList
     topInfo.value = res.regProjCntInfo
-    totalCnt.value = res.totalCnt
-    totalCnt.value = 0
+    // TODO 총건수 필요..
+    totalCnt.value = 10
+ 
   }else{
     //TODO 공통Alert으로 변경 예정
     alert(rtn.rtnMsg);
   }
   
+}
+
+
+function chkItem(idx){
+
+  if(regProjList.value[idx].chkVal == true){
+    regProjList.value[idx].chkVal = false  
+    chkAll.value = false 
+  }else{
+    regProjList.value[idx].chkVal = true
+  }
+
+}
+
+
+function chkItemAll(){
+  if(chkAll.value == true){
+    chkAll.value = false  
+    regProjList.value.forEach(el=> el.chkVal = false)
+  }else{
+    chkAll.value = true
+    regProjList.value.forEach(el=> el.chkVal = true)
+
+  }
+}
+
+
+function showEngrDetail(idx){
+  console.log(idx)
+
+}
+
+async function finish(){
+  console.log(filteredChkList);
+
+  var api = "/v1/my/reg-project-list";
+  var postParams = {projIdList : filteredChkList};
+  var queryParams = { userMail: userMail.value , sortDiv:sortDiv.value};
+  let rtn = await gfnUtils.axiosPost(
+    api,
+    postParams,
+    queryParams
+  );
+  
+  if(rtn.rtnCd == "00"){
+    console.log(rtn);
+
+  }else{
+    //TODO 공통Alert으로 변경 예정
+    alert(rtn.rtnMsg);
+  }
   
 
 }
