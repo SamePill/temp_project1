@@ -27,6 +27,8 @@ import Header from '@/components/layoutComponents/Header.vue'
 body{
   overflow-y:none;
   overflow: hidden !important; 
+  font-family: 'Pretendard-Regular', sans-serif !important;
 }
+
 </style>
 

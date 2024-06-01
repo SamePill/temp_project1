@@ -69,7 +69,10 @@ function goToPage(url){
     }
     if(url == 'AppliedProjectList' ){
       url = "Login";
-    }    
+    }
+    if(url == 'MyInformation' ){
+      url = "Login";
+    }       
     if(url == 'Test' ){
       url = "Login";
     }
