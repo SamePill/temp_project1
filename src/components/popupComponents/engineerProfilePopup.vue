@@ -391,8 +391,56 @@
 import { defineProps } from 'vue'
 const props = defineProps({
   mode:{default:"01"},
-  profile:{},
-  pojectList:[{}]
+  profile:{
+    // "engrId": "엔지니어 id",
+    // "engrNm": "엔지니어 이름",
+    // "engrRtngDivCd": "엔제니어 등급 구분 코드",
+    // "engrRtndDivCdNm": "엔지니어 등급 구분 코드 명",
+    // "crrYear": "경력 년",
+    // "crrMon": "경력 월",
+    // "projSprtSeq": "string",
+    // "schlNm": "string",
+    // "compNm": "string",
+    // "engrSprtStatCd": "string",
+    // "bith": "string",
+    // "baseAddr": "string",
+    // "dtlAddr": "string",
+    // "dprt": "string",
+    // "taskSkil": "string",
+    // "engrPhotUrl": "string",
+    // "crtfList": [
+    //   {
+    //     "crtfNm": "string",
+    //     "acqsDt": "string"
+    //   }
+    // ],
+    // "engrProjHstrList": [
+    //   {
+    //     "engrProjHstrSeq": "string",
+    //     "projTitl": "string",
+    //     "strtYm": "string",
+    //     "endYm": "string",
+    //     "crntProjPrgsYn": "string",
+    //     "clntNm": "string",
+    //     "projUseTool": "string",
+    //     "projCtntTask": "string",
+    //     "projDmndSkil": "string",
+    //     "projEtcInfo": "string",
+    //     "crrYear": "string",
+    //     "crrMon": "string",
+    //     "jobDivCdList": [
+    //       {
+    //         "jobDivCd": "string"
+    //       }
+    //     ],
+    //     "taskDivCdList": [
+    //       {
+    //         "jobDivCd": "string"
+    //       }
+    //     ]
+    //   }
+    // ]
+  },
 
 })
 

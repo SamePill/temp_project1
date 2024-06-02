@@ -290,7 +290,7 @@
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
                       
             <div v-for="el, idx in engrList" :key="idx">
-              <div  @click="showProfile(el)" class="hover:cursor-pointer">
+              <div @click="showProfile(el)" class="hover:cursor-pointer" :profile="engrProfile">
                 <SelEngineerItem :engineerInfo="el"/>
               </div>
             </div>
@@ -350,6 +350,7 @@ const router = useRouter()
 const pageNo = ref(1)
 const totalCnt = ref(0)
 const userMail = ref(window.$cookies.get("loginUserMail"));
+const engrProfile = ref();
 
 const projInfo = ref({
   // "projId": "string",
@@ -377,12 +378,20 @@ const engrList =  ref([])
 async function showProfile(el){
 
   console.log(el.engrId)
-  // var api = "/v1/my/select-engineer-info";
-  // var getParams = {userMail: userMail.value, engrId:el.engrId};
-  // let rtn = await gfnUtils.axiosGet(
-  //   api,
-  //   getParams
-  // );
+  var api = "/v1/my/engineer/detail";
+  var getParams = {userMail: userMail.value, engrId:el.engrId};
+  let rtn = await gfnUtils.axiosGet(
+    api,
+    getParams
+  );
+
+  if(rtn.rtnCd == "00"){
+    engrProfile.value = rtn.rtnData
+   
+  }else{
+    //TODO 공통Alert으로 변경 예정
+    alert(rtn.rtnMsg);
+  }
 }
 
 async function loadData(selPage){
