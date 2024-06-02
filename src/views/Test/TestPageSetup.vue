@@ -99,6 +99,11 @@
             deactivated	onDeactivated   컴포넌트가 비활성화될 때 실행됩니다.
         </pre>
         <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="savefile()">savefile</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button style="background-color: pink; padding:5px 10px; border-radius:10px; color:white;" @click="showCode()">ShowCode</button>
 
         <testComp ref="xx"/>
 
@@ -114,7 +119,7 @@
     import testComp from '@/views/Test/testComponent.vue'
     import Modal from '@/components/baseComponents/Modal.vue'
     import confirmPopup from '@/components/popupComponents/confirmPopup.vue'
-    
+
     const xx = ref()
     const store = commonStore()
 
@@ -162,6 +167,14 @@
 
     function openPopup(){  
         show();
+    }
+
+    async function showCode(){
+        // if(store.getCodeList == undefined || store.getCodeList.length == 0  ){
+        //     await this.gfnUtils.loadCommCode()
+        // }
+        await this.gfnUtils.loadCommCode()
+        console.log(store.getCodeList)
     }
 
     // store 사용 예시

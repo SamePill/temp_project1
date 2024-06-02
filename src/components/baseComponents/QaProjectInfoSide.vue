@@ -177,7 +177,7 @@
 import { ref, defineProps, onMounted } from "vue";
 import * as gfnRules from "@/utils/gfnRules.js";
 import * as gfnUtils from "@/utils/gfnUtils.js";
-import EngineerPopup from "@/views/PrjtList/EngineerPopup.vue";
+import EngineerPopup from "@/components/popupComponents/EngineerPopup.vue";
 const $EngineerPopup = ref();
 import { useRouter } from 'vue-router';
 const router = useRouter()

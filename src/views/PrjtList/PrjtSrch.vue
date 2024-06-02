@@ -7,7 +7,7 @@
       <div style="position:absolute; z-index: 999;  ">
         <DropDown @click="documentClick('WorkDivCd','dropDown')" id="WorkDivCd" ref="$WorkDivCd" @setData="getWorkDivCd" class="mr-2" :title="'근무형태'" :listDivCd="'WORK_DIV_CD'"/>
         <DropDown @click="documentClick('WorkPirdDivCd','dropDown')" id="WorkPirdDivCd" ref="$WorkPirdDivCd" @setData="getWorkPirdDivCd" class="mr-2" :title="'근무기간'" :listDivCd="'WORK_PIRD_DIV_CD'"/>
-        <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGN_RTNG_DIV_CD'"/>
+        <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
       </div>
 
       <!--검색 -->
@@ -82,49 +82,51 @@ const workDivCd = ref("")
 const workPirdDivCd = ref("")
 const engrRtngDivCd = ref("")
 const srchKeyWord = ref("")
-const projList = ref([{
-                      "projId": "C00001P00001",
-                      "workDivCd": "10",
-                      "projTitl": "김락영의 테스트 공고 입니다._001",
-                      "engrCnt": "5",
-                      "pirdVal": "24",
-                      "strtDay": "20240314",
-                      "expcPric": 8000000,
-                      "workAddr": "서울 강서구 초록마을로 171",
-                      "projStatCd": "10",
-                      "regDttm": "20240314150000",
-                      "projSprtSeq": null,
-                      "engrRtngInfo": {
-                          "bgnrEngrCnt": 3,
-                          "bgnrEngrUnitPric": 2000000,
-                          "intrEngrCnt": 0,
-                          "intrEngrUnitPric": 0,
-                          "advnEngrCnt": 2,
-                          "advnEngrUnitPric": 6000000,
-                          "spclEngrCnt": 0,
-                          "spclEngrUnitPric": 0
-                      },
-                      "jobDivCdNmList": [
-                          {
-                              "jobDivCdNm": "#제조",
-                              "jobDivCd": "10"
-                          }
-                      ],
-                      "taskDivCdNmList": [
-                          {
-                              "taskDivCdNm": "#WEB",
-                              "taskDivCd": "10"
-                          },
-                          {
-                              "taskDivCdNm": "#APP",
-                              "taskDivCd": "20"
-                          },
-                          {
-                              "taskDivCdNm": "#IOT",
-                              "taskDivCd": "30"
-                          }
-                      ]
-                   }])
+const projList = ref([
+                      // {
+                      // "projId": "C00001P00001",
+                      // "workDivCd": "10",
+                      // "projTitl": "김락영의 테스트 공고 입니다._001",
+                      // "engrCnt": "5",
+                      // "pirdVal": "24",
+                      // "strtDay": "20240314",
+                      // "expcPric": 8000000,
+                      // "workAddr": "서울 강서구 초록마을로 171",
+                      // "projStatCd": "10",
+                      // "regDttm": "20240314150000",
+                      // "projSprtSeq": null,
+                      // "engrRtngInfo": {
+                      //     "bgnrEngrCnt": 3,
+                      //     "bgnrEngrUnitPric": 2000000,
+                      //     "intrEngrCnt": 0,
+                      //     "intrEngrUnitPric": 0,
+                      //     "advnEngrCnt": 2,
+                      //     "advnEngrUnitPric": 6000000,
+                      //     "spclEngrCnt": 0,
+                      //     "spclEngrUnitPric": 0
+                      // },
+                      // "jobDivCdNmList": [
+                      //     {
+                      //         "jobDivCdNm": "#제조",
+                      //         "jobDivCd": "10"
+                      //     }
+                      // ],
+                      // "taskDivCdNmList": [
+                      //     {
+                      //         "taskDivCdNm": "#WEB",
+                      //         "taskDivCd": "10"
+                      //     },
+                      //     {
+                      //         "taskDivCdNm": "#APP",
+                      //         "taskDivCd": "20"
+                      //     },
+                      //     {
+                      //         "taskDivCdNm": "#IOT",
+                      //         "taskDivCd": "30"
+                      //     }
+                      // ]
+                      //  }
+                  ])
 const $WorkDivCd = ref()
 const $WorkPirdDivCd = ref()
 const $EngrRtngDivCd = ref()

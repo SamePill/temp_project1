@@ -86,7 +86,7 @@
                     <div v-if="props.regProjItem.workDivCd =='20'" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dd6431]" >
                       <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-white">비상주</p>
                     </div> 
-                  <div v-show="props.regProjItem.engrRtngInfo['bgnrEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#ddf2ef]" >
+                    <div v-show="props.regProjItem.engrRtngInfo['bgnrEngrCnt'] > 0" class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#ddf2ef]" >
                       <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]">
                         초급 엔지니어
                       </p>
@@ -136,7 +136,7 @@
             >
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">
                 <!--TODO 예상금액 값...-->
-                예상금액 : {{ props.regProjItem.expcPric }}
+                예상금액 : {{ props.regProjItem.expcPric/10000 }}만원
               </p>
               <div
                 class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-1 py-0.5 rounded-sm bg-white border border-[#ddd]"

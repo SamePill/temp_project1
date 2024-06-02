@@ -322,6 +322,9 @@
         </div>
       </div>
     </div>
+
+
+    <!-- 하단 버튼 제어-->
     <!-- 지원취소 -->
     <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '10'">
       <div
