@@ -2,11 +2,10 @@
   <div
     class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[1060px] relative gap-[100px]"
   >
-    <p
-      class="flex-grow-0 flex-shrink-0 w-[60px] text-sm font-medium text-left text-[#1ba494]"
-    >
-      선정합격
-    </p>
+    <p v-show="props.engineerInfo.engrSprtStatCd == '10'" class="flex-grow-0 flex-shrink-0 w-[60px] text-sm font-medium text-left text-[#1ba494]">선정합격</p>
+    <p v-show="props.engineerInfo.engrSprtStatCd == '20'" class="flex-grow-0 flex-shrink-0 w-[60px] text-sm font-medium text-left text-[#1ba494]">선정대기</p>
+    <p v-show="props.engineerInfo.engrSprtStatCd == '30'" class="flex-grow-0 flex-shrink-0 w-[60px] text-sm font-medium text-left text-[#1ba494]">미팅예정</p>
+    <p v-show="props.engineerInfo.engrSprtStatCd == '40'" class="flex-grow-0 flex-shrink-0 w-[60px] text-sm font-medium text-left text-[#1ba494]">선정탈락</p>
     <p class="flex-grow-0 flex-shrink-0 w-[100px] text-sm text-left text-[#191919]">
       {{ props.engineerInfo.compNm }}
     </p>

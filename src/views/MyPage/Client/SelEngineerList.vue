@@ -325,111 +325,143 @@
         </div>
       </div>
     </div>
-    <Modal>
-      <!-- <engineerProfilePopup mode='10' /> -->
+    <modal ref="modalShowProfile" :width="810">
+      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @close="cancel" @confirm="confirm" />
     </Modal>
   </div>
 </template>
 
 <script setup>
-import DropDown from '@/components/uiComponents/DropDown.vue'
-import { ref, onMounted } from 'vue'
-import * as gfnUtils from "@/utils/gfnUtils.js";
-import SelEngineerItem from '@/components/baseComponents/SelEngineerItem.vue'
-import { useRouter } from 'vue-router'
-import Modal from '@/components/baseComponents/Modal.vue'
-// import engineerProfilePopup from '@components/popupComponents/engineerProfilePopup.vue'
+  import DropDown from '@/components/uiComponents/DropDown.vue'
+  import { ref, onMounted } from 'vue'
+  import * as gfnUtils from "@/utils/gfnUtils.js";
+  import SelEngineerItem from '@/components/baseComponents/SelEngineerItem.vue'
+  import { useRouter } from 'vue-router'
+  import Modal from '@/components/baseComponents/Modal.vue'
+  import engineerProfilePopup from '@/components/popupComponents/engineerProfilePopup.vue'
 
-onMounted(() => {
-  loadData();
-})
-const { dataObj } = history.state; 
-const projId = ref(JSON.parse(dataObj));
+  onMounted(() => {
+    loadData();
+  })
+  const { dataObj } = history.state; 
+  const projId = ref(JSON.parse(dataObj));
 
-const router = useRouter()
-const pageNo = ref(1)
-const totalCnt = ref(0)
-const userMail = ref(window.$cookies.get("loginUserMail"));
-const engrProfile = ref();
-
-const projInfo = ref({
-  // "projId": "string",
-  // "projTitl": "string",
-  // "engrCnt": "string",
-  // "strtDay": "yyyyMMdd",
-  // "expcPric": 0,
-  // "pirdVal": "string",
-  // "workAddr": "string"
-})
-const qmMngrInfo =  ref({
-  // "qmMngrNm": "string",
-  // "hp": "string"
-})
-const engrCntInfo =  ref({
-  // "totSprtEngrCnt": 0,
-  // "passEngrCnt": 0,
-  // "waitEngrCnt": 0,
-  // "meetWillEngrCnt": 0,
-  // "failEngrCnt": 0
-})
-const engrList =  ref([])
+  const router = useRouter()
+  const pageNo = ref(1)
+  const totalCnt = ref(0)
+  const userMail = ref(window.$cookies.get("loginUserMail"))
+  const engrProfile = ref({})
+  const profileMode = ref("")
 
 
-async function showProfile(el){
+  const projInfo = ref({
+    // "projId": "string",
+    // "projTitl": "string",
+    // "engrCnt": "string",
+    // "strtDay": "yyyyMMdd",
+    // "expcPric": 0,
+    // "pirdVal": "string",
+    // "workAddr": "string"
+  })
+  const qmMngrInfo =  ref({
+    // "qmMngrNm": "string",
+    // "hp": "string"
+  })
+  const engrCntInfo =  ref({
+    // "totSprtEngrCnt": 0,
+    // "passEngrCnt": 0,
+    // "waitEngrCnt": 0,
+    // "meetWillEngrCnt": 0,
+    // "failEngrCnt": 0
+  })
+  const engrList =  ref([])
 
-  console.log(el.engrId)
-  var api = "/v1/my/engineer/detail";
-  var getParams = {userMail: userMail.value, engrId:el.engrId};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
-
-  if(rtn.rtnCd == "00"){
-    engrProfile.value = rtn.rtnData
-   
-  }else{
-    //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
+  //프로필 팝업 창
+  const modalShowProfile = ref(null)
+  const showModalProfile = () => {
+    modalShowProfile.value.open()            
   }
-}
+  //취소버튼
+  const cancel = function (){
+    modalShowProfile.value.close()      
+  }
+  //확인버튼
+  const confirm = function (){
+    modalShowProfile.value.close()      
+    
+  }
 
-async function loadData(selPage){
+
+  async function showProfile(el){
+
+    console.log(el.engrId)
+    var api = "/v1/my/engineer/detail";
+    var getParams = {userMail: userMail.value, engrId:el.engrId};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    
+    if(rtn.rtnCd == "00"){
+      engrProfile.value = rtn.rtnData   
+      console.log(engrProfile.value)
+      if(engrProfile.value.engrSprtStatCd == '10'){
+        //선정합격
+        profileMode.value = "30"
+      }else if(engrProfile.value.engrSprtStatCd == '20'){
+        //선정대기
+        profileMode.value = "40"
+      }else if(engrProfile.value.engrSprtStatCd == '30'){
+        //미팅예정
+        profileMode.value = "40"
+      }else if(engrProfile.value.engrSprtStatCd == '40'){
+        //선정탈락
+        profileMode.value = "50"
+      }
+
+      showModalProfile()
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      alert(rtn.rtnMsg);
+    }
+  }
+
+  async function loadData(selPage){
+    
+    console.log(selPage)
+    if(selPage != null){
+      pageNo.value = selPage;
+    }
+
+    var api = "/v1/my/select-engineer-info";
+    var getParams = {userMail: userMail.value, projId:projId.value, engrNm:"", engrRtngDivCd:"", engrSortDiv:"", pageNo:pageNo.value};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    console.log(rtn)
+    if(rtn.rtnCd == "00"){
+      let res = rtn.rtnData
   
-  console.log(selPage)
-  if(selPage != null){
-    pageNo.value = selPage;
-  }
+      projInfo.value = res.projInfo
+      qmMngrInfo.value = res.regProjCntInfo
+      engrCntInfo.value = res.engrCntInfo
+      engrList.value = res.engrList
 
-  var api = "/v1/my/select-engineer-info";
-  var getParams = {userMail: userMail.value, projId:projId.value, engrNm:"", engrRtngDivCd:"", engrSortDiv:"", pageNo:pageNo.value};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
-  console.log(rtn)
-  if(rtn.rtnCd == "00"){
-    let res = rtn.rtnData
- 
-    projInfo.value = res.projInfo
-    qmMngrInfo.value = res.regProjCntInfo
-    engrCntInfo.value = res.engrCntInfo
-    engrList.value = res.engrList
+      console.log(engrList.value)
 
-    console.log(engrList.value)
-
-    // TODO 총건수 필요..
-    totalCnt.value = 10
- 
-  }else{
-    //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
-  }
+      // TODO 총건수 필요..
+      totalCnt.value = 10
   
-}
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      alert(rtn.rtnMsg);
+    }
+    
+  }
 
-function goBack(){
-  router.back()
-}
+  function goBack(){
+    router.back()
+  }
 
 </script>
