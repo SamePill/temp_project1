@@ -227,51 +227,10 @@
               </svg>
             </div> -->
             
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3" >
               <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
-              <!-- <div
-                class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">등급</p>
-                <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1">
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">전체</p>
-                  <svg
-                    width="16"
-                    height="17"
-                    viewBox="0 0 16 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M8.76822 10.5781C8.36843 11.0579 7.63157 11.0579 7.23178 10.5781L4.36682 7.14019C3.82405 6.48886 4.2872 5.5 5.13504 5.5L10.865 5.5C11.7128 5.5 12.176 6.48886 11.6332 7.14019L8.76822 10.5781Z"
-                      fill="#191919"
-                    ></path>
-                  </svg>
-                </div>
-              </div> -->
-              <div
-                class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
-              >
-                <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1">
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">지원순</p>
-                  <svg
-                    width="16"
-                    height="17"
-                    viewBox="0 0 16 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M8.76822 10.5781C8.36843 11.0579 7.63157 11.0579 7.23178 10.5781L4.36682 7.14019C3.82405 6.48886 4.2872 5.5 5.13504 5.5L10.865 5.5C11.7128 5.5 12.176 6.48886 11.6332 7.14019L8.76822 10.5781Z"
-                      fill="#191919"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
+              
+              <DropDown @click="documentClick('SelEngrSort','dropDown')" id="SelEngrSort" ref="$SelEngrSort" @setData="getSelEngrSort" :title="'지원순'" :listDivCd="'SEL_ENGR_SORT'"/>
             </div>
           </div>
           <div class="flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ededed]"></div>
@@ -352,6 +311,10 @@
   const userMail = ref(window.$cookies.get("loginUserMail"))
   const engrProfile = ref({})
   const profileMode = ref("")
+  const EngrRtngDivCd = ref("")
+  const $EngrRtngDivCd = ref()
+  const SelEngrSort = ref("")
+  const $SelEngrSort = ref("")
 
 
   const projInfo = ref({
@@ -391,6 +354,14 @@
     
   }
 
+  
+  function getEngrRtngDivCd(data){
+    EngrRtngDivCd.value = data;
+  }
+
+  function getSelEngrSort(data){
+    SelEngrSort.value = data;
+  }
 
   async function showProfile(el){
 
@@ -426,6 +397,19 @@
     }
   }
 
+  function documentClick(div,eventTarget){
+    if(eventTarget == 'dropDown'){
+
+      if(div != 'EngrRtngDivCd'){
+        $EngrRtngDivCd.value.noShowItem();
+      }
+      if(div != 'SelEngrSort'){
+        $SelEngrSort.value.noShowItem();
+      }
+      
+    }
+  }
+
   async function loadData(selPage){
     
     console.log(selPage)
@@ -434,7 +418,7 @@
     }
 
     var api = "/v1/my/select-engineer-info";
-    var getParams = {userMail: userMail.value, projId:projId.value, engrNm:"", engrRtngDivCd:"", engrSortDiv:"", pageNo:pageNo.value};
+    var getParams = {userMail: userMail.value, projId:projId.value, engrNm:"", engrRtngDivCd:EngrRtngDivCd.value, engrSortDiv:"", pageNo:pageNo.value};
     let rtn = await gfnUtils.axiosGet(
       api,
       getParams

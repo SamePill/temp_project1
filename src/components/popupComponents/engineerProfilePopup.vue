@@ -15,7 +15,7 @@
           xmlns="http://www.w3.org/2000/svg"
           class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
           preserveAspectRatio="none"
-          @click="$emit('close')"
+          @click="showMore=false;$emit('close')"
         >
           <path
             d="M19 5L5 19"
@@ -183,15 +183,17 @@
                 >
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">업무 내용</p>
                   <div
+                    v-show="!showMore"
                     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[5px]"
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#333]">
                       프로젝트 설명 및 주요 담당 업무
                     </p>
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">더보기</p>
+                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]"  @click="showMore=true">더보기</button>
                   </div>
                   <!-- 펼침 -->
-                  <div
+                  <div 
+                    v-show="showMore"
                     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[5px]"
                   >
                     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -238,7 +240,7 @@
                         </p>
                       </div>
                     </div>
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">접기</p>
+                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="showMore=false">접기</button>
                   </div>                  
                   <!-- 펼침 끝 -->
                 </div>
@@ -317,7 +319,9 @@
 
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, ref } from 'vue'
+
+const showMore = ref(false)
 const props = defineProps({
   mode:{default:"99"},
   profile:{

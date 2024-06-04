@@ -16,6 +16,7 @@ import MyCompanyInfo from "@/views/MyPage/Account/MyCompanyInfo.vue";
 import MyIdDeactivation from "@/views/MyPage/Account/MyIdDeactivation.vue";
 import MyInformation from "@/views/MyPage/Account/MyInformation.vue";
 import MyPasswordMng from "@/views/MyPage/Account/MyPasswordMng.vue";
+import MyProjectList from "@/views/MyPage/Account/MyProjectList.vue";
 
 //클라이언트
 import RegisteredProjectList from "@/views/MyPage/Client/RegisteredProjectList.vue";
@@ -146,6 +147,12 @@ export default createRouter({
       path: '/myIdDeactivation',
       component: MyIdDeactivation,
       name: 'MyIdDeactivation'
+    },
+
+    {
+      path: '/myProjectList',
+      component: MyProjectList,
+      name: 'MyProjectList'
     },
     
 

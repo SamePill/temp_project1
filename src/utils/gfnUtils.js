@@ -281,6 +281,12 @@ export const loadCommCode = async () => {
     // console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' + rtn.rtnCd)
     
     if(rtn.rtnCd == "00"){
+
+      let codeList = rtn.rtnData.codeList
+      let sort1 =  [{cd: '10', cdNm: '지원순'} ,{cd: '20', cdNm: '경력높은순'} ,{cd: '30', cdNm: '경력낮은순'}]
+      codeList.SEL_ENGR_SORT = sort1
+
+      console.log(codeList)
       cmmnStore.setCodeList(rtn.rtnData.codeList)
       //return cmmnStore.getCodeList
     }else{

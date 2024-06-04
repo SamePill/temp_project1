@@ -78,7 +78,11 @@
             <div
               class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 w-[790px] gap-5"
             >
-              <div
+              <div class="w-[1060px]" style="position: relative; text-align: right">
+                <input class="w-[300px]  py-[8px]  px-[10px] justify-between border-line-1 border rounded box-border placeholder:text-sm placeholder:text-text-3" type="text" placeholder="이름을 검색해주세요." v-model="srchKeyWord" @keyup.enter="loadData()">
+                <img style="cursor: pointer; position:absolute; right:10px; top:14px;" class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
+              </div>
+              <!-- <div
                 class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[300px] relative overflow-hidden px-2.5 py-2 rounded bg-white border border-[#ddd]"
               >
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#999]">
@@ -107,9 +111,10 @@
                     stroke-linecap="round"
                   ></path>
                 </svg>
-              </div>
+              </div> -->
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <div
+                <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
+                <!-- <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
                   <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">등급</p>
@@ -132,7 +137,7 @@
                       ></path>
                     </svg>
                   </div>
-                </div>
+                </div> -->
                 <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
@@ -283,61 +288,82 @@
   </div>
 </template>
 <script setup>
-import SubHeader from '@/components/layoutComponents/SubHeader.vue'
-import SideMenu from '@/components/layoutComponents/SideMenu.vue'
-import EngineerItem from '@/components/baseComponents/EngineerItem.vue'
-import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
-import { ref, onMounted } from 'vue'
-import * as gfnUtils from "@/utils/gfnUtils.js";
+  import DropDown from '@/components/uiComponents/DropDown.vue'
+  import SubHeader from '@/components/layoutComponents/SubHeader.vue'
+  import SideMenu from '@/components/layoutComponents/SideMenu.vue'
+  import EngineerItem from '@/components/baseComponents/EngineerItem.vue'
+  import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
+  import { ref, onMounted } from 'vue'
+  import * as gfnUtils from "@/utils/gfnUtils.js";
 
-const pageNo = ref(1)
-const totalCnt = ref(100)
-const userMail = ref(window.$cookies.get("loginUserMail"));
-// const sortDiv = ref(20)
-const engineerList = ref([])
-const topInfo = ref({
-    compNm: "",
-    userNm: "",
-    sprtProjCnt: 0,
-    prgsProjCnt: 0,
-    cpltProjCnt: 0
+  const pageNo = ref(1)
+  const totalCnt = ref(100)
+  const userMail = ref(window.$cookies.get("loginUserMail"));
+  // const sortDiv = ref(20)
+  const engineerList = ref([])
+  const topInfo = ref({
+      compNm: "",
+      userNm: "",
+      sprtProjCnt: 0,
+      prgsProjCnt: 0,
+      cpltProjCnt: 0
+    })
+  const EngrRtngDivCd = ref("")
+  const $EngrRtngDivCd = ref()
+
+  onMounted(() => {
+    loadData();
   })
 
-onMounted(() => {
-  loadData();
-})
-
-async function loadData(selPage){
-  
-  console.log(selPage)
-  if(selPage != null){
-    pageNo.value = selPage;
+    
+  function getEngrRtngDivCd(data){
+    EngrRtngDivCd.value = data;
   }
 
-  var api = "/v1/my/engineer/management";
-  var getParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:"", srvdStatCd:"", engrRtngDivCd:"", engrSortDiv:"", };
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
-  
-  if(rtn.rtnCd == "00"){
-    console.log(rtn);
-    let res = rtn.rtnData
-    console.log(res);
+  function documentClick(div,eventTarget){
+    if(eventTarget == 'dropDown'){
 
-    engineerList.value = res.engineerList
-    topInfo.value = res.topInfo
-    totalCnt.value = res.totalCnt
-    totalCnt.value = 0
-  }else{
-    //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
+      if(div != 'EngrRtngDivCd'){
+        $EngrRtngDivCd.value.noShowItem();
+      }
+      // if(div != 'SelEngrSort'){
+      //   $SelEngrSort.value.noShowItem();
+      // }
+      
+    }
   }
-  
-  
 
-}
+  async function loadData(selPage){
+    
+    console.log(selPage)
+    if(selPage != null){
+      pageNo.value = selPage;
+    }
+
+    var api = "/v1/my/engineer/management";
+    var getParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:"", srvdStatCd:"", engrRtngDivCd:"", engrSortDiv:"", };
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    
+    if(rtn.rtnCd == "00"){
+      console.log(rtn);
+      let res = rtn.rtnData
+      console.log(res);
+
+      engineerList.value = res.engineerList
+      topInfo.value = res.topInfo
+      totalCnt.value = res.totalCnt
+      totalCnt.value = 0
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      alert(rtn.rtnMsg);
+    }
+    
+    
+
+  }
 
 
 </script>
@@ -346,52 +372,52 @@ async function loadData(selPage){
 
 
 <style>
-.paginationDiv .pagination-container {
-  column-gap: 10px;
-  align-items: center;
-}
-.paginationDiv .paginate-buttons {
-  height: 35px;
-  width: 35px;
-  cursor: pointer;
-  border-radius: 4px;
-  background-color: transparent;
-  border: none;
-  color: black;
-}
+  .paginationDiv .pagination-container {
+    column-gap: 10px;
+    align-items: center;
+  }
+  .paginationDiv .paginate-buttons {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: transparent;
+    border: none;
+    color: black;
+  }
 
-.paginationDiv .back-button,
-.paginationDiv .next-button {
-  background-color: white;
-  color: white;
-  border-radius: 8px;
-  height: 45px;
-  width: 45px;
-}
-.paginationDiv .active-page {
-  background-color: #e5e5e5;
-}
-.paginationDiv .paginate-buttons:hover {
-  background-color: #f5f5f5;
-}
-.paginationDiv .active-page:hover {
-  background-color: #e5e5e5;
-}
+  .paginationDiv .back-button,
+  .paginationDiv .next-button {
+    background-color: white;
+    color: white;
+    border-radius: 8px;
+    height: 45px;
+    width: 45px;
+  }
+  .paginationDiv .active-page {
+    background-color: #e5e5e5;
+  }
+  .paginationDiv .paginate-buttons:hover {
+    background-color: #f5f5f5;
+  }
+  .paginationDiv .active-page:hover {
+    background-color: #e5e5e5;
+  }
 
-.paginationDiv .back-button svg {
-  transform: rotate(180deg) translateY(-2px);
-}
-.paginationDiv .next-button svg {
-  transform: translateY(2px);
-}
+  .paginationDiv .back-button svg {
+    transform: rotate(180deg) translateY(-2px);
+  }
+  .paginationDiv .next-button svg {
+    transform: translateY(2px);
+  }
 
-/* .paginationDiv .back-button:hover,
-.paginationDiv .next-button:hover {
-  background-color: rgb(45, 45, 45);
-} */
+  /* .paginationDiv .back-button:hover,
+  .paginationDiv .next-button:hover {
+    background-color: rgb(45, 45, 45);
+  } */
 
-.paginationDiv .back-button:active,
-.paginationDiv .next-button:active {
-  background-color: rgb(85, 85, 85);
-}
+  .paginationDiv .back-button:active,
+  .paginationDiv .next-button:active {
+    background-color: rgb(85, 85, 85);
+  }
 </style>
