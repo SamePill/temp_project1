@@ -283,8 +283,16 @@ export const loadCommCode = async () => {
     if(rtn.rtnCd == "00"){
 
       let codeList = rtn.rtnData.codeList
+
+      let sort0 =  [{cd: '20', cdNm: '등록순'} ,{cd: '30', cdNm: '진행순'} ,{cd: '30', cdNm: '완료순'}]
       let sort1 =  [{cd: '10', cdNm: '지원순'} ,{cd: '20', cdNm: '경력높은순'} ,{cd: '30', cdNm: '경력낮은순'}]
+      let sort2 =  [{cd: '40', cdNm: '등록순'} ,{cd: '20', cdNm: '경력높은순'} ,{cd: '30', cdNm: '경력낮은순'}]
+      let sort3 =  [{cd: '10', cdNm: '지원순'} ,{cd: '20', cdNm: '등록순'} ,{cd: '30', cdNm: '진행순'} ,{cd: '40', cdNm: '완료순'}]
+      
+      codeList.REG_PRJT_SORT = sort0
       codeList.SEL_ENGR_SORT = sort1
+      codeList.MNG_ENGR_SORT = sort2
+      codeList.APL_PRJT_SORT = sort3
 
       console.log(codeList)
       cmmnStore.setCodeList(rtn.rtnData.codeList)
@@ -297,6 +305,7 @@ export const loadCommCode = async () => {
 
 
 export const getCommCode = async (cdName) => {
+  console.log("--------------"+cdName)
   const cmmnStore = commonStore()
 
   if(cmmnStore.getCodeList == undefined || cmmnStore.getCodeList.length == 0  ){

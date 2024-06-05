@@ -53,29 +53,7 @@
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">전체선택</p>
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <div
-                  class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
-                >
-                  <div
-                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1"
-                  >
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">등록순</p>
-                    <svg
-                      width="16"
-                      height="17"
-                      viewBox="0 0 16 17"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M8.76822 10.5781C8.36843 11.0579 7.63157 11.0579 7.23178 10.5781L4.36682 7.14019C3.82405 6.48886 4.2872 5.5 5.13504 5.5L10.865 5.5C11.7128 5.5 12.176 6.48886 11.6332 7.14019L8.76822 10.5781Z"
-                        fill="#191919"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
+                <DropDown @click="documentClick('RegPrjtSort','dropDown')" id="RegPrjtSort" ref="$RegPrjtSort" @setData="getRegPrjtSort" :title="'정렬'" :listDivCd="'REG_PRJT_SORT'"/>
                 <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
@@ -92,7 +70,7 @@
 
             <!-- 프로젝트 리스트 반복부 -->
             <div v-show="totalCnt > 0" v-for="el,idx in regProjList" :key="el">
-              <RegisteredPrjtItem :regProjItem="el" @chkItem="chkItem(idx)" @showEngrDetail="showEngrDetail(idx)"/>
+              <RegisteredPrjtItem :projItem="el" @chkItem="chkItem(idx)" @showEngrDetail="showEngrDetail(idx)" mode="REGI"/>
             </div>
             
             <!-- 조회 내용이 없을 때 -->
@@ -137,175 +115,196 @@
   </div>
 </template>
 <script setup>
-import SubHeader from '@/components/layoutComponents/SubHeader.vue'
-import SideMenu from '@/components/layoutComponents/SideMenu.vue'
-import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
-import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
-import { ref, onMounted, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import * as gfnUtils from "@/utils/gfnUtils.js";
-import Modal from '@/components/baseComponents/Modal.vue'
-import confirmPopup from '@/components/popupComponents/confirmPopup.vue'
-import messagePopup from '@/components/popupComponents/messagePopup.vue'
+  import DropDown from '@/components/uiComponents/DropDown.vue'
+  import SubHeader from '@/components/layoutComponents/SubHeader.vue'
+  import SideMenu from '@/components/layoutComponents/SideMenu.vue'
+  import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
+  import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
+  import { ref, onMounted, computed } from 'vue'
+  import { useRouter } from 'vue-router'
+  import * as gfnUtils from "@/utils/gfnUtils.js";
+  import Modal from '@/components/baseComponents/Modal.vue'
+  import confirmPopup from '@/components/popupComponents/confirmPopup.vue'
+  import messagePopup from '@/components/popupComponents/messagePopup.vue'
 
-const router = useRouter()
+  const router = useRouter()
 
-const pageNo = ref(1)
-const totalCnt = ref(0)
-const userMail = ref(window.$cookies.get("loginUserMail"));
-const sortDiv = ref(20)
-const chkAll = ref(false)
-const regProjList = ref([])
-const topInfo = ref({
-    compNm: "",
-    userNm: "",
-    sprtProjCnt: 0,
-    prgsProjCnt: 0,
-    cpltProjCnt: 0
-})
-const alertMsg = ref("")
+  const pageNo = ref(1)
+  const totalCnt = ref(0)
+  const userMail = ref(window.$cookies.get("loginUserMail"));
+  const sortDiv = ref(20)
+  const chkAll = ref(false)
+  const regProjList = ref([])
+  const topInfo = ref({
+      compNm: "",
+      userNm: "",
+      sprtProjCnt: 0,
+      prgsProjCnt: 0,
+      cpltProjCnt: 0
+  })
+  const alertMsg = ref("")
+  const RegPrjtSort = ref("")
+  const $RegPrjtSort = ref()
 
-onMounted(() => {
-  loadData();
-})
 
-const filteredChkList = computed( () => {
-    let filter = true
-    return regProjList.value.filter( item => 
-        item.chkVal == filter
-    )
-})
+  onMounted(() => {
+    loadData();
+  })
 
-//확인창
-const modalShow = ref(null)
-const show = () => {
-  if(filteredChkList.value.length == 0){
-    return
-  }else{
-    modalShow.value.open() 
-  }             
-}
-//취소버튼
-const cancel = function (){
-    modalShow.value.close()
+  function getRegPrjtSort(data){
+    RegPrjtSort.value = data;
+  }
+
+  function documentClick(div,eventTarget){
+    if(eventTarget == 'dropDown'){
+
+      if(div != 'RegPrjtSort'){
+        $RegPrjtSort.value.noShowItem();
+      }
+      // if(div != 'SelEngrSort'){
+      //   $SelEngrSort.value.noShowItem();
+      // }
+      
+    }
+  }
+
+  const filteredChkList = computed( () => {
+      let filter = true
+      return regProjList.value.filter( item => 
+          item.chkVal == filter
+      )
+  })
+
+  //확인창
+  const modalShow = ref(null)
+  const show = () => {
+    if(filteredChkList.value.length == 0){
+      return
+    }else{
+      modalShow.value.open() 
+    }             
+  }
+  //취소버튼
+  const cancel = function (){
+      modalShow.value.close()
+      
+  }
+  //확인버튼
+  const confirm = function (){
+      modalShow.value.close()
+      finish()
+  }
+
+  // Alert창 제어
+  const alertShow = ref(null)
+  const showAlert = () => {
+    if(filteredChkList.value.length > 0){
+      return
+    }else{
+      alertShow.value.open() 
+    }           
+  }
+
+  function openPopup(){  
+    show();
+  }
+
+  function openAlert(msg){  
+    alertMsg.value = msg
+    showAlert();
+  }
+
+
+  async function loadData(selPage){
     
-}
-//확인버튼
-const confirm = function (){
-    modalShow.value.close()
-    finish()
-}
+    console.log(selPage)
+    if(selPage != null){
+      pageNo.value = selPage;
+    }
 
-// Alert창 제어
-const alertShow = ref(null)
-const showAlert = () => {
-  if(filteredChkList.value.length > 0){
-    return
-  }else{
-    alertShow.value.open() 
-  }           
-}
+    var api = "/v1/my/reg-project-list";
+    var getParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:sortDiv.value};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    
+    if(rtn.rtnCd == "00"){
+      console.log(rtn);
+      let res = rtn.rtnData
+      console.log(res);
 
-function openPopup(){  
-  show();
-}
-
-function openAlert(msg){  
-  alertMsg.value = msg
-  showAlert();
-}
-
-
-async function loadData(selPage){
+      regProjList.value = res.regProjList
+      topInfo.value = res.topInfo
+      // TODO 총건수 필요..
+      totalCnt.value = 10
   
-  console.log(selPage)
-  if(selPage != null){
-    pageNo.value = selPage;
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      alert(rtn.rtnMsg);
+    }
+    
   }
 
-  var api = "/v1/my/reg-project-list";
-  var getParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:sortDiv.value};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
-  
-  if(rtn.rtnCd == "00"){
-    console.log(rtn);
-    let res = rtn.rtnData
-    console.log(res);
 
-    regProjList.value = res.regProjList
-    topInfo.value = res.regProjCntInfo
-    // TODO 총건수 필요..
-    totalCnt.value = 10
- 
-  }else{
-    //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
-  }
-  
-}
+  function chkItem(idx){
 
-
-function chkItem(idx){
-
-  if(regProjList.value[idx].chkVal == true){
-    regProjList.value[idx].chkVal = false  
-    chkAll.value = false 
-  }else{
-    regProjList.value[idx].chkVal = true
-  }
-
-}
-
-
-function chkItemAll(){
-  if(chkAll.value == true){
-    chkAll.value = false  
-    regProjList.value.forEach(el=> el.chkVal = false)
-  }else{
-    chkAll.value = true
-    regProjList.value.forEach(el=> el.chkVal = true)
+    if(regProjList.value[idx].chkVal == true){
+      regProjList.value[idx].chkVal = false  
+      chkAll.value = false 
+    }else{
+      regProjList.value[idx].chkVal = true
+    }
 
   }
-}
 
 
-function showEngrDetail(idx){
-  console.log(idx)
-  
-  router.push({name: "SelEngineerList"
-              ,state : {
-                //dataObj : { a:1, b:'string', c:true },
-                dataObj : JSON.stringify(regProjList.value[idx].projId),
-              }
-            })
-}
+  function chkItemAll(){
+    if(chkAll.value == true){
+      chkAll.value = false  
+      regProjList.value.forEach(el=> el.chkVal = false)
+    }else{
+      chkAll.value = true
+      regProjList.value.forEach(el=> el.chkVal = true)
 
-async function finish(){
-  console.log(filteredChkList);
-
-  var api = "/v1/my/update/project-recruitment-terminate";
-  var postParams = {projIdList : filteredChkList};
-  var queryParams = { userMail: userMail.value , sortDiv:sortDiv.value};
-  let rtn = await gfnUtils.axiosPost(
-    api,
-    postParams,
-    queryParams
-  );
-  
-  if(rtn.rtnCd == "00"){
-    console.log(rtn);
-    openAlert("엔지니어 모집이 종료되었습니다.")
-  }else{
-    //TODO 공통Alert으로 변경 예정
-    //alert(rtn.rtnMsg);
-    openAlert(rtn.rtnMsg)
+    }
   }
-  
 
-}
+
+  function showEngrDetail(idx){
+    console.log(idx)
+    
+    router.push({name: "SelEngineerList"
+                ,state : {
+                  //dataObj : { a:1, b:'string', c:true },
+                  dataObj : JSON.stringify(regProjList.value[idx].projId),
+                }
+              })
+  }
+
+  async function finish(){
+    console.log(filteredChkList);
+
+    var api = "/v1/my/update/project-recruitment-terminate";
+    var postParams = {projIdList : filteredChkList};
+    var queryParams = { userMail: userMail.value , sortDiv:sortDiv.value};
+    let rtn = await gfnUtils.axiosPost(
+      api,
+      postParams,
+      queryParams
+    );
+    
+    if(rtn.rtnCd == "00"){
+      console.log(rtn);
+      openAlert("엔지니어 모집이 종료되었습니다.")
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      //alert(rtn.rtnMsg);
+      openAlert(rtn.rtnMsg)
+    }
+    
+
+  }
 
 
 </script>

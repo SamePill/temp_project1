@@ -10,12 +10,12 @@
               <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
                 엔지니어 관리
               </p>
-              <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">
+              <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]" @click="addEngineerInfo()">
                 엔지니어 추가하기
               </button>
             </div>
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">총 인원 : 180명</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">총 인원 : {{engrRtngCntInfo.totEngrCnt}}명</p>
               <svg
                 width="2"
                 height="13"
@@ -28,7 +28,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                초급 엔지니어 : 100명
+                초급 엔지니어 : {{engrRtngCntInfo.bgnrCnt}}명
               </p>
               <svg
                 width="2"
@@ -42,7 +42,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                중급 엔지니어 : 60명
+                중급 엔지니어 : {{engrRtngCntInfo.intrCnt}}명
               </p>
               <svg
                 width="2"
@@ -56,7 +56,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                고급 엔지니어 : 15명
+                고급 엔지니어 : {{engrRtngCntInfo.advnCnt}}명
               </p>
               <svg
                 width="2"
@@ -70,7 +70,7 @@
                 <path d="M1 0.5V12.5" stroke="#DDDDDD" stroke-linecap="round"></path>
               </svg>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                특급 엔지니어 : 5명
+                특급 엔지니어 : {{engrRtngCntInfo.spclCnt}}명
               </p>
             </div>
           </div>
@@ -138,7 +138,8 @@
                     </svg>
                   </div>
                 </div> -->
-                <div
+                <DropDown @click="documentClick('SrvdStatCd','dropDown')" id="SrvdStatCd" ref="$SrvdStatCd" @setData="getSrvdStatCd" :title="'재직'" :listDivCd="'SRVD_STAT_CD'"/>
+                <!-- <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
                   <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">재직</p>
@@ -161,8 +162,9 @@
                       ></path>
                     </svg>
                   </div>
-                </div>
-                <div
+                </div> -->
+                <DropDown @click="documentClick('MngEngrSort','dropDown')" id="MngEngrSort" ref="$MngEngrSort" @setData="getMngEngrSort" :title="'등록순'" :listDivCd="'MNG_ENGR_SORT'"/>
+                <!-- <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
                   <div
@@ -184,7 +186,7 @@
                       ></path>
                     </svg>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div
@@ -204,9 +206,10 @@
             <div
               v-show="totalCnt > 0"
               class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] gap-3"
-              
             >
-              <EngineerItem/>
+              <div v-for="el in engineerList" :key="el" @click="showProfile(el)"  class="hover:cursor-pointer">
+                <EngineerItem :engineerInfo="el"/>
+              </div>
             </div>
           </div>
 
@@ -285,6 +288,9 @@
         </div>
       </div>
     </div>
+    <modal ref="modalShowProfile" :width="810">
+      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @close="cancel" @confirm="confirm" />
+    </Modal>
   </div>
 </template>
 <script setup>
@@ -295,7 +301,11 @@
   import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
   import { ref, onMounted } from 'vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
+  import Modal from '@/components/baseComponents/Modal.vue'
+  import engineerProfilePopup from '@/components/popupComponents/engineerProfilePopup.vue'  
+  import { useRouter } from 'vue-router'
 
+  const router = useRouter()
   const pageNo = ref(1)
   const totalCnt = ref(100)
   const userMail = ref(window.$cookies.get("loginUserMail"));
@@ -310,15 +320,82 @@
     })
   const EngrRtngDivCd = ref("")
   const $EngrRtngDivCd = ref()
+  const SrvdStatCd = ref("")
+  const $SrvdStatCd = ref()
+  const MngEngrSort = ref("")
+  const $MngEngrSort = ref()
+  const engrRtngCntInfo = ref({})
+  
+  const engrProfile = ref({})
+  const profileMode = ref('')
+
+  //프로필 팝업 창
+  const modalShowProfile = ref(null)
+  const showModalProfile = () => {
+    modalShowProfile.value.open()            
+  }
+  //취소버튼
+  const cancel = function (){
+    modalShowProfile.value.close()      
+  }
+  //확인버튼
+  const confirm = function (){
+    modalShowProfile.value.close()      
+    
+  }  
 
   onMounted(() => {
     loadData();
   })
 
-    
+  async function showProfile(el){
+
+    console.log(el.engrId)
+    var api = "/v1/my/engineer/detail";
+    var getParams = {userMail: userMail.value, engrId:el.engrId};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+
+    if(rtn.rtnCd == "00"){
+      engrProfile.value = rtn.rtnData   
+      console.log(engrProfile.value)
+      profileMode.value = "20"
+      // if(engrProfile.value.engrSprtStatCd == '10'){
+      //   //선정합격
+      //   profileMode.value = "30"
+      // }else if(engrProfile.value.engrSprtStatCd == '20'){
+      //   //선정대기
+      //   profileMode.value = "40"
+      // }else if(engrProfile.value.engrSprtStatCd == '30'){
+      //   //미팅예정
+      //   profileMode.value = "40"
+      // }else if(engrProfile.value.engrSprtStatCd == '40'){
+      //   //선정탈락
+      //   profileMode.value = "50"
+      // }
+
+      showModalProfile()
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      alert(rtn.rtnMsg);
+    }
+  }
+
+
   function getEngrRtngDivCd(data){
     EngrRtngDivCd.value = data;
   }
+
+  function getSrvdStatCd(data){
+    SrvdStatCd.value = data;
+  }
+      
+  function getMngEngrSort(data){
+    MngEngrSort.value = data;
+  }
+
 
   function documentClick(div,eventTarget){
     if(eventTarget == 'dropDown'){
@@ -326,11 +403,17 @@
       if(div != 'EngrRtngDivCd'){
         $EngrRtngDivCd.value.noShowItem();
       }
-      // if(div != 'SelEngrSort'){
-      //   $SelEngrSort.value.noShowItem();
-      // }
-      
+      if(div != 'SrvdStatCd'){
+        $SrvdStatCd.value.noShowItem();
+      }
+      if(div != 'MngEngrSort'){
+        $MngEngrSort.value.noShowItem();
+      }
     }
+  }
+
+  function addEngineerInfo(){
+    router.push({name: "AddEngineerInfo"})
   }
 
   async function loadData(selPage){
@@ -352,10 +435,10 @@
       let res = rtn.rtnData
       console.log(res);
 
-      engineerList.value = res.engineerList
+      engineerList.value = res.engrList
       topInfo.value = res.topInfo
-      totalCnt.value = res.totalCnt
-      totalCnt.value = 0
+      totalCnt.value = res.engrTotlCnt
+      engrRtngCntInfo.value = res.engrRtngCntInfo
     }else{
       //TODO 공통Alert으로 변경 예정
       alert(rtn.rtnMsg);

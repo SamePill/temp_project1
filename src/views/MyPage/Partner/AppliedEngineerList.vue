@@ -1,5 +1,5 @@
 <template>
-  `<div
+  <div
     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[1920px] overflow-hidden gap-5 px-[430px] pt-10 pb-[100px] bg-[#fefefe]"
   >
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10 pt-5">

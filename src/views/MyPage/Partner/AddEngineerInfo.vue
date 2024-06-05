@@ -1,385 +1,383 @@
 <template>
-  <div
-    class="flex justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 px-[700px] pt-10 pb-[100px] bg-[#fefefe]"
-  >
-    <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-[60px]">
-      <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-[30px]">
-        <div
-          class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative gap-2.5"
-        >
-          <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
-            <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
-              엔지니어 추가
-            </p>
-            <p class="flex-grow-0 flex-shrink-0 text-left">
-              <span class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-[#191919]"
-                >2 </span
-              ><span class="flex-grow-0 flex-shrink-0 text-2xl text-left text-[#777]">/</span
-              ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#777]">2</span>
-            </p>
+  <div style="display: flex; justify-content: center;" class="py-[40px]">
+    <div
+      class="flex justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 px-[700px] pt-10 pb-[100px] bg-[#fefefe]"
+    >
+      <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10">
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-[30px]">
+          <div
+            class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative gap-2.5"
+          >
+            <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
+              <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
+                엔지니어 추가
+              </p>
+              <p class="flex-grow-0 flex-shrink-0 text-left">
+                <span class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-[#191919]"
+                  >1 </span
+                ><span class="flex-grow-0 flex-shrink-0 text-2xl text-left text-[#777]">/</span
+                ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#777]">2</span>
+              </p>
+            </div>
+            <div class="flex-grow-0 flex-shrink-0 w-[519px] h-px bg-[#191919]"></div>
           </div>
-          <div class="flex-grow-0 flex-shrink-0 w-[519px] h-px bg-[#191919]"></div>
-        </div>
-        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
+          <div class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 gap-5">
             <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
+              class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-5"
             >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                  >프로젝트 명 </span
-                ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">1</span
-                ><span class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#191919]">
-                </span
-                ><span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">/50</span>
-              </p>
-            </div>
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-              <div
-                class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                  프로젝트명을 입력해주세요.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                  >클라이언트 명 </span
-                ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">1</span
-                ><span class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#191919]">
-                </span
-                ><span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">/30</span>
-              </p>
-            </div>
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-              <div
-                class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                  클라이언트명을 입력해주세요.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-              <div
-                class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                  <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                    >수행 시작월 </span
-                  ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
-                </p>
-                <div
-                  class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">YYYY.MM</p>
-                </div>
-              </div>
-              <div
-                class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                  <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                    >수행 종료월 </span
-                  ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
-                </p>
-                <div
-                  class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">YYYY.MM</p>
-                </div>
-              </div>
+              <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로필 사진</p>
             </div>
             <div
-              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[519px] relative"
+              class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5"
             >
-              <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5">
+              <svg
+                width="150"
+                height="200"
+                viewBox="0 0 150 200"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="flex-grow-0 flex-shrink-0 w-[150px] h-[200px] relative"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <rect x="0.5" y="0.5" width="149" height="199" fill="#DDDDDD"></rect>
+                <rect x="0.5" y="0.5" width="149" height="199" stroke="#DDDDDD"></rect>
+                <circle cx="75" cy="80" r="35" fill="white"></circle>
+                <path
+                  d="M75 125C33.5786 125 0 158.579 0 200H150C150 158.579 116.421 125 75 125Z"
+                  fill="white"
+                ></path>
+              </svg>
+              <div
+                class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd]"
+              >
                 <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                  class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                   preserveAspectRatio="none"
                 >
-                  <rect width="24" height="24" fill="white"></rect>
-                  <rect x="4.5" y="4.5" width="15" height="15" stroke="#DBDBDB"></rect>
+                  <path
+                    d="M8.63398 3.16667C8.63398 2.79848 8.34297 2.5 7.98398 2.5C7.625 2.5 7.33398 2.79848 7.33398 3.16667V13.8333C7.33398 14.2015 7.625 14.5 7.98398 14.5C8.34297 14.5 8.63398 14.2015 8.63398 13.8333V3.16667Z"
+                    fill="#555555"
+                  ></path>
+                  <path
+                    d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
+                    fill="#555555"
+                  ></path>
                 </svg>
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
-                  현재 프로젝트 진행중
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">사진추가</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+          <div
+            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-5"
+          >
+            <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]"
+                >이름 및 상태 </span
+              ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+            </p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+            <div
+              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[340px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                이름을 입력해주세요.
+              </p>
+            </div>
+            <div
+              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">재직</p>
+              <div class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+          <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
+            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">생년월일 </span
+            ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+          </p>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+            <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">YYYY</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
+            </div>
+            <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">MM</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">월</p>
+            </div>
+            <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">DD</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">일</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+          <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
+            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">주소 </span
+            ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+          </p>
+          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
+            <div
+              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                주소를 입력해주세요.
+              </p>
+            </div>
+            <div
+              class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                상세주소를 입력해주세요.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+          <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
+            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">최종학력 </span
+            ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+          </p>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+            <div
+              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">대학교</p>
+              <svg
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M5 9.5L12 15.5L19 9.5"
+                  stroke="#191919"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+            <div
+              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[340px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                학교명을 입력해주세요.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
+            <div
+              class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                전공학과를 입력해주세요.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+          <div
+            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-5"
+          >
+            <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">경력 </span
+              ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+            </p>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] gap-5">
+            <div
+              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
+                초급 엔지니어
+              </p>
+              <svg
+                width="16"
+                height="17"
+                viewBox="0 0 16 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M3 6.5L8 10.5L13 6.5"
+                  stroke="#191919"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+            <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">년</p>
+            </div>
+            <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">개월</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+          <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
+            <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">업무스킬 </span
+              ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+            </p>
+            <div
+              class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
+            </div>
+          </div>
+          <div
+            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+          >
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+              예) 지라, 레드마인, 포토샵, 일러스트
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+          <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
+            <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증</p>
+            <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+              <div class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"></div>
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left">추가하기</p>
+            </div>
+          </div>
+          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+            <div
+              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">자격증 명</p>
+              <div
+                class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+              >
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                  자격증 명을 입력해주세요.
                 </p>
               </div>
-              <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
-                프로젝트 수행 0개월
-              </p>
             </div>
-          </div>
-          <div
-            class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[519px] relative gap-5"
-          >
-            <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-              <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">직군 </span
-              ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
-            </p>
-            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+              <div
+                class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
+              >
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
                 <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#76c8bf]"
+                  class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
                 >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"># 제조</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># IT</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 금융</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                    # 미디어 · 디자인
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                    취득일자를 선택해주세요.
                   </p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 교육</p>
-                </div>
-              </div>
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 의료</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                    # 판매 · 유통
-                  </p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 건설</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 기관.협회</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 기타</p>
+                  <div class="flex-grow-0 flex-shrink-0 w-6 h-6 relative overflow-hidden">
+                    <div
+                      class="w-5 h-[17px] absolute left-[0.75px] top-[3.75px] rounded-sm border-[1.5px] border-[#191919]"
+                    ></div>
+                    <div class="w-[1.5px] h-1 absolute left-1 top-px rounded-[1px] bg-[#191919]"></div>
+                    <div
+                      class="w-[1.5px] h-5 absolute left-[21px] top-2.5 rounded-[1px] bg-[#191919]"
+                    ></div>
+                    <div class="w-[1.5px] h-1 absolute left-[16.5px] top-px rounded bg-[#191919]"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div
-            class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-          >
-            <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-              <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                >업무 영역 </span
-              ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span
-              ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"> </span>
-            </p>
-            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#76c8bf]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"># Web</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># App</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># IOT</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 증강현실</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 금융</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># AI</p>
-                </div>
-              </div>
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 블록체인</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 자동차</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 하드웨어</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 임베디드</p>
-                </div>
-              </div>
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 메타버스</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 플랫폼</p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 기타</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                  >프로젝트 설명 및 주요 담당 업무 </span
-                ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
-              </p>
-              <div
-                class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-              </div>
-            </div>
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]"
-                  >업무내용을 입력해주세요.</span
-                ><br /><br /><br /><br /><br /><br />
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">업무스킬</p>
-              <div
-                class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-              </div>
-            </div>
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]"
-                  >업무내용을 입력해주세요.</span
-                ><br /><br /><br /><br /><br /><br />
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">활용 Tool</p>
-              <div
-                class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[69px] relative overflow-hidden px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-              </div>
-            </div>
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 w-[161px] text-base text-left text-[#999]">
-                업무내용을 입력해주세요.
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative gap-2"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">기타사항</p>
-            </div>
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]"
-                  >업무내용을 입력해주세요.</span
-                ><br /><br /><br /><br /><br /><br />
-              </p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5">
-        <div
-          class="flex justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
-            취소 하기
-          </p>
-        </div>
-        <div
-          class="flex justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
-        >
-          <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white">
-            추가 하기
-          </p>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-[60px]">
+          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+            <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
+              <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증 1</p>
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">삭제하기</p>
+            </div>
+            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+              <div
+                class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
+              >
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">자격증 명</p>
+                <div
+                  class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                    자격증 명을 입력해주세요.
+                  </p>
+                </div>
+              </div>
+              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+                <div
+                  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
+                  <div
+                    class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+                  >
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
+                      취득일자를 선택해주세요.
+                    </p>
+                    <div class="flex-grow-0 flex-shrink-0 w-6 h-6 relative overflow-hidden">
+                      <div
+                        class="w-5 h-[17px] absolute left-[0.75px] top-[3.75px] rounded-sm border-[1.5px] border-[#191919]"
+                      ></div>
+                      <div
+                        class="w-[1.5px] h-1 absolute left-1 top-px rounded-[1px] bg-[#191919]"
+                      ></div>
+                      <div
+                        class="w-[1.5px] h-5 absolute left-[21px] top-2.5 rounded-[1px] bg-[#191919]"
+                      ></div>
+                      <div
+                        class="w-[1.5px] h-1 absolute left-[16.5px] top-px rounded bg-[#191919]"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
+            @click="nextStep()"
+          >
+            
+              다음 단계로 넘어가기
+            
+        </button>
         </div>
       </div>
     </div>
   </div>
-
 </template>
+
+<script setup>
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
+
+  function nextStep(){
+    router.push({name: "AddEngineerCareerList"})
+  }
+</script>
