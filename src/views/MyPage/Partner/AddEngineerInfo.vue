@@ -9,7 +9,7 @@
             class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative gap-2.5"
           >
             <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
-              <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
+              <p class="flex-grow-0 flex-shrink-0 text-2xl text-left text-[#191919] font-medium">
                 엔지니어 추가
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-left">
@@ -196,12 +196,10 @@
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
           <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
             <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
-              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">업무스킬 </span
-              ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">업무스킬 </span>
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
             </p>
-            <div
-              class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
-            >
+            <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]">
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
             </div>
           </div>
@@ -220,36 +218,14 @@
               class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
             >
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">자격증 명</p>
-              <div
-                class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                  자격증 명을 입력해주세요.
-                </p>
-              </div>
+              <input type="text" placeholder="자격증 명을 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
             </div>
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
               <div
                 class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
               >
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
-                <div
-                  class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                    취득일자를 선택해주세요.
-                  </p>
-                  <div class="flex-grow-0 flex-shrink-0 w-6 h-6 relative overflow-hidden">
-                    <div
-                      class="w-5 h-[17px] absolute left-[0.75px] top-[3.75px] rounded-sm border-[1.5px] border-[#191919]"
-                    ></div>
-                    <div class="w-[1.5px] h-1 absolute left-1 top-px rounded-[1px] bg-[#191919]"></div>
-                    <div
-                      class="w-[1.5px] h-5 absolute left-[21px] top-2.5 rounded-[1px] bg-[#191919]"
-                    ></div>
-                    <div class="w-[1.5px] h-1 absolute left-[16.5px] top-px rounded bg-[#191919]"></div>
-                  </div>
-                </div>
+                <input type="date" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
               </div>
             </div>
           </div>
@@ -271,34 +247,6 @@
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
                     자격증 명을 입력해주세요.
                   </p>
-                </div>
-              </div>
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-                <div
-                  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
-                  <div
-                    class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-                  >
-                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                      취득일자를 선택해주세요.
-                    </p>
-                    <div class="flex-grow-0 flex-shrink-0 w-6 h-6 relative overflow-hidden">
-                      <div
-                        class="w-5 h-[17px] absolute left-[0.75px] top-[3.75px] rounded-sm border-[1.5px] border-[#191919]"
-                      ></div>
-                      <div
-                        class="w-[1.5px] h-1 absolute left-1 top-px rounded-[1px] bg-[#191919]"
-                      ></div>
-                      <div
-                        class="w-[1.5px] h-5 absolute left-[21px] top-2.5 rounded-[1px] bg-[#191919]"
-                      ></div>
-                      <div
-                        class="w-[1.5px] h-1 absolute left-[16.5px] top-px rounded bg-[#191919]"
-                      ></div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
