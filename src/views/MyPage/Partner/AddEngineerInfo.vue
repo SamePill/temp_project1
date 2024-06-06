@@ -21,15 +21,11 @@
             </div>
             <div class="flex-grow-0 flex-shrink-0 w-[519px] h-px bg-[#191919]"></div>
           </div>
-          <div class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 gap-5">
-            <div
-              class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-5"
-            >
+          <div class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0">
+            <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
               <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로필 사진</p>
             </div>
-            <div
-              class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5"
-            >
+            <div class="mt-[20px] flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative border border-[#ddd] rounded " >
               <svg
                 width="150"
                 height="200"
@@ -47,9 +43,8 @@
                   fill="white"
                 ></path>
               </svg>
-              <div
-                class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd]"
-              >
+            </div>
+            <button class="flex mt-[10px] justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd] text-left text-[#555]">
                 <svg
                   width="16"
                   height="17"
@@ -57,45 +52,29 @@
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M8.63398 3.16667C8.63398 2.79848 8.34297 2.5 7.98398 2.5C7.625 2.5 7.33398 2.79848 7.33398 3.16667V13.8333C7.33398 14.2015 7.625 14.5 7.98398 14.5C8.34297 14.5 8.63398 14.2015 8.63398 13.8333V3.16667Z"
-                    fill="#555555"
-                  ></path>
-                  <path
-                    d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
-                    fill="#555555"
-                  ></path>
+                  preserveAspectRatio="none">
+                    <path
+                      d="M8.63398 3.16667C8.63398 2.79848 8.34297 2.5 7.98398 2.5C7.625 2.5 7.33398 2.79848 7.33398 3.16667V13.8333C7.33398 14.2015 7.625 14.5 7.98398 14.5C8.34297 14.5 8.63398 14.2015 8.63398 13.8333V3.16667Z"
+                      fill="#555555"></path>
+                    <path
+                      d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
+                      fill="#555555"></path>
                 </svg>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">사진추가</p>
-              </div>
-            </div>
+                사진추가
+            </button>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-          <div
-            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-5"
-          >
+          <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-5">
             <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
-              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]"
-                >이름 및 상태 </span
-              ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">이름 및 상태 </span>
+              <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
             </p>
           </div>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[340px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                이름을 입력해주세요.
-              </p>
-            </div>
-            <div
-              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-[#ddd]"
-            >
+            <input type="text" class="flex h-[51px] w-[340px] p-4 rounded border border-[#ddd] text-left text-[#191919]" placeholder="이름을 입력해주세요."/>
+            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-[#ddd]">
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">재직</p>
-              <div class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"></div>
             </div>
           </div>
         </div>
@@ -105,46 +84,30 @@
             ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">YYYY</p>
+            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
+              <input type="number" placeholder="YYYY" min="1" max="31" style="border:none"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
             </div>
             <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+              class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
             >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">MM</p>
+              <input type="number" placeholder="MM" min="1" max="12" style="border:none"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">월</p>
             </div>
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">DD</p>
+            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
+              <input type="number" placeholder="DD" min="1" max="31" style="border:none"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">일</p>
             </div>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
           <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
-            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">주소 </span
-            ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">주소 </span>
+            <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                주소를 입력해주세요.
-              </p>
-            </div>
-            <div
-              class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                상세주소를 입력해주세요.
-              </p>
-            </div>
+            <input type="text" placeholder="주소를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
+            <input type="text" placeholder="상세주소를 입력해주세요.." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
@@ -175,23 +138,11 @@
                 ></path>
               </svg>
             </div>
-            <div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[340px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                학교명을 입력해주세요.
-              </p>
-            </div>
+            <input type="text" placeholder="학교명을 입력해주세요." class="h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]">
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
             <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
-            <div
-              class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                전공학과를 입력해주세요.
-              </p>
-            </div>
+            <input type="text" placeholder="전공학과를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -254,13 +205,7 @@
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
             </div>
           </div>
-          <div
-            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          >
-            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-              예) 지라, 레드마인, 포토샵, 일러스트
-            </p>
-          </div>
+          <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
           <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] relative">

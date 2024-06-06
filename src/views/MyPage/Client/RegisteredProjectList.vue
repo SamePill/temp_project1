@@ -53,7 +53,7 @@
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">전체선택</p>
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <DropDown @click="documentClick('RegPrjtSort','dropDown')" id="RegPrjtSort" ref="$RegPrjtSort" @setData="getRegPrjtSort" :title="'정렬'" :listDivCd="'REG_PRJT_SORT'"/>
+                <DropDown style="z-index: 99" @click="documentClick('RegPrjtSort','dropDown')" id="RegPrjtSort" ref="$RegPrjtSort" @setData="getRegPrjtSort" :title="'정렬'" :listDivCd="'REG_PRJT_SORT'"/>
                 <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >

@@ -54,7 +54,7 @@
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
 
-                <DropDown @click="documentClick('AplPrjtSort','dropDown')" id="AplPrjtSort" ref="$AplPrjtSort" @setData="getAplPrjtSort" :title="'정렬'" :listDivCd="'APL_PRJT_SORT'"/>
+                <DropDown style="z-index: 99" @click="documentClick('AplPrjtSort','dropDown')" id="AplPrjtSort" ref="$AplPrjtSort" @setData="getAplPrjtSort" :title="'정렬'" :listDivCd="'APL_PRJT_SORT'"/>
                 <!-- <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >

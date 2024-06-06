@@ -228,9 +228,9 @@
             </div> -->
             
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3" >
-              <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
+              <DropDown style="z-index: 99" @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
               
-              <DropDown @click="documentClick('SelEngrSort','dropDown')" id="SelEngrSort" ref="$SelEngrSort" @setData="getSelEngrSort" :title="'지원순'" :listDivCd="'SEL_ENGR_SORT'"/>
+              <DropDown style="z-index: 99" @click="documentClick('SelEngrSort','dropDown')" id="SelEngrSort" ref="$SelEngrSort" @setData="getSelEngrSort" :title="'지원순'" :listDivCd="'SEL_ENGR_SORT'"/>
             </div>
           </div>
           <div class="flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ededed]"></div>
