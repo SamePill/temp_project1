@@ -283,6 +283,17 @@
               })
   }
 
+  // function showPrjDetl(idx){
+  //   router.push({name: "SelEngineerList"
+  //               ,state : {
+  //                 //dataObj : { a:1, b:'string', c:true },
+  //                 dataObj : JSON.stringify(regProjList.value[idx].projId),
+  //               }
+  //             })
+  // }
+  
+
+
   async function finish(){
     console.log(filteredChkList);
 

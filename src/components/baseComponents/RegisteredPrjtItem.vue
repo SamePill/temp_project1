@@ -55,7 +55,8 @@
     </div>
     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
       <div
-        class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] overflow-hidden gap-[30px] p-[30px] rounded-[10px] bg-white border border-[#ddd]"
+        class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[790px] overflow-hidden gap-[30px] p-[30px] rounded-[10px] bg-white border border-[#ddd] hover:cursor-pointer"
+        @click="goToPage()"
       >
         <div
           class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-4"
@@ -404,57 +405,66 @@
   </div>
 </template>
 <script setup>
-import { defineProps } from 'vue'
+  import { defineProps } from 'vue'
+  import { useRouter } from 'vue-router';
 
-const props = defineProps({
-  mode:{}
-  ,projItem : {
-    //     "projId": "C00005P00001",
-    //     "workDivCd": "10",
-    //     "workDivCdNm": "상주",
-    //     "projTitl": "아마존 웹서비스 검증_수정_001",
-    //     "engrCnt": "10",
-    //     "pirdVal": "12",
-    //     "strtDay": "20240801",
-    //     "expcPric": 17000000,
-    //     "workAddr": "서울시 강남구 홍제동",
-    //     "projStatCd": "10",
-    //     "projStatCdNm": "모집중",
-    //     "regDttm": "20240415142852",
-    //     "engrRtngInfo": {
-    //         "bgnrEngrCnt": 2,
-    //         "bgnrEngrUnitPric": 2000000,
-    //         "intrEngrCnt": 4,
-    //         "intrEngrUnitPric": 4000000,
-    //         "advnEngrCnt": 3,
-    //         "advnEngrUnitPric": 5000000,
-    //         "spclEngrCnt": 1,
-    //         "spclEngrUnitPric": 6000000
-    //     },
-    //     "projSprtSeq": null,
-    //     "jobDivCdNmList": [
-    //         {
-    //             "jobDivCdNm": "#교육",
-    //             "jobDivCd": "50"
-    //         }
-    //     ],
-    //     "taskDivCdNmList": [
-    //         {
-    //             "taskDivCdNm": "#WEB",
-    //             "taskDivCd": "10"
-    //         }
-    //     ],
-    //     "engrCntInfo": {
-    //         "totSprtEngrCnt": 7,
-    //         "passEngrCnt": 5,
-    //         "waitEngrCnt": 2,
-    //         "meetWillEngrCnt": 0,
-    //         "failEngrCnt": 0
-    //     }
-    }
+  const router = useRouter()
+  const props = defineProps({
+    mode:{}
+    ,projItem : {
+      //     "projId": "C00005P00001",
+      //     "workDivCd": "10",
+      //     "workDivCdNm": "상주",
+      //     "projTitl": "아마존 웹서비스 검증_수정_001",
+      //     "engrCnt": "10",
+      //     "pirdVal": "12",
+      //     "strtDay": "20240801",
+      //     "expcPric": 17000000,
+      //     "workAddr": "서울시 강남구 홍제동",
+      //     "projStatCd": "10",
+      //     "projStatCdNm": "모집중",
+      //     "regDttm": "20240415142852",
+      //     "engrRtngInfo": {
+      //         "bgnrEngrCnt": 2,
+      //         "bgnrEngrUnitPric": 2000000,
+      //         "intrEngrCnt": 4,
+      //         "intrEngrUnitPric": 4000000,
+      //         "advnEngrCnt": 3,
+      //         "advnEngrUnitPric": 5000000,
+      //         "spclEngrCnt": 1,
+      //         "spclEngrUnitPric": 6000000
+      //     },
+      //     "projSprtSeq": null,
+      //     "jobDivCdNmList": [
+      //         {
+      //             "jobDivCdNm": "#교육",
+      //             "jobDivCd": "50"
+      //         }
+      //     ],
+      //     "taskDivCdNmList": [
+      //         {
+      //             "taskDivCdNm": "#WEB",
+      //             "taskDivCd": "10"
+      //         }
+      //     ],
+      //     "engrCntInfo": {
+      //         "totSprtEngrCnt": 7,
+      //         "passEngrCnt": 5,
+      //         "waitEngrCnt": 2,
+      //         "meetWillEngrCnt": 0,
+      //         "failEngrCnt": 0
+      //     }
+      }
 
-})
+  })
 
-
+  function goToPage(){
+    router.push({ 
+      name: "PrjtSrchDetl"
+      ,state : {
+                dataObj : {projId: props.projItem.projId}
+              }
+    });
+  }
 
 </script>
