@@ -112,7 +112,7 @@
                   ></path>
                 </svg>
               </div> -->
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
+              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3" style="z-index: 99">
                 <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" :title="'등급'" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
                 <!-- <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
