@@ -192,9 +192,9 @@
           <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[1060px]">
 
             
-            <div class="w-[1060px]" style="position: relative; text-align: left">
+            <div class="w-[214px]" style="position: relative; text-align: left">
               <input class="w-[214px]  py-[8px]  px-[10px] justify-between border-line-1 border rounded box-border placeholder:text-sm placeholder:text-text-3" type="text" placeholder="이름을 검색해주세요." v-model="srchKeyWord" @keyup.enter="loadData()">
-              <img style="cursor: pointer; position:absolute; right:10px; top:14px;" class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
+              <img style="cursor: pointer; position:absolute; right:10px; top:14px;" class="w-[18px] h-[15px]" src="@/assets/ic_magnifier.png" alt="" @click="loadData()">
             </div>
             <!-- <div
               class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[214px] relative overflow-hidden px-2.5 py-2 rounded bg-white border border-[#ddd]"
