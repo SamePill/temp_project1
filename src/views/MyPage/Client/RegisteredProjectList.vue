@@ -237,7 +237,7 @@
       regProjList.value = res.regProjList
       topInfo.value = res.topInfo
       // TODO 총건수 필요..
-      totalCnt.value = 10
+      totalCnt.value = res.projTotlCnt
   
     }else{
       //TODO 공통Alert으로 변경 예정
