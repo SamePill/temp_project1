@@ -10,7 +10,7 @@
           <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
             지원한 프로젝트
           </p>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+          <div class="flex  justify-center items-center flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
             <div class="flex justify-between items-end flex-grow-0 flex-shrink-0 w-[790px]">
               <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
                 <div class="flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden">
@@ -100,7 +100,7 @@
             <!-- 반복부 끝 -->
 
             <!-- 조회 내용이 없을 때 -->
-            <MyPageNodata v-show="totalCnt == 0" :showDiv="1"/>
+            <MyPageNodata class="mt-[20px]" v-show="totalCnt == 0" :showDiv="1"/>
 
             <!-- pagenation -->
             <div v-show="totalCnt > 0" class="paginationDiv h-10 my-10 mx-auto font-basic" style="text-align:center">
@@ -261,6 +261,7 @@
       projList.value = rtn.rtnData.projList
       topInfo.value = rtn.rtnData.topInfo
       totalCnt.value = rtn.rtnData.projTotlCnt
+      // totalCnt.value = 0
 
     }else{
       //TODO 공통Alert으로 변경 예정

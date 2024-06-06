@@ -4,7 +4,7 @@
       <SubHeader :topInfo="topInfo"/>
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
         <SideMenu/>
-        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10 pt-5">
+        <div class="flex justify-center items-center flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-10 pt-5">
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
             <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[790px] relative">
               <p class="flex-grow-0 flex-shrink-0 text-2xl font-medium text-left text-[#191919]">
@@ -215,7 +215,7 @@
 
                       
           <!-- 조회 내용이 없을 때 -->
-          <MyPageNodata v-show="totalCnt == 0" :showDiv="3"/>
+          <MyPageNodata class="mt-[20px]" v-show="totalCnt == 0" :showDiv="3"/>
 
           <div v-show="totalCnt > 0"
             class="paginationDiv flex justify-center items-center flex-grow-0 flex-shrink-0 w-[790px] relative gap-5"
@@ -438,6 +438,7 @@
       engineerList.value = res.engrList
       topInfo.value = res.topInfo
       totalCnt.value = res.engrTotlCnt
+      // totalCnt.value = 0
       engrRtngCntInfo.value = res.engrRtngCntInfo
     }else{
       //TODO 공통Alert으로 변경 예정
