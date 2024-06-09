@@ -257,7 +257,7 @@ export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
  * @param {*} postParams //파라메터
  * @param {*} loading //로딩바(프로그레스바) 표시 여부
  */
-export const axiosPostEx = (api, postParams, queryParam, loading, isErr) => {
+export const axiosPostEx = (api, postParams, loading, isErr) => {
   // const cmmnStore = commonStore()
   
   if (typeof loading == "undefined") {
@@ -271,17 +271,15 @@ export const axiosPostEx = (api, postParams, queryParam, loading, isErr) => {
   if (typeof isErr == "undefined") {
     isErr = true;
   }
-  if (typeof queryParam == "undefined") {
-    queryParam = "";
-  }
 
   var apiUrl = api;
-
+  console.log("-=--------------------------------------=-")
+  console.log(apiUrl)
   axios.defaults.headers.common["Content-Type"] = "application/json"
   
   return new Promise(function(resolve, reject) {
     axios
-      .post(apiUrl, postParams , { params: queryParam }, {crossDomain: true})
+      .post(apiUrl, postParams , {crossDomain: true})
       .then(res => {
         var resData = res.data;
         console.log("-------result-------");
@@ -303,15 +301,16 @@ export const axiosPostEx = (api, postParams, queryParam, loading, isErr) => {
         if (loading) {
           // store.commit("setLoading", false);
         }
-        console.log(err.response.data);
+        console.log(err);
+        console.log(err.response);
         if (isErr) {
           console.log("Error -----------------------")
-          console.log(err.response.data)
-          console.log(err.response.status)
+          //console.log(err.response.data)
+          //console.log(err.response.status)
           //alert(err.response.status);     
           // console.log("오류");
-          console.log(err.response.data.rtnMsg)
-          console.log(err.response.data.rtnData)
+          // console.log(err.response.data.rtnMsg)
+          // console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
             //응답코드별 처리...

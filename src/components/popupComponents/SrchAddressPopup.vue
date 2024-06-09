@@ -1,21 +1,25 @@
 <template>
   <div>
-    <form id="form" name="form" method="post">
+    <form id="form" name="form" method="post" @submit.prevent="init()">
       <input type="hidden" id="confmKey" name="confmKey" value=""/>
       <input type="hidden" id="returnUrl" name="returnUrl" value=""/>
-      <input type="hidden" id="resultType" name="resultType" value=""/> // resultType항목 추가(2016.10.06)
+      <input type="hidden" id="resultType" name="resultType" value=""/> 
     </form>
   </div>
 </template>
 <script setup>
   
+  // import * as gfnUtils from "@/utils/gfnUtils.js";
   import { onMounted } from 'vue'
 
   onMounted(() => {
-   init();
+    init();
+    initAxios();
   })
 
   function init(){
+    console.log("Xxx");
+
     var url = location.href;
     var confmKey = "devU01TX0FVVEgyMDI0MDYwNDE4NDI0NzExNDgyMjg=";//승인키
     // resultType항목 추가(2016.10.06)
@@ -29,13 +33,59 @@
       //document.form.action="https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
       document.form.submit();
     }else{
-      /** API 서비스 제공항목 확대 (2017.02) **/
-      opener.jusoCallBack("<%=roadFullAddr%>","<%=roadAddrPart1%>","<%=addrDetail%>", "<%=roadAddrPart2%>","<%=engAddr%>"
-        , "<%=jibunAddr%>","<%=zipNo%>", "<%=admCd%>", "<%=rnMgtSn%>", "<%=bdMgtSn%>", "<%=detBdNmList%>"
-        , "<%=bdNm%>", "<%=bdKdcd%>", "<%=siNm%>", "<%=sggNm%>", "<%=emdNm%>", "<%=liNm%>", "<%=rn%>", "<%=udrtYn%>"
-        , "<%=buldMnnm%>", "<%=buldSlno%>", "<%=mtYn%>", "<%=lnbrMnnm%>", "<%=lnbrSlno%>", "<%=emdNo%>");
-      window.close();
+
+    //   console.log("ddddd");
+    //   //sendMsgToParent()
+      
+    //   /** API 서비스 제공항목 확대 (2017.02) **/
+    //   // opener.jusoCallBack("<%=roadFullAddr%>","<%=roadAddrPart1%>","<%=addrDetail%>", "<%=roadAddrPart2%>","<%=engAddr%>"
+    //   //   , "<%=jibunAddr%>","<%=zipNo%>", "<%=admCd%>", "<%=rnMgtSn%>", "<%=bdMgtSn%>", "<%=detBdNmList%>"
+    //   //   , "<%=bdNm%>", "<%=bdKdcd%>", "<%=siNm%>", "<%=sggNm%>", "<%=emdNm%>", "<%=liNm%>", "<%=rn%>", "<%=udrtYn%>"
+    //   //   , "<%=buldMnnm%>", "<%=buldSlno%>", "<%=mtYn%>", "<%=lnbrMnnm%>", "<%=lnbrSlno%>", "<%=emdNo%>");
+        
+    //   window.close();
     }
+  }
+  // function submitForm() {
+  //   console.log("ddddd-------------------------------------");
+  // }
+
+
+  async function initAxios(){
+    console.log("axios....");
+    
+    // let confmKey = "devU01TX0FVVEgyMDI0MDYwNDE4NDI0NzExNDgyMjg="
+    // let url = location.href
+    // let resultType = "4"
+
+    // var api = "/addrlink/addrMobileLinkUrl.do"
+    // var params = {confmKey:confmKey, returnUrl:url, resultType:resultType};
+    // let rtn = await gfnUtils.axiosPostEx(
+    //   api
+    //   ,params
+    // );
+
+    // console.log(rtn)
+  }
+
+  function sendMsgToParent(){  // eslint-disable-line no-unused-vars
+    this.sendToOpener(
+    {
+        evt: 'message' ,
+        message : 'hello'
+    });
+  }
+
+ function sendToOpener( sendObj ){ // eslint-disable-line no-unused-vars
+
+    if( opener == null ) {
+      return;
+    }
+
+    let sendStr = JSON.stringify( sendObj );
+
+    // 부모 창에 Message를 보냄
+    window.opener.postMessage( sendStr, '*' );
   }
 
 
