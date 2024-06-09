@@ -77,7 +77,7 @@ onMounted(() => {
 onUnmounted(()=>{
 })
 const pageNo = ref(1)
-const totalCnt = ref(100)
+const totalCnt = ref()
 const workDivCd = ref("")
 const workPirdDivCd = ref("")
 const engrRtngDivCd = ref("")

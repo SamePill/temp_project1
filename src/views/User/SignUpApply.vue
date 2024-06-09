@@ -108,7 +108,7 @@
                   >
                     회사 로고를 추가해주세요. (PNG,JPG)
                   </p>
-                  <input type="file" id="upload-logo" hidden />
+                  <input type="file"  accept=".jpg, .png, .pdf" id="upload-logo" hidden />
                 </div>
                 <label for="upload-logo">
                   <div
@@ -196,7 +196,7 @@
                   >
                     사업자 등록증을 추가해주세요.
                   </p>
-                  <input type="file" id="upload-docu" hidden />
+                  <input type="file" accept=".jpg, .png, .pdf" id="upload-docu" hidden />
                 </div>
                 <label for="upload-docu">
                   <div
@@ -754,7 +754,7 @@ function prevPage(){
   console.log(dataObj)
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
   //const signUpdData = signUp.value.map(item => item);
-  router.push({ name: "signUp"
+  router.push({ name: "SignUp"
              ,state : {
                         //dataObj : { a:1, b:'string', c:true },
                         dataObj : dataObj,

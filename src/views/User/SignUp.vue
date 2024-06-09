@@ -242,7 +242,7 @@ function nextPage(){
   console.log(signUp.value.joinOneStep)
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
   //const signUpdData = signUp.value.map(item => item);
-  router.push({ name: "signUpApply"
+  router.push({ name: "SignUpApply"
              // ,state: { data : signUp.value}
             //  ,param: {
             //             dataObj : { a:1, b:'string', c:true },

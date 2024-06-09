@@ -36,8 +36,11 @@ import SignUp from "@/views/User/SignUp.vue";
 import SignUpApply from "@/views/User/SignUpApply.vue";
 import FindId from "@/views/User/FindId.vue";
 import ResetPassword from "@/views/User/ResetPassword.vue";
-import Test from "@/views/Prjt/Test.vue";
 
+//주소검색
+import SrchAddrPop from '@/components/popupComponents/SrchAddressPopup.vue'
+
+import Test from "@/views/Prjt/Test.vue";
 import TestPage from "@/views/Test/TestPage.vue";
 import TestPageSetup from "@/views/Test/TestPageSetup.vue";
 
@@ -100,13 +103,13 @@ export default createRouter({
     //회원가입 steo1
     {
       path: '/signUp',
-      name: 'signUp',
+      name: 'SignUp',
       component: SignUp,
     },
     //회원가입 step2
     {
       path: '/signUpApply',
-      name: 'signUpApply',
+      name: 'SignUpApply',
       component: SignUpApply,
       //props : true,
     },
@@ -205,16 +208,20 @@ export default createRouter({
       component: ManageEngineer,
       name: 'ManageEngineer'
     },
-
-
+  /*********************** 주소검색 ***********************/
     {
-      path: '/Test',
+      path: '/addressPopup',
+      component: SrchAddrPop,
+      name: 'SrchAddrPop'
+    },
+
+
+   /*********************** 테스트 페이지 ***********************/
+    {
+     path: '/Test',
       component: Test,
       name: Test,
     },
-
-   /*********************** 테스트 페이지 ***********************/
-    
     //테스트 페이지
     {
       path: '/testPage',

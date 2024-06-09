@@ -134,11 +134,14 @@ export const axiosGet = (api, getParams) => {
  * @param {*} loading //로딩바(프로그레스바) 표시 여부
  */
 export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
+  // const cmmnStore = commonStore()
+  
   if (typeof loading == "undefined") {
     loading = true;
   }
   if (loading) {
     // store.commit("setLoading", true);
+    
   }
 
   if (typeof isErr == "undefined") {
@@ -247,6 +250,100 @@ export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
       });
   });
 };
+
+/**
+ *
+ * @param {*} api  //restapi 호출주소
+ * @param {*} postParams //파라메터
+ * @param {*} loading //로딩바(프로그레스바) 표시 여부
+ */
+export const axiosPostEx = (api, postParams, queryParam, loading, isErr) => {
+  // const cmmnStore = commonStore()
+  
+  if (typeof loading == "undefined") {
+    loading = true;
+  }
+  if (loading) {
+    // store.commit("setLoading", true);
+    
+  }
+
+  if (typeof isErr == "undefined") {
+    isErr = true;
+  }
+  if (typeof queryParam == "undefined") {
+    queryParam = "";
+  }
+
+  var apiUrl = api;
+
+  axios.defaults.headers.common["Content-Type"] = "application/json"
+  
+  return new Promise(function(resolve, reject) {
+    axios
+      .post(apiUrl, postParams , { params: queryParam }, {crossDomain: true})
+      .then(res => {
+        var resData = res.data;
+        console.log("-------result-------");
+        console.log(resData);
+
+        if (resData.rtnCd == "00") {
+          //resolve(resData.rtnData);
+          resolve(resData);
+        } else {
+          //store.commit("setLoading", false);
+          // console.log("오류");
+          //store.commit("setAlertDialog", true);
+          //openAlertDiaolog("ERROR", resData.rtnMsg);
+          reject(resData);
+          // resolve(resData);
+        }
+      })
+      .catch(err => {
+        if (loading) {
+          // store.commit("setLoading", false);
+        }
+        console.log(err.response.data);
+        if (isErr) {
+          console.log("Error -----------------------")
+          console.log(err.response.data)
+          console.log(err.response.status)
+          //alert(err.response.status);     
+          // console.log("오류");
+          console.log(err.response.data.rtnMsg)
+          console.log(err.response.data.rtnData)
+          if (err.response.status == "404") {
+            // goto 404 page
+            //응답코드별 처리...
+            // openAlertDiaolog(
+            //   "ERROR",
+            //   "오류가 발생하였습니다. (" + err.response.status + ")"
+            // );
+          } else if (err.response.status == "403") {
+            // if ("Landing" != router.currentRoute.name) {
+            //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+            // }
+
+            router.replace({ name: "Login" });
+          } else if (err.response.status == "400") {
+            // if ("Landing" != router.currentRoute.name) {
+            //   // openAlertDiaolog("ERROR", "로그인 되어있지 않습니다.");
+            // }
+            resolve(err.response.data);
+          } else {
+            // openAlertDiaolog(
+            //   "ERROR",
+            //   "오류가 발생하였습니다. (" + err.response + ")"
+            // );
+            //reject(err.response.data);     
+            resolve(err.response.data);            
+          }
+        }
+      });
+  });
+};
+
+
 
 
 export const loadCommCode = async () => {

@@ -171,7 +171,7 @@
 
 
   const pageNo = ref(1)
-  const totalCnt = ref(0)
+  const totalCnt = ref()
   // const boolSort = ref(false)
   const userMail = ref(window.$cookies.get("loginUserMail"))
   const sortDiv = ref()

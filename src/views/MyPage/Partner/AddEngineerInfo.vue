@@ -26,6 +26,7 @@
               <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로필 사진</p>
             </div>
             <div class="mt-[20px] flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative border border-[#ddd] rounded " >
+              <img id="preview" v-show="showImg"/>
               <svg
                 width="150"
                 height="200"
@@ -34,6 +35,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 class="flex-grow-0 flex-shrink-0 w-[150px] h-[200px] relative"
                 preserveAspectRatio="xMidYMid meet"
+                v-show="!showImg"
               >
                 <rect x="0.5" y="0.5" width="149" height="199" fill="#DDDDDD"></rect>
                 <rect x="0.5" y="0.5" width="149" height="199" stroke="#DDDDDD"></rect>
@@ -44,24 +46,27 @@
                 ></path>
               </svg>
             </div>
-            <button class="flex mt-[10px] justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd] text-left text-[#555]">
-                <svg
-                  width="16"
-                  height="17"
-                  viewBox="0 0 16 17"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                  preserveAspectRatio="none">
-                    <path
-                      d="M8.63398 3.16667C8.63398 2.79848 8.34297 2.5 7.98398 2.5C7.625 2.5 7.33398 2.79848 7.33398 3.16667V13.8333C7.33398 14.2015 7.625 14.5 7.98398 14.5C8.34297 14.5 8.63398 14.2015 8.63398 13.8333V3.16667Z"
-                      fill="#555555"></path>
-                    <path
-                      d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
-                      fill="#555555"></path>
-                </svg>
-                사진추가
-            </button>
+            <input type="file"  accept=".jpg, .png" id="upload-photo" hidden @change="readURL($event)"/>
+            <label for="upload-photo">
+              <div class="flex mt-[10px] justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd] text-left text-[#555]">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+                    preserveAspectRatio="none">
+                      <path
+                        d="M8.63398 3.16667C8.63398 2.79848 8.34297 2.5 7.98398 2.5C7.625 2.5 7.33398 2.79848 7.33398 3.16667V13.8333C7.33398 14.2015 7.625 14.5 7.98398 14.5C8.34297 14.5 8.63398 14.2015 8.63398 13.8333V3.16667Z"
+                        fill="#555555"></path>
+                      <path
+                        d="M13.3333 9.13301C13.7015 9.13301 14 8.84199 14 8.48301C14 8.12402 13.7015 7.83301 13.3333 7.83301L2.66667 7.83301C2.29848 7.83301 2 8.12402 2 8.48301C2 8.84199 2.29848 9.13301 2.66667 9.13301H13.3333Z"
+                        fill="#555555"></path>
+                  </svg>
+                  사진추가
+                </div>
+            </label>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -267,10 +272,28 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
+  import {  ref } from "vue";
 
   const router = useRouter()
+  const showImg = ref(false)
 
   function nextStep(){
     router.push({name: "AddEngineerCareerList"})
+  }
+
+  function readURL(input) {
+
+    if (input.target.files && input.target.files[0]) {
+      console.log("파일있음")
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('preview').src = e.target.result;
+      };
+      reader.readAsDataURL(input.target.files[0]);
+      showImg.value = true;
+    } else {
+      console.log("파일없음")
+      document.getElementById('preview').src = "";
+    }
   }
 </script>

@@ -307,7 +307,7 @@
 
   const router = useRouter()
   const pageNo = ref(1)
-  const totalCnt = ref(0)
+  const totalCnt = ref()
   const userMail = ref(window.$cookies.get("loginUserMail"))
   const engrProfile = ref({})
   const profileMode = ref("")
