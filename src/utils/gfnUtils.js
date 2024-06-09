@@ -275,6 +275,7 @@ export const axiosPostEx = (api, postParams, loading, isErr) => {
   var apiUrl = api;
   console.log("-=--------------------------------------=-")
   console.log(apiUrl)
+  console.log(postParams)
   axios.defaults.headers.common["Content-Type"] = "application/json"
   
   return new Promise(function(resolve, reject) {

@@ -213,12 +213,18 @@
       </tbody>
     </table>
     <!-- <modal ref="srchAddrShow" :width="340">
-    <SrchAddressPopup @closeAddrPop="closeAddrPop"/>
-  </modal> -->
-    <modal ref="srchAddrApiShow" :width="340">
+      <SrchAddressPopup @closeAddrPop="closeAddrPop"/>
+    </modal> -->
+    <br>
+    <br>
+    <br>
+    <modal ref="srchAddrShow" :width="340">
       <SrchAddrApiPopup @closeAddrPop="closeAddrPop" />
     </modal>
-
+    <button type="button" @click="showAddrPop">모달 주소검색 팝업 띄우기</button>
+    <br>
+    <br>
+    <br>
     <!--윈도우 팝업-->
     <WindowPopup ref="winPopup"  @onClose="val=>evtCloseWinPopup(val)"  @onRecvEvtFromWinPop="val=>onRecvWinPop(val)" >
     </WindowPopup>
@@ -258,15 +264,15 @@
     alert("OK");
   };
 
-  const srchAddrApiShow = ref(null);
-  // const srchAddrShow = ref(null)
-  // const showAddrPop = () => {
-  //   srchAddrShow.value.open()
-  // }
-  // //닫기
-  // const closeAddrPop = function (){
-  //   srchAddrShow.value.close()
-  // }
+  // const srchAddrApiShow = ref(null);
+  const srchAddrShow = ref(null)
+  const showAddrPop = () => {
+    srchAddrShow.value.open()
+  }
+  //닫기
+  const closeAddrPop = function (){
+    srchAddrShow.value.close()
+  }
 
   const apiUrl = ref("/v1/common/code");
   const apiResult = ref("");

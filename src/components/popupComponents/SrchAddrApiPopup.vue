@@ -22,10 +22,10 @@
   import { ref } from 'vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
 
-  const currentPage = ref()
+  const currentPage = ref(1)
   const countPerPage = ref(10)
   // const resultType =ref("json")
-  const confmKey = 'devU01TX0FVVEgyMDI0MDYwNDE4NDI0NzExNDgyMjg='
+  const confmKey = ref('devU01TX0FVVEgyMDI0MDYwNDE4NDI0NzExNDgyMjg=')
   const keyword = ref("")
 
   function test(x){
@@ -39,11 +39,14 @@
       return ;
     }
     console.log("주소 검색 2112121")
-    var api = "https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do";
-    var getParams = {currentPage: currentPage.value, countPerPage:countPerPage.value, confmKey:confmKey.value, keyword:keyword.value };
+    //var api = "https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do";
+    //var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
+    var api = "/addrlink/addrLinkApi.do";
+    var params = {currentPage: currentPage.value, countPerPage:countPerPage.value, confmKey:confmKey.value, keyword:keyword.value };
+
     let rtn = await gfnUtils.axiosPostEx(
       api,
-      getParams
+      params
     );
 
     console.log(rtn)
