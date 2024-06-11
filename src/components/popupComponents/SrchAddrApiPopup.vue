@@ -1,11 +1,11 @@
 <template>
   <div
-    class="flex flex-col justify-start items-center w-[340px] relative overflow-hidden gap-[50px] px-[72px] pt-[60px] pb-5 rounded-[10px] bg-white"
+    class="flex flex-col justify-start items-center w-[800px] relative overflow-hidden gap-[50px] px-[72px] pt-[30px] pb-5 rounded-[10px] bg-white"
   >
     <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
       우편번호 검색
     </p>
-    <input type="text" v-model="keyword"/>
+    <input type="text" class="w-[300px] py-[10px]  px-[10px] justify-between border-line-1 border rounded box-border placeholder:text-sm placeholder:text-text-3" v-model="keyword" placeholder="주소를 입력해 주세요" />
     <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
       <button
         class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
@@ -14,24 +14,25 @@
         주소검색
       </button>
  
+      <div>
+
+      </div>
+
     </div>
-    <button @click="test('X')">asdfasdf</button>
   </div>
 </template>
 
 <script setup>
   import { ref } from 'vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
+  //import axios from "axios";
 
+  // const FormData = require('form-data');
   const currentPage = ref(1)
   const countPerPage = ref(10)
   // const resultType =ref("json")
   const confmKey = ref('devU01TX0FVVEgyMDI0MDYwNDE4NDI0NzExNDgyMjg=')
-  const keyword = ref("등촌로39마길 28")
-
-  function test(x){
-    alert(x)
-  }
+  const keyword = ref("")
 
   async function getAddr(){
     console.log("주소 검색")
@@ -41,19 +42,24 @@
     }
     console.log("주소 검색 pass")
     //var api = "https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do";
-    //var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
-    var api = "/addrlink/addrLinkApi.do";
-    
-    var params = {currentPage: currentPage.value, countPerPage:countPerPage.value, confmKey:confmKey.value, keyword:keyword.value };
-    console.log(params)
-    let rtn = await gfnUtils.axiosPostEx(
-      api,
-      params
+    var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
+    //var api = "/addrlink/addrLinkApi.do" 
+            // + "?confmKey=" + confmKey.value
+            // + "&currentPage=" + currentPage.value
+            // + "&countPerPage=" + countPerPage.value
+            // + "&keyword=" + keyword.value
+            // + "&resultType=json";
+
+    var params = {currentPage: currentPage.value, countPerPage:countPerPage.value, confmKey:confmKey.value, keyword:keyword.value, resultType:"json" };
+    let rtn = await gfnUtils.axiosGetEx(
+      api
+      ,params
     );
 
     console.log(rtn)
   }
 
+  
 
   // function enterSearch(event) {
   //   var evt_code = (window.netscape) ? ev.which : event.keyCode;

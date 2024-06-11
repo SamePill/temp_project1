@@ -258,6 +258,7 @@ export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
  * @param {*} getParams //파라메터
  */
 export const axiosGetEx = (api, getParams) => {
+  console.log(getParams)
 
   var apiUrl =  api;
   axios.defaults.headers.common["Content-Type"] = "application/json"
@@ -268,7 +269,7 @@ export const axiosGetEx = (api, getParams) => {
     }
     
     axios
-      .get(apiUrl, { "data" : getParams}  , {crossDomain: true})
+      .get(apiUrl, {"params": getParams}, {crossDomain: true})
       .then(res => {
         if (res.status === 200) {
           var resData = res;
@@ -284,14 +285,14 @@ export const axiosGetEx = (api, getParams) => {
         //   // store.commit("setLoading", false);
         // }
         console.log("err catch 에러!!!!!!!!!!!!!!!!" + isErr);
-        console.log(err.response.data);
+        console.log(err.response);
         if (isErr) {
           // console.log("Error -----------------------")
           // console.log(err.response.data)
           // console.log(err.response.status)
           //alert(err.response.status);     
           // console.log("오류");
-          console.log(err.response.data.rtnMsg)
+          // console.log(err.response.data.rtnMsg)
           // console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
@@ -351,7 +352,7 @@ export const axiosPostEx = (api, postParams, loading, isErr) => {
   console.log("-=--------------------------------------=-")
   console.log(apiUrl)
   console.log(postParams)
-  axios.defaults.headers.common["Content-Type"] = "application/json"
+  axios.defaults.headers.common["Content-Type"] = "multipart/form-data"
   
   return new Promise(function(resolve, reject) {
     axios
