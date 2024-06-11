@@ -1,7 +1,7 @@
 <template>
   <div class= "flex justify-between items-center h-[80px] mx-auto font-basic">
     <div
-      class="flex flex-col justify-center items-center w-[1920px] h-20 overflow-hidden gap-2.5 px-[60px] py-5 bg-white"
+      class="flex flex-col justify-center items-center mx-auto w-[1200px] h-20 overflow-hidden gap-2.5 px-[60px] py-5 bg-white"
     >
       <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1060px]">
         <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-[120px]">

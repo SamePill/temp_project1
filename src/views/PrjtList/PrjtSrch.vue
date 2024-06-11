@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[1060px] h-10 my-10 mx-auto font-basic">
+  <div class="w-[1060px] my-10 mx-auto font-basic">
 
     <!-- 상단 검색 -->
     <div class="flex items-center justify-between w-full" style="position: relative;">
