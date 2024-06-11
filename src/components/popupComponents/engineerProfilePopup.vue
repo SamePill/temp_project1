@@ -36,7 +36,7 @@
       <div class="flex-grow-0 flex-shrink-0 w-[720px] h-px bg-[#191919]"></div>
     </div>
     <div style="height: 600px; overflow-y: auto">
-      <div class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-[30px]">
+      <div class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-[30px]" id="resume">
         <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[30px]">
           <svg
             width="150"
@@ -67,7 +67,7 @@
                   {{ props.profile.compNm }}
                 </p>
               </div>
-              <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">
+              <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494] hidden-print" @click="resumeDownClick">
                 이력서 다운받기
               </button>
             </div>
@@ -318,9 +318,51 @@
 
 
 <script setup>
+
 import { defineProps, ref } from 'vue'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const showMore = ref(false)
+//테스트중
+async function  resumeDownClick(){
+  const elementsToHide = document.getElementsByClassName('hidden-print');
+  for (let i = 0; i < elementsToHide.length; i++) {
+    elementsToHide[i].style.display = 'none';
+  }
+
+  const resume = document.getElementById('resume');
+  const canvas = await html2canvas(resume, {
+    scale: 1, // 더 높은 해상도를 위해 스케일을 높임
+  });
+  // 숨긴 요소를 다시 보이게 설정
+  for (let i = 0; i < elementsToHide.length; i++) {
+    elementsToHide[i].style.display = '';
+  }
+  const imgData = canvas.toDataURL('image/png');
+
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const imgWidth = 210; // A4 크기 너비(mm)
+  const pageHeight = 297; // A4 크기 높이(mm)
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  let heightLeft = imgHeight;
+  const margin = 0; // 페이지 분할 시 추가할 여백
+
+  let position = 0;
+
+  pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+  heightLeft -= pageHeight;
+
+  while (heightLeft >= 0) {
+    position = heightLeft - imgHeight + margin;
+    pdf.addPage();
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+  }
+
+  pdf.save('resume.pdf');  
+}
+
 const props = defineProps({
   mode:{default:"99"},
   profile:{
