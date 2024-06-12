@@ -218,8 +218,8 @@
     <br>
     <br>
     <br>
-    <modal ref="srchAddrShow" :width="340">
-      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" />
+    <modal ref="srchAddrShow" :width="1060">
+      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="closeAddrPop" />
     </modal>
     <button type="button" @click="showAddrPop">모달 주소검색 팝업 띄우기</button>
     <br>

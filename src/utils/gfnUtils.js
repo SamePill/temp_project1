@@ -4,9 +4,9 @@ import moment from "moment";
 //import router from "@/routes";
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
 import { commonStore } from '@/stores'
 
+const addrApiKey = "devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI="  //devKey
 
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
 const baseUrl = "http://dev.l-walk.com:29080" ;
@@ -257,7 +257,11 @@ export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
  * @param {*} api //restapi 호출주소
  * @param {*} getParams //파라메터
  */
-export const axiosGetEx = (api, getParams) => {
+export const axiosGetEx = (api, getParams, div) => {
+
+  if(div == "addr"){
+    getParams.confmKey = addrApiKey
+  }
   console.log(getParams)
 
   var apiUrl =  api;

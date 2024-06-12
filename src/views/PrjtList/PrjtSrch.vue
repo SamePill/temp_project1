@@ -59,7 +59,7 @@
           </template>
         </vue-awesome-paginate>
       </div> 
-      <div class="h-[40px]"></div>
+    <div class="h-[40px]"></div>
   </div> 
 </template>
 

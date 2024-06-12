@@ -1,11 +1,38 @@
 <template>
   <div
-    class="flex flex-col justify-start items-center w-[800px] relative overflow-hidden gap-[50px] px-[72px] pt-[30px] pb-5 rounded-[10px] bg-white"
+    class="flex flex-col justify-start items-center w-[1000px] relative overflow-hidden gap-[50px] px-[5px] pt-[30px] pb-5 rounded-[10px] bg-white"
   >
     <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
       우편번호 검색
     </p>
     <input type="text" class="w-[300px] py-[10px]  px-[10px] justify-between border-line-1 border rounded box-border placeholder:text-sm placeholder:text-text-3" v-model="keyword" placeholder="주소를 입력해 주세요" />
+
+    <!--반복부-->
+    <div v-for="el in addressList" :key="el">
+      {{ el.roadAddr }}
+      {{ el.zipNo }}
+    </div>
+    <!--페이지네이션-->
+    <div v-if="addressList.length  > 0" class="paginationDiv w-[1000px] h-10 my-10 mx-auto font-basic" style="text-align:center">
+      <vue-awesome-paginate
+        :total-items=totalCnt
+        v-model="currentPage"
+        :items-per-page=countPerPage
+        :max-pages-shown="10"
+        :on-click="getAddr"
+      >
+        <template #prev-button>
+          <span>
+            <font-awesome-icon icon="chevron-right" color="black" />
+          </span>
+        </template>
+        <template #next-button>
+          <span>
+            <font-awesome-icon icon="chevron-right" color="black" />
+          </span>
+        </template>
+      </vue-awesome-paginate>
+    </div> 
     <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
       <button
         class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
@@ -13,10 +40,18 @@
         >
         주소검색
       </button>
- 
-      <div>
-
-      </div>
+      <button
+        class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
+        @click="$emit('closeAddrPop')"
+        >
+        닫기
+      </button>
+      <button
+        class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
+        @click="$emit('selAddr')"
+        >
+        선택
+      </button>      
 
     </div>
   </div>
@@ -28,11 +63,13 @@
   //import axios from "axios";
 
   // const FormData = require('form-data');
+  const totalCnt = ref()
   const currentPage = ref(1)
-  const countPerPage = ref(10)
+  const countPerPage = ref(5)
   // const resultType =ref("json")
-  const confmKey = ref('devU01TX0FVVEgyMDI0MDYwNDE4NDI0NzExNDgyMjg=')
+  // const confmKey = ref('devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI=') //for DEV
   const keyword = ref("")
+  const addressList = ref([])
 
   async function getAddr(){
     console.log("주소 검색")
@@ -41,7 +78,6 @@
       return ;
     }
     console.log("주소 검색 pass")
-    //var api = "https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do";
     var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
     //var api = "/addrlink/addrLinkApi.do" 
             // + "?confmKey=" + confmKey.value
@@ -50,13 +86,22 @@
             // + "&keyword=" + keyword.value
             // + "&resultType=json";
 
-    var params = {currentPage: currentPage.value, countPerPage:countPerPage.value, confmKey:confmKey.value, keyword:keyword.value, resultType:"json" };
+    var params = {currentPage: currentPage.value, countPerPage:countPerPage.value, confmKey:"", keyword:keyword.value, resultType:"json" };
     let rtn = await gfnUtils.axiosGetEx(
       api
       ,params
+      ,"addr"
     );
 
     console.log(rtn)
+    if(rtn.data.results.common.errorCode == 0){
+      addressList.value = rtn.data.results.juso
+      totalCnt.value = rtn.data.results.common.totalCount
+    }else{
+      //TODO 에러처리
+    }
+    
+
   }
 
   
@@ -134,3 +179,54 @@
 
 
 </script>
+
+<style>
+.paginationDiv .pagination-container {
+  column-gap: 10px;
+  align-items: center;
+}
+.paginationDiv .paginate-buttons {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.paginationDiv .back-button,
+.paginationDiv .next-button {
+  background-color: white;
+  color: white;
+  border-radius: 8px;
+  height: 45px;
+  width: 45px;
+}
+.paginationDiv .active-page {
+  background-color: #e5e5e5;
+}
+.paginationDiv .paginate-buttons:hover {
+  background-color: #f5f5f5;
+}
+.paginationDiv .active-page:hover {
+  background-color: #e5e5e5;
+}
+
+.paginationDiv .back-button svg {
+  transform: rotate(180deg) translateY(-2px);
+}
+.paginationDiv .next-button svg {
+  transform: translateY(2px);
+}
+
+/* .paginationDiv .back-button:hover,
+.paginationDiv .next-button:hover {
+  background-color: rgb(45, 45, 45);
+} */
+
+.paginationDiv .back-button:active,
+.paginationDiv .next-button:active {
+  background-color: rgb(85, 85, 85);
+}
+</style>
