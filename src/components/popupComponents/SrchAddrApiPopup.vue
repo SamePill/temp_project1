@@ -78,8 +78,8 @@
       return ;
     }
     console.log("주소 검색 pass")
-    var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
-    //var api = "/addrlink/addrLinkApi.do" 
+    //var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
+    var api = "/addrlink/addrLinkApi.do" 
             // + "?confmKey=" + confmKey.value
             // + "&currentPage=" + currentPage.value
             // + "&countPerPage=" + countPerPage.value

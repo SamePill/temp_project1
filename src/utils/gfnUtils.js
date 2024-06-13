@@ -266,14 +266,17 @@ export const axiosGetEx = (api, getParams, div) => {
 
   var apiUrl =  api;
   axios.defaults.headers.common["Content-Type"] = "application/json"
-  
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
   return new Promise(function(resolve, reject, isErr) {
     if (typeof isErr == "undefined") {
       isErr = true;
     }
     
     axios
-      .get(apiUrl, {"params": getParams}, {crossDomain: true})
+      .get(apiUrl, {"params": getParams}, 
+          {headers: { // remove headers
+            }}
+        )
       .then(res => {
         if (res.status === 200) {
           var resData = res;
