@@ -1,66 +1,65 @@
 <template>
-  <!-- 상단메뉴 -->
-  <nav class="flex justify-between items-center h-[80px] mx-auto font-basic"
-      :class="getHeaderType[0]">
-
-    <!-- 상단메뉴 -->
-    <div :class="getHeaderType[1]">
-      <span class="hover:cursor-pointer" @click="goToPage('Home')">Q-MEET LOGO</span>
-    </div>
-
-    <!-- 상단중간 메뉴 -->
-    <ul class="flex text-base bg-white"
-      :class="getHeaderType[2]">
-
-      <li class="mr-10 hover:cursor-pointer" @click="goToPage('PrjtSrch')">프로젝트 찾기</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('PrjtRegiPage1')">프로젝트 등록</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('MyInformation')">마이페이지</li>
-      <li class="mx-10 hover:cursor-pointer">큐밋이란?</li>
-      <li class="mx-10 hover:cursor-pointer">고객센터</li>
-      <li class="mx-10 hover:cursor-pointer" @click="goToPage('TestPageSetup')">Test페이지</li>
-    </ul>
-
-    <!-- 로그인 회원가입 -->
-   
-    <ul class="flex grow basis-[14%]"
-      :class="getHeaderType[3]"
-      v-if="loginYn == null"
-      >
-      
-      {{ loginYn }}
-      <li class="mr-5">
-        <button @click="goToPage('Login')">
-          로그인
-        </button>
-      </li>
-      <li class="mr-5">|</li>
-        <button @click="goToPage('SignUp')">
-          회원가입
-        </button>
-    </ul>
-    <ul class="flex grow basis-[14%]"
-      :class="getHeaderType[3]"
-      v-else>
-
-      <li class="mr-5">
-        <button @click="logout()">
-          로그아웃
-        </button>
-      </li>
-    </ul>
-  </nav>
+  <div class= "flex justify-between items-center h-[80px] mx-auto font-basic">
+    <div
+      class="flex flex-col justify-center items-center w-[1920px] h-20 overflow-hidden gap-2.5 px-[60px] py-5 bg-white"
+    >
+      <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1060px]">
+        <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-[120px]">
+          <button class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#191919]" @click="goToPage('Home')">
+            Q-MEET LOGO
+          </button>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-20">
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('PrjtSrch')">
+              프로젝트 찾기
+            </button>
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('PrjtRegiPage1')">
+              프로젝트 등록
+            </button>
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
+              큐밋이란?
+            </button>
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
+              고객센터
+            </button>
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('TestPageSetup')">
+              test
+            </button>          
+          </div>
+        </div>
+        <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-5" v-if="loginYn == null">
+          <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('Login')">
+            로그인
+          </button>
+          <div class="flex-grow-0 flex-shrink-0 w-px h-4 rounded-[100px] bg-[#aaa]"></div>
+          <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('SignUp')">
+            회원가입
+          </button>
+        </div>
+        <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-5"  v-else>
+          <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="goToPage('MyInformation')" >
+            마이페이지
+          </button>
+          <div class="flex-grow-0 flex-shrink-0 w-px h-4 rounded-[100px] bg-[#aaa]"></div>
+          <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="logout()">
+            로그아웃
+          </button>
+        </div>
+      </div>
+    </div> 
+  </div> 
 </template>
 <script setup>
 // import baseMixin from "@/utils/baseMixin.js";
 //import * as gfnUtils from "@/utils/gfnUtils.js";
 import { useRouter } from 'vue-router'
-import { computed, ref, defineProps } from 'vue'
+import { ref } from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const router = useRouter()
 const loginYn = ref(window.$cookies.get("loginYn"));
-const props = defineProps({
-  headerType : ref("1")})
+// const props = defineProps({
+//   headerType : ref("1")
+// })
 
 function goToPage(url){
   if(loginYn.value != "Y"){
@@ -87,17 +86,17 @@ function logout(){
   router.push({name: "Home"})
 }
 
-const getHeaderType = computed(() => {
-  //헤더 Width, 각요소 basis      
-  if(props.headerType == '1')
-  {        
-    return ['w-[1060px]', 'basis-[22%]', 'basis-[64%]', 'basis-[14%]']
-  }
-  else
-  {
-    return ['w-[1440px]', 'basis-[16%]', 'basis-[73%]', 'basis-[11%]']
-  }      
-})
+// const getHeaderType = computed(() => {
+//   //헤더 Width, 각요소 basis      
+//   if(props.headerType == '1')
+//   {        
+//     return ['w-[1060px]', 'basis-[22%]', 'basis-[64%]', 'basis-[14%]']
+//   }
+//   else
+//   {
+//     return ['w-[1440px]', 'basis-[16%]', 'basis-[73%]', 'basis-[11%]']
+//   }      
+// })
 
 // export default {
 //   // mixins: [baseMixin],

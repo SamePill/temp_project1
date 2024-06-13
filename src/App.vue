@@ -14,9 +14,12 @@
     <template v-else >
       <Header/>
     </template>
+
     <div style=" height:calc(100vh - 80px); overflow-y: auto;">
       <router-view ></router-view>
+      <Footer></Footer>
     </div>
+    
     <modal ref="loadingBar" :width="340">
       <img  src="@/assets/ic_small_arrow_001.png" alt="">
     </modal>
@@ -25,6 +28,7 @@
 
 <script setup>
   import Header from '@/components/layoutComponents/Header.vue'
+  import Footer from '@/components/layoutComponents/Footer.vue'
   import Modal from '@/components/baseComponents/Modal.vue'
   import { ref } from 'vue'
 

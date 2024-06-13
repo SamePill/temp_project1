@@ -84,14 +84,14 @@
   </div>
   <!-- 푸터 -->
   <!-- <Footer /> -->
-  <div class="mt-20 bg-sub-2 w-full">
+  <!-- <div class="mt-20 bg-sub-2 w-full">
       <div class="w-[1060px] mx-auto flex flex-col py-10">
         <div class="text-text-0 font-bold text-[28px]">큐밋로고</div>
         <span class="text-xs text-text-1 mt-5">리드워크 l 대표이사 : {{ siteInfo.reprNm }}</span>
         <span class="text-xs text-text-1">주소 : {{siteInfo.compAddr}}</span>
         <span class="text-xs text-text-1">메일 : {{siteInfo.compMail}} 전화 : {{siteInfo.compNo}} 팩스 : {{siteInfo.faxNo}}</span>
       </div>
-    </div>
+    </div> -->
 </div>
 </template>
 
