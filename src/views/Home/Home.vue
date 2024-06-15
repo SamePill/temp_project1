@@ -65,23 +65,65 @@
   </div>
 
   <!-- 큐밋 전문 검증 엔지니어 -->
-  <div class="h-[521px] py-[40px]">
-    <p class="text-[28px] text-center text-text-0 font-semibold">큐밋 전문 검증 엔지니어</p>
-    <div class="w-[1060px] mx-auto font-basic mt-5 flex justify-between">
-      <div class="w-[196px] h-[196px] rounded-lg bg-sub-1"></div>
-      <div class="w-[196px] h-[196px] rounded-lg bg-sub-1"></div>
-      <div class="w-[196px] h-[196px] rounded-lg bg-sub-1"></div>
-      <div class="w-[196px] h-[196px] rounded-lg bg-sub-1"></div>
-      <div class="w-[196px] h-[196px] rounded-lg bg-sub-1"></div>
+  <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[100] relative overflow-hidden gap-5 pt-10 pb-[80px] bg-[#fefefe]">
+  <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-center text-[#191919] font-semibold">
+    큐밋 전문 검증 엔지니어
+  </p>
+  <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 overflow-hidden gap-5">
+    <div v-for="el in engrList" :key="el" class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[340px] h-[341px] relative px-5 pt-5 pb-[30px] rounded-[10px] bg-white border border-[#ddd]">
+      <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[300px] relative gap-5">
+        <div class="flex-grow-0 flex-shrink-0 w-[100px] h-[100px] relative rounded-[100px] bg-white border border-[#ddd]">
+          <img src="@/assets/home_engi.png" class="w-[100px] h-[100px] absolute left-[-1px] top-[-1px] object-cover" />
+        </div>
+        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relati gap-2">
+          <p class="flex-grow-0 flex-shrink-0 text-lg font-bold text-left text-[#191919]">
+            {{el.engrNm}}
+          </p>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5">
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">등급</p>
+            <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]">
+              {{ el.engrRtngDivCdNm }}
+            </p>
+          </div>
+          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-4">
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5">
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">경력</p>
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">{{ el.crrYear }}년 {{ el.crrMon }}개월</p>
+            </div>
+          </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5">
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">소속</p>
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]">{{ el.compNm }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-grow-0 flex-shrink-0 mt-[40px]">
+        <div class="flex flex-col justify-start items-start">
+          <p class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#191919]">
+            업무 스킬
+          </p>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative mt-[10px] gap-4">
+            <p v-for="taskEl in el.taskSkil.split(',')" :key="taskEl" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">{{ taskEl }}</p>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start mt-[20px]">
+          <p class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#191919]">
+            수행분야
+          </p>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative mt-[10px]  gap-4">
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">Web</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">App</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">블록체인</p>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">메타버스</p>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <p class="font-basic mt-10 text-center text-text-1 text-[32px]">
-      <span class="mr-10">등록된 업체</span>
-      <span class="font-bold mr-[100px]">120업체</span>
-      <span class="mr-10">등록된 전문 인력</span>
-      <span class="font-bold">5200명</span>
-    </p>
   </div>
+</div>
+
+
+
   <!-- 푸터 -->
   <!-- <Footer /> -->
   <!-- <div class="mt-20 bg-sub-2 w-full">
@@ -114,6 +156,8 @@ const loginYn = ref(window.$cookies.get("loginYn"));
 const router = useRouter()
 const projList = ref([])
 const bnnrInfo = ref([])
+const engrList = ref([])
+// const taskSkil = ref([])
 //let projList = []
 const siteInfo = ref({reprNm:"", compAddr:"", compNo:"", csctNo:"", faxNo:""})
 
@@ -151,10 +195,19 @@ async function loadData(){
   projList.value = res.projList
   siteInfo.value = res.footerInfo
   bnnrInfo.value = res.bnnrInfo
+
+
+  engrList.value = res.engrList
+  // if(!gfnRules.isNull(engrList.value.taskSkil)){
+  //   console.log('?')
+  //   console.log(engrList.value.taskSkil)
+  //   taskSkil.value = engrList.value.taskSkil.split(',');
+  // }
+
+
   //console.log(projList.value);
   console.log("footerInfo");
   console.log(siteInfo.value);
 }
-
 
 </script>
