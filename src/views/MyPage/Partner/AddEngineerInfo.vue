@@ -25,7 +25,7 @@
             <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
               <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로필 사진</p>
             </div>
-            <div class="mt-[20px] flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative border border-[#ddd] rounded " >
+            <div class="mt-[20px] w-[150px] h-[200px] flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative border border-[#ddd] rounded overflow-hidden " >
               <img id="preview" v-show="showImg"/>
               <svg
                 width="150"
@@ -48,7 +48,7 @@
             </div>
             <input type="file"  accept=".jpg, .png" id="upload-photo" hidden @change="readURL($event)"/>
             <label for="upload-photo">
-              <div class="flex mt-[10px] justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd] text-left text-[#555]">
+              <div style="cursor: pointer;" class="flex mt-[10px] justify-center items-center flex-grow-0 flex-shrink-0 w-[150px] relative overflow-hidden gap-0.5 py-2.5 rounded bg-[#ededed] border border-[#ddd] text-left text-[#555]">
                   <svg
                     width="16"
                     height="17"
