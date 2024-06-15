@@ -17,7 +17,18 @@
 
     <div style=" height:calc(100vh - 80px); overflow-y: auto;">
       <router-view ></router-view>
-      <Footer></Footer>
+      <template
+        v-if="
+          $route.path.indexOf('/login') >= 0 ||
+          $route.path.indexOf('/signUp') >= 0 ||
+          $route.path.indexOf('/signUpApply') >= 0 ||
+          $route.path.indexOf('Popup') >= 0 
+        "
+      >
+      </template>
+      <template v-else >
+        <Footer></Footer>
+      </template>      
     </div>
     
     <modal ref="loadingBar" :width="340">
