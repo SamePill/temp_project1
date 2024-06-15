@@ -204,7 +204,7 @@
   import {  ref } from "vue";
   import * as gfnRules from "@/utils/gfnRules.js";
   // import * as gfnUtils from "@/utils/gfnUtils.js";
-  import * as gfnUtils from "@/utils/gfnUtils.js";
+  // import * as gfnUtils from "@/utils/gfnUtils.js";
   import { useRouter } from 'vue-router';
 
   const { dataObj } = history.state; 
@@ -287,10 +287,12 @@
       var postParams = {  };
 
       console.log("val ::" + postParams);
+      console.log(api)
 
-      //var loading = "";
-      //var isErr = "";
-      var rtn = await gfnUtils.axiosPost(api, postParams);
+      //FIXME 임시처리
+      var rtn = {}//await gfnUtils.axiosPost(api, postParams);
+      rtn.rtnCd = "00"
+
       if (rtn.rtnCd == "00") {
         //요청 완료 되면 입력창 표시여부
         blSendCertNo.value = true
@@ -308,11 +310,16 @@
     var api = "/v1/auth/???";
     var postParams = {  };
 
+    console.log("api ::" + api);
     console.log("val ::" + postParams);
 
     //var loading = "";
     //var isErr = "";
-    var rtn = await gfnUtils.axiosPost(api, postParams);
+    //var rtn = await gfnUtils.axiosPost(api, postParams);
+    //FIXME 임시처리
+    var rtn = {}//await gfnUtils.axiosPost(api, postParams);
+    rtn.rtnCd = "00"
+    
     if (rtn.rtnCd == "00") {
       //인증 번호 확인 완료
       if(rtn.rtnCd == "00"){
