@@ -75,6 +75,66 @@ export const commonStore = defineStore('common', {
     }
 })
 
+export const systemStore = defineStore('system', {
+    // 화살표 함수는 전체 유형 유추을 위해 권장됨. 
+    state: () => ({
+        // 이 모든 속성은 자동으로 유형이 유추됨.
+        alert : false
+        ,alertTitle : ''
+        ,alertMsg : ''
+        ,confirm : false
+        ,confirmTitle : ''
+        ,confirmMsg : ''
+        ,progress : false
+    }),
+    getters: {
+        getAlert(state){
+            return state.alert;
+        },
+        getAlertTitle(state) {
+            return state.alertTitle;
+        },
+        getAlertMsg(state) {
+            return state.alertMsg;
+        },
+        getConfirm(state) {
+            return state.confirm;
+        },
+        getConfirmTitle(state) {
+            return state.confirmTitle;
+        },
+        getConfirmMsg(state)  {
+            return state.confirmMsg;
+        },
+        getProgress(state)  {
+            return state.progress;
+        }
+    },
+    actions: {
+        setAlert(val) {
+            this.alert = val;
+        },
+        setAlertTitle(val) {
+            this.alertTitle = val;
+        },
+        setAlertMsg(val) {
+            this.alertMsg = val;
+        },
+        setConfirm(val) {
+            this.confirm = val;
+        },
+        setConfirmTitle(val) {
+            this.confirmTitle = val;
+        },
+        setConfirmMsg(val) {
+            this.confirmMsg = val;
+        },
+        setProgress(val) {
+            this.progress = val;
+        }
+    }
+})
+
 // export const commonStore = defineStore('common', () => { 
 //     const loginCompId = ref('')
 //     const loginUserMail = ref('')

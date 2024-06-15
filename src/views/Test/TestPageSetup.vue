@@ -229,14 +229,20 @@
     <WindowPopup ref="winPopup"  @onClose="val=>evtCloseWinPopup(val)"  @onRecvEvtFromWinPop="val=>onRecvWinPop(val)" >
     </WindowPopup>
     <button type="button" @click="openWinPop">윈 팝업 띄우기</button>
-
+    <br>
+    <br>
+    <br>
+    <button type="button" @click="showLoading()">테스트... 띄우기</button>
+    <br>
+    <br>
+    <button type="button" @click="showAlert()">alert 테스트... 띄우기</button>
   </div>
 </template>
 
 <script setup>
   import { ref, computed } from "vue";
   import * as gfnUtils from "@/utils/gfnUtils.js";
-  import { commonStore } from "@/stores";
+  import { commonStore, systemStore } from "@/stores";
   import testComp from "@/views/Test/testComponent.vue";
   import Modal from "@/components/baseComponents/Modal.vue";
   import confirmPopup from "@/components/popupComponents/confirmPopup.vue";
@@ -247,6 +253,7 @@
 
   const xx = ref();
   const store = commonStore();
+  const sysStore = systemStore();
 
   //모달 테스트
   const modalShow = ref(null);
@@ -439,6 +446,17 @@
           break;
       }
     }
+  }
+
+  function showLoading(){
+    console.log("------------------------------------")
+    console.log(sysStore.getProgress)
+    sysStore.setProgress(true)
+    console.log(sysStore.getProgress)
+  }
+
+  function showAlert(){
+    gfnUtils.openAlert("메세지 테스트","", 0)
   }
 </script>
 <style scoped>

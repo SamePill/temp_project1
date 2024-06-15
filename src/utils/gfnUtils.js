@@ -4,7 +4,7 @@ import moment from "moment";
 //import router from "@/routes";
 import { useRouter } from 'vue-router'
 const router = useRouter()
-import { commonStore } from '@/stores'
+import { commonStore, systemStore} from '@/stores'
 
 const addrApiKey = "devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI="  //devKey
 
@@ -40,9 +40,16 @@ export const routerReplace = (uri) => {
  * @param {*} api //restapi 호출주소
  * @param {*} getParams //파라메터
  */
-export const axiosGet = (api, getParams) => {
-  // store.commit("setLoading", true);
-  // var apiUrl = baseUrl + api+ ".sys";
+export const axiosGet = (api, getParams, loading ) => {
+  const sysStore = systemStore();
+
+  if (typeof loading == "undefined") {
+    loading = true;
+  }
+  if (loading) {
+    sysStore.setProgress(true);    
+  }
+
   var apiUrl = baseUrl + api;
   // console.log("api post url::::" + apiUrl);
   // console.log("-------param-------");
@@ -62,6 +69,7 @@ export const axiosGet = (api, getParams) => {
     axios
       .get(apiUrl, { params: getParams })
       .then(res => {
+        sysStore.setProgress(false);
         if (res.status === 200) {
           var resData = res.data;
           // console.log("-------result-------");
@@ -133,15 +141,14 @@ export const axiosGet = (api, getParams) => {
  * @param {*} postParams //파라메터
  * @param {*} loading //로딩바(프로그레스바) 표시 여부
  */
-export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
-  // const cmmnStore = commonStore()
-  
+export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
+  const sysStore = systemStore();
+
   if (typeof loading == "undefined") {
     loading = true;
   }
   if (loading) {
-    // store.commit("setLoading", true);
-    
+    sysStore.setProgress(true);    
   }
 
   if (typeof isErr == "undefined") {
@@ -178,9 +185,9 @@ export const axiosPost = (api, postParams, queryParam,loading, isErr) => {
         var resData = res.data;
         // console.log("-------result-------");
         // console.log(resData);
+        sysStore.setProgress(false);
 
-        if (resData.rtnCd == "00") {
-          //store.commit("setLoading", false);
+        if (resData.rtnCd == "00") {          
           if(api == "/v1/auth/login"){
             setCookiesLoginUserInfo(resData.rtnData)
             // console.log("login success")
@@ -574,19 +581,31 @@ export const clearCookiesLoginUserInfo = () => {
   // store.commit("setClientId", "");
 };
 
+
 /**
- * 공통 스낵바 표시
+ * 공통 Alert 표시
  * @param {*} msg //내용
  * @param {*} bgcolor //바탕색 (생략시 primary)
  */
-export const openSnackbar = (msg, bgcolor) => {
-  console.log("공통 스낵바 열기");
-  // store.commit("setSnackbarOpen", true);
-  // store.commit("setSnackbarMsg", msg);
-  // console.log(store.getters.snackbarOpen);
-  if (typeof bgcolor != "undefined" && bgcolor.length > 0) {
-    // store.commit("setSnackbarColor", bgcolor);
+export const openAlert = ( msg, title, timeout) => {
+  const sysStore = systemStore();
+  
+  if (typeof title == "undefined") {
+    title = "";
   }
+  if (typeof timeout == "undefined") {
+    timeout = 0;
+  }
+
+  sysStore.setAlert(true)
+  sysStore.setAlertMsg(msg)
+  
+  if(timeout > 0){
+    setTimeout(function(){
+      sysStore.setAlert(false)
+    }, timeout);
+  }
+ 
 };
 
 
@@ -617,7 +636,7 @@ export const calDate = (date, div, num) => {
   //var apiUrl = baseUrl + api + ".app";
   var rtnDt = "";
   if (!moment(date, "YYYY-MM-DD").isValid()) {
-    openSnackbar("날짜 형식이 잘못 되었습니다. [" + date + "]", "error");
+    openAlert("날짜 형식이 잘못 되었습니다. [" + date + "]", "error", 3000);
     return;
   } else {
     if ("Y" == div || "y" == div) {

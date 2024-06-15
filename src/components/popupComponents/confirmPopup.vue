@@ -23,18 +23,27 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+  import { defineProps } from 'vue'
 
-const props = defineProps({
-  message: {
-    default: "",
-  }
-  ,btnOk: {
-    default: "확인",
-  }
-  ,btnCancel: {
-    default: "취소",
-  }
-})
+  const props = defineProps({
+    message: {
+      default: "",
+    }
+    ,btnOk: {
+      default: "확인",
+    }
+    ,btnCancel: {
+      default: "취소",
+    }
+  })
+
+  // 공통처리 필요??
+  // import { systemStore } from '@/stores'
+  // import { compute } from 'vue'
+
+  // //Store
+  // const sysStore = systemStore();
+  // //const alertTitle = computed(() => sysStore.getAlertTitle);
+  // const alertMsg = computed(() => sysStore.getAlertMsg);
 
 </script>

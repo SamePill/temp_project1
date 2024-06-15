@@ -31,29 +31,39 @@
       </template>      
     </div>
     
-    <modal ref="loadingBar" :width="340">
-      <img  src="@/assets/ic_small_arrow_001.png" alt="">
-    </modal>
+    <TPModal ref="loadingBar" :width="150" v-show="showProgress" >
+      <img  src="@/assets/progress.gif" alt=""  style="background-color: rgba(0, 0, 0, 0);">
+    </TPModal>
+
+    <Modal ref="showAlert"  :width="340" v-show="blAlert">
+      <msgAlert></msgAlert>
+    </Modal>
+    <!-- <Modal ref="showConfirm"  v-show="blConfirm">
+
+    </Modal> -->
   </div>
 </template>
 
 <script setup>
   import Header from '@/components/layoutComponents/Header.vue'
   import Footer from '@/components/layoutComponents/Footer.vue'
+  import TPModal from '@/components/baseComponents/Transparent.vue'
   import Modal from '@/components/baseComponents/Modal.vue'
-  import { ref } from 'vue'
+  import msgAlert from '@/components/popupComponents/messagePopup.vue'
+  import { systemStore } from '@/stores'
+  import { ref, computed } from 'vue'
 
-  //프로필 팝업 창
+  //Store
+  const sysStore = systemStore();
+  
+  //팝업 창
   const loadingBar = ref(null)
-  // const showLoading = () => {
-  //   loadingBar.value.open()            
-  // }
-  // //취소버튼
-  // const unshowLoading = function (){
-  //   loadingBar.value.close()      
-  // }
- 
+  const showProgress = computed(() => sysStore.getProgress);
 
+  const showAlert = ref(null)
+  const blAlert = computed(() => sysStore.getAlert);
+  // const showConfirm = ref(null)
+  // const blConfirm = computed(() => sysStore.getConfirm);
 
 
 </script>
