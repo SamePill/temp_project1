@@ -58,7 +58,7 @@
           모집이 종료되었습니다
         </button>
         <div v-else>
-          <!-- TODO 프로젝트 작성자인 경우 프로젝트 수정하기로 표시-->
+          <!-- TODO 프로젝트 데이터 전달 필요-->
           <div v-if="prj.crtdUserMail == userMail">
             <button             
               class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[300px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"

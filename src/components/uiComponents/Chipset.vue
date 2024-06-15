@@ -13,7 +13,7 @@
 import { defineProps,defineExpose }    from 'vue'
 import { onMounted , ref, computed, onUnmounted} from 'vue'
 import * as gfnUtils      from "@/utils/gfnUtils.js";
-defineExpose({loadData}) 
+defineExpose({loadData,returnCdList,saveList}) 
 
 onMounted(() => {
   loadData();
@@ -24,11 +24,12 @@ onUnmounted(()=>{
 
 const props = defineProps({
   listDivCd : String
+  ,cdList :[]
 })
 
 const cdList = ref({});
 const filteredCdList = computed( () => {
-    let filter = true
+    let filter = true;
     return cdList.value.filter( item => 
         item.chkVal == filter
     )
@@ -39,6 +40,35 @@ async function loadData(){
   if(cdList.value != undefined){
     cdList.value[0].chkVal = true;
   }
+  if(props.cdList.length > 0 && cdList.value.length >0){
+    cdList.value.forEach(el=>{
+      props.cdList.forEach(props=>{
+        if(props.cd == el.cd){
+          el.chkVal = true;
+        }
+      });
+    });
+  }
+}
+
+function returnCdList(){
+    let filter = true;
+    return cdList.value.filter( item => 
+        item.chkVal == filter
+    )
+}
+
+function saveList (){
+  let returnList = [];
+  let filter = true;
+
+  cdList.value.forEach(el=>{
+    if(el.chkVal == filter){
+      returnList.push({'jobDivCd':el.cd})
+    }
+  })
+
+  return returnList
 }
 
 function chipClick(el){

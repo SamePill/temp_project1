@@ -247,7 +247,7 @@
               </div>
             </div>
             <!-- 구분선 -->
-            <div class="flex-grow-0 flex-shrink-0 w-[540px] h-px bg-[#ddd]"></div>
+            <div class="flex-grow-0 flex-shrink-0 w-[540px] h-px mt-[10px] bg-[#ddd]"></div>
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@
       </div>
     </div>
     <!-- 제목 -->
-    <p class="mt-3 text-xl font-medium text-text-0">{{props.prj.projTitl}}</p>
+    <p class="mt-3 text-xl font-medium font-semibold text-text-0">{{props.prj.projTitl}}</p>
 
     <!-- 해시테그 -->
     <div class="mt-4" >   

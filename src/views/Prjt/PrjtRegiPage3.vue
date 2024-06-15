@@ -24,11 +24,15 @@
             </div>
             <div>
               <div class="flex flex-col justify-start items-start self-stretch gap-4">
-                <div class="flex justify-start items-start gap-5">
+                <div class="flex justify-start items-start gap-5 relative	">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#ddf2ef] text-[#1ba494]">
                     초급 엔지니어
                   </div>
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="명" />
+                  <div>
+                  <input type="text" v-model="projStep.projThreeStep.bgnrEngrCnt" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="명" />
+                  <span class="absolute" style="">명</span>  
+                  </div>
+                  
                   <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="만원" />
                 </div>
                 <div class="flex justify-start items-start gap-5">
@@ -304,39 +308,40 @@ import {  ref } from "vue";
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const projThreeStep =ref({
-      bgnrEngrCnt:0
-    ,bgnrEngrUnitPric:0
-    ,intrEngrCnt:0
-    ,intrEngrUnitPric:0
-    ,advnEngrCnt:0
-    ,advnEngrUnitPric:0
-    ,spclEngrCnt:0
-    ,spclEngrUnitPric:0
-    ,projChck01yn:''
-    ,projChck02yn:''
-    ,projChck03yn:''
-    ,projChck04yn:''
-  })
+// const projThreeStep =ref({
+//       bgnrEngrCnt:0
+//     ,bgnrEngrUnitPric:0
+//     ,intrEngrCnt:0
+//     ,intrEngrUnitPric:0
+//     ,advnEngrCnt:0
+//     ,advnEngrUnitPric:0
+//     ,spclEngrCnt:0
+//     ,spclEngrUnitPric:0
+//     ,projChck01yn:''
+//     ,projChck02yn:''
+//     ,projChck03yn:''
+//     ,projChck04yn:''
+//   })
 
   const pageNo = ref(3)
   const totPageNo = ref(4) 
       
   const { dataObj } = history.state; 
-  console.log(JSON.parse(dataObj)); 
+  const projStep = ref(JSON.parse(dataObj));
+  // console.log(JSON.parse(dataObj)); 
   
   function nextPage(div){
     if(div == 'next'){  
       router.push({ 
         name: "PrjtRegiPage4"
         ,state: {
-          dataObj : JSON.stringify(projThreeStep.value),
+          dataObj : JSON.stringify(projStep.value),
         },
       });
     }else{
       router.push({ 
         name: "PrjtRegiPage2"
-        ,state: {
+        ,state: { 
           dataObj : dataObj,
         },
       });
