@@ -34,29 +34,44 @@
       <div
         class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 gap-5"
       >
-        <input
-          type="text"
-          v-model="email"
-          class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          @keyup="btnStatChng()"
-          @blur="ruleChk()"
-          placeholder="이메일"
-        />
-        <input
-          type="password"
-          v-model="pswd"
-          class="mb-[70px] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-          @keyup="btnStatChng()"
-          placeholder="비밀번호"
-        />
+        <div
+          class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2"
+        >     
+          <input
+            type="text"
+            v-model="email"
+            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            @keyup="btnStatChng()"
+            @blur="ruleChk()"
+            placeholder="이메일"
+          />
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]">
+            이메일이 올바르지 않습니다. 다시 한번 확인해주세요.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2 mb-[70px] "
+        > 
+          <input
+            type="password"
+            v-model="pswd"
+            class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            @keyup="btnStatChng()"
+            placeholder="비밀번호"
+          />
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]">
+            이메일 또는 비밀번호가 올바르지 않습니다. 다시 한번 확인해주세요.
+          </p>
+        </div>
+
       </div>
     </div>
     <div
       class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-20"
     >
       <button
-        class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999] text-white"
-        :class="btnIsActv ? 'bg-[#1BA494]' : ''"
+        :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded text-white"'
         @click="reqLogin()"
       >
         로그인 하기
