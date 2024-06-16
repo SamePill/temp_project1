@@ -57,14 +57,25 @@
               type="text"
               class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
               placeholder="회사명"
+              v-model="signUp.joinTwoStep.compNm"
             />
-            <input
-              type="text"
-              class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-              placeholder="사업자등록번호"
-              maxlength="6"
-              @input="validateBizNo"
-            />
+            <div
+              class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2"
+            >
+              <input
+               :class='(chkBizNo ? "border-[#ddd]" : "border-[#ff5252]")  + " flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border"'
+                type="text"
+                placeholder="사업자등록번호"
+                maxlength="10"
+                @blur="ruleChkBizRegNo()"
+                @input="validateBizNo"
+                v-model="signUp.joinTwoStep.bizRegNo"
+              />                
+              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                사업자 등록번호가 올바르지 않습니다. 다시 한번 확인해주세요.
+              </p>
+            </div>
+            
             <div
               class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
               @click="showAddrPop"
@@ -584,8 +595,9 @@
               </button>
               <button
                 @click="regiUser()"
-                class="text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[205px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
-              >
+                :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[205px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded "'
+                :disabled="!btnIsActv"
+                >
                 회원가입 완료
               </button>
             </div>
@@ -662,19 +674,22 @@
 
 <script setup>
   import { ref } from "vue";
-  import { useRouter, onBeforeRouteLeave  } from 'vue-router';
+  import { useRouter } from 'vue-router';
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import Modal from "@/components/baseComponents/Modal.vue";
   import SrchAddrApiPopup from "@/components/popupComponents/SrchAddrApiPopup.vue";
+  import * as gfnRules from "@/utils/gfnRules.js";
 
   const router = useRouter()
   const { dataObj } = history.state; // 이렇게 받는다.
   const signUp = ref(JSON.parse(dataObj));
 
+  const chkBizNo = ref(true)
   const bizNoFile = ref({})
   const logoFile = ref({})
   const bizNoFileYn = ref(false)
   const logoFileYn = ref(false)
+  const btnIsActv = ref(false)
 
   const srchAddrShow = ref(null)
   const showAddrPop = () => {
@@ -734,6 +749,7 @@
 
     }
 
+    btnStatChng()
   }
 
   function checkBoxMrkt(id){
@@ -768,26 +784,24 @@
 
     var api = "/v1/auth/join";
     let formData = new FormData();
-    formData.append("bizReqMultiFile")
-    formData.append("compLogoMultiFile")
+    formData.append("bizReqMultiFile",bizNoFile)
+    formData.append("compLogoMultiFile",logoFile)
     formData.append(
-      "params",
-      new Blob([JSON.stringify(params)], { type: "application/json" })
+      "joinInputJson ",
+      new Blob([JSON.stringify(signUp)], { type: "application/json" })
     );
-    var getParams = {};
-    let rtn = await gfnUtils.axiosGet(
+   
+    let rtn = await gfnUtils.axiosPost(
       api,
-      getParams
+      formData
     );
 
     if(rtn.rtnCd == "00"){
-      gfnUtils.openAlert("회원가입이 완료 되었습니다.","", 0)
+      gfnUtils.openAlert("회원가입이 완료 되었습니다.","", 2000)
       router.replace("/")
     }else{
-      gfnUtils.openAlert("회원가입중 오류가 발생하였습니다.","", 0)
+      gfnUtils.openAlert("회원가입중 오류가 발생하였습니다.","", 2000)
     }
-    console.log(rtn)
-
   }
 
   function validateBizNo(event){
@@ -815,6 +829,7 @@
       console.log("파일없음")
       document.getElementById('preview').src = "";
     }
+    
   }
 
   function readBizNo(input) {
@@ -834,6 +849,7 @@
       console.log("파일없음")
       document.getElementById('preview').src = "";
     }
+    btnStatChng()
   }
 
   function delFile(div){
@@ -846,26 +862,57 @@
     }
   }
   
+  // function ruleChkCompNm(){
+  //   chkEmail.value = gfnRules.validEmail(signUp.value.joinTwoStep.compNm);
+  //   btnStatChng()
+  // }
+  function ruleChkBizRegNo(){
+    chkBizNo.value = gfnRules.validBizRegNo(signUp.value.joinTwoStep.bizRegNo);
+    btnStatChng()
+  }
+
+
+  function btnStatChng() {
+    // console.log(email.value == "");
+    // console.log(pswd.value == "");
+    console.log(bizNoFileYn.value)
+    console.log(signUp.value.joinTwoStep.privTrmsYn)
+    console.log(signUp.value.joinTwoStep.useTrmsYn)
+    console.log(signUp.value.joinTwoStep.compNm)
+    console.log(signUp.value.joinTwoStep.bizRegNo)
+    if (!bizNoFileYn.value  
+      || signUp.value.joinTwoStep.privTrmsYn != "Y" || signUp.value.joinTwoStep.useTrmsYn != "Y" 
+      || signUp.value.joinTwoStep.compNm == "" || signUp.value.joinTwoStep.bizRegNo == "" 
+      // || signUp.value.joinTwoStep.compBaseAddr == "" 
+    ) {
+      btnIsActv.value = false;
+    } else {
+      btnIsActv.value = true;
+    }
+    console.log(btnIsActv.value)
+  }
+
   function prevPage(){
 
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
     console.log(dataObj)
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    //const signUpdData = signUp.value.map(item => item);
-    router.push({ name: "SignUp"
+  
+    router.replace({ name: "SignUp"
               ,state : {
                           //dataObj : { a:1, b:'string', c:true },
-                          dataObj : dataObj,
+                          dataObj :  JSON.stringify(signUp.value)
+                         
                         }
               });
   }
 
-  onBeforeRouteLeave((to, from, next) => {
+  // onBeforeRouteLeave((to, from, next) => {
     
-    //next(false);  //뒤로가기 무력화
-    console.log(to);
-    console.log(from);
-    console.log(next);
-    // next(false);
-  });
+  //   //next(false);  //뒤로가기 무력화
+  //   console.log(to);
+  //   console.log(from);
+  //   console.log(next);
+  //   next(true);
+  // });
 </script>

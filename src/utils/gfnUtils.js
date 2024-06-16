@@ -89,9 +89,9 @@ export const axiosGet = (api, getParams, loading ) => {
         }
       })
       .catch(err => {
-        // if (loading) {
-        //   // store.commit("setLoading", false);
-        // }
+        if (loading) {
+          sysStore.setProgress(false);
+        }
         console.log("err catch 에러!!!!!!!!!!!!!!!!" + isErr);
         console.log(err.response.data);
         if (isErr) {
@@ -207,8 +207,9 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
         }
       })
       .catch(err => {
+
         if (loading) {
-          // store.commit("setLoading", false);
+          sysStore.setProgress(false);
         }
         console.log(err.response.data);
         if (isErr) {
@@ -264,7 +265,14 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
  * @param {*} api //restapi 호출주소
  * @param {*} getParams //파라메터
  */
-export const axiosGetEx = (api, getParams, div) => {
+export const axiosGetEx = (api, getParams, div, loading) => {
+  const sysStore = systemStore();
+  if (typeof loading == "undefined") {
+    loading = true;
+  }
+  if (loading) {
+    sysStore.setProgress(true);    
+  }
 
   if(div == "addr"){
     getParams.confmKey = addrApiKey
@@ -285,6 +293,7 @@ export const axiosGetEx = (api, getParams, div) => {
             }}
         )
       .then(res => {
+        sysStore.setProgress(false);
         if (res.status === 200) {
           var resData = res;
           // console.log("-------result-------");
@@ -295,9 +304,9 @@ export const axiosGetEx = (api, getParams, div) => {
         }
       })
       .catch(err => {
-        // if (loading) {
-        //   // store.commit("setLoading", false);
-        // }
+        if (loading) {
+          sysStore.setProgress(false);
+        }
         console.log("err catch 에러!!!!!!!!!!!!!!!!" + isErr);
         console.log(err.response);
         if (isErr) {
@@ -348,14 +357,13 @@ export const axiosGetEx = (api, getParams, div) => {
  * @param {*} loading //로딩바(프로그레스바) 표시 여부
  */
 export const axiosPostEx = (api, postParams, loading, isErr) => {
-  // const cmmnStore = commonStore()
+  const sysStore = systemStore();
   
   if (typeof loading == "undefined") {
     loading = true;
   }
   if (loading) {
-    // store.commit("setLoading", true);
-    
+    sysStore.setProgress(true);    
   }
 
   if (typeof isErr == "undefined") {
@@ -372,6 +380,7 @@ export const axiosPostEx = (api, postParams, loading, isErr) => {
     axios
       .post(apiUrl,  { "data" : postParams} ,{dataType: "json"} , {crossDomain: true})
       .then(res => {
+        sysStore.setProgress(false);
         var resData = res.data;
         console.log("-------result-------");
         console.log(resData);
@@ -390,7 +399,7 @@ export const axiosPostEx = (api, postParams, loading, isErr) => {
       })
       .catch(err => {
         if (loading) {
-          // store.commit("setLoading", false);
+          sysStore.setProgress(false);
         }
         console.log(err);
         console.log(err.response);

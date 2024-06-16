@@ -43,6 +43,40 @@ export const validHp = value => {
 }
 
 
+export const  validBizRegNo = businessNumber => {
+  // 형식 검증
+  /*
+  const regex = /^\d{3}-\d{2}-\d{5}$/;  
+
+  if (!regex.test(businessNumber)) {
+    return false;
+  }
+
+  // 하이픈 제거
+  const digits = businessNumber.replace(/-/g, '');
+
+  // 가중치
+  const weights = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+
+  // 가중치 합 계산
+  let sum = 0;
+  for (let i = 0; i < weights.length; i++) {
+    sum += weights[i] * parseInt(digits[i], 10);
+  }
+
+  // 마지막 숫자는 나머지를 구한 뒤에 더함
+  const checkSum = sum + Math.floor((weights[8] * parseInt(digits[8], 10)) / 10);
+
+  // 유효성 검증
+  const isValid = (10 - (checkSum % 10)) % 10 === parseInt(digits[9], 10);
+  
+  
+  return isValid || (value || "").length == 0 || false;
+  */
+  // 임시 리턴
+  const regex = /^\d+$/;
+  return regex.test(businessNumber) || (businessNumber || "").length == 0 || false
+}
 
 
 export const number = value => {

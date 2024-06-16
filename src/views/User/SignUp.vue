@@ -148,6 +148,7 @@
         <button
           :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"'
           @click="nextPage()"
+          :disabled="!btnIsActv"
           >         
             다음 단계로 넘어가기
         </button>
@@ -206,13 +207,12 @@
 </template>
 
 <script setup>
-  import {  ref } from "vue";
+  import {  ref, onMounted } from "vue";
   import * as gfnRules from "@/utils/gfnRules.js";
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import { useRouter } from 'vue-router';
 
   const { dataObj } = history.state; 
-  console.log(dataObj); 
 
   const isButtonDisabled = ref(false)
   const isInputReadonly = ref(false)
@@ -231,11 +231,11 @@
   const signUp = ref(
                     {
                       joinOneStep: {
-                          userMail: "",
-                          pass: "",
-                          confirmPass: "",
-                          userNm: "",
-                          hp: ""
+                        userMail: "",
+                        pass: "",
+                        confirmPass: "",
+                        userNm: "",
+                        hp: ""
                       },
                       joinTwoStep: {
                         privTrmsYn: "",
@@ -248,6 +248,17 @@
                         bizRegNo: ""
                       }
                     })
+
+  onMounted(() => {
+    loadData();
+  })
+
+  function loadData(){
+    if(dataObj != undefined){
+      signUp.value = JSON.parse(dataObj);
+    }
+    console.log(signUp.value)
+  }
 
   function ruleChkPwd(){
     pwdChk.value = gfnRules.validPwd(signUp.value.joinOneStep.pass);
@@ -287,19 +298,22 @@
       blReq = true
     }
 
-    //TODO 인증번호 요청 추가
+    //TODO 인증번호 요청 추가  : reqAuthHpDivCd 확인 필요
     // 요청가능 상태 인경우
     if(blReq){
-      var api = "/v1/auth/???";
-      var postParams = {  };
+      var api = "/v1/auth/req-auth-hp";
+      if(signUp.value.joinOneStep.userMail == ""){
+        gfnUtils.openAlert("이메일을 입력해주세요.","", 2000)
+        return false;
+      }
+      var postParams = { "hp": signUp.value.joinOneStep.hp ,  "reqAuthHpDivCd": "string",   "userMail":  signUp.value.joinOneStep.userMail };
 
       console.log("val ::" + postParams);
       console.log(api)
 
-      //FIXME 임시처리
-      //var rtn = await gfnUtils.axiosPost(api, postParams);
-      var rtn = {}
-      rtn.rtnCd = "00"
+      var rtn = await gfnUtils.axiosPost(api, postParams);
+      //var rtn = {}
+      //rtn.rtnCd = "00"
 
       if (rtn.rtnCd == "00") {
         //요청 완료 되면 입력창 표시여부
@@ -308,7 +322,7 @@
         countdown.value = '03:00'
         startCount()
       } else {
-        console.log("에러처리...");
+        gfnUtils.openAlert("인증 SMS요청중 오류가 발생하였습니다.","", 2000)
       }
 
     }
@@ -316,9 +330,13 @@
 
   async function checkCertNo(){
 
-    //TODO 인증번호 요청 추가
-    var api = "/v1/auth/???";
-    var postParams = {  };
+    if(authNo.value == ""){
+      gfnUtils.openAlert("인증번호를 입력해주세요.","", 2000)
+      return false;
+    }
+
+    var api = "/v1/auth/join/step1/verify-auth-hp"
+    var postParams = {   "hp": signUp.value.joinOneStep.hp,   "authNo": authNo.value };
 
     console.log("api ::" + api);
     console.log("val ::" + postParams);
@@ -326,12 +344,11 @@
     //var loading = "";
     //var isErr = "";
     //var rtn = await gfnUtils.axiosPost(api, postParams);
-    //FIXME 임시처리
-    var rtn = {}//await gfnUtils.axiosPost(api, postParams);
-    rtn.rtnCd = "00"
+  
+    var rtn = await gfnUtils.axiosPost(api, postParams);
     
     if (rtn.rtnCd == "00") {
-      //인증 번호 확인 완료
+      //TODO 인증 번호 확인 완료 오류 메세지 처리
       if(rtn.rtnCd == "00"){
         certNoChk.value = "OK"
         isButtonDisabled.value = true //인증버튼 비활성
@@ -340,11 +357,12 @@
         gfnUtils.openAlert("인증 되었습니다.","", 2000)
       }else{
         certNoChk.value = "ERROR"
+        gfnUtils.openAlert("SMS 인증처리중 오류가 발생하였습니다.","", 2000)
       }
       
     } else {
       certNoChk.value = "ERROR"
-      console.log("에러처리...");
+      gfnUtils.openAlert("SMS 인증처리중 오류가 발생하였습니다.","", 2000)
     }
   }
 
@@ -384,7 +402,7 @@
             clearInterval(countdownInterval);
             countdown.value = '00:00';
 
-            //TODO 버튼 잠금 처리 필요...(인증번호 확인 잠금, 인증 재요청 열기)
+            //TODO 버튼 잠금 처리 필요...(인증번호 확인 잠금, 인증 재요청 열기)???
             return;
         }
 
@@ -414,9 +432,11 @@
   }
 
   function nextPage(){
-    if( btnIsActv.value != true){
-      return false;
-    }
+
+    //FIXME 테스트용 주석!!!
+    // if( btnIsActv.value != true){
+    //   return false;
+    // }
 
     console.log(authNo.value)
 

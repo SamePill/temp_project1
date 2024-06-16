@@ -7,7 +7,9 @@
         $route.path.indexOf('/login') >= 0 ||
         $route.path.indexOf('/signUp') >= 0 ||
         $route.path.indexOf('/signUpApply') >= 0 ||
-        $route.path.indexOf('Popup') >= 0 
+        $route.path.indexOf('Popup') >= 0  ||
+        $route.path.indexOf('/findId') >= 0 ||
+        $route.path.indexOf('/resetPassword') >= 0 
       "
     >
     </template>
@@ -22,7 +24,9 @@
           $route.path.indexOf('/login') >= 0 ||
           $route.path.indexOf('/signUp') >= 0 ||
           $route.path.indexOf('/signUpApply') >= 0 ||
-          $route.path.indexOf('Popup') >= 0 
+          $route.path.indexOf('Popup') >= 0 ||
+          $route.path.indexOf('/findId') >= 0 ||
+          $route.path.indexOf('/resetPassword') >= 0  
         "
       >
       </template>
