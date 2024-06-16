@@ -72,10 +72,13 @@
                     placeholder="휴대폰번호"
                     v-model="signUp.joinOneStep.userHp"
                     @blur="ruleChkHp()"
+                    :readonly="isInputReadonly"
+                    @input="validateHp"
                   />
                   <button
                     :class='(blSendCertNo ? " bg-white border-[#ddd] text-[#191919]" :  (chkHp && signUp.joinOneStep.userHp != null ? " border-[#1ba494] bg-[#1BA494]  text-white" : "bg-[#999]  text-white")) + " flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[125px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded border "'
                     @click = "reqCertNo()"
+                    :disabled="isButtonDisabled"
                   >
                     <span v-show="!blSendCertNo">인증번호 전송</span>
                     <span v-show="blSendCertNo">인증번호 재전송</span>
@@ -94,11 +97,13 @@
                   type="text"
                   placeholder="인증번호"
                   v-model="authNo"
+                  @input="validateCert"
                   />
                   <!-- <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">04:59</p> -->
                   <button
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[125px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#1ba494]"
                     @click="checkCertNo()"
+                    :disabled="isButtonDisabled"
                   >
                   인증번호 확인
                 </button>
@@ -203,13 +208,14 @@
 <script setup>
   import {  ref } from "vue";
   import * as gfnRules from "@/utils/gfnRules.js";
-  // import * as gfnUtils from "@/utils/gfnUtils.js";
-  // import * as gfnUtils from "@/utils/gfnUtils.js";
+  import * as gfnUtils from "@/utils/gfnUtils.js";
   import { useRouter } from 'vue-router';
 
   const { dataObj } = history.state; 
   console.log(dataObj); 
 
+  const isButtonDisabled = ref(false)
+  const isInputReadonly = ref(false)
   //const chkCertNo = ref(false) //인증번호 일치 확인 후 true
   const chkEmail = ref(true)  //이메일 정합성
   const chkName =ref(true) //이름 정합성
@@ -265,7 +271,7 @@
     }
 
     let blReq = true
-    //TODO 인증번호 요청 추가
+
     if(blSendCertNo.value == true){
       //재요청
       if(countdown.value != '0:00') {
@@ -281,6 +287,7 @@
       blReq = true
     }
 
+    //TODO 인증번호 요청 추가
     // 요청가능 상태 인경우
     if(blReq){
       var api = "/v1/auth/???";
@@ -290,7 +297,8 @@
       console.log(api)
 
       //FIXME 임시처리
-      var rtn = {}//await gfnUtils.axiosPost(api, postParams);
+      //var rtn = await gfnUtils.axiosPost(api, postParams);
+      var rtn = {}
       rtn.rtnCd = "00"
 
       if (rtn.rtnCd == "00") {
@@ -307,6 +315,8 @@
   }
 
   async function checkCertNo(){
+
+    //TODO 인증번호 요청 추가
     var api = "/v1/auth/???";
     var postParams = {  };
 
@@ -324,6 +334,10 @@
       //인증 번호 확인 완료
       if(rtn.rtnCd == "00"){
         certNoChk.value = "OK"
+        isButtonDisabled.value = true //인증버튼 비활성
+        isInputReadonly.value = true //전화번호 수정불가
+        blSendCertNo.value = false   //인증번호 입력 부분 비노출
+        gfnUtils.openAlert("인증 되었습니다.","", 2000)
       }else{
         certNoChk.value = "ERROR"
       }
@@ -383,7 +397,21 @@
                
   }
 
+  function validateHp(event){
+    const value = event.target.value;
+    if (!/^\d*$/.test(value)) {
+      event.target.value = value.replace(/\D/g, '');
+      signUp.value.joinOneStep.userHp = event.target.value;
+    }
+  }
 
+  function validateCert(event){
+    const value = event.target.value;
+    if (!/^\d*$/.test(value)) {
+      event.target.value = value.replace(/\D/g, '');
+      authNo.value = event.target.value;
+    }
+  }
 
   function nextPage(){
     if( btnIsActv.value != true){

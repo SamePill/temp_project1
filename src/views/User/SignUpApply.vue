@@ -62,15 +62,18 @@
               type="text"
               class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
               placeholder="사업자등록번호"
+              maxlength="6"
+              @input="validateBizNo"
             />
             <div
               class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+              @click="showAddrPop"
             >
               <p
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
               >
-                서울특별시 금천구 디지털로9길 41
-              </p>
+                {{ signUp.joinTwoStep.compBaseAddr }} 
+              </p>              
               <svg
                 width="24"
                 height="25"
@@ -108,11 +111,12 @@
                   >
                     회사 로고를 추가해주세요. (PNG,JPG)
                   </p>
-                  <input type="file"  accept=".jpg, .png, .pdf" id="upload-logo" hidden />
+                  <input type="file"  accept=".jpg, .png, .pdf" id="upload-logo" hidden @change="readLogo($event)"  />
                 </div>
                 <label for="upload-logo">
                   <div
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
+                    style="cursor: pointer"
                   >
                     <svg
                       width="16"
@@ -147,9 +151,9 @@
                   class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] relative gap-2"
                 >
                   <p
-                    class="flex-grow-0 flex-shrink-0 w-[116px] text-base font-medium text-left text-[#1585d7]"
+                    class="flex-grow-0 flex-shrink-0 w-[200px] text-base font-medium text-left text-[#1585d7]"
                   >
-                    회사 로고.png
+                    {{ logoFile.name }}
                   </p>
                   <svg
                     width="16"
@@ -159,6 +163,9 @@
                     xmlns="http://www.w3.org/2000/svg"
                     class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                     preserveAspectRatio="none"
+                    @click="delFile('logo')"
+                    style="cursor: pointer"
+                    v-show="logoFileYn"
                   >
                     <rect
                       width="16"
@@ -196,11 +203,12 @@
                   >
                     사업자 등록증을 추가해주세요.
                   </p>
-                  <input type="file" accept=".jpg, .png, .pdf" id="upload-docu" hidden />
+                  <input type="file" accept=".jpg, .png, .pdf" id="upload-docu" hidden @change="readBizNo($event)" />
                 </div>
                 <label for="upload-docu">
                   <div
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[120px] relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
+                    style="cursor: pointer"
                   >
                     <svg
                       width="16"
@@ -244,9 +252,9 @@
                   class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] relative gap-2"
                 >
                   <p
-                    class="flex-grow-0 flex-shrink-0 w-[116px] text-base font-medium text-left text-[#1585d7]"
+                    class="flex-grow-0 flex-shrink-0 w-[200px] text-base font-medium text-left text-[#1585d7]"
                   >
-                    사업자등록증.pdf
+                    {{ bizNoFile.name }}
                   </p>
                   <svg
                     width="16"
@@ -256,6 +264,9 @@
                     xmlns="http://www.w3.org/2000/svg"
                     class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                     preserveAspectRatio="none"
+                    @click="delFile('bizNo')"
+                    style="cursor: pointer"
+                    v-show="bizNoFileYn"
                   >
                     <rect
                       width="16"
@@ -643,131 +654,218 @@
         </div>
       </div>
     </div>
-</div>
+    <modal ref="srchAddrShow" :width="1060">
+      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="closeAddrPop" />
+    </modal>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter, onBeforeRouteLeave  } from 'vue-router';
-import * as gfnUtils from "@/utils/gfnUtils.js";
+  import { ref } from "vue";
+  import { useRouter, onBeforeRouteLeave  } from 'vue-router';
+  import * as gfnUtils from "@/utils/gfnUtils.js";
+  import Modal from "@/components/baseComponents/Modal.vue";
+  import SrchAddrApiPopup from "@/components/popupComponents/SrchAddrApiPopup.vue";
 
-const router = useRouter()
-const { dataObj } = history.state; // 이렇게 받는다.
-const signUp = ref(JSON.parse(dataObj));
+  const router = useRouter()
+  const { dataObj } = history.state; // 이렇게 받는다.
+  const signUp = ref(JSON.parse(dataObj));
 
-// {
-//   "joinOneStep":
-//   {"userMail":"sdasd","pass":"","confirmPass":"","userNm":"sdfdsf","hp":"","userHp":"sdfds"}
-//  ,"joinTwoStep":
-//   {"privTrmsYn":"","useTrmsYn":"","mrktMailRcptYn":"","mrktSmsRcptYn":"","compNm":"","compBaseAddr":"","compDtlAddr":"","bizRegNo":""}
-// }
-// signUp.value.joinTwoStep.mrktYn = "N"
-// signUp.value.joinTwoStep.privTrmsYn = "N"
-// signUp.value.joinTwoStep.useTrmsYn = "N"
+  const bizNoFile = ref({})
+  const logoFile = ref({})
+  const bizNoFileYn = ref(false)
+  const logoFileYn = ref(false)
 
-console.log(dataObj); 
-console.log(signUp.value)
+  const srchAddrShow = ref(null)
+  const showAddrPop = () => {
+    srchAddrShow.value.open()
+  }
+  //닫기
+  const closeAddrPop = function (){
+    srchAddrShow.value.close()
+  }
+  // {
+  //   "joinOneStep":
+  //   {"userMail":"sdasd","pass":"","confirmPass":"","userNm":"sdfdsf","hp":"","userHp":"sdfds"}
+  //  ,"joinTwoStep":
+  //   {"privTrmsYn":"","useTrmsYn":"","mrktMailRcptYn":"","mrktSmsRcptYn":"","compNm":"","compBaseAddr":"","compDtlAddr":"","bizRegNo":""}
+  // }
+  // signUp.value.joinTwoStep.mrktYn = "N"
+  // signUp.value.joinTwoStep.privTrmsYn = "N"
+  // signUp.value.joinTwoStep.useTrmsYn = "N"
 
-function selEmail(){
-  console.log("check!!!!!!!!!!!!!!!!!!")
-}
+  console.log(dataObj); 
+  console.log(signUp.value)
 
-function checkBox(id){
-  console.log(id);
-  
-  if(id == "privTrmsYn"){
-  
-    if(signUp.value.joinTwoStep.privTrmsYn == "Y"){
-      signUp.value.joinTwoStep.privTrmsYn = "N";
-    }else{
-      signUp.value.joinTwoStep.privTrmsYn = "Y";
-    }
-  
-  }else if(id == "useTrmsYn"){
+  function selEmail(){
+    console.log("check!!!!!!!!!!!!!!!!!!")
+  }
 
-    if(signUp.value.joinTwoStep.useTrmsYn == "Y"){
-      signUp.value.joinTwoStep.useTrmsYn = "N";
-    }else{
-      signUp.value.joinTwoStep.useTrmsYn = "Y";
-    }
-
-  }else if(id == "mrktYn"){
+  function checkBox(id){
+    console.log(id);
     
-    if(signUp.value.joinTwoStep.mrktYn == "Y"){
-      signUp.value.joinTwoStep.mrktYn = "N";
-      signUp.value.joinTwoStep.mrktMailRcptYn = "N"
-      signUp.value.joinTwoStep.mrktSmsRcptYn = "N";
-    }else{
-      signUp.value.joinTwoStep.mrktYn = "Y";
-      signUp.value.joinTwoStep.mrktMailRcptYn = "Y"
-      signUp.value.joinTwoStep.mrktSmsRcptYn = "Y";
-    }
-
-  }
-
-}
-
-function checkBoxMrkt(id){
-  if(id == "mrktMailRcptYn"){
+    if(id == "privTrmsYn"){
     
-    if(signUp.value.joinTwoStep.mrktMailRcptYn == "Y"){
-      signUp.value.joinTwoStep.mrktMailRcptYn = "N";
-    }else{
-      signUp.value.joinTwoStep.mrktMailRcptYn = "Y";
-    }
-
-  }else if(id == "mrktSmsRcptYn"){
+      if(signUp.value.joinTwoStep.privTrmsYn == "Y"){
+        signUp.value.joinTwoStep.privTrmsYn = "N";
+      }else{
+        signUp.value.joinTwoStep.privTrmsYn = "Y";
+      }
     
-    if(signUp.value.joinTwoStep.mrktSmsRcptYn == "Y"){
-      signUp.value.joinTwoStep.mrktSmsRcptYn = "N";
-    }else{
-      signUp.value.joinTwoStep.mrktSmsRcptYn = "Y";
+    }else if(id == "useTrmsYn"){
+
+      if(signUp.value.joinTwoStep.useTrmsYn == "Y"){
+        signUp.value.joinTwoStep.useTrmsYn = "N";
+      }else{
+        signUp.value.joinTwoStep.useTrmsYn = "Y";
+      }
+
+    }else if(id == "mrktYn"){
+      
+      if(signUp.value.joinTwoStep.mrktYn == "Y"){
+        signUp.value.joinTwoStep.mrktYn = "N";
+        signUp.value.joinTwoStep.mrktMailRcptYn = "N"
+        signUp.value.joinTwoStep.mrktSmsRcptYn = "N";
+      }else{
+        signUp.value.joinTwoStep.mrktYn = "Y";
+        signUp.value.joinTwoStep.mrktMailRcptYn = "Y"
+        signUp.value.joinTwoStep.mrktSmsRcptYn = "Y";
+      }
+
     }
 
   }
 
-  if(signUp.value.joinTwoStep.mrktMailRcptYn == "Y" || signUp.value.joinTwoStep.mrktSmsRcptYn == "Y"){
-    signUp.value.joinTwoStep.mrktYn = "Y"
+  function checkBoxMrkt(id){
+    if(id == "mrktMailRcptYn"){
+      
+      if(signUp.value.joinTwoStep.mrktMailRcptYn == "Y"){
+        signUp.value.joinTwoStep.mrktMailRcptYn = "N";
+      }else{
+        signUp.value.joinTwoStep.mrktMailRcptYn = "Y";
+      }
+
+    }else if(id == "mrktSmsRcptYn"){
+      
+      if(signUp.value.joinTwoStep.mrktSmsRcptYn == "Y"){
+        signUp.value.joinTwoStep.mrktSmsRcptYn = "N";
+      }else{
+        signUp.value.joinTwoStep.mrktSmsRcptYn = "Y";
+      }
+
+    }
+
+    if(signUp.value.joinTwoStep.mrktMailRcptYn == "Y" || signUp.value.joinTwoStep.mrktSmsRcptYn == "Y"){
+      signUp.value.joinTwoStep.mrktYn = "Y"
+    }
+
+    if(signUp.value.joinTwoStep.mrktMailRcptYn != "Y" && signUp.value.joinTwoStep.mrktSmsRcptYn != "Y"){
+      signUp.value.joinTwoStep.mrktYn = "N"
+    }
   }
 
-  if(signUp.value.joinTwoStep.mrktMailRcptYn != "Y" && signUp.value.joinTwoStep.mrktSmsRcptYn != "Y"){
-    signUp.value.joinTwoStep.mrktYn = "N"
+  async function regiUser(){
+
+    var api = "/v1/auth/join";
+    let formData = new FormData();
+    formData.append("bizReqMultiFile")
+    formData.append("compLogoMultiFile")
+    formData.append(
+      "params",
+      new Blob([JSON.stringify(params)], { type: "application/json" })
+    );
+    var getParams = {};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+
+    if(rtn.rtnCd == "00"){
+      gfnUtils.openAlert("회원가입이 완료 되었습니다.","", 0)
+      router.replace("/")
+    }else{
+      gfnUtils.openAlert("회원가입중 오류가 발생하였습니다.","", 0)
+    }
+    console.log(rtn)
+
   }
-}
 
-async function regiUser(){
+  function validateBizNo(event){
+    const value = event.target.value;
+    if (!/^\d*$/.test(value)) {
+      event.target.value = value.replace(/\D/g, '');
+      signUp.value.joinTwoStep.bizRegNo = event.target.value;
+    }
+  }
 
-  var api = "/v1/project/list";
-  var getParams = {};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
+  function readLogo(input) {
 
-  console.log(rtn)
+    if (input.target.files && input.target.files[0]) {
+      console.log("파일있음")
+      console.log(input.target.files[0].name)
+      logoFile.value = input.target.files[0]
+      logoFileYn.value = true
+      // var reader = new FileReader();
+      // reader.onload = function(e) {
+      //   document.getElementById('preview').src = e.target.result;
+      // };
+      // reader.readAsDataURL(input.target.files[0]);
+      // showImg.value = true;
+    } else {
+      console.log("파일없음")
+      document.getElementById('preview').src = "";
+    }
+  }
 
-}
+  function readBizNo(input) {
 
-function prevPage(){
+    if (input.target.files && input.target.files[0]) {
+      console.log("파일있음")
+      console.log(input.target.files[0].name)
+      bizNoFile.value = input.target.files[0]
+      bizNoFileYn.value = true
+      // var reader = new FileReader();
+      // reader.onload = function(e) {
+      //   document.getElementById('preview').src = e.target.result;
+      // };
+      // reader.readAsDataURL(input.target.files[0]);
+      // showImg.value = true;
+    } else {
+      console.log("파일없음")
+      document.getElementById('preview').src = "";
+    }
+  }
 
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  console.log(dataObj)
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  //const signUpdData = signUp.value.map(item => item);
-  router.push({ name: "SignUp"
-             ,state : {
-                        //dataObj : { a:1, b:'string', c:true },
-                        dataObj : dataObj,
-                      }
-            });
-}
-
-onBeforeRouteLeave((to, from, next) => {
+  function delFile(div){
+    if ('bizNo' == div){
+      logoFile.value = {}
+      logoFileYn.value = false
+    }else if ('logo' == div){
+      bizNoFile.value = {}
+      bizNoFileYn.value = false
+    }
+  }
   
-  //next(false);  //뒤로가기 무력화
-  console.log(to);
-  console.log(from);
-  console.log(next);
-  // next(false);
-});
+  function prevPage(){
+
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    console.log(dataObj)
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    //const signUpdData = signUp.value.map(item => item);
+    router.push({ name: "SignUp"
+              ,state : {
+                          //dataObj : { a:1, b:'string', c:true },
+                          dataObj : dataObj,
+                        }
+              });
+  }
+
+  onBeforeRouteLeave((to, from, next) => {
+    
+    //next(false);  //뒤로가기 무력화
+    console.log(to);
+    console.log(from);
+    console.log(next);
+    // next(false);
+  });
 </script>
