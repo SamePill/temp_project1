@@ -215,7 +215,7 @@
                   비밀번호 변경
                 </button>
                 <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative">
-                  <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#666]" @click="goToPage('MyIdDeactivation')">회원탈퇴</button>
+                  <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#666]" @click="showModalDelUser()">회원탈퇴</button>
                   <svg
                     width="16"
                     height="17"
@@ -247,125 +247,148 @@
         </div>
       </div>
     </div>
+    <modal ref="delUser" :width="640">
+      <deleteUserPopup  @close="cancel"  />
+    </modal>
   </div>
 </template>
 
 <script setup>
-import SubHeader from '@/components/layoutComponents/SubHeader.vue'
-import SideMenu from '@/components/layoutComponents/SideMenu.vue'
-import * as gfnUtils from "@/utils/gfnUtils.js";
-import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
+  import SubHeader from '@/components/layoutComponents/SubHeader.vue'
+  import SideMenu from '@/components/layoutComponents/SideMenu.vue'
+  import Modal from '@/components/baseComponents/Modal.vue'
+  import deleteUserPopup from '@/components/popupComponents/deleteUserPopup.vue'  
+  import * as gfnUtils from "@/utils/gfnUtils.js";
+  import { useRouter } from 'vue-router'
+  import { onMounted, ref } from 'vue'
 
-onMounted(() => {
-  loadData();
-})
-
-const router = useRouter()
-const userMail = ref(window.$cookies.get("loginUserMail"))
-const userInfo = ref({
-  compId: "",
-  userMail: "",
-  userNm: "",
-  hp: "",
-  mrktMailRcptYn: "",
-  mrktSmsRcptYn: "",
-  mrktYn: ""
-})
-
-const topInfo = ref({
-    compNm: "",
-    userNm: "",
-    sprtProjCnt: 0,
-    prgsProjCnt: 0,
-    cpltProjCnt: 0
+  onMounted(() => {
+    loadData();
   })
 
+  //프로필 팝업 창
+  const delUser = ref(null)
+  const showModalDelUser = () => {
+    delUser.value.open()            
+  }
+  //취소버튼
+  const cancel = function (){
+    delUser.value.close()      
+  }
 
-function goToPage(pageNm){
+  const router = useRouter()
+  const userMail = ref(window.$cookies.get("loginUserMail"))
+  const userInfo = ref({
+    compId: "",
+    userMail: "",
+    userNm: "",
+    hp: "",
+    mrktMailRcptYn: "",
+    mrktSmsRcptYn: "",
+    mrktYn: ""
+  })
 
-  router.push({name : pageNm})
+  const topInfo = ref({
+      compNm: "",
+      userNm: "",
+      sprtProjCnt: 0,
+      prgsProjCnt: 0,
+      cpltProjCnt: 0
+    })
 
-}
 
-function myCompany(){
+  function goToPage(pageNm){
 
-  router.push({name :"MyCompanyInfo"})
-}
+    if('MyPasswordMng' == pageNm){
+      router.push({ name: pageNm
+                ,state : {
+                            dataObj : JSON.stringify(topInfo.value),
+                        }
+                });
+    }else{
+      router.push({name : pageNm})
+    }
 
-async function loadData(){
+  }
 
-  var api = "/v1/my/myinfo";
-  var getParams = {userMail: userMail.value};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
-  
-  console.log(rtn);
-  
-  if(rtn.rtnCd == "00"){
-    userInfo.value = rtn.rtnData
+  function myCompany(){
 
-    if(rtn.rtnData.mrktMailRcptYn == "Y" || rtn.rtnData.mrktSmsRcptYn == "Y"){
+    router.push({name :"MyCompanyInfo"})
+  }
+
+  async function loadData(){
+
+    var api = "/v1/my/myinfo";
+    var getParams = {userMail: userMail.value};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    
+    console.log(rtn);
+    
+    if(rtn.rtnCd == "00"){
+      userInfo.value = rtn.rtnData
+
+      if(rtn.rtnData.mrktMailRcptYn == "Y" || rtn.rtnData.mrktSmsRcptYn == "Y"){
+        userInfo.value.mrktYn = "Y"
+      }
+    }else{
+      //TODO 공통Alert으로 변경 예정
+      alert(rtn.rtnMsg);
+    }
+    
+  }
+
+  function checkBoxMrkt(id){
+    if(id == "mrktMailRcptYn"){
+      
+      if(userInfo.value.mrktMailRcptYn == "Y"){
+        userInfo.value.mrktMailRcptYn = "N";
+      }else{
+        userInfo.value.mrktMailRcptYn = "Y";
+      }
+
+    }else if(id == "mrktSmsRcptYn"){
+      
+      if(userInfo.value.mrktSmsRcptYn == "Y"){
+        userInfo.value.mrktSmsRcptYn = "N";
+      }else{
+        userInfo.value.mrktSmsRcptYn = "Y";
+      }
+
+    }
+
+    if(userInfo.value.mrktMailRcptYn == "Y" || userInfo.value.mrktSmsRcptYn == "Y"){
       userInfo.value.mrktYn = "Y"
     }
-  }else{
-    //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
-  }
-  
-}
 
-function checkBoxMrkt(id){
-  if(id == "mrktMailRcptYn"){
+    if(userInfo.value.mrktMailRcptYn != "Y" && userInfo.value.mrktSmsRcptYn != "Y"){
+      userInfo.value.mrktYn = "N"
+    }
+  }
+
+
+  async function saveInfo(){
+
+    var api = "/v1/my/myinfo";
+    var getParams = {userMail: userMail.value};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
     
-    if(userInfo.value.mrktMailRcptYn == "Y"){
-      userInfo.value.mrktMailRcptYn = "N";
-    }else{
-      userInfo.value.mrktMailRcptYn = "Y";
-    }
-
-  }else if(id == "mrktSmsRcptYn"){
+    console.log(rtn);
     
-    if(userInfo.value.mrktSmsRcptYn == "Y"){
-      userInfo.value.mrktSmsRcptYn = "N";
+    if(rtn.rtnCd == "00"){
+      userInfo.value = rtn.rtnData
+
+      if(rtn.rtnData.mrktMailRcptYn == "Y" || rtn.rtnData.mrktSmsRcptYn == "Y"){
+        userInfo.value.mrktYn = "Y"
+      }
     }else{
-      userInfo.value.mrktSmsRcptYn = "Y";
+      alert(rtn.rtnMsg);
     }
 
   }
-
-  if(userInfo.value.mrktMailRcptYn == "Y" || userInfo.value.mrktSmsRcptYn == "Y"){
-    userInfo.value.mrktYn = "Y"
-  }
-
-  if(userInfo.value.mrktMailRcptYn != "Y" && userInfo.value.mrktSmsRcptYn != "Y"){
-    userInfo.value.mrktYn = "N"
-  }
-}
-
-
-async function saveInfo(){
-
-  var api = "/v1/my/myinfo";
-  var getParams = {userMail: userMail.value};
-  let rtn = await gfnUtils.axiosGet(
-    api,
-    getParams
-  );
-  
-  console.log(rtn);
-  
-  if(rtn.rtnCd == "00"){
-    userInfo.value = rtn.rtnData
-
-    if(rtn.rtnData.mrktMailRcptYn == "Y" || rtn.rtnData.mrktSmsRcptYn == "Y"){
-      userInfo.value.mrktYn = "Y"
-    }
-  }else{
-    alert(rtn.rtnMsg);
-  }
-
-}
 </script>

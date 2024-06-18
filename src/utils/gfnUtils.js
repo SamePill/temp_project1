@@ -466,7 +466,7 @@ export const loadCommCode = async () => {
     var api = "/v1/common/code";
     var postParams = {codeGrpList:['EDCT_DIV_CD','ENGR_RTNG_DIV_CD','ENGR_INPT_STAT_CD','ENGR_SPRT_STAT_CD'
                                   ,'JOB_DIV_CD','PIRD_DIV_CD','PROJ_STAT_CD','SMS_DIV_CD','SRVD_STAT_CD'
-                                  ,'TASK_DIV_CD','WORK_DIV_CD','WORK_PIRD_DIV_CD']};
+                                  ,'TASK_DIV_CD','WORK_DIV_CD','WORK_PIRD_DIV_CD','PROJ_CHCK_DIV_CD']};
     //var loading = "";
     //var isErr = "";
     let rtn = await axiosPost(

@@ -341,7 +341,6 @@
   //확인버튼
   const confirm = function (){
     modalShowProfile.value.close()      
-    
   }  
 
   onMounted(() => {

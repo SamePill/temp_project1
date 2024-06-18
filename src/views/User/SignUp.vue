@@ -298,7 +298,6 @@
       blReq = true
     }
 
-    //TODO 인증번호 요청 추가  : reqAuthHpDivCd 확인 필요
     // 요청가능 상태 인경우
     if(blReq){
       var api = "/v1/auth/req-auth-hp";
@@ -306,7 +305,7 @@
         gfnUtils.openAlert("이메일을 입력해주세요.","", 2000)
         return false;
       }
-      var postParams = { "hp": signUp.value.joinOneStep.hp ,  "reqAuthHpDivCd": "string",   "userMail":  signUp.value.joinOneStep.userMail };
+      var postParams = { "hp": signUp.value.joinOneStep.hp ,  "reqAuthHpDivCd": "10",   "userMail":  signUp.value.joinOneStep.userMail };
 
       console.log("val ::" + postParams);
       console.log(api)
@@ -348,21 +347,16 @@
     var rtn = await gfnUtils.axiosPost(api, postParams);
     
     if (rtn.rtnCd == "00") {
-      //TODO 인증 번호 확인 완료 오류 메세지 처리
-      if(rtn.rtnCd == "00"){
-        certNoChk.value = "OK"
-        isButtonDisabled.value = true //인증버튼 비활성
-        isInputReadonly.value = true //전화번호 수정불가
-        blSendCertNo.value = false   //인증번호 입력 부분 비노출
-        gfnUtils.openAlert("인증 되었습니다.","", 2000)
-      }else{
-        certNoChk.value = "ERROR"
-        gfnUtils.openAlert("SMS 인증처리중 오류가 발생하였습니다.","", 2000)
-      }
-      
+    
+      certNoChk.value = "OK"
+      isButtonDisabled.value = true //인증버튼 비활성
+      isInputReadonly.value = true //전화번호 수정불가
+      blSendCertNo.value = false   //인증번호 입력 부분 비노출
+      gfnUtils.openAlert("인증 되었습니다.","", 2000)
+    
     } else {
       certNoChk.value = "ERROR"
-      gfnUtils.openAlert("SMS 인증처리중 오류가 발생하였습니다.","", 2000)
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
   }
 
