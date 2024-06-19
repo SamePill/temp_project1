@@ -41,7 +41,7 @@
         <p class="absolute left-24 top-[262px] text-base font-medium text-center text-[#555]">
           <span class="text-base font-medium text-center text-[#555] font-basic font-semibold">참여하고 싶은<br/>프로젝트를 찾아보세요.</span>
         </p>
-        <img src="@/assets/ic_project_003.png" class="w-80 h-40 absolute left-[9px] top-[37px] object-none" />
+        <img src="@/assets/ic_project_003.png" class="w-80 h-40 absolute left-[0px] top-[37px] object-none" />
       </div>
       <div class="w-[340px] h-[340px] relative overflow-hidden rounded-[10px] bg-[#ddf2ef]">
         <p class="absolute left-[93px] top-[218px] text-[28px] font-semibold text-center text-[#191919]">
@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="flex-grow-0 flex-shrink-0 mt-[40px]">
-        <div class="flex flex-col justify-start items-start">
+        <div v-if="!gfnRules.isNull(el.taskSkil)" class="flex flex-col justify-start items-start">
           <p class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#191919]">
             업무 스킬
           </p>
@@ -141,6 +141,7 @@
 // import Footer from '@/components/layoutComponents/Footer.vue'
 import QaProjectItem from '@/components/baseComponents/QaProjectItem.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import * as gfnRules from "@/utils/gfnRules.js";
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 

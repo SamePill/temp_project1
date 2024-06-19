@@ -47,7 +47,7 @@
         </button>
     </div>
     <!-- 하단정보 -->
-    <div class="justify-between mt-4 text-sm text-text-1">
+    <div class="justify-between mt-4  text-text-1">
       
       <span>예상금액 : {{props.prj.expcPric/10000}}만원</span>
       <span class="ml-2 py-[2px] px-1 border-solid border border-line-0 text-[10px] text-[#555] rounded-sm"> 월 단위 </span>

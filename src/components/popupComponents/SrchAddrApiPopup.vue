@@ -1,59 +1,68 @@
 <template>
-  <div
-    class="flex flex-col justify-start items-center w-[1000px] relative overflow-hidden gap-[50px] px-[5px] pt-[30px] pb-5 rounded-[10px] bg-white"
-  >
-    <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
-      우편번호 검색
-    </p>
-    <input type="text" class="w-[300px] py-[10px]  px-[10px] justify-between border-line-1 border rounded box-border placeholder:text-sm placeholder:text-text-3" v-model="keyword" placeholder="주소를 입력해 주세요" />
+  <div class="flex flex-col justify-start items-center w-[700px] relative overflow-hidden mx-auto pt-[30px] pb-5 rounded-[10px] bg-white min-h-[580px] px-[10px]">
+    <p class="text-xl font-medium text-[#191919] absolute left-[20px] top-[20px]">주소검색</p>
+    <svg  style="cursor: pointer;" @click="$emit('closeAddrPop')" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            class="grow-0 flex-shrink-0 w-6 h-6 absolute right-[20px] top-[20px]" preserveAspectRatio="none">
+        <path d="M19 5L5 19" stroke="#191919" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
+        <path d="M5 5L19 19" stroke="#191919" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
+    </svg>
+    
+    <div class="w-[660px] mt-[25px] h-px bg-[#ddd]"></div>
+
+     <div class="relative mt-[12px]">
+        <input class="w-[660px] px-2 pr-[30px] py-[10px] border rounded box-border text-text-0"  type="text" placeholder="서울특별시 강남구 테헤란로13길" v-model="keyword" @keyup.enter="getAddr()">
+        <img style="cursor: pointer; position:absolute; right:15px; top:14px;" class="w-[18px] h-[18px]" src="@/assets/ic_magnifier.png" alt="" @click="getAddr()">
+      </div>
 
     <!--반복부-->
-    <div v-for="el in addressList" :key="el">
-      {{ el.roadAddr }}
-      {{ el.zipNo }}
+    <div class="mt-[20px]">
+      <div class="w-[660px] mx-auto">
+        <div class="w-[660px] h-[370px] overflow-hidden rounded-[10px] p-4 bg-white border border-[#ddd] mx-auto">
+          <p class="mb-[3px] flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
+            검색 결과
+          </p>
+          <div class=" mt-[10px] h-px bg-[#ddd]"></div>
+          <div>
+            <div class="mt-[35px]" v-if="addressList.length == 0 && isSrch > 0">
+                <p class="text-lg font-bold text-center text-[#555]">찾으시는 주소를 찾지 못했습니다.</p>
+                <p class="text-sm font-medium text-center text-[#777] mt-[10px]">
+                <span class="text-sm font-medium text-center text-[#777]">찾으시는 주소를 찾지 못했습니다.</span>
+                <br /><span class="text-sm font-medium text-center text-[#777]">찾으시는 주소가 맞는지 다시 한번 확인해주세요.</span>
+              </p>
+            </div>
+            <div v-if="addressList.length  > 0" class="table-row-group">
+              <div class="table-row text-[15px] text-[#555]" @click="$emit('selAddr')"  v-for="(el,i) in addressList" :key="el" style="cursor: pointer;" :style="(i+10)%2 != 0?'background-color: #F5F5F5':''" >
+                <div class="table-cell w-[50px] h-[30px] text-center text-sm text-text-2" style="line-height:60px">{{ i+1 }}</div>
+                <div class="table-cell w-[450px] h-[30px] text-left text-sm text-text-2" >{{ el.roadAddr }}</div>
+                <div class="table-cell w-[130px] h-[30px] text-center text-sm text-text-2">{{ el.zipNo }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--페이지네이션-->
+        <div v-if="addressList.length  > 0" class="mt-[10px] w-[420px] paginationDiv  font-basic">
+          <vue-awesome-paginate
+            :total-items=totalCnt
+            v-model="currentPage"
+            :items-per-page=countPerPage
+            :max-pages-shown="5"
+            :on-click="getAddr"
+          >
+            <template #prev-button>
+              <span>
+                <font-awesome-icon icon="chevron-right" color="black" />
+              </span>
+            </template>
+            <template #next-button>
+              <span>
+                <font-awesome-icon icon="chevron-right" color="black" />
+              </span>
+            </template>
+          </vue-awesome-paginate>
+        </div> 
+      </div>
     </div>
-    <!--페이지네이션-->
-    <div v-if="addressList.length  > 0" class="paginationDiv w-[1000px] h-10 my-10 mx-auto font-basic" style="text-align:center">
-      <vue-awesome-paginate
-        :total-items=totalCnt
-        v-model="currentPage"
-        :items-per-page=countPerPage
-        :max-pages-shown="10"
-        :on-click="getAddr"
-      >
-        <template #prev-button>
-          <span>
-            <font-awesome-icon icon="chevron-right" color="black" />
-          </span>
-        </template>
-        <template #next-button>
-          <span>
-            <font-awesome-icon icon="chevron-right" color="black" />
-          </span>
-        </template>
-      </vue-awesome-paginate>
-    </div> 
-    <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
-      <button
-        class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
-        @click="getAddr()"
-        >
-        주소검색
-      </button>
-      <button
-        class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
-        @click="$emit('closeAddrPop')"
-        >
-        닫기
-      </button>
-      <button
-        class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[145px] relative overflow-hidden gap-2.5 px-[45px] py-2.5 rounded-[1000px] bg-white border border-[#1ba494]"
-        @click="$emit('selAddr')"
-        >
-        선택
-      </button>      
-
-    </div>
+    <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5"></div>
   </div>
 </template>
 
@@ -66,6 +75,7 @@
   const totalCnt = ref()
   const currentPage = ref(1)
   const countPerPage = ref(5)
+  const isSrch = ref(0)
   // const resultType =ref("json")
   // const confmKey = ref('devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI=') //for DEV
   const keyword = ref("")
@@ -100,7 +110,7 @@
     }else{
       //TODO 에러처리
     }
-    
+    isSrch.value = isSrch.value+1;
 
   }
 
