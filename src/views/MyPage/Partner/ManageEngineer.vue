@@ -289,7 +289,7 @@
       </div>
     </div>
     <modal ref="modalShowProfile" :width="810">
-      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @close="cancel" @confirm="confirm" />
+      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @popBtn1="profileBtn"  />
     </Modal>
   </div>
 </template>
@@ -334,14 +334,13 @@
   const showModalProfile = () => {
     modalShowProfile.value.open()            
   }
-  //취소버튼
-  const cancel = function (){
-    modalShowProfile.value.close()      
+  //수정 하기 버튼 
+  function profileBtn(){
+    //TODO 수정하기 연결
+    alert("수정하기 연결...")
+
+    modalShowProfile.value.close()
   }
-  //확인버튼
-  const confirm = function (){
-    modalShowProfile.value.close()      
-  }  
 
   onMounted(() => {
     loadData();
@@ -377,10 +376,10 @@
 
       showModalProfile()
     }else{
-      //TODO 공통Alert으로 변경 예정
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
   }
+
 
 
   function getEngrRtngDivCd(data){
@@ -440,8 +439,7 @@
       // totalCnt.value = 0
       engrRtngCntInfo.value = res.engrRtngCntInfo
     }else{
-      //TODO 공통Alert으로 변경 예정
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
     
     

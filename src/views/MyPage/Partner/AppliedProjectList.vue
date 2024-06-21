@@ -54,7 +54,7 @@
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
 
-                <DropDown style="z-index: 99" @click="documentClick('AplPrjtSort','dropDown')" id="AplPrjtSort" ref="$AplPrjtSort" @setData="getAplPrjtSort" :title="'정렬'" :listDivCd="'APL_PRJT_SORT'"/>
+                <DropDown style="z-index: 99" @click="documentClick('AplPrjtSort','dropDown')" id="AplPrjtSort" ref="$AplPrjtSort" @setData="getAplPrjtSort"  :listDivCd="'APL_PRJT_SORT'"/>
                 <!-- <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
@@ -161,6 +161,7 @@
   import SideMenu from '@/components/layoutComponents/SideMenu.vue'
   import MyPageNodata from '@/components/baseComponents/MyPageNodata.vue'
   import RegisteredPrjtItem from '@/components/baseComponents/RegisteredPrjtItem.vue'
+  import { useRouter } from 'vue-router'
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import { onMounted, ref } from 'vue'
 
@@ -169,7 +170,7 @@
     loadData();
   })
 
-
+  const router = useRouter()
   const pageNo = ref(1)
   const totalCnt = ref()
   // const boolSort = ref(false)
@@ -222,12 +223,12 @@
   function showEngrDetail(idx){
     console.log(idx)
     
-    // router.push({name: "SelEngineerList"
-    //             ,state : {
-    //               //dataObj : { a:1, b:'string', c:true },
-    //               dataObj : JSON.stringify(regProjList.value[idx].projId),
-    //             }
-    //           })
+    router.push({name: "AppliedEngineerList"
+                ,state : {
+                  //dataObj : { a:1, b:'string', c:true },
+                  dataObj : JSON.stringify(projList.value[idx]),
+                }
+              })
   }
 
   function documentClick(div,eventTarget){

@@ -285,7 +285,7 @@
       </div>
     </div>
     <modal ref="modalShowProfile" :width="810">
-      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @close="cancel" @confirm="confirm" />
+      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @popBtn1="profileBtn1" @popBtn2="profileBtn2" @close="close"/>
     </Modal>
   </div>
 </template>
@@ -311,6 +311,8 @@
   const userMail = ref(window.$cookies.get("loginUserMail"))
   const engrProfile = ref({})
   const profileMode = ref("")
+  const profileProcess =ref({})
+
   const EngrRtngDivCd = ref("")
   const $EngrRtngDivCd = ref()
   const SelEngrSort = ref("")
@@ -345,14 +347,87 @@
     modalShowProfile.value.open()            
   }
   //취소버튼
-  const cancel = function (){
+  const close = function (){
     modalShowProfile.value.close()      
   }
-  //확인버튼
-  const confirm = function (){
+  // //확인버튼
+  // const confirm = function (){
+  //   modalShowProfile.value.close()      
+    
+  // }
+
+  async function profileBtn1(){
     modalShowProfile.value.close()      
+
+    var api = "";
+    var getParams = {userMail : userMail.value};
+    var postParams = profileProcess.value;
+    
+
+    if(profileMode.value == "30"){
+      //선정합격 상태
+      console.log("불합격처리")
+      api = "/v1/my/modify/engineer-fail";
+    }else if(profileMode.value == "40"){
+      //선정대기 //미팅예정
+      console.log("불합격처리")
+      api = "/v1/my/modify/engineer-fail";
+    }else if(profileMode.value == "50"){
+      //선정탈락 상태
+      console.log("선정대기")
+      api = "/v1/my/modify/engineer-wait";
+    }
+
+    let rtn = await gfnUtils.axiosPost(
+      api,
+      postParams,
+      getParams
+    );
+
+    if(rtn.rtnCd == "00"){
+      //TODO 정상시 메세지 리턴되는가??
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
     
   }
+
+  async function profileBtn2(){
+    modalShowProfile.value.close()      
+
+    var api = "";
+    var getParams = {userMail : userMail.value};
+    var postParams = profileProcess.value;
+    
+    if(profileMode.value == "30"){
+      //선정합격 상태
+      console.log("미팅요청")
+      api = "/v1/my/modify/engineer-meeting-scheduled"
+    }else if(profileMode.value == "40"){
+      //선정대기 //미팅예정
+      console.log("선정하기")
+      api = "/v1/my/modify/engineer-pass"
+    }else if(profileMode.value == "50"){
+      //선정탈락 상태
+      console.log("처리없음")
+    }
+
+    let rtn = await gfnUtils.axiosPost(
+      api,
+      postParams,
+      getParams
+    );
+
+    if(rtn.rtnCd == "00"){
+      //TODO 정상시 메세지 리턴되는가??
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
+
+  }
+
 
   
   function getEngrRtngDivCd(data){
@@ -367,7 +442,7 @@
 
     console.log(el.engrId)
     var api = "/v1/my/engineer/detail";
-    var getParams = {userMail: userMail.value, engrId:el.engrId};
+    var getParams = {userMail: userMail.value, engrId:el.engrId , projId:projId.value};
     let rtn = await gfnUtils.axiosGet(
       api,
       getParams
@@ -375,7 +450,9 @@
     
     if(rtn.rtnCd == "00"){
       engrProfile.value = rtn.rtnData   
-      console.log(engrProfile.value)
+      profileProcess.value.projSprtSeq = el.projSprtSeq
+      profileProcess.value.engrId = el.engrId
+
       if(engrProfile.value.engrSprtStatCd == '10'){
         //선정합격
         profileMode.value = "30"
@@ -392,8 +469,7 @@
 
       showModalProfile()
     }else{
-      //TODO 공통Alert으로 변경 예정
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
   }
 
@@ -434,12 +510,10 @@
 
       console.log(engrList.value)
 
-      // TODO 총건수 필요..
-      totalCnt.value = 10
+      totalCnt.value = res.engrTotlCnt
   
     }else{
-      //TODO 공통Alert으로 변경 예정
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
     
   }

@@ -192,18 +192,14 @@ async function loadData(selPage){
   );
   
   if(rtn.rtnCd == "00"){
-    console.log(rtn);
     let res = rtn.rtnData
-    console.log(res);
 
     projList.value = res.projList
-    topInfo.value = {}
-    // TODO 총건수 필요..
-    totalCnt.value = 10
- 
+    topInfo.value = res.topInfo
+    totalCnt.value = res.projTotlCnt
+
   }else{
-    //TODO 공통Alert으로 변경 예정
-    alert(rtn.rtnMsg);
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }
 }
 

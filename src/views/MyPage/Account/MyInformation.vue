@@ -333,9 +333,9 @@
       if(rtn.rtnData.mrktMailRcptYn == "Y" || rtn.rtnData.mrktSmsRcptYn == "Y"){
         userInfo.value.mrktYn = "Y"
       }
+      topInfo.value = rtn.rtnData.topInfo
     }else{
-      //TODO 공통Alert으로 변경 예정
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
     
   }
@@ -387,7 +387,7 @@
         userInfo.value.mrktYn = "Y"
       }
     }else{
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
 
   }

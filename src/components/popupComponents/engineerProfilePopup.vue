@@ -15,6 +15,7 @@
           xmlns="http://www.w3.org/2000/svg"
           class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
           preserveAspectRatio="none"
+          style="cursor: pointer"
           @click="showMore=false;$emit('close')"
         >
           <path
@@ -152,30 +153,34 @@
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">
                     프로젝트 명
                   </p>
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">초급 엔지니어</p>
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{ el.projTitl}}</p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">수행기간</p>
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
-                    2022.01.01 ~ 재직중
+                    {{ el.strtYm }} ~ {{ el.endYm }}
                   </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">직군</p>
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">Web</p>
+                  <div v-for="subEl in el.jobDivCdList" :key="subEl" >
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{ subEl.jobDivCdNm }}</p>
+                  </div>                  
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">클라이언트</p>
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">배달의 민족</p>
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{ el.clntNm }}</p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">업무 영역</p>
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">모바일</p>
+                  <div v-for="subEl in el.taskDivCdList" :key="subEl" >
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{ subEl.taskDivCdNm }}</p>
+                  </div>                                    
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">활용 Tool</p>
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
-                    엑셀, 지라, 레드마인
+                    {{ el.projUseTool }}
                   </p>
                 </div>
                 <div
@@ -204,11 +209,9 @@
                           프로젝트 설명 및 주요 담당 업무
                         </p>
                         <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
-                          <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
-                            >현재상황은 시나리오 및 기획서만 만들어져 있는 상태입니다.</span
-                          ><br /><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
-                            >TC 및 테스트와 관련된 문서는 없습니다.</span
-                          >
+                          <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+                            {{ el.projCtntTask }}
+                          </span>
                         </p>
                       </div>
                       <div
@@ -218,11 +221,9 @@
                           업무스킬
                         </p>
                         <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
-                          <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
-                            >현재상황은 시나리오 및 기획서만 만들어져 있는 상태입니다.</span
-                          ><br /><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
-                            >TC 및 테스트와 관련된 문서는 없습니다.</span
-                          >
+                          <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+                            {{ el.projDmndSkil }}
+                          </span>
                         </p>
                       </div>
                       <div
@@ -232,11 +233,9 @@
                           기타 사항
                         </p>
                         <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
-                          <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
-                            >현재상황은 시나리오 및 기획서만 만들어져 있는 상태입니다.</span
-                          ><br /><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]"
-                            >TC 및 테스트와 관련된 문서는 없습니다.</span
-                          >
+                          <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
+                            {{ el.projEtcInfo }}
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -252,8 +251,6 @@
         </div>
       </div>
     </div>
-
-    
     <!-- 하단 버튼 제어-->
     <!-- 프로젝트지원 엔지니어 선택.... -->
     <!-- 지원취소 -->
@@ -266,7 +263,6 @@
         </button>
       </div>
     </div>
-
     <!-- 수정하기 -->
     <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '20'">
       <div
@@ -275,7 +271,6 @@
         <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">수정하기</button>
       </div>
     </div>
-
     <!-- 등록프로젝트 엔지니어 선택.... -->
     <!-- 선정후 -->
     <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '30'">
@@ -364,7 +359,7 @@ async function  resumeDownClick(){
 }
 
 const props = defineProps({
-  mode:{default:"99"},
+  mode:{},
   profile:{
     // "engrId": "엔지니어 id",
     // "engrNm": "엔지니어 이름",

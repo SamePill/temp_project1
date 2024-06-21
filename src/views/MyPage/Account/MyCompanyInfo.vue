@@ -64,13 +64,14 @@
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[360px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                     placeholder="png, jpg 만 첨부가능합니다."
                     readonly
-                    v-model="bizRegFileNm"
                   />
+                  <!-- v-model="bizRegFileNm" -->
                   <input type="file" id="bizRegFile" hidden  accept="image/*, .pdf"  @change="showFileName('bizReg')"/>
                   
                   <label for="bizRegFile">
                     <div
                       class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
+                      style="cursor: pointer"
                     >
                       <svg
                         width="16"
@@ -111,7 +112,9 @@
                       xmlns="http://www.w3.org/2000/svg"
                       class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                       preserveAspectRatio="none"
+                      style="cursor: pointer"
                       @click="delFile('bizReg')"
+                      v-show="companyInfo.bizRegFileNm !='' && companyInfo.bizRegFileNm != null"
                     >
                       <rect width="16" height="16" transform="translate(0 0.5)" fill="white"></rect>
                       <path
@@ -145,12 +148,13 @@
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[360px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                     placeholder="png, jpg 만 첨부가능합니다."
                     readonly
-                    v-model="compLogoFileNm"
                   />
+                  <!-- v-model="compLogoFileNm" -->
                   <input id ="compLogoFile" type="file" hidden  accept="image/*, .pdf"  @change="showFileName('compLogo')"/>
                   <label for="compLogoFile">
                     <div
                       class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]"
+                      style="cursor: pointer"
                     >
                       <svg
                         width="16"
@@ -192,6 +196,8 @@
                       class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
                       preserveAspectRatio="none"
                       @click="delFile('compLogo')"
+                      style="cursor: pointer"
+                      v-show="companyInfo.compLogoFileNm !='' && companyInfo.compLogoFileNm != null"
                     >
                       <rect width="16" height="16" transform="translate(0 0.5)" fill="white"></rect>
                       <path
@@ -272,11 +278,13 @@ function showFileName(div){
     let fileName = input.files[0].name;
     bizRegFileNm.value = fileName;
     bizRegFile.value = input.files[0]
+    companyInfo.value.bizRegFileNm = fileName;
   }else if(div == "compLogo"){
     let input = document.getElementById('compLogoFile');
     let fileName = input.files[0].name;
     compLogoFileNm.value = fileName;
     compLogoFile.value = input.files[0]
+    companyInfo.value.compLogoFileNm = fileName;
   }
 
 }
@@ -299,9 +307,9 @@ async function loadData(){
 
   if(rtn.rtnCd == "00"){
     companyInfo.value = rtn.rtnData
-
+    topInfo.value = rtn.rtnData.topInfo
   }else{
-    alert(rtn.rtnMsg);
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }
 
 }
@@ -367,9 +375,13 @@ async function saveInfo(){
 function delFile(div){
 
   if(div == "bizReg"){
-    console.log("")
+    bizRegFileNm.value = "";
+    bizRegFile.value = null
+    companyInfo.value.bizRegFileNm = "";
   }else if(div == "compLogo"){
-    console.log("")
+    compLogoFileNm.value = "";
+    compLogoFile.value = null
+    companyInfo.value.compLogoFileNm = "";
   }
 
 }
