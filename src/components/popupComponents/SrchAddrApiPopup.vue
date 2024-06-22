@@ -128,7 +128,8 @@ async function getAddr(){
   //주소 선택 시
   function selectAddr(addrVal){
     console.log('주소보내는곳',addrVal)
-    emit('selAddr',addrVal)
+    emit('selAddr',addrVal);
+    close();
   }
   // function enterSearch(event) {
   //   var evt_code = (window.netscape) ? ev.which : event.keyCode;
