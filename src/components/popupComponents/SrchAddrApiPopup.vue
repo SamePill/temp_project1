@@ -40,7 +40,7 @@
           </div>
         </div>
         <!--페이지네이션-->
-        <div v-if="addressList.length  > 0" class="mt-[10px] w-[420px] paginationDiv  font-basic">
+        <div v-if="addressList.length  > 0" class="mt-[10px] w-[660px] mx-auto paginationDiv font-basic" style="text-align:center">
           <vue-awesome-paginate
             :total-items=totalCnt
             v-model="currentPage"
