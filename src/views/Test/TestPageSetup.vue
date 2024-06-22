@@ -219,7 +219,7 @@
     <br>
     <br>
     <modal ref="srchAddrShow" :width="700">
-      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="closeAddrPop" />
+      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="returnArrd" />
     </modal>
     <button type="button" @click="showAddrPop">모달 주소검색 팝업 띄우기</button>
     <br>
@@ -281,6 +281,10 @@
     srchAddrShow.value.close()
   }
 
+  function returnArrd(addrVal){
+    console.log('주소받는곳',addrVal);
+    srchAddrShow.value.close()
+  }
   const apiUrl = ref("/v1/common/code");
   const apiResult = ref("");
   const testId = ref("");

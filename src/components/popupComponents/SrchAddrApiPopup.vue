@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-start items-center w-[700px] relative overflow-hidden mx-auto pt-[30px] pb-5 rounded-[10px] bg-white min-h-[580px] px-[10px]">
     <p class="text-xl font-medium text-[#191919] absolute left-[20px] top-[20px]">주소검색</p>
-    <svg  style="cursor: pointer;" @click="$emit('closeAddrPop')" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    <svg  style="cursor: pointer;" @click="close()" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
             class="grow-0 flex-shrink-0 w-6 h-6 absolute right-[20px] top-[20px]" preserveAspectRatio="none">
         <path d="M19 5L5 19" stroke="#191919" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
         <path d="M5 5L19 19" stroke="#191919" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
@@ -31,7 +31,7 @@
               </p>
             </div>
             <div v-if="addressList.length  > 0" class="table-row-group">
-              <div class="table-row text-[15px] text-[#555]" @click="$emit('selAddr')"  v-for="(el,i) in addressList" :key="el" style="cursor: pointer;" :style="(i+10)%2 != 0?'background-color: #F5F5F5':''" >
+              <div class="table-row text-[15px] text-[#555]" @click="selectAddr(el)"  v-for="(el,i) in addressList" :key="el" style="cursor: pointer;" :style="(i+10)%2 != 0?'background-color: #F5F5F5':''" >
                 <div class="table-cell w-[50px] h-[30px] text-center text-sm text-text-2" style="line-height:60px">{{ i+1 }}</div>
                 <div class="table-cell w-[450px] h-[30px] text-left text-sm text-text-2" >{{ el.roadAddr }}</div>
                 <div class="table-cell w-[130px] h-[30px] text-center text-sm text-text-2">{{ el.zipNo }}</div>
@@ -67,27 +67,30 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref,defineEmits } from 'vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
-  //import axios from "axios";
 
-  // const FormData = require('form-data');
-  const totalCnt = ref()
-  const currentPage = ref(1)
-  const countPerPage = ref(5)
-  const isSrch = ref(0)
-  // const resultType =ref("json")
-  // const confmKey = ref('devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI=') //for DEV
-  const keyword = ref("")
-  const addressList = ref([])
+const emit = defineEmits([
+  'closeAddrPop','selAddr'
+]);
 
-  async function getAddr(){
-    console.log("주소 검색")
+const totalCnt = ref()
+const currentPage = ref(1)
+const countPerPage = ref(5)
+const isSrch = ref(0)
+const keyword = ref("")
+const addressList = ref([])
+
+async function getAddr(){
+    //import axios from "axios";
+    // const FormData = require('form-data');
+    // const resultType =ref("json")
+    // const confmKey = ref('devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI=') //for DEV
+
     // 적용예 (api 호출 전에 검색어 체크)   
     if (!checkSearchedWord(keyword)) {
       return ;
     }
-    console.log("주소 검색 pass")
     //var api = "https://business.juso.go.kr/addrlink/addrLinkApi.do";
     var api = "/addrlink/addrLinkApi.do" 
             // + "?confmKey=" + confmKey.value
@@ -102,8 +105,6 @@
       ,params
       ,"addr"
     );
-
-    console.log(rtn)
     if(rtn.data.results.common.errorCode == 0){
       addressList.value = rtn.data.results.juso
       totalCnt.value = rtn.data.results.common.totalCount
@@ -111,11 +112,24 @@
       //TODO 에러처리
     }
     isSrch.value = isSrch.value+1;
-
   }
 
+  //닫기 버튼 선택 시 값 초기화
+  function close(){
+    totalCnt.value = '';
+    currentPage.value = 1;
+    countPerPage.value =5;
+    isSrch.value = 0;
+    keyword.value = "";
+    addressList.value = [];
+    emit('closeAddrPop');
+  }
   
-
+  //주소 선택 시
+  function selectAddr(addrVal){
+    console.log('주소보내는곳',addrVal)
+    emit('selAddr',addrVal)
+  }
   // function enterSearch(event) {
   //   var evt_code = (window.netscape) ? ev.which : event.keyCode;
   //   if (evt_code == 13) {    
