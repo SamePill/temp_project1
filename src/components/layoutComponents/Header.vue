@@ -15,10 +15,10 @@
             <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('PrjtRegiPage1')">
               프로젝트 등록
             </button>
-            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('WhatIsQm')">
               큐밋이란?
             </button>
-            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
+            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('CstmSrvcCntr')">
               고객센터
             </button>
             <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('TestPageSetup')">
