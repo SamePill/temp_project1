@@ -43,14 +43,12 @@
      <!--엔지니어 등록-->  
       <div id="engiRegi" v-show="slctMainTabIdx.i == 1" class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4 h-[730px] pt-[180px]">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] text-left">
-          <span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">
-            큐밋과 함께라면, 프로젝트 등록을 </span>
           <span class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#1ba494]">
-            무료로 단 10분</span><span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]"> 만에 완료!</span>
+            엔지니어를 등록</span><span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]"> 후 프로젝트에 지원해보세요</span>
         </p>
         <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-[30px]">
           <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#555]">
-            큐밋은 사용자 친화적인 인터페이스와 간편한 절차로 신속한 프로젝트 신청이 가능합니다.
+            엔지니어와 주요 내용을 구체적으로 입력해 주세요 클라이언트가 선정할 확률이 높아져요
           </p>
           <button @click="goToPage('AddEngineerInfo')" class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
               엔지니어 등록하기 >
@@ -62,13 +60,13 @@
       <div id="prjtAply" v-show="slctMainTabIdx.i == 1" class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4 py-[160px]">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] text-left">
           <span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">
-            큐밋과 함께라면, 프로젝트 등록을 </span>
+            다양한 프로젝트를 확인 후 나에게 맞는 </span>
           <span class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#1ba494]">
-            무료로 단 10분</span><span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]"> 만에 완료!</span>
+            프로젝트를 지원</span><span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">해 보세요.</span>
         </p>
         <div class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-[30px]">
           <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#555]">
-            큐밋은 사용자 친화적인 인터페이스와 간편한 절차로 신속한 프로젝트 신청이 가능합니다.
+            내가 등록한 엔지니어가 돋보일 수 있도록 엔지니어 프로필을 작성해 보세요.
           </p>
           <button @click="goToPage('PrjtSrch')" class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
               프로젝트 둘러보기 >
