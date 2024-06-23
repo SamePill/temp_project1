@@ -119,6 +119,7 @@
 
   function process(){
     alert("탈퇴처리....");
+    
   }
 
 // const props = defineProps({

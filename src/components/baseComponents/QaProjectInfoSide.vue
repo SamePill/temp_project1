@@ -58,7 +58,6 @@
           모집이 종료되었습니다
         </button>
         <div v-else>
-          <!-- TODO 프로젝트 데이터 전달 필요-->
           <div v-if="prj.crtdUserMail == userMail">
             <button             
               class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[300px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
@@ -103,7 +102,7 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
                     >
-                      10명 지원
+                      {{ engr10Cnt }} 명 지원
                     </p>
                   </div>
                   <div
@@ -118,19 +117,10 @@
                         중급 엔지니어
                       </p>
                     </div>
-                    <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                      <span
-                        class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                        >4명</span
-                      >
-                      <span
-                        class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"
-                      >
-                      </span>
-                      <span
-                        class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                        >지원</span
-                      >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
+                    >
+                    {{ engr20Cnt }} 명 지원
                     </p>
                   </div>
                   <div
@@ -148,7 +138,25 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
                     >
-                      2명 지원
+                    {{ engr30Cnt }} 명 지원
+                    </p>
+                  </div>
+                  <div
+                    class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4"
+                  >
+                    <div
+                      class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#faf1db]"
+                    >
+                      <p
+                        class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc630b]"
+                      >
+                        특급 엔지니어
+                      </p>
+                    </div>
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
+                    >
+                    {{ engr40Cnt }} 명 지원
                     </p>
                   </div>
                 </div>
@@ -221,7 +229,7 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
               >
-                10명 지원
+                {{ engr10Cnt}} 명 지원
               </p>
             </div>
             <div
@@ -236,19 +244,10 @@
                   중급 엔지니어
                 </p>
               </div>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left">
-                <span
-                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                  >4명</span
-                >
-                <span
-                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"
-                >
-                </span>
-                <span
-                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                  >지원</span
-                >
+              <p
+                class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
+              >
+              {{ engr20Cnt }} 명 지원
               </p>
             </div>
             <div
@@ -266,7 +265,25 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
               >
-                2명 지원
+              {{ engr30Cnt }} 명 지원
+              </p>
+            </div>
+            <div
+              class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4"
+            >
+              <div
+                class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#faf1db]"
+              >
+                <p
+                  class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc630b]"
+                >
+                  특급 엔지니어
+                </p>
+              </div>
+              <p
+                class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
+              >
+              {{ engr40Cnt }} 명 지원
               </p>
             </div>
           </div>
@@ -401,6 +418,7 @@
       </div>
       <button
         class="flex justify-center text-base font-medium text-left text-white w-[300px] px-2.5 py-4 rounded bg-[#1ba494]"
+        @click="apply"
       >
         지원하기
       </button>
@@ -446,6 +464,11 @@ const privTrmsYnIsShow = ref(false);
 
 const isShowDetl = ref(false);
 
+const engr10Cnt = ref(0)
+const engr20Cnt = ref(0)
+const engr30Cnt = ref(0)
+const engr40Cnt = ref(0)
+
 function goToPage(div) {
   router.push({ name: div });
 }
@@ -475,7 +498,7 @@ function clickSideMenuBtn(div) {
 }
 
 async function editProject(){
-  //TODO 프로젝트 수정전 프로젝트 정보 조회하여 넘김.
+  //TODO 프로젝트 수정전 프로젝트 정보 조회하여 넘김 (칩 체크리스트 오류...).
 
   var getParams = { projId: props.prj.projId, userMail: userMail.value };
   await gfnUtils
@@ -508,13 +531,33 @@ async function editProject(){
     });
 }
 
-function selectEngr(engrList, engr10Cnt, engr20Cnt, engr30Cnt, engr40Cnt){
+async function apply(){
+  //프로젝트 지원하기 및 수정지원
+  
+  var api = "/v1/auth/login";
+  var postParams = { userMail: email.value, pass: pswd.value };
+
+  console.log("val ::" + postParams);
+
+  //var loading = "";
+  //var isErr = "";
+  var rtn = await gfnUtils.axiosPost(api, postParams);
+  if (rtn.rtnCd == "00") {
+    console.log(rtn)
+    router.replace("/");
+  } else {
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  }
+
+}
+
+function selectEngr(engrList, sel10Cnt, sel20Cnt, sel30Cnt, sel40Cnt){
   //선택한 엔지니어 정도
   console.log(engrList)
-  console.log(engr10Cnt)
-  console.log(engr20Cnt)
-  console.log(engr30Cnt)
-  console.log(engr40Cnt)
+  engr10Cnt.value = sel10Cnt
+  engr20Cnt.value = sel20Cnt
+  engr30Cnt.value = sel30Cnt
+  engr40Cnt.value = sel40Cnt
   console.log("지원 엔지니어 정보")
 }
 </script>

@@ -358,7 +358,7 @@ async function saveInfo(){
   // }
   // console.log(formData);
 
-  let res = await this.gfn_utils.axiosPost(
+  let res = await gfnUtils.axiosPost(
       "/v1/my/modify/comp-info",
       formData
   );         
@@ -367,7 +367,7 @@ async function saveInfo(){
     companyInfo.value = res.rtnData
 
   }else{
-    alert(res.rtnMsg);
+    gfnUtils.openAlert(res.rtnMsg,"", 2000)
   }
   
 }

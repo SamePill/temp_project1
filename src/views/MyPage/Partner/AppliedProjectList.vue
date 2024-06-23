@@ -265,8 +265,7 @@
       // totalCnt.value = 0
 
     }else{
-      //TODO 공통Alert으로 변경 예정
-      alert(rtn.rtnMsg);
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
 
     

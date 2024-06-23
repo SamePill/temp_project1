@@ -873,13 +873,11 @@
 
 
   function btnStatChng() {
-    // console.log(email.value == "");
-    // console.log(pswd.value == "");
-    console.log(bizNoFileYn.value)
-    console.log(signUp.value.joinTwoStep.privTrmsYn)
-    console.log(signUp.value.joinTwoStep.useTrmsYn)
-    console.log(signUp.value.joinTwoStep.compNm)
-    console.log(signUp.value.joinTwoStep.bizRegNo)
+    // console.log(bizNoFileYn.value)
+    // console.log(signUp.value.joinTwoStep.privTrmsYn)
+    // console.log(signUp.value.joinTwoStep.useTrmsYn)
+    // console.log(signUp.value.joinTwoStep.compNm)
+    // console.log(signUp.value.joinTwoStep.bizRegNo)
     if (!bizNoFileYn.value  
       || signUp.value.joinTwoStep.privTrmsYn != "Y" || signUp.value.joinTwoStep.useTrmsYn != "Y" 
       || signUp.value.joinTwoStep.compNm == "" || signUp.value.joinTwoStep.bizRegNo == "" 

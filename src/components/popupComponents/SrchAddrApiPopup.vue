@@ -146,7 +146,7 @@ async function getAddr(){
       //특수문자 제거
       var expText = /[%=><]/ ;
       if(expText.test(obj.value) == true){
-        alert("특수문자를 입력 할수 없습니다.") ;
+        gfnUtils.openAlert("특수문자를 입력 할수 없습니다.","", 2000)
         obj.value = obj.value.split(expText).join(""); 
         return false;
       }
