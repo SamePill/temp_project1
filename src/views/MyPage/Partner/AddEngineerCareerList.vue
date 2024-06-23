@@ -46,7 +46,7 @@
               <p
                 class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#1ba494]"
               >
-                등록한 프로젝트 2개
+                등록한 프로젝트 {{projSmryHstrList.length}}개
               </p>
               <svg
                 width="24"
@@ -66,146 +66,55 @@
                 ></path>
               </svg>
             </div>
-            <div
-              class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[520px] overflow-hidden gap-4 p-5 rounded-[10px] bg-neutral-50 border border-[#ddd]"
-            >
+            <div v-for="el, idx in projSmryHstrList" :key="el">
               <div
-                class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[480px] relative"
-              >
-                <p
-                  class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#191919]"
-                >
-                  NH농협은행 내부 프로그램 QA
-                </p>
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left">
-                  수정하기
-                </p>
-              </div>
-              <div
-                class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3"
+                class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[520px] overflow-hidden gap-4 p-5 rounded-[10px] bg-neutral-50 border border-[#ddd]"
               >
                 <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
+                  class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[480px] relative"
                 >
                   <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
+                    class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#191919]"
                   >
-                    # IT
+                    {{ el.projTitl }}
                   </p>
+                  <button class="flex-grow-0 flex-shrink-0 text-sm text-left" @click="editCareer(idx)">
+                    수정하기
+                  </button>
                 </div>
                 <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
+                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3"
                 >
-                  <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
-                  >
-                    # 금융
-                  </p>
+                  <!-- 반복부 # -->
+                  <div  v-for="el in jobDivCdList" :key="el">
+                    <div
+                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
+                    >
+                      <p
+                        class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
+                      >
+                        {{ el.jobDivCdNm }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
+                  class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-3"
                 >
                   <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
+                    class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]"
                   >
-                    # Web
+                    {{ el.strtYm }} ~ {{ el.endYm }}
                   </p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
-                >
                   <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
+                    class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]"
                   >
-                    # 모바일
+                    프로젝트 {{el.crrYear}}년 {{el.crrMon}}개월 수행
                   </p>
                 </div>
-              </div>
-              <div
-                class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-3"
-              >
-                <p
-                  class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]"
-                >
-                  2024.01.01 ~ 2024.02.01
-                </p>
-                <p
-                  class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]"
-                >
-                  프로젝트 1개월 수행
-                </p>
-              </div>
-            </div>
-            <div
-              class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[520px] overflow-hidden gap-4 p-5 rounded-[10px] bg-neutral-50 border border-[#ddd]"
-            >
-              <div
-                class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[480px] relative"
-              >
-                <p
-                  class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#191919]"
-                >
-                  NH농협은행 내부 프로그램 QA
-                </p>
-                <p class="flex-grow-0 flex-shrink-0 text-sm text-left">
-                  수정하기
-                </p>
-              </div>
-              <div
-                class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3"
-              >
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
-                >
-                  <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
-                  >
-                    # IT
-                  </p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
-                >
-                  <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
-                  >
-                    # 금융
-                  </p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
-                >
-                  <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
-                  >
-                    # Web
-                  </p>
-                </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
-                >
-                  <p
-                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
-                  >
-                    # 모바일
-                  </p>
-                </div>
-              </div>
-              <div
-                class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-3"
-              >
-                <p
-                  class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]"
-                >
-                  2024.01.01 ~ 2024.02.01
-                </p>
-                <p
-                  class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]"
-                >
-                  프로젝트 1개월 수행
-                </p>
               </div>
             </div>
+
           </div>
         </div>
         <div class="flex-grow-0 flex-shrink-0 w-[520px] h-px bg-[#ddd]"></div>
@@ -275,8 +184,73 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
+  import { onMounted, ref } from "vue";
+  import * as gfnUtils from "@/utils/gfnUtils.js";
+
+  // 목록 조회 :  /v1/my/engineer/projet-summary-list (userMail , engrId )
+  // 상세 조회 :  /v1/my/engineer/step2  (userMail , engrProjHstrSeq , engrId )
+  onMounted(() => {
+    loadData();
+  })
+  const { dataObj } = history.state; 
 
   const router = useRouter()
+
+  const engrInfo = ref("")
+  const userMail = ref(window.$cookies.get("loginUserMail"));
+  const projSmryHstrList = ref(
+    [
+    //   {
+    //     engrProjHstrSeq: "",
+    //     engrId: "",
+    //     projTitl: "",
+    //     strtYm: "",
+    //     endYm: "",
+    //     crntProjPrgsYn: "",
+    //     crrYear: "",
+    //     crrMon: "",
+    //     jobDivCdList: [
+    //       {
+    //         jobDivCd: "",
+    //         jobDivCdNm: ""
+    //       }
+    //     ],
+    //     taskDivCdList: [
+    //       {
+    //         taskDivCd: "",
+    //         taskDivCdNm: ""
+    //       }
+    //     ]
+    //   }
+    ]
+  )
+
+  async function loadData(){
+    if(dataObj != undefined){
+      engrInfo.value = JSON.parse(dataObj);
+    }
+
+    var api = "/v1/my/engineer/projet-summary-list";
+    var getParams = {userMail : userMail.value ,  engrId:engrInfo.value.engrId };
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    if(rtn.rtnCd == "00"){
+      let res = rtn.rtnData
+      projSmryHstrList.value = res.projSmryHstrList
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
+  }      
+
+  function editCareer(idx){
+    console.log(idx)
+    router.push({
+      name: "AddEngineerCareerInfo",
+      state : { dataObj : JSON.stringify(projSmryHstrList.value[idx].value) }
+    })
+  }
 
   function addCareer(){
     router.push({name: "AddEngineerCareerInfo"})

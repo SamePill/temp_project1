@@ -450,8 +450,34 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
+  // import * as gfnUtils from "@/utils/gfnUtils.js";
 
   const router = useRouter()
+  // const engrStep2Detl = ref({
+  //   engrId: "string",
+  //   projTitl: "string",
+  //   clntNm: "string",
+  //   strtYm: "string",
+  //   endYm: "string",
+  //   crntProjPrgsYn: "string",
+  //   projCtntTask: "string",
+  //   projDmndSkil: "string",
+  //   projUseTool: "string",
+  //   projEtcInfo: "string",
+  //   jobDivCdList: [
+  //     {
+  //       jobDivCd: "string",
+  //       jobDivCdNm: "string"
+  //     }
+  //   ],
+  //   taskDivCdList: [
+  //     {
+  //       taskDivCd: "string",
+  //       taskDivCdNm: "string"
+  //     }
+  //   ]
+  // })
+
 
   function back(){
     router.back()

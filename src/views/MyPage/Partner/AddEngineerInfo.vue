@@ -77,7 +77,10 @@
             </p>
           </div>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <input type="text" class="flex h-[51px] w-[340px] p-4 rounded border border-[#ddd] text-left text-[#191919]" placeholder="이름을 입력해주세요."/>
+            <input type="text" class="flex h-[51px] w-[340px] p-4 rounded border border-[#ddd] text-left text-[#191919]" 
+              placeholder="이름을 입력해주세요."
+              v-model="engrStep1.engrNm"
+            />
             <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-[#ddd]">
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">재직</p>
             </div>
@@ -111,8 +114,8 @@
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <input type="text" placeholder="주소를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
-            <input type="text" placeholder="상세주소를 입력해주세요.." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
+            <input type="text" placeholder="주소를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.baseAddr">
+            <input type="text" placeholder="상세주소를 입력해주세요.." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.dtlAddr">
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
@@ -143,7 +146,7 @@
                 ></path>
               </svg>
             </div>
-            <input type="text" placeholder="학교명을 입력해주세요." class="h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]">
+            <input type="text" placeholder="학교명을 입력해주세요." class="h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.schlNm">
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
             <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
@@ -208,35 +211,39 @@
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
             </div>
           </div>
-          <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
+          <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.taskSkil">
         </div>
-        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-          <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
-            <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증</p>
-            <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
-              <div class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"></div>
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left">추가하기</p>
-            </div>
-          </div>
+        <div v-for="el, idx in engrStep1.crtfList" :key="el">
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">자격증 명</p>
-              <input type="text" placeholder="자격증 명을 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
+            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[520px] relative">
+              <p v-show="idx == 0" class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증</p>
+              <p v-show="idx > 0"  class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증 {{ idx }}</p>
+              <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+                <div class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"></div>
+                <p v-show="idx == 0" class="flex-grow-0 flex-shrink-0 text-sm text-left" @click="addCert">추가하기</p>
+                <p v-show="idx > 0" class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]" @click="removeCert(idx)">삭제하기</p>
+              </div>
             </div>
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
               <div
                 class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
               >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
-                <input type="date" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">자격증 명</p>
+                <input type="text" placeholder="자격증 명을 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="el.crtfNm">
+              </div>
+              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+                <div
+                  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
+                  <input type="date" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="el.acqsDt">
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-[60px]">
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+          <!-- <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
             <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
               <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증 1</p>
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">삭제하기</p>
@@ -255,15 +262,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <button
             class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
             @click="nextStep()"
-          >
-            
-              다음 단계로 넘어가기
-            
-        </button>
+          >           
+           다음 단계로 넘어가기
+          </button>
         </div>
       </div>
     </div>
@@ -276,6 +281,29 @@
 
   const router = useRouter()
   const showImg = ref(false)
+
+  const engrStep1 = ref(
+    {
+      crtdUserMail: "",
+      engrNm: "",
+      bith: "",
+      baseAddr: "",
+      dtlAddr: "",
+      edctDivCd: "",
+      edctDivCdNm: "",
+      schlNm: "",
+      dprt: "",
+      engrRtngDivCd: "",
+      taskSkil: "",
+      crtfList: [
+        {
+          crtfNm: "",
+          acqsDt: ""
+        }
+      ]
+    }
+  )
+
 
   function nextStep(){
     router.push({name: "AddEngineerCareerList"})
@@ -295,5 +323,17 @@
       console.log("파일없음")
       document.getElementById('preview').src = "";
     }
+  }
+
+  function addCert(){
+    engrStep1.value.crtfList.push({
+      crtfNm: "",
+      acqsDt: ""
+    })
+  }
+
+  function removeCert(idx){
+    console.log(idx)
+    engrStep1.value.crtfList.splice(idx, 1);
   }
 </script>

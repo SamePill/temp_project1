@@ -141,10 +141,14 @@ async function loadData(selPage){
     api,
     getParams
   );
+  if(rtn.rtnCd == "00"){
+    let res = rtn.rtnData
+    projList.value = res.projList
+    totalCnt.value = res.projTotlCnt
+  }else{
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  }
   
-  let res = rtn.rtnData
-  projList.value = res.projList
-  totalCnt.value = res.projTotlCnt
 }
 
 function getWorkDivCd(data){
