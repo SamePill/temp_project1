@@ -48,6 +48,7 @@
               type="text"
               class="flex w-[300px] px-2.5 py-2 rounded bg-white border border-[#ddd] text-sm text-left text-[#191919]"
               placeholder="이름을 입력해주세요"
+              v-model="srchEngr"
             />
             <img
               style="
@@ -59,6 +60,7 @@
               class="w-[18px] h-[18px]"
               src="@/assets/ic_magnifier.png"
               alt="search"
+              @click="srchEngrNm()"
             />
           </div>
           <div
@@ -69,6 +71,7 @@
               type="text"
               class="flex w-[300px] px-2.5 py-2 rounded bg-white border border-[#ddd] text-sm text-left text-[#191919]"
               placeholder="이름을 입력해주세요"
+              v-model="srchSprt"
             />
             <img
               style="
@@ -99,8 +102,9 @@
                 </p>
                 <button
                   class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#999]"
+                  @click="addEngr()"
                 >
-                  선정으로 이동
+                  지원하기
                 </button>
               </div>
               <div
@@ -113,8 +117,7 @@
               style="overflow-y: auto"
             >
               <div
-                v-for="el in list"
-                :key="el"
+                v-for="el,idx in filteredEngrList" :key="el"
                 class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0"
               >
                 <div
@@ -128,6 +131,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     class="flex-grow-0 flex-shrink-0 w-8 h-8 relative"
                     preserveAspectRatio="xMidYMid meet"
+                    @click="chkAdd(idx)"
                   >
                     <rect
                       x="4.75"
@@ -143,12 +147,13 @@
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      v-show="el.chkVal == true"
                     ></path>
                   </svg>
                   <p
                     class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]"
                   >
-                    김큐밋
+                    {{ el.engrNm }}
                   </p>
                 </div>
                 <div
@@ -160,13 +165,13 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]"
                     >
-                      거주지 : {{ "서울 강남구" }}
+                      거주지 : {{ el.baseAddr }}
                     </p>
                     <span class="text-sm text-[#DBDBDB] px-2">|</span>
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]"
                     >
-                      경력 : {{ "1년 7개월" }}
+                      경력 : {{ el.crrYear }}년 {{ el.crrMon }} 개월
                     </p>
                   </div>
                   <div
@@ -175,7 +180,7 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]"
                     >
-                      초급 엔지니어
+                      {{ el.engrRtngDivCdNm }}
                     </p>
                   </div>
                 </div>
@@ -183,7 +188,7 @@
             </div>
             <div class="w-[460px] mt-[20px]">
               <p class="text-base font-bold text-right text-[#191919]">
-                총 173명
+                총 {{ engrList.length }}명
               </p>
             </div>
           </div>
@@ -202,8 +207,9 @@
                 </p>
                 <button
                   class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]"
+                  @click="removeEngr()"
                 >
-                  미선정으로 이동
+                  지원 취소하기
                 </button>
               </div>
               <div
@@ -216,7 +222,7 @@
               style="overflow-y: auto"
             >
               <div
-                v-for="el in list"
+                v-for="el,idx  in filteredEngrSprtList"
                 :key="el"
                 class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0"
               >
@@ -231,6 +237,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     class="flex-grow-0 flex-shrink-0 w-8 h-8 relative"
                     preserveAspectRatio="xMidYMid meet"
+                    @click="chkRemove(idx)"
                   >
                     <rect
                       x="4.75"
@@ -246,12 +253,13 @@
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      v-show="el.chkVal == true"
                     ></path>
                   </svg>
                   <p
                     class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]"
                   >
-                    김큐밋
+                    {{ el.engrNm }}
                   </p>
                 </div>
                 <div
@@ -263,13 +271,13 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]"
                     >
-                      거주지 : {{ "서울 강남구" }}
+                      거주지 : {{ el.baseAddr }}
                     </p>
                     <span class="text-sm text-[#DBDBDB] px-2">|</span>
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]"
                     >
-                      경력 : {{ "1년 7개월" }}
+                      경력 : {{ el.crrYear }}년 {{ el.crrMon }}개월
                     </p>
                   </div>
                   <div
@@ -278,7 +286,7 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]"
                     >
-                      초급 엔지니어
+                      {{ el.engrRtngDivCdNm }}
                     </p>
                   </div>
                 </div>
@@ -286,23 +294,23 @@
             </div>
             <div class="w-[460px] mt-[20px]">
               <p class="text-base font-bold text-right text-[#191919]">
-                총 173명
+                총 {{ engrSprtList.length }}명
               </p>
             </div>
           </div>
         </div>
         <div class="flex justify-center items-center gap-5 mt-[30px]">
           <button
-            @click="cancel()"
+            @click="goEngrMng()"
             class="w-40 gap-2.5 px-2.5 py-4 rounded border border-[#dbdbdb] text-base font-medium text-[#555]"
           >
             엔지니어 추가
           </button>
           <button
-            @click="cancel()"
+            @click="saveData()"
             class="w-40 gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-base font-medium text-white"
           >
-            선택완료
+            완료하기
           </button>
         </div>
       </div>
@@ -310,40 +318,203 @@
   </Modal>
 </template>
 <script setup>
-import { ref, defineExpose, defineProps, onMounted } from "vue";
+import { ref, defineExpose, defineProps, defineEmits, computed } from "vue";
 import Modal from "@/components/baseComponents/Modal.vue";
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const emit = defineEmits([
+  'selEngrs'
+]);
 
 const props = defineProps({ prj: {} });
+const prjEngrInfo = ref([]);
 
-onMounted(() => {
-  //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
-  //로그인 후 - 지원 후(projectSprtInfo유무)
-});
+// onMounted(() => {
+//   //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
+//   //로그인 후 - 지원 후(projectSprtInfo유무)
+// });
 
-const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 const userMail = ref(window.$cookies.get("loginUserMail"));
-
 const baseModal = ref(null);
+
+const srchEngr = ref("")
+const engrList = ref([])
+const srchSprt = ref("")
+const engrSprtList = ref([])
+// 등급별 건수
+const engr10Cnt = computed( () => {
+  return engrSprtList.value.filter( item => 
+      item.engrRtngDivCd == 10
+  ).length
+})
+const engr20Cnt = computed( () => {
+  return engrSprtList.value.filter( item => 
+      item.engrRtngDivCd == 20
+  ).length
+})
+const engr30Cnt = computed( () => {
+  return engrSprtList.value.filter( item => 
+      item.engrRtngDivCd == 30
+  ).length
+})
+const engr40Cnt = computed( () => {
+  return engrSprtList.value.filter( item => 
+      item.engrRtngDivCd == 40
+  ).length
+})
+
+const filteredEngrList = computed( () => {
+  if(srchEngr.value == ""){
+    return engrList.value
+  }
+  return engrList.value.filter( item => 
+      item.engrNm.indexOf(srchEngr.value) == 0
+  )
+})
+
+const filteredEngrSprtList = computed( () => {
+  if(srchSprt.value == ""){
+    return engrSprtList.value  
+  }
+  return engrSprtList.value.filter( item => 
+      item.engrNm.indexOf(srchSprt.value) == 0
+  )
+})
+
+
+const checkedEngrList = computed( () => {
+    let filter = true;
+    return engrList.value.filter( item => 
+        item.chkVal == filter
+    )
+})
+
+const checkedEngrSprtList = computed( () => {
+    let filter = true;
+    return engrSprtList.value.filter( item => 
+        item.chkVal == filter
+    )
+})
+
+
+// const saveParam = ref(
+//   {
+//     projId: "",
+//     sprtUserMail: "",
+//     hopeStrtDay: "",
+//     useTrmsYn: "",
+//     privTrmsYn: "",
+//     engrList: [
+//       {
+//         engrId: ""
+//       }
+//     ],
+//     projSprtSeq: ""
+//   }
+// )
 
 const show = () => {
   baseModal.value.open();
 };
+
 const cancel = () => {
   baseModal.value.close();
-};
+}
 
-async function srchEngrInfo() {
+function chkAdd(idx){
+
+  if(engrList.value[idx].chkVal == true){
+    engrList.value[idx].chkVal = false  
+  }else{
+    engrList.value[idx].chkVal = true
+  }
+
+}
+
+function chkRemove(idx){
+  
+  if(engrSprtList.value[idx].chkVal == true){
+    engrSprtList.value[idx].chkVal = false  
+  }else{
+    engrSprtList.value[idx].chkVal = true
+  }
+
+}
+
+
+function addEngr(){
+  //checkedEngrList(engrList) -> checkedEngrSprtList(engrSprtList)
+
+  console.log(checkedEngrList.value)
+  console.log("추가")
+
+  for(var i=0; i<checkedEngrList.value.length; i++){
+    console.log(checkedEngrList.value[i])
+    engrSprtList.value.push(checkedEngrList.value[i]);    
+  }
+
+  engrList.value = engrList.value.filter(item => item.chkVal !== true);
+  
+}
+
+function removeEngr(){
+  //checkedEngrList(engrList) <- checkedEngrSprtList(engrSprtList)
+  //engrSprtList에서 삭제
+  console.log("제외")
+
+  for(var i=0; i<checkedEngrSprtList.value.length; i++){
+    console.log(checkedEngrSprtList.value[i])
+    engrList.value.push(checkedEngrSprtList.value[i]);    
+  }
+
+  engrSprtList.value = engrSprtList.value.filter(item => item.chkVal !== true);
+  
+}
+
+
+function srchEngrNm(){
+  console.log(srchEngr)
+}
+
+
+async function loadData() {
+
+  console.log(props.prj)
+
   var getParams = { projId: props.prj.projId, userMail: userMail.value };
   await gfnUtils
     .axiosGet("/v1/project/engineers", getParams)
     .then(function (rtn) {
       if (rtn.rtnCd == "00") {
         console.log(rtn);
+
+        prjEngrInfo.value = rtn.rtnData;
+        engrSprtList.value = rtn.rtnData.sprtEngrList;
+        engrList.value = rtn.rtnData.notSprtEngrList;
+      }else{
+        console.log(rtn);
       }
     });
 }
 
-defineExpose({ show, srchEngrInfo });
+
+async function saveData() {
+
+  // console.log(engr10Cnt.value)
+  // console.log(engr20Cnt.value)
+  // console.log(engr30Cnt.value)
+  // console.log(engr40Cnt.value)
+  emit('selectEngr' ,engrSprtList.value, engr10Cnt.value, engr20Cnt.value, engr30Cnt.value, engr40Cnt.value);
+  baseModal.value.close();
+
+}
+
+function goEngrMng(){
+  router.push({name : "ManageEngineer"})
+}
+
+defineExpose({ show, loadData });
 </script>
 

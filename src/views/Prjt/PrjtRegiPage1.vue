@@ -233,6 +233,7 @@ const { dataObj } = history.state;
 async function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
+    console.log(projStep.value)
   }
 }
 

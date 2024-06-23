@@ -274,7 +274,7 @@
             @click="popup()"
             class="flex justify-center w-[300px] gap-2.5 px-2.5 py-4 rounded border border-[#ddd] text-base font-medium text-left text-[#555]"
           >
-            엔지니어 추가하기
+            엔지니어 선택하기
           </button>
         </div>
         <div
@@ -404,10 +404,11 @@
       >
         지원하기
       </button>
-      <EngineerPopup
+      <EngineerApplyPopup
         :prj="JSON.parse(JSON.stringify(props.prj))"
         ref="$EngineerPopup"
-      ></EngineerPopup>
+        @selectEngr="selectEngr"
+      ></EngineerApplyPopup>
     </div>
   </div>
 </template>
@@ -415,7 +416,7 @@
 import { ref, defineProps, onMounted } from "vue";
 import * as gfnRules from "@/utils/gfnRules.js";
 import * as gfnUtils from "@/utils/gfnUtils.js";
-import EngineerPopup from "@/components/popupComponents/EngineerPopup.vue";
+import EngineerApplyPopup from "@/components/popupComponents/EngineerApplyPopup.vue";
 const $EngineerPopup = ref();
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -449,8 +450,10 @@ function goToPage(div) {
   router.push({ name: div });
 }
 function popup() {
+  $EngineerPopup.value.loadData();
   $EngineerPopup.value.show();
 }
+
 function checkTrmsYn(div) {
   if (div == "use") {
     useTrmsYn.value = !useTrmsYn.value;
@@ -471,7 +474,47 @@ function clickSideMenuBtn(div) {
   }
 }
 
-function editProject(){
-  //TODO 프로젝트 수정화면으로 이동
+async function editProject(){
+  //TODO 프로젝트 수정전 프로젝트 정보 조회하여 넘김.
+
+  var getParams = { projId: props.prj.projId, userMail: userMail.value };
+  await gfnUtils
+    .axiosGet("/v1/project/step-all", getParams)
+    .then(function (rtn) {
+      if (rtn.rtnCd == "00") {
+        console.log(rtn);
+
+        let projStep = rtn.rtnData
+        
+        for (let key in projStep.projOneStep.jobDivCdList) {
+          projStep.projOneStep.jobDivCdList[key].chkVal = true
+        }
+
+        for (let key in projStep.projOneStep.taskDivCdList) {
+          projStep.projOneStep.taskDivCdList[key].chkVal = true
+        }
+        
+        console.log(projStep)
+        router.push( { 
+          name: "PrjtRegiPage1"
+          ,state: {
+            dataObj : JSON.stringify(projStep),
+          },
+        })
+
+      }else{
+        console.log(rtn);
+      }
+    });
+}
+
+function selectEngr(engrList, engr10Cnt, engr20Cnt, engr30Cnt, engr40Cnt){
+  //선택한 엔지니어 정도
+  console.log(engrList)
+  console.log(engr10Cnt)
+  console.log(engr20Cnt)
+  console.log(engr30Cnt)
+  console.log(engr40Cnt)
+  console.log("지원 엔지니어 정보")
 }
 </script>
