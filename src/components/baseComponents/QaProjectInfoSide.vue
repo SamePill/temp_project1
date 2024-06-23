@@ -464,14 +464,17 @@ const engr40Cnt = ref(0)
 onMounted(() => {
   //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
   //로그인 후 - 지원 후(projectSprtInfo유무)
-  hopeStrtDay.value = today;
+  //hopeStrtDay.value = today;
+  hopeStrtDay.value = props.prj.projectSprtInfo.hopeStrtDay
   //alert(props.prj.value)
-  console.log(props.prj.value)
-  // engr10Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.bgnrCnt
-  // engr20Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.intrCnt
-  // engr30Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.advnCnt
-  // engr40Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.spclCnt
-
+  engr10Cnt.value = props.prj.projectSprtInfo.engrRtngCntInfo.bgnrCnt
+  engr20Cnt.value = props.prj.projectSprtInfo.engrRtngCntInfo.intrCnt
+  engr30Cnt.value = props.prj.projectSprtInfo.engrRtngCntInfo.advnCnt
+  engr40Cnt.value = props.prj.projectSprtInfo.engrRtngCntInfo.spclCnt
+  
+  useTrmsYn.value = props.prj.projectSprtInfo.useTrmsYn == "Y" ? true : false
+  privTrmsYn.value  = props.prj.projectSprtInfo.useTrmsYn == "Y" ? true : false
+  
 });
 
 function goToPage(div) {
@@ -493,11 +496,11 @@ function checkTrmsYn(div) {
 
 function clickSideMenuBtn(div) {
   if (div == "cancel") {
-    console.log(props.prj.value);
+    console.log(props.prj);
     //컨펌띄우기
   } else {
     isShowDetl.value = true;
-    console.log(props.prj.value);
+    console.log(props.prj);
     if (props.prj.projectSprtInfo != null) {
       // TODO 기존 지원 내용있으면 집어넣기
     }
