@@ -40,6 +40,13 @@ import ResetPassword from "@/views/User/ResetPassword.vue";
 //주소검색
 import SrchAddrPop from '@/components/popupComponents/SrchAddressPopup.vue'
 
+//큐밋이란
+import WhatIsQm from '@/views/AboutQm/WhatIsQm.vue'
+
+//고객센터
+import CstmSrvcCntr from '@/views/Cstm/CstmSrvcCntr.vue'
+
+//테스트
 import Test from "@/views/Prjt/Test.vue";
 import TestPage from "@/views/Test/TestPage.vue";
 import TestPageSetup from "@/views/Test/TestPageSetup.vue";
@@ -215,6 +222,21 @@ export default createRouter({
       name: 'SrchAddrPop'
     },
 
+
+  /*********************** 큐밋이란 ***********************/
+  {
+    path: '/whatIsQm',
+    component: WhatIsQm,
+    name: 'WhatIsQm'
+  },
+
+  
+  /*********************** 고객센터 ***********************/
+  {
+    path: '/cstmSrvcCntr',
+    component: CstmSrvcCntr,
+    name: 'CstmSrvcCntr'
+  },
 
    /*********************** 테스트 페이지 ***********************/
     {

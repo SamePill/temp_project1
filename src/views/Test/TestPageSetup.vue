@@ -283,7 +283,6 @@
 
   function returnArrd(addrVal){
     console.log('주소받는곳',addrVal);
-    srchAddrShow.value.close()
   }
   const apiUrl = ref("/v1/common/code");
   const apiResult = ref("");
