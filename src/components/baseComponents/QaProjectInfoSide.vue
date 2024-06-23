@@ -444,14 +444,6 @@ const props = defineProps({ prj: {} });
 
 const loginUserNm = ref(window.$cookies.get("loginUserNm"));
 const userMail = ref(window.$cookies.get("loginUserMail"));
-onMounted(() => {
-  //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
-  //로그인 후 - 지원 후(projectSprtInfo유무)
-  hopeStrtDay.value = today;
-  // console.log(props.prj.projId);
-  // console.log();
-});
-
 // const projId = ref(props.value.prj.projId);
 // const sprtUserMail= ref(window.$cookies.get("loginUserMail"));
 const hopeStrtDay = ref("");
@@ -468,6 +460,19 @@ const engr10Cnt = ref(0)
 const engr20Cnt = ref(0)
 const engr30Cnt = ref(0)
 const engr40Cnt = ref(0)
+
+onMounted(() => {
+  //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
+  //로그인 후 - 지원 후(projectSprtInfo유무)
+  hopeStrtDay.value = today;
+  //alert(props.prj.value)
+  console.log(props.prj.value)
+  // engr10Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.bgnrCnt
+  // engr20Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.intrCnt
+  // engr30Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.advnCnt
+  // engr40Cnt.value = props.prj.value.projectSprtInfo.engrRtngCntInfo.spclCnt
+
+});
 
 function goToPage(div) {
   router.push({ name: div });
@@ -488,9 +493,11 @@ function checkTrmsYn(div) {
 
 function clickSideMenuBtn(div) {
   if (div == "cancel") {
+    console.log(props.prj.value);
     //컨펌띄우기
   } else {
     isShowDetl.value = true;
+    console.log(props.prj.value);
     if (props.prj.projectSprtInfo != null) {
       // TODO 기존 지원 내용있으면 집어넣기
     }
@@ -533,21 +540,26 @@ async function editProject(){
 
 async function apply(){
   //프로젝트 지원하기 및 수정지원
+  // 지원 /v1/project/support
+  // 수정 /v1/project/modify/support -> //projSprtSeq
   
-  // var api = "/v1/auth/login";
-  // var postParams = { userMail: email.value, pass: pswd.value };
+  var api = "";
+  var getParams = { userMail : userMail.value}
+  var postParams = { 
+    projId: userMail.value,
+    sprtUserMail: userMail.value,
+    hopeStrtDay: hopeStrtDay.value,
+    useTrmsYn: "Y",
+    privTrmsYn: "Y",
+    engrList: []
+  };
 
-  // console.log("val ::" + postParams);
-
-  // //var loading = "";
-  // //var isErr = "";
-  // var rtn = await gfnUtils.axiosPost(api, postParams);
-  // if (rtn.rtnCd == "00") {
-  //   console.log(rtn)
-  //   router.replace("/");
-  // } else {
-  //   gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-  // }
+  var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
+  if (rtn.rtnCd == "00") {
+    gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
+  } else {
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  }
 
 }
 
@@ -560,4 +572,47 @@ function selectEngr(engrList, sel10Cnt, sel20Cnt, sel30Cnt, sel40Cnt){
   engr40Cnt.value = sel40Cnt
   console.log("지원 엔지니어 정보")
 }
+
+/*
+prop.prj
+{ "projId": "C00001P00016"
+, "workDivCd": "10"
+, "workDivCdNm": "상주"
+, "projTitl": "리드워크 웹서비스 검증_수정_001"
+, "engrCnt": "10"
+, "pirdVal": "12"
+, "strtDay": "20240801"
+, "expcPric": 41000000
+, "workAddr": "서울시 강남구 홍제동"
+, "projStatCd": "10"
+, "projStatCdNm": "모집중"
+, "regDttm": "20240415142852"
+, "engrRtngInfo": { "bgnrEngrCnt": 2, "bgnrEngrUnitPric": 2000000, "intrEngrCnt": 4, "intrEngrUnitPric": 4000000, "advnEngrCnt": 3, "advnEngrUnitPric": 5000000, "spclEngrCnt": 1, "spclEngrUnitPric": 6000000 }
+, "projSprtSeq": null
+, "jobDivCdNmList": [ { "jobDivCdNm": "#금융", "jobDivCd": "30" } ]
+, "taskDivCdNmList": [ { "taskDivCdNm": "#IOT", "taskDivCd": "30" } ]
+, "atndTime": "1000"
+, "lvwkTime": "1800"
+, "projCtntTask": "웹 서비스 검증을 수정합니다."
+, "projDmndSkil": "TC, 리딩, 관리"
+, "projUseTool": "지라, 슬랙, 메일"
+, "projEtcInfo": "기타입니다."
+, "crtdUserMail": "klyhja@l-walk.com"
+, "strtDayCnslYn": "N"
+, "projectSprtInfo": { 
+       "projSprtSeq": "7"
+     , "projId": "C00001P00016"
+     , "hopeStrtDay": "20240801"
+     , "useTrmsYn": "Y"
+     , "privTrmsYn": "Y"
+     , "engrRtngCntInfo": { 
+              "bgnrCnt": 3
+            , "intrCnt": 0
+            , "advnCnt": 0
+            , "spclCnt": 0 } }
+, "fileList": [ { "fileUrl": "https://d2o04aboxunrcy.cloudfront.net/projFile/202404/FindEat.pdf", "fileNm": "FindEat.pdf", "projFileSeq": "28" }, { "fileUrl": "https://d2o04aboxunrcy.cloudfront.net/projFile/202404/%EB%A6%AC%EB%93%9C%EC%9B%8C%ED%81%AC+%ED%99%88%ED%99%94%EB%A9%B4.png", "fileNm": "리드워크 홈화면.png", "projFileSeq": "29" } ]
+, "projChckDivCdList": [ { "projChckDivCd": "10", "projChckDivCdNm": "프로젝트 수행 시 연장 및 휴일 근무가 필요합니다." }, { "projChckDivCd": "20", "projChckDivCdNm": "연장 / 휴일 근무 발생 시 대체휴무 제공합니다." } ] }
+*/
+
 </script>
+

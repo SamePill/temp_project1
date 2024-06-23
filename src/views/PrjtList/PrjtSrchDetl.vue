@@ -34,6 +34,8 @@ const userMail = ref(window.$cookies.get("loginUserMail"));
 const workDivCd = ref();
 const projInfo = ref({});
 
+loadData();
+
 onMounted(() => {
 //   if(gfnRules.isNotNull(userMail.value)){
     loadData();
