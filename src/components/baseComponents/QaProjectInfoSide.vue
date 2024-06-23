@@ -490,7 +490,7 @@ const cancel = function () {
 //확인버튼
 const confirm = function () {
   modalConfirm.value.close();
-  //cancelApply();
+  cancelApply();
 };
 
 onMounted(() => {
@@ -632,19 +632,21 @@ async function apply() {
   }
 }
 
-// async function cancelApply() {
-//   alert("xxxxx");
-//   // let api = "";
-//   // let postParams = {};
-//   // let getParams = {};
+async function cancelApply() {
+  //TODO 지원 취소 API 확인 필요
+  console.log("지원 취소 API 확인 필요!!!!!!!!!!!");
+  
+  // let api = "";
+  // let postParams = {};
+  // let getParams = {};
 
-//   // var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
-//   // if (rtn.rtnCd == "00") {
-//   //   gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
-//   // } else {
-//   //   gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-//   // }
-// }
+  // var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
+  // if (rtn.rtnCd == "00") {
+  //   gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
+  // } else {
+  //   gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  // }
+}
 
 function selectEngr(applEngrList, sel10Cnt, sel20Cnt, sel30Cnt, sel40Cnt) {
   //선택한 엔지니어 정도

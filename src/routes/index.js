@@ -225,7 +225,7 @@ export default createRouter({
 
   /*********************** 큐밋이란 ***********************/
   {
-    path: '/whatIsQm',
+    path: '/whatIsQmeet',
     component: WhatIsQm,
     name: 'WhatIsQm'
   },

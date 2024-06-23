@@ -80,11 +80,10 @@
                 </div> -->
                 <button
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
-                  @click="cancelAppl()"
+                  @click="cancelConfirm()"
                 >
                   <p
                     class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1"
-                  
                   >
                     지원취소
                   </p>
@@ -152,6 +151,15 @@
         </div>
       </div> -->
     </div>
+    <Modal ref="modalConfirm" :width="340">
+      <confirmPopup
+        message="정말로 프로젝트 지원을 취소 하시겠습니까?"
+        btnOk="확인"
+        btnCancel="닫기"
+        @cancel="cancel"
+        @confirm="confirm"
+      />
+    </Modal>  
   </div>
 </template>
   
@@ -164,7 +172,8 @@
   import { useRouter } from 'vue-router'
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import { onMounted, ref } from 'vue'
-
+  import Modal from "@/components/baseComponents/Modal.vue";
+  import confirmPopup from "@/components/popupComponents/confirmPopup.vue";
 
   onMounted(() => {
     loadData();
@@ -188,14 +197,46 @@
   const AplPrjtSort = ref("")
   const $AplPrjtSort = ref()  
 
+  //모달 테스트
+  const modalConfirm = ref(null);
+  const showConfirm = () => {
+    modalConfirm.value.open();
+  };
+  //취소버튼
+  const cancel = function () {
+    modalConfirm.value.close();
+  };
+  //확인버튼
+  const confirm = function () {
+    modalConfirm.value.close();
+    cancelApply();
+  };
 
   function getAplPrjtSort(data){
     AplPrjtSort.value = data;
   }
 
-  async function cancelAppl(){
-    console.log("지원취소")
+  async function cancelConfirm(){
+    showConfirm
   }
+
+
+  async function cancelApply() {
+  //TODO 지원 취소 API 확인 필요
+  console.log("지원 취소 API 확인 필요!!!!!!!!!!!");
+  
+  // let api = "";
+  // let postParams = {};
+  // let getParams = {};
+
+  // var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
+  // if (rtn.rtnCd == "00") {
+  //   gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
+  // } else {
+  //   gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  // }
+}
+
 
   
   function chkItem(idx){

@@ -289,7 +289,7 @@
       </div>
     </div>
     <modal ref="modalShowProfile" :width="810">
-      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @popBtn1="profileBtn"  />
+      <engineerProfilePopup :mode='profileMode' :profile="engrProfile" @popBtn1="profileBtn" @close="close" />
     </Modal>
   </div>
 </template>
@@ -340,6 +340,10 @@
     alert("수정하기 연결...")
 
     modalShowProfile.value.close()
+  }
+  //취소버튼
+  const close = function (){
+    modalShowProfile.value.close()      
   }
 
   onMounted(() => {
