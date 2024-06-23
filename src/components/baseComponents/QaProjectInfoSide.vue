@@ -534,20 +534,20 @@ async function editProject(){
 async function apply(){
   //프로젝트 지원하기 및 수정지원
   
-  var api = "/v1/auth/login";
-  var postParams = { userMail: email.value, pass: pswd.value };
+  // var api = "/v1/auth/login";
+  // var postParams = { userMail: email.value, pass: pswd.value };
 
-  console.log("val ::" + postParams);
+  // console.log("val ::" + postParams);
 
-  //var loading = "";
-  //var isErr = "";
-  var rtn = await gfnUtils.axiosPost(api, postParams);
-  if (rtn.rtnCd == "00") {
-    console.log(rtn)
-    router.replace("/");
-  } else {
-    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-  }
+  // //var loading = "";
+  // //var isErr = "";
+  // var rtn = await gfnUtils.axiosPost(api, postParams);
+  // if (rtn.rtnCd == "00") {
+  //   console.log(rtn)
+  //   router.replace("/");
+  // } else {
+  //   gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  // }
 
 }
 
