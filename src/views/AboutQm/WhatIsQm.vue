@@ -23,7 +23,7 @@
 
     <!--프로젝트등록-->
     <div v-show="slctMainTabIdx.i < 2" class="mt-[120px] flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 gap-10">
-      <div id="prjtRegi" v-show="slctMainTabIdx.i == 0" class="flex flex-col justify-start items-center gap-4 h-[849px]  pt-[180px]">
+      <div v-show="slctMainTabIdx.i == 0" class="flex flex-col justify-start items-center gap-4 h-[849px]  pt-[180px]">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] text-left">
           <span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">
             큐밋과 함께라면, 프로젝트 등록을 </span>
@@ -34,14 +34,14 @@
           <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#555]">
             큐밋은 사용자 친화적인 인터페이스와 간편한 절차로 신속한 프로젝트 신청이 가능합니다.
           </p>
-          <button @click="goToPage('PrjtRegiPage1')"  class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
+          <button id="prjtRegi"  @click="goToPage('PrjtRegiPage1')"  class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
               프로젝트 등록하기 >
           </button>
         </div>
         <img src="@/assets/aboutQm_prjtRegi.png"  class="w-1080 h-[565px] object-none mt-[40px] z-1" />        
       </div>    
      <!--엔지니어 등록-->  
-      <div id="engiRegi" v-show="slctMainTabIdx.i == 1" class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4 h-[730px] pt-[180px]">
+      <div v-show="slctMainTabIdx.i == 1" class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4 h-[730px] pt-[180px]">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] text-left">
           <span class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#1ba494]">
             엔지니어를 등록</span><span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]"> 후 프로젝트에 지원해보세요</span>
@@ -50,7 +50,7 @@
           <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#555]">
             엔지니어와 주요 내용을 구체적으로 입력해 주세요 클라이언트가 선정할 확률이 높아져요
           </p>
-          <button @click="goToPage('AddEngineerInfo')" class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
+          <button id="engiRegi" @click="goToPage('AddEngineerInfo')" class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
               엔지니어 등록하기 >
           </button>
         </div>
