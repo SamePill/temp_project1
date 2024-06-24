@@ -69,13 +69,11 @@
                   </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-                  <div
-                    class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                  >
-                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                      프로젝트명을 입력해주세요.
-                    </p>
-                  </div>
+                  <input
+                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                    placeholder="프로젝트명을 입력해주세요."
+                    v-model="engrStep2Detl.projTitl"
+                  />
                 </div>
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
@@ -95,13 +93,11 @@
                   </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-                  <div
-                    class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  <input
+                    class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                    placeholder="프로젝트명을 입력해주세요."
+                    v-model="engrStep2Detl.projTitl"
                   >
-                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                      프로젝트명을 입력해주세요.
-                    </p>
-                  </div>
                 </div>
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
@@ -451,9 +447,10 @@
 <script setup>
   import { useRouter } from 'vue-router'
   // import * as gfnUtils from "@/utils/gfnUtils.js";
+  import { ref } from "vue";
 
   const router = useRouter()
-  // const engrStep2Detl = ref({
+  const engrStep2Detl = ref({
   //   engrId: "string",
   //   projTitl: "string",
   //   clntNm: "string",
@@ -476,7 +473,7 @@
   //       taskDivCdNm: "string"
   //     }
   //   ]
-  // })
+  })
 
 
   function back(){
