@@ -27,7 +27,7 @@
             <p class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#1ba494]">
               등록한 프로젝트 2개
             </p>
-            <svg
+            <!-- <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -43,7 +43,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               ></path>
-            </svg>
+            </svg> -->
           </div>
         </div>
         <div class="flex-grow-0 flex-shrink-0 w-[520px] h-px bg-[#ddd]"></div>
@@ -70,6 +70,7 @@
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
                   <input
+                    type="text"
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                     placeholder="프로젝트명을 입력해주세요."
                     v-model="engrStep2Detl.projTitl"
@@ -94,9 +95,10 @@
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
                   <input
+                    type="text"
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                    placeholder="프로젝트명을 입력해주세요."
-                    v-model="engrStep2Detl.projTitl"
+                    placeholder="클라이언트명을 입력해주세요."
+                    v-model="engrStep2Detl.clntNm"
                   >
                 </div>
               </div>
@@ -112,11 +114,12 @@
                         >*</span
                       >
                     </p>
-                    <div
-                      class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                    <input
+                      type="text"
+                      class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                      placeholder="YYYY.MM"
+                      v-model="engrStep2Detl.strtYm"
                     >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">YYYY.MM</p>
-                    </div>
                   </div>
                   <div
                     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
@@ -128,13 +131,20 @@
                         >*</span
                       >
                     </p>
-                    <div
-                      class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-[#ddd] border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        현재 프로젝트 진행중
-                      </p>
-                    </div>
+                    <input
+                      v-if="engrStep2Detl.crntProjPrgsYn == 'Y'"
+                      type="text"
+                      class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-[#ddd] border border-[#ddd]"
+                      placeholder="현재 프로젝트 진행중"
+                      readonly
+                    />
+                    <input
+                      v-else
+                      type="text"
+                      class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                      placeholder="YYYY.MM"
+                      v-model="engrStep2Detl.endYm"
+                    />                    
                   </div>
                 </div>
                 <div
@@ -151,6 +161,7 @@
                       xmlns="http://www.w3.org/2000/svg"
                       class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
                       preserveAspectRatio="none"
+                      @click="prjtIng()"
                     >
                       <rect width="24" height="24" fill="white"></rect>
                       <rect x="4.5" y="4.5" width="15" height="15" stroke="#DBDBDB"></rect>
@@ -160,6 +171,7 @@
                         stroke-width="1.3"
                         stroke-linecap="round"
                         stroke-linejoin="round"
+                        v-show="engrStep2Detl.crntProjPrgsYn == 'Y'"
                       ></path>
                     </svg>
                     <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
@@ -167,7 +179,7 @@
                     </p>
                   </div>
                   <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
-                    프로젝트 0개월 수행
+                    프로젝트 {{ 0 }}개월 수행
                   </p>
                 </div>
               </div>
@@ -178,68 +190,8 @@
                   <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">직군 </span
                   ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
                 </p>
-                <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
-                  <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#76c8bf]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"># 제조</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># IT</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 금융</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 미디어 · 디자인
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 교육</p>
-                    </div>
-                  </div>
-                  <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 의료</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 판매 · 유통
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 건설</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 기관.협회
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 기타</p>
-                    </div>
-                  </div>
-                </div>
+                <!-- 직군 chips -->
+                <Chipset ref="$jobChipset"  :cdList="engrStep2Detl.jobDivCdList" :listDivCd="'JOB_DIV_CD'" class="mt-[10px]"/>
               </div>
               <div
                 class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
@@ -250,89 +202,8 @@
                   ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span
                   ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"> </span>
                 </p>
-                <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
-                  <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#76c8bf]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]"># Web</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># App</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># IOT</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 증강현실
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 금융</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># AI</p>
-                    </div>
-                  </div>
-                  <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 블록체인
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 자동차</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 하드웨어
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 임베디드
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">
-                        # 메타버스
-                      </p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 플랫폼</p>
-                    </div>
-                    <div
-                      class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-12 px-4 py-2 rounded-[100px] bg-white border border-[#ddd]"
-                    >
-                      <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]"># 기타</p>
-                    </div>
-                  </div>
-                </div>
+                <!-- 업무영역 chips -->
+                <Chipset ref="$taskChipset" :cdList="engrStep2Detl.taskDivCdList" :listDivCd="'TASK_DIV_CD'" class="mt-[10px]"/>
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
                 <div
@@ -349,15 +220,12 @@
                     <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
                   </div>
                 </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                <textarea
+                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  placeholder="업무내용을 입력해주세요."
+                  v-model="engrStep2Detl.projCtntTask"
                 >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                    <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]"
-                      >업무내용을 입력해주세요.</span
-                    ><br /><br /><br /><br /><br /><br />
-                  </p>
-                </div>
+                </textarea>
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
                 <div
@@ -370,15 +238,12 @@
                     <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
                   </div>
                 </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                <textarea
+                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  placeholder="업무스킬을 입력해주세요."
+                  v-model="engrStep2Detl.projCtntTask"
                 >
-                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                    <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]"
-                      >업무내용을 입력해주세요.</span
-                    ><br /><br /><br /><br /><br /><br />
-                  </p>
-                </div>
+                </textarea>
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
                 <div
@@ -391,13 +256,12 @@
                     <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
                   </div>
                 </div>
-                <div
-                  class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
-                >
-                  <p class="flex-grow-0 flex-shrink-0 w-[161px] text-base text-left text-[#999]">
-                    업무내용을 입력해주세요.
-                  </p>
-                </div>
+                <input 
+                  type="text"
+                  class="flex-grow-0 flex-shrink-0 w-[161px] text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  placeholder="활용Tool을 입력해주세요."
+                  v-model="engrStep2Detl.projUseTool"
+                />
               </div>
             </div>
           </div>
@@ -410,15 +274,12 @@
               >
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">기타사항</p>
               </div>
-              <div
-                class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+              <textarea
+                class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                placeholder="기타사항을 입력해주세요."
+                v-model="engrStep2Detl.projEtcInfo"
               >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]">
-                  <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]"
-                    >업무내용을 입력해주세요.</span
-                  ><br /><br /><br /><br /><br /><br />
-                </p>
-              </div>
+              </textarea>
             </div>
             <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5">
               <button
@@ -429,13 +290,14 @@
                   취소 하기
                 </p>
               </button>
-              <div
+              <button
                 class="flex justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
+                @click="saveData()"
               >
                 <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white">
                   추가 하기
                 </p>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -446,39 +308,68 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
-  // import * as gfnUtils from "@/utils/gfnUtils.js";
+  import Chipset       from '@/components/uiComponents/Chipset.vue'
+  import * as gfnUtils from "@/utils/gfnUtils.js";
   import { ref } from "vue";
 
+  const $jobChipset = ref(null);
+  const $taskChipset = ref(null);
   const router = useRouter()
   const engrStep2Detl = ref({
-  //   engrId: "string",
-  //   projTitl: "string",
-  //   clntNm: "string",
-  //   strtYm: "string",
-  //   endYm: "string",
-  //   crntProjPrgsYn: "string",
-  //   projCtntTask: "string",
-  //   projDmndSkil: "string",
-  //   projUseTool: "string",
-  //   projEtcInfo: "string",
-  //   jobDivCdList: [
-  //     {
-  //       jobDivCd: "string",
-  //       jobDivCdNm: "string"
-  //     }
-  //   ],
-  //   taskDivCdList: [
-  //     {
-  //       taskDivCd: "string",
-  //       taskDivCdNm: "string"
-  //     }
-  //   ]
+    engrId: "",
+    projTitl: "",
+    clntNm: "",
+    strtYm: "",
+    endYm: "",
+    crntProjPrgsYn: "",
+    projCtntTask: "",
+    projDmndSkil: "",
+    projUseTool: "",
+    projEtcInfo: "",
+    jobDivCdList: [
+      {
+        jobDivCd: "",
+        jobDivCdNm: ""
+      }
+    ],
+    taskDivCdList: [
+      {
+        taskDivCd: "",
+        taskDivCdNm: ""
+      }
+    ]
   })
 
+  function prjtIng(){
+    //console.log(engrStep2Detl.value.crntProjPrgsYn)
+    if(engrStep2Detl.value.crntProjPrgsYn == "Y"){
+      engrStep2Detl.value.crntProjPrgsYn = "N"
+    }else{
+      engrStep2Detl.value.crntProjPrgsYn = "Y"
+    }
+  }
 
   function back(){
     router.back()
   }
+
+
+  async function saveData(){
+    
+    //TODO 커리어 등록
+    var api = "/v1/my/engineer/???";
+    var getParams = {};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    if(rtn.rtnCd == "00"){
+      let res = rtn.rtnData
+      console.log(res.rtnCd)
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
+  }      
 
   
 </script>
