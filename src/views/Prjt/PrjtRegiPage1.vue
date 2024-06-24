@@ -200,10 +200,9 @@ const projStep = ref({
     ,advnEngrUnitPric:0
     ,spclEngrCnt:0
     ,spclEngrUnitPric:0
-    ,projChck01yn:''
-    ,projChck02yn:''
-    ,projChck03yn:''
-    ,projChck04yn:''
+    ,projChckDivCdList: [
+      {projChckDivCd: ''}
+    ]
   }
 
   })
@@ -233,7 +232,7 @@ const { dataObj } = history.state;
 async function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
-    console.log(projStep.value)
+    // console.log(projStep.value)
   }
 }
 

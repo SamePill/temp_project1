@@ -29,77 +29,135 @@
                     초급 엔지니어
                   </div>
                   <div>
-                  <input type="text" v-model="projStep.projThreeStep.bgnrEngrCnt" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="명" />
-                  <span class="absolute" style="">명</span>  
+                    <input type="number" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <span class="absolute" style="top:17px; right:190px">명</span>  
                   </div>
-                  
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="만원" />
+                  <input type="text" v-model="bgnrEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
-                <div class="flex justify-start items-start gap-5">
+                <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#dbe9fa] text-[#0b6bdc]">
                     중급 엔지니어
                   </div>
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="명" />
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="만원" />
+                  <input type="number" v-model="projStep.projThreeStep.intrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:190px">명</span>  
+                  <input type="text" v-model="intrEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
-                <div class="flex justify-start items-start gap-5">
+                <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#fadbe6] text-[#dc0b56]">
                     고급 엔지니어
                   </div>
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="명" />
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="만원" />
+                  <input type="number" v-model="projStep.projThreeStep.advnEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:190px">명</span>  
+                  <input type="text" v-model="advnEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
-                <div class="flex justify-start items-start gap-5">
+                <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#faf1db] text-[#dc630b]">
                     특급 엔지니어
                   </div>
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="명" />
-                  <input type="text" class="flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="만원" />
+                  <input type="number" v-model="projStep.projThreeStep.spclEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:190px">명</span>  
+                  <input type="text" v-model="spclEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
               </div>
             </div>
           </div>
           <div class="mt-[20px] flex-shrink-0 w-[520px] h-px border border-[#ddd]"></div>
             <div class="mt-[20px] flex flex-col gap-3">
-            <div class="flex justify-between items-center self-stretch">
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">초급 엔지니어</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                  <span class="mr-[5px]">{{'4500'}}</span>
-                  <span>만원</span>
-                </p>
-            </div>
-            <div class="flex justify-between items-center self-stretch">
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#0b6bdc]">중급 엔지니어</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                  <span class="mr-[5px]">{{'4500'}}</span>
-                  <span>만원</span>
-                </p>
-            </div>
-            <div class="flex justify-between items-center self-stretch">
-              <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#333]">총인원 20명</p>
-              <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2 text-[#333] text-xl">
-                <span>총 금액</span>
-                <span>{{'4500'}}</span>
-                <span>만원</span>
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.bgnrEngrCnt) && projStep.projThreeStep.bgnrEngrCnt > 0">
+                <div class="flex justify-between items-center self-stretch">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">초급 엔지니어</p>
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                      <span class="mr-[5px]">{{projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)}}</span>
+                      <span>만원</span>
+                    </p>
+                </div>
               </div>
-            </div>
-            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-2.5 px-5 py-4 rounded bg-[#f3faf9]">
-              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#067d68]">예산은 VAT를 제외한 금액</span>
-                <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#191919]">으로 기재해주세요.</span>
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left">
-                <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#191919]">예산 견적 : </span>
-                <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#067d68]">최소 330만원 ~ 최대 660만원</span>
-                <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#191919]">(부가세 10% 포함한 최종 금액)</span>
-              </p>
-            </div>
-          </div>   
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.intrEngrCnt) && projStep.projThreeStep.intrEngrCnt > 0">
+                <div class="flex justify-between items-center self-stretch">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#0b6bdc]">중급 엔지니어</p>
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                      <span class="mr-[5px]">{{projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)}}</span>
+                      <span>만원</span>
+                    </p>
+                </div>
+              </div>
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.advnEngrCnt) && projStep.projThreeStep.advnEngrCnt > 0">
+                <div class="flex justify-between items-center self-stretch">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc0b56]">고급 엔지니어</p>
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                      <span class="mr-[5px]">{{projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)}}</span>
+                      <span>만원</span>
+                    </p>
+                </div>
+              </div>
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.spclEngrCnt) && projStep.projThreeStep.spclEngrCnt > 0">
+                <div class="flex justify-between items-center self-stretch">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc630b]">특급 엔지니어</p>
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                      <span class="mr-[5px]">{{projStep.projThreeStep.spclEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)}}</span>
+                      <span>만원</span>
+                    </p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center self-stretch">
+                <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#333]">총인원 {{projStep.projThreeStep.bgnrEngrCnt +
+                                                                                           projStep.projThreeStep.intrEngrCnt +
+                                                                                           projStep.projThreeStep.advnEngrCnt +
+                                                                                           projStep.projThreeStep.bgnrEngrCnt 
+                                                                                          }} 명</p>
+                <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2 text-[#333] text-xl">
+                  <span>총 금액</span>
+                  <span>{{(projStep.projThreeStep.bgnrEngrCnt * (bgnrEngrUnitPricInput)) +
+                          (projStep.projThreeStep.intrEngrCnt * (intrEngrUnitPricInput)) +
+                          (projStep.projThreeStep.advnEngrCnt * (advnEngrUnitPricInput)) +
+                          (projStep.projThreeStep.bgnrEngrCnt * (spclEngrUnitPricInput)) 
+                        }}</span>
+                  <span>만원</span>
+                </div>
+              </div>
+              <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-2.5 px-5 py-4 rounded bg-[#f3faf9]">
+                <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left">
+                  <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#067d68]">예산은 VAT를 제외한 금액</span>
+                  <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#191919]">으로 기재해주세요.</span>
+                </p>
+                <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left">
+                  <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#191919]">예산 견적 : </span>
+                  <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#067d68]">최소 330만원 ~ 최대 660만원</span>
+                  <span class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#191919]">(부가세 10% 포함한 최종 금액)</span>
+                </p>
+              </div>
+            </div>   
           <div class="mt-[40px]">
             <div>
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl font-semibold text-left text-[#191919]">
                 Check Check !
               </p>
+              <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor: pointer;" @click="strtDayCnslYnClick()">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <rect x="4.75" y="4.75" width="22.5" height="22.5" stroke="#DBDBDB" stroke-width="1"></rect>
+                  <path v-if="projStep.projOneStep.strtDayCnslYn =='Y'"
+                    d="M9 16L14 21L22 13L23 12"
+                    stroke="#191919"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-text-2">
+                    협의가능
+                  </p>
+              </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
                 <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
                   <svg
@@ -304,8 +362,9 @@
   </div>
 </template>
 <script setup>
-import {  ref } from "vue";
+import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
+import * as gfnRules      from "@/utils/gfnRules.js";
 
 const router = useRouter()
 // const projThreeStep =ref({
@@ -317,10 +376,7 @@ const router = useRouter()
 //     ,advnEngrUnitPric:0
 //     ,spclEngrCnt:0
 //     ,spclEngrUnitPric:0
-//     ,projChck01yn:''
-//     ,projChck02yn:''
-//     ,projChck03yn:''
-//     ,projChck04yn:''
+//     ,projChckDivCdList:
 //   })
 
   const pageNo = ref(3)
@@ -328,23 +384,51 @@ const router = useRouter()
       
   const { dataObj } = history.state; 
   const projStep = ref(JSON.parse(dataObj));
-  // console.log(JSON.parse(dataObj)); 
-  
-  function nextPage(div){
-    if(div == 'next'){  
-      router.push({ 
-        name: "PrjtRegiPage4"
-        ,state: {
-          dataObj : JSON.stringify(projStep.value),
-        },
-      });
-    }else{
-      router.push({ 
-        name: "PrjtRegiPage2"
-        ,state: { 
-          dataObj : dataObj,
-        },
-      });
-    }
+  const bgnrEngrUnitPricInput = ref(0);
+  const intrEngrUnitPricInput = ref(0);
+  const advnEngrUnitPricInput = ref(0);
+  const spclEngrUnitPricInput = ref(0);
+
+onMounted(() => {
+  loadData();
+});
+
+function loadData(){
+  if(dataObj != undefined){
+    projStep.value = JSON.parse(dataObj);
+    console.log(dataObj)
+    console.log(projStep.value.projThreeStep.bgnrEngrUnitPric)
+    bgnrEngrUnitPricInput.value = projStep.value.projThreeStep.bgnrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.bgnrEngrUnitPric/10000;
+    intrEngrUnitPricInput.value = projStep.value.projThreeStep.intrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.intrEngrUnitPric/10000;
+    advnEngrUnitPricInput.value = projStep.value.projThreeStep.advnEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.advnEngrUnitPric/10000;
+    spclEngrUnitPricInput.value = projStep.value.projThreeStep.spclEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.spclEngrUnitPric/10000;
   }
+}
+
+function nextPage(div){
+  if(div == 'next'){  
+    router.push({ 
+      name: "PrjtRegiPage4"
+      ,state: {
+        dataObj : JSON.stringify(projStep.value),
+      },
+    });
+  }else{
+    router.push({ 
+      name: "PrjtRegiPage2"
+      ,state: { 
+        dataObj : dataObj,
+      },
+    });
+  }
+}
+
+//협의가능 체크
+function strtDayCnslYnClick(){
+  if(projStep.value.projOneStep.strtDayCnslYn == 'Y'){
+    projStep.value.projOneStep.strtDayCnslYn = 'N';
+  }else{
+    projStep.value.projOneStep.strtDayCnslYn = 'Y';
+  }
+}
 </script>

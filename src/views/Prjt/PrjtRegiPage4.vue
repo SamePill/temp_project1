@@ -26,7 +26,7 @@
           <p class="text-xl text-left text-[#191919]">담당자 이름
             <span class="text-[#ff5252]">*</span></p>
           <div class="flex flex-col justify-center items-start gap-2">
-            <input type="text" v-model="projFourStep.rprsNm" class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이름을 입력해주세요."/>
+            <input type="text" v-model="projStep.projFourStep.rprsNm" class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이름을 입력해주세요."/>
           </div>
         </div>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
@@ -34,7 +34,7 @@
             <span class="text-[#ff5252]">*</span>
           </p>
           <div class="flex justify-start items-start gap-5">
-            <input type="text" v-model="projFourStep.rprsHp"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 휴대폰 번호를 입력해주세요."/>
+            <input type="text" v-model="projStep.projFourStep.rprsHp"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 휴대폰 번호를 입력해주세요."/>
           </div>
         </div>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
@@ -42,12 +42,12 @@
             <span class="text-[#ff5252]">*</span>
           </p>
           <div class="flex justify-start items-start gap-5">
-            <input type="text" v-model="projFourStep.rprsMail"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이메일을 입력해주세요."/>
+            <input type="text" v-model="projStep.projFourStep.rprsMail"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이메일을 입력해주세요."/>
           </div>
         </div>
         
         <div class="mt-[40px] flex flex-col justify-start items-start relative">
-          <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+          <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor:pointer" @click="trmsClick('useTrmsYn')">
             <svg
               width="32"
               height="32"
@@ -65,6 +65,13 @@
                 stroke="#DBDBDB"
                 stroke-width="1.5"
               ></rect>
+                <path v-if="projStep.projFourStep.useTrmsYn == 'Y'"
+                  d="M9 16L14 21L22 13L23 12"
+                  stroke="#191919"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
             </svg>
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
               (필수) 큐밋 이용약관에 동의합니다.
@@ -73,7 +80,7 @@
           <div class="flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10">
             <p class="flex-grow-0 flex-shrink-0 text-xs text-right text-[#777]">상세보기</p>
           </div>
-          <div class="mt-[20px] flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+          <div class="mt-[20px] flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor:pointer" @click="trmsClick('privTrmsYn')">
             <svg
               width="32"
               height="32"
@@ -91,6 +98,13 @@
                 stroke="#DBDBDB"
                 stroke-width="1.5"
               ></rect>
+                <path v-if="projStep.projFourStep.privTrmsYn == 'Y'"
+                  d="M9 16L14 21L22 13L23 12"
+                  stroke="#191919"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
             </svg>
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
               (필수) 큐밋 이용약관에 동의합니다.
@@ -117,34 +131,58 @@
   </div>
 </template>
 <script setup>
-import {  ref } from "vue";
+import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const projFourStep = ref({
-  rprsNm:''
-  ,rprsHp:''
-  ,rprsMail:''
-  ,useTrmsYn: "Y"
-  ,privTrmsYn: "Y"
-})
+// const projFourStep = ref({
+//   rprsNm:''
+//   ,rprsHp:''
+//   ,rprsMail:''
+//   ,useTrmsYn: "Y"
+//   ,privTrmsYn: "Y"
+// })
 
 const pageNo = ref(4)
 const totPageNo = ref(4) 
+const { dataObj } = history.state; 
+const projStep = ref(JSON.parse(dataObj));
 const compNm = ref(window.$cookies.get("loginCompNm"));
 
+onMounted(() => {
+  loadData();
+});
+
+async function loadData(){
+  if(dataObj != undefined){
+    projStep.value = JSON.parse(dataObj);
+  }
+}
 
 function nextPage(div){
-  console.log(compNm)
   if(div == 'next'){  
     console.log('등록완료');
+    // projStep.value.projOneStep.jobDivCdList.forEach(el=>{
+    //   el = {'jobDivCd':el.cd}
+
+
+
+    // });
+    console.log(projStep.value)
   }else{
     router.push({ 
       name: "PrjtRegiPage3"
       ,state: {
-        dataObj : JSON.stringify(projFourStep.value),
+        dataObj : JSON.stringify(projStep.value),
       },
     });
+  }
+}
+function trmsClick(div){
+  if(projStep.value.projFourStep[div] == 'Y'){
+    projStep.value.projFourStep[div] = 'N'
+  }else{
+    projStep.value.projFourStep[div] = 'Y'
   }
 }
 </script>

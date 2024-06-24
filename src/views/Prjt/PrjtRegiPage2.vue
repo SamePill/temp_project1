@@ -61,27 +61,72 @@
               <textarea v-model="projStep.projTwoStep.projEtcInfo" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="기타 전달사항 및 우대사항을 입력해주세요."/>
             </div>
           </div>
-          <div class="mt-[40px]">
+
+
+          <div class="mt-[40px] w-[520px]">
+
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">파일 자료
               </p>
               <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">최대 50MB 까지</p>
             </div>
-            <div>
-              <div class="flex justify-start items-start gap-5">
-                <input type="text" class="w-[340px] relative gap-12 p-4 rounded border border-[#ddd]" placeholder="파일을 추가해주세요."/>
-                <div class="flex justify-center items-center w-40 relative overflow-hidden gap-0.5 p-4 rounded bg-[#ededed] border border-[#ddd]">
-                  <button class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">파일추가</button>
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+              <input
+                type="text"
+                class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999]  w-[340px] p-4 rounded bg-white border border-[#ddd]"
+                placeholder="파일을 추가해주세요."
+                readonly
+              />
+              <input type="file" id="file" hidden  accept="image/*, .pdf"  @change="showFileName()"/>
+              
+              <label for="file">
+                <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-40 overflow-hidden  p-4 rounded bg-[#ededed] border border-[#ddd]" style="cursor: pointer">
+                  <p class="text-[#555]">파일추가</p>
                 </div>
-              </div>
+              </label>
+            </div>
+            <div>
               <div class="mt-[20px]">
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                   <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
-                    문구 변경: 필요한 내용을 정리한 문서를 추가해 주세요.(최대 3대)</span><br />
+                    문구 변경: 필요한 내용을 정리한 문서를 추가해 주세요.(최대 3갸)</span><br />
                   <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                     프로젝트 예산 및 일정 산정에 활용되며, 문서 및 이미지 파일만 추가 가능합니다.
                   </span>
                 </p>
+              </div>
+            </div>
+            <div v-for="(el,i) in fileList" :key="i" class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[540px] gap-3">
+              <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-2">
+                <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1585d7]">
+                  {{el.name}}
+                </p>
+                <svg
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+                  preserveAspectRatio="none"
+                  style="cursor: pointer"
+                  @click="delFile(i)"
+                  v-show="el !='' && el != null"
+                >
+                  <rect width="16" height="16" transform="translate(0 0.5)" fill="white"></rect>
+                  <path
+                    d="M4 4.5L12 12.5"
+                    stroke="#999999"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                  ></path>
+                  <path
+                    d="M12 4.5L4 12.5"
+                    stroke="#999999"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
               </div>
             </div>
           </div>
@@ -122,9 +167,17 @@ const projStep = ref(JSON.parse(dataObj));
 const $TaskTip = ref();
 const $SkillTip = ref();
 const $ToolTip = ref();
+const fileList = ref([]);
 
 onMounted(() => {
+  loadData();
 });
+
+async function loadData(){
+  if(dataObj != undefined){
+    projStep.value = JSON.parse(dataObj);
+  }
+}
 
 function popup(div){
   if(div == '$TaskTip'){
@@ -142,7 +195,6 @@ function popup(div){
 
 function nextPage(div){
 
-  console.log(projStep.value)
   if(div == 'next'){  
     router.push({ 
       name: "PrjtRegiPage3"
@@ -163,4 +215,20 @@ function nextPage(div){
 //   var location = document.querySelector("#top").offsetTop;
 //   window.scrollTo({location, behavior: 'smooth' });
 // }
+
+
+
+
+function showFileName(){
+  if(fileList.value.length < 3){
+    let input = document.getElementById('file');
+    fileList.value.push(input.files[0])
+    // console.log(fileList.value)
+  }
+}
+
+function delFile(idx){
+  fileList.value.splice(idx,1);
+}
+
 </script>

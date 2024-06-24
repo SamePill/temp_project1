@@ -5,7 +5,7 @@
       <!-- fixed top-[120px] -->
       <!--상단 탭-->
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-        <button @click="clickMainTab(el,i)" v-for="(el,i) in mainTabMenu" :key="i" :class="slctMainTabIdx.i == i ? 'border border-[#1ba494] text-lg font-bold text-left text-[#1ba494]' : 'border-[#ddd] text-lg font-medium text-left text-[#666]' " class="flex justify-center w-[340px] gap-2.5 px-2.5 py-5 rounded-[10px]">
+        <button @click="clickMainTab(el,i)" v-for="(el,i) in mainTabMenu" :key="i" :class="slctMainTabIdx.i == i ? 'border border-1 border-[#1ba494] text-lg font-bold text-left text-[#1ba494] bg-[#f3faf9]' : 'border-[#ddd] text-lg font-medium text-left text-[#666]' " class="flex justify-center w-[340px] gap-2.5 px-2.5 py-5 rounded-[10px]">
             {{ el.tabNm }}
         </button>
       </div>    
@@ -57,7 +57,7 @@
         <img v-show="slctMainTabIdx.i == 1" src="@/assets/aboutQm_engiRegi.png" class="w-1080 h-[400px] object-none mt-[40px] z-1" />          
       </div>
       <!--프로젝트 지원-->   
-      <div id="prjtAply" v-show="slctMainTabIdx.i == 1" class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4 py-[160px]">
+      <div v-show="slctMainTabIdx.i == 1" class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-4 py-[160px]">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] text-left">
           <span class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">
             다양한 프로젝트를 확인 후 나에게 맞는 </span>
@@ -68,11 +68,11 @@
           <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#555]">
             내가 등록한 엔지니어가 돋보일 수 있도록 엔지니어 프로필을 작성해 보세요.
           </p>
-          <button @click="goToPage('PrjtSrch')" class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494]">
+          <button id="prjtAply" @click="goToPage('PrjtSrch')" class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5 font-medium text-lg text-left text-[#1ba494] mb-[40px]">
               프로젝트 둘러보기 >
           </button>
         </div>
-        <img v-show="slctMainTabIdx.i == 1" src="@/assets/aboutQm_prjtAply.png" class="w-1080 h-[400px] object-none mt-[40px]" />           
+        <img v-show="slctMainTabIdx.i == 1" src="@/assets/aboutQm_prjtAply.png" class="w-1080 h-[400px] object-none" />           
       </div>
 
       <img id="prjtMngGide" v-show="slctMainTabIdx.i == 0 || slctMainTabIdx.i == 1" src="@/assets/aboutQm_prjtMngGide.png" class="w-1080 h-[790px] object-none pt-[260px]" />           <!--큐밋매니저가이드-->   
@@ -90,10 +90,11 @@
 import { onMounted, onUnmounted, ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 
+const { dataObj } = history.state; 
 const router = useRouter()
-const mainTabMenu = ref([{tabId:'clnt'     ,tabNm:'클라이언트 이용방법'}
-                        ,{tabId:'ptns'     ,tabNm:'파트너스 이용방법'}
-                        ,{tabId:'howToUse' ,tabNm:'이용방법'}]);
+const mainTabMenu = ref([{tabId:'clnt'  ,tabNm:'클라이언트 이용방법'}
+                        ,{tabId:'ptns'  ,tabNm:'파트너스 이용방법'}
+                        ,{tabId:'price' ,tabNm:'이용요금'}]);
                    
 const specTabMenu = ref([{clnt:[{tabId:'prjtRegi'     ,tabNm:'프로젝트 등록'}
                                 ,{tabId:'prjtMngGide' ,tabNm:'큐밋 매니저 가이드'}
@@ -105,27 +106,35 @@ const specTabMenu = ref([{clnt:[{tabId:'prjtRegi'     ,tabNm:'프로젝트 등�
                         ,{ptns:[{tabId:'engiRegi'     ,tabNm:'엔지니어 등록'}
                               ,{tabId:'prjtAply'      ,tabNm:'프로젝트 지원'}
                               ,{tabId:'prjtMngGide'   ,tabNm:'프로젝트 매니저 가이드'}
-                              ,{tabId:'meet2'          ,tabNm:'미팅'}
+                              ,{tabId:'meet2'         ,tabNm:'미팅'}
                               ,{tabId:'ctrtCcld'      ,tabNm:'계약체결'}
                               ,{tabId:'prjtMng'       ,tabNm:'프로젝트 관리'}
                               ,{tabId:'prjtCmpl'      ,tabNm:'프로젝트 완료'}]}
-                        ,{null:[]}
+                        ,{price:[{tabId:'price'       ,tabNm:'이용요금'}]}
 ]);
 const slctMainTabIdx = ref( {i:0,tabId:'clnt'});
 const slctSpecTab = ref('prjtRegi');
 
-
 onMounted(() => {
   slctMainTabIdx.value = {i:0,tabId:'clnt'}
-  slctSpecTab.value = 'prjtRegi'
+  slctSpecTab.value = 'prjtRegi';
+  
+  if(dataObj != undefined){
+    loadData(dataObj)
+  }
 })
 
 onUnmounted(()=>{
 })
 
+function loadData(dataObj){
+  slctMainTabIdx.value = dataObj;
+  slctSpecTab.value = dataObj.i == 0 ? 'prjtRegi' : (dataObj.i == 1 ?'engiRegi' : 'price')
+}
+
 function clickMainTab(el,i){
   slctMainTabIdx.value = {i:i ,tabId:el.tabId};
-
+  console.log(slctMainTabIdx.value)
   if(i==0){
     slctSpecTab.value = 'prjtRegi';
     scroll('prjtRegi');
@@ -133,7 +142,7 @@ function clickMainTab(el,i){
     slctSpecTab.value = 'engiRegi';
     scroll('engiRegi');
   }else{
-    slctSpecTab.value = 'null';
+    slctSpecTab.value = 'price';
   }
 }
 
