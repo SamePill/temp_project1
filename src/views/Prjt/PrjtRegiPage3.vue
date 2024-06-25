@@ -20,7 +20,8 @@
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로젝트 예산
                 <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
               </p>
-              <button class="px-2.5 height-[23px] width-[69px] rounded-[100px] border border-[#1ba494]  text-[#1ba494]">작성 TIP</button>
+              <button @click="popup('$BudgetTip')" class="px-2.5 height-[23px] width-[69px] rounded-[100px] border border-[#1ba494]  text-[#1ba494]">작성 TIP</button>
+              <BudgetTip ref="$BudgetTip" ></BudgetTip>
             </div>
             <div>
               <div class="flex flex-col justify-start items-start self-stretch gap-4">
@@ -67,7 +68,7 @@
           </div>
           <div class="mt-[20px] flex-shrink-0 w-[520px] h-px border border-[#ddd]"></div>
             <div class="mt-[20px] flex flex-col gap-3">
-              <div v-if="!gfnRules.isNull(projStep.projThreeStep.bgnrEngrCnt) && projStep.projThreeStep.bgnrEngrCnt > 0">
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.bgnrEngrCnt) && projStep.projThreeStep.bgnrEngrCnt &gt; 0">
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">초급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
@@ -76,7 +77,7 @@
                     </p>
                 </div>
               </div>
-              <div v-if="!gfnRules.isNull(projStep.projThreeStep.intrEngrCnt) && projStep.projThreeStep.intrEngrCnt > 0">
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.intrEngrCnt) && projStep.projThreeStep.intrEngrCnt &gt; 0">
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#0b6bdc]">중급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
@@ -85,7 +86,7 @@
                     </p>
                 </div>
               </div>
-              <div v-if="!gfnRules.isNull(projStep.projThreeStep.advnEngrCnt) && projStep.projThreeStep.advnEngrCnt > 0">
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.advnEngrCnt) && projStep.projThreeStep.advnEngrCnt &gt; 0">
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc0b56]">고급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
@@ -94,7 +95,7 @@
                     </p>
                 </div>
               </div>
-              <div v-if="!gfnRules.isNull(projStep.projThreeStep.spclEngrCnt) && projStep.projThreeStep.spclEngrCnt > 0">
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.spclEngrCnt) && projStep.projThreeStep.spclEngrCnt &gt; 0">
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc630b]">특급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
@@ -136,30 +137,8 @@
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl font-semibold text-left text-[#191919]">
                 Check Check !
               </p>
-              <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor: pointer;" @click="strtDayCnslYnClick()">
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <rect x="4.75" y="4.75" width="22.5" height="22.5" stroke="#DBDBDB" stroke-width="1"></rect>
-                  <path v-if="projStep.projOneStep.strtDayCnslYn =='Y'"
-                    d="M9 16L14 21L22 13L23 12"
-                    stroke="#191919"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-                </svg>
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-text-2">
-                    협의가능
-                  </p>
-              </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" @click="projChck('10')">
                   <svg
                     width="32"
                     height="32"
@@ -177,7 +156,7 @@
                       stroke="#DBDBDB"
                       stroke-width="1.5"
                     ></rect>
-                    <path
+                    <path v-show="projChckDivCd10 =='10'"
                       d="M9 16L14 21L22 13L23 12"
                       stroke="#191919"
                       stroke-width="2"
@@ -189,7 +168,7 @@
                     프로젝트 수행 시 연장 및 휴일 근무가 필요합니다.
                   </p>
                 </div>
-                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" @click="projChck('20')">
                   <svg
                     width="32"
                     height="32"
@@ -207,7 +186,7 @@
                       stroke="#DBDBDB"
                       stroke-width="1.5"
                     ></rect>
-                    <path
+                    <path v-show="projChckDivCd20 =='20'"
                       d="M9 16L14 21L22 13L23 12"
                       stroke="#191919"
                       stroke-width="2"
@@ -219,7 +198,7 @@
                     연장 / 휴일 근무 발생 시 대체휴무 제공합니다.
                   </p>
                 </div>
-                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" @click="projChck('30')">
                   <svg
                     width="32"
                     height="32"
@@ -236,8 +215,8 @@
                       height="22.5"
                       stroke="#DBDBDB"
                       stroke-width="1.5"
-                    ></rect>
-                    <path
+                    ></rect> 
+                    <path v-show="projChckDivCd30 =='30'"
                       d="M9 16L14 21L22 13L23 12"
                       stroke="#191919"
                       stroke-width="2"
@@ -249,7 +228,7 @@
                     월차 및 반차 제공 합니다.
                   </p>
                 </div>
-                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
+                <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" @click="projChck('40')">
                   <svg
                     width="32"
                     height="32"
@@ -267,7 +246,7 @@
                       stroke="#DBDBDB"
                       stroke-width="1.5"
                     ></rect>
-                    <path
+                    <path v-show="projChckDivCd40 =='40'"
                       d="M9 16L14 21L22 13L23 12"
                       stroke="#191919"
                       stroke-width="2"
@@ -365,29 +344,22 @@
 import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
 import * as gfnRules      from "@/utils/gfnRules.js";
+import BudgetTip from "@/components/popupComponents/BudgetTip.vue";
 
-const router = useRouter()
-// const projThreeStep =ref({
-//       bgnrEngrCnt:0
-//     ,bgnrEngrUnitPric:0
-//     ,intrEngrCnt:0
-//     ,intrEngrUnitPric:0
-//     ,advnEngrCnt:0
-//     ,advnEngrUnitPric:0
-//     ,spclEngrCnt:0
-//     ,spclEngrUnitPric:0
-//     ,projChckDivCdList:
-//   })
-
+const router = useRouter();
   const pageNo = ref(3)
   const totPageNo = ref(4) 
-      
+  const $BudgetTip = ref();      
   const { dataObj } = history.state; 
   const projStep = ref(JSON.parse(dataObj));
   const bgnrEngrUnitPricInput = ref(0);
   const intrEngrUnitPricInput = ref(0);
   const advnEngrUnitPricInput = ref(0);
   const spclEngrUnitPricInput = ref(0);
+  const projChckDivCd10 = ref('');
+  const projChckDivCd20 = ref('');
+  const projChckDivCd30 = ref('');
+  const projChckDivCd40 = ref('');
 
 onMounted(() => {
   loadData();
@@ -396,8 +368,6 @@ onMounted(() => {
 function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
-    console.log(dataObj)
-    console.log(projStep.value.projThreeStep.bgnrEngrUnitPric)
     bgnrEngrUnitPricInput.value = projStep.value.projThreeStep.bgnrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.bgnrEngrUnitPric/10000;
     intrEngrUnitPricInput.value = projStep.value.projThreeStep.intrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.intrEngrUnitPric/10000;
     advnEngrUnitPricInput.value = projStep.value.projThreeStep.advnEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.advnEngrUnitPric/10000;
@@ -407,6 +377,23 @@ function loadData(){
 
 function nextPage(div){
   if(div == 'next'){  
+    projStep.value.projThreeStep.bgnrEngrUnitPric = bgnrEngrUnitPricInput.value * 10000;
+    projStep.value.projThreeStep.intrEngrUnitPric = intrEngrUnitPricInput.value * 10000;
+    projStep.value.projThreeStep.advnEngrUnitPric = advnEngrUnitPricInput.value * 10000;
+    projStep.value.projThreeStep.spclEngrUnitPric = spclEngrUnitPricInput.value * 10000;
+
+    if(!gfnRules.isNull(projChckDivCd10.value)){
+      projStep.value.projThreeStep.projChckDivCdList.push({projChckDivCd:projChckDivCd10.value});
+    }
+    if(!gfnRules.isNull(projChckDivCd20.value)){
+      projStep.value.projThreeStep.projChckDivCdList.push({projChckDivCd:projChckDivCd20.value});
+    }
+    if(!gfnRules.isNull(projChckDivCd30.value)){
+      projStep.value.projThreeStep.projChckDivCdList.push({projChckDivCd:projChckDivCd30.value});
+    }
+    if(!gfnRules.isNull(projChckDivCd40.value)){
+      projStep.value.projThreeStep.projChckDivCdList.push({projChckDivCd:projChckDivCd40.value});
+    }
     router.push({ 
       name: "PrjtRegiPage4"
       ,state: {
@@ -424,11 +411,22 @@ function nextPage(div){
 }
 
 //협의가능 체크
-function strtDayCnslYnClick(){
-  if(projStep.value.projOneStep.strtDayCnslYn == 'Y'){
-    projStep.value.projOneStep.strtDayCnslYn = 'N';
-  }else{
-    projStep.value.projOneStep.strtDayCnslYn = 'Y';
+function projChck(div){
+  if(div == '10'){
+    projChckDivCd10.value = projChckDivCd10.value == '10' ? '' : '10';
+  }else if(div == '20'){
+    projChckDivCd20.value = projChckDivCd20.value == '20' ? '' : '20';
+  }else if(div == '30'){
+    projChckDivCd30.value = projChckDivCd30.value == '30' ? '' : '30';
+  }else if(div == '40'){
+    projChckDivCd40.value = projChckDivCd40.value == '40' ? '' : '40';
   }
+}
+
+//Tip
+function popup(){
+    $BudgetTip.value.show();
+  return false
+
 }
 </script>

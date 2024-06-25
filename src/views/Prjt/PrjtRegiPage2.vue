@@ -216,9 +216,6 @@ function nextPage(div){
 //   window.scrollTo({location, behavior: 'smooth' });
 // }
 
-
-
-
 function showFileName(){
   if(fileList.value.length < 3){
     let input = document.getElementById('file');

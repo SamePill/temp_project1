@@ -201,8 +201,14 @@ const projStep = ref({
     ,spclEngrCnt:0
     ,spclEngrUnitPric:0
     ,projChckDivCdList: [
-      {projChckDivCd: ''}
     ]
+  },
+  projFourStep: {
+    rprsNm    : '',
+    rprsHp    : '',
+    rprsMail  : '',
+    useTrmsYn : 'Y',
+    privTrmsYn: 'Y'
   }
 
   })
