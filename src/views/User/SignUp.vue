@@ -70,13 +70,13 @@
                     :class='(chkHp ? "border-[#ddd]" : "border-[#ff5252]") + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border" '
                     type="text"
                     placeholder="휴대폰번호"
-                    v-model="signUp.joinOneStep.userHp"
+                    v-model="signUp.joinOneStep.hp"
                     @blur="ruleChkHp()"
                     :readonly="isInputReadonly"
                     @input="validateHp"
                   />
                   <button
-                    :class='(blSendCertNo ? " bg-white border-[#ddd] text-[#191919]" :  (chkHp && signUp.joinOneStep.userHp != null ? " border-[#1ba494] bg-[#1BA494]  text-white" : "bg-[#999]  text-white")) + " flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[125px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded border "'
+                    :class='(blSendCertNo ? " bg-white border-[#ddd] text-[#191919]" :  (chkHp && signUp.joinOneStep.hp != null ? " border-[#1ba494] bg-[#1BA494]  text-white" : "bg-[#999]  text-white")) + " flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[125px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded border "'
                     @click = "reqCertNo()"
                     :disabled="isButtonDisabled"
                   >
@@ -307,7 +307,7 @@
       }
       var postParams = { "hp": signUp.value.joinOneStep.hp ,  "reqAuthHpDivCd": "10",   "userMail":  signUp.value.joinOneStep.userMail };
 
-      console.log("val ::" + postParams);
+      console.log( postParams);
       console.log(api)
 
       var rtn = await gfnUtils.axiosPost(api, postParams);
@@ -371,7 +371,7 @@
   }
 
   function ruleChkHp(){
-    chkHp.value = gfnRules.validHp(signUp.value.joinOneStep.userHp);
+    chkHp.value = gfnRules.validHp(signUp.value.joinOneStep.hp);
     btnStatChng()
   }
 
@@ -380,7 +380,7 @@
     // console.log(pswd.value == "");
     if (signUp.value.joinOneStep.userMail == "" || signUp.value.joinOneStep.userNm == ""
       || signUp.value.joinOneStep.pass == "" || signUp.value.joinOneStep.confirmPass == ""
-      || signUp.value.joinOneStep.userHp == "" || certNoChk.value != "OK"
+      || signUp.value.joinOneStep.hp == "" || certNoChk.value != "OK"
     ) {
       btnIsActv.value = false;
     } else {
@@ -413,7 +413,7 @@
     const value = event.target.value;
     if (!/^\d*$/.test(value)) {
       event.target.value = value.replace(/\D/g, '');
-      signUp.value.joinOneStep.userHp = event.target.value;
+      signUp.value.joinOneStep.hp = event.target.value;
     }
   }
 
