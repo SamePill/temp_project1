@@ -192,11 +192,12 @@
   onMounted(() => {
     loadData();
   })
+  
   const { dataObj } = history.state; 
+  const engrInfo = ref(JSON.parse(dataObj))
 
   const router = useRouter()
 
-  const engrInfo = ref("")
   const userMail = ref(window.$cookies.get("loginUserMail"));
   const projSmryHstrList = ref(
     [
@@ -227,21 +228,23 @@
 
 
   async function loadData(){
-    if(dataObj != undefined){
-      engrInfo.value = JSON.parse(dataObj);
-    }
-
-    var api = "/v1/my/engineer/projet-summary-list";
-    var getParams = {userMail : userMail.value ,  engrId:engrInfo.value.engrId };
-    let rtn = await gfnUtils.axiosGet(
-      api,
-      getParams
-    );
-    if(rtn.rtnCd == "00"){
-      let res = rtn.rtnData
-      projSmryHstrList.value = res.projSmryHstrList
+    
+    if(engrInfo.value.editMode == true){
+      console.log("수정모드")
+      var api = "/v1/my/engineer/projet-summary-list";
+      var getParams = {userMail : userMail.value ,  engrId:engrInfo.value.engrId };
+      let rtn = await gfnUtils.axiosGet(
+        api,
+        getParams
+      );
+      if(rtn.rtnCd == "00"){
+        let res = rtn.rtnData
+        projSmryHstrList.value = res.projSmryHstrList
+      }else{
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      }
     }else{
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      console.log("등록모드")
     }
   }      
 

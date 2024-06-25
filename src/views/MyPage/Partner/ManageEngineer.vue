@@ -335,11 +335,14 @@
     modalShowProfile.value.open()            
   }
   //수정 하기 버튼 
-  function profileBtn(){
-    //TODO 수정하기 연결
-    alert("수정하기 연결...")
-
+  function profileBtn(engrId){
+    console.log(engrId)
+    let engrInfo = {engrId : engrId}
     modalShowProfile.value.close()
+    router.push({
+       name: "AddEngineerInfo"
+      ,state: {dataObj : JSON.stringify(engrInfo)}  
+    })
   }
   //취소버튼
   const close = function (){

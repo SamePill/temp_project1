@@ -214,11 +214,11 @@
                       >프로젝트 설명 및 주요 담당 업무 </span
                     ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
                   </p>
-                  <div
-                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
+                  <button @click="popup('$TaskTip')" 
+                    class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
                   >
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-                  </div>
+                    작성 TIP</button>
+                    <TaskTip ref="$TaskTip" ></TaskTip>
                 </div>
                 <textarea
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
@@ -232,11 +232,11 @@
                   class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
                 >
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">업무스킬</p>
-                  <div
-                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
+                  <button  @click="popup('$SkillTip')" 
+                    class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
                   >
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-                  </div>
+                    작성 TIP</button>
+                    <SkillTip ref="$SkillTip" ></SkillTip>
                 </div>
                 <textarea
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
@@ -250,11 +250,10 @@
                   class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative"
                 >
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">활용 Tool</p>
-                  <div
-                    class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[69px] relative overflow-hidden px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
-                  >
-                    <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-                  </div>
+                  <button @click="popup('$ToolTip')" 
+                    class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]"
+                  >작성 TIP</button>
+                  <ToolTip ref="$ToolTip" ></ToolTip>
                 </div>
                 <input 
                   type="text"
@@ -311,7 +310,13 @@
   import Chipset       from '@/components/uiComponents/Chipset.vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import { ref } from "vue";
+  import TaskTip from "@/components/popupComponents/TaskTip.vue";
+  import SkillTip from "@/components/popupComponents/SkillTip.vue";
+  import ToolTip from "@/components/popupComponents/ToolTip.vue";
 
+  const $TaskTip = ref();
+  const $SkillTip = ref();
+  const $ToolTip = ref();
   const $jobChipset = ref(null);
   const $taskChipset = ref(null);
   const router = useRouter()
@@ -340,6 +345,20 @@
     ]
   })
 
+  function popup(div){
+    if(div == '$TaskTip'){
+      $TaskTip.value.show();
+    }
+    if(div == '$SkillTip'){
+      $SkillTip.value.show();
+    }
+    if(div == '$ToolTip'){
+      $ToolTip.value.show();
+    }
+    return false
+
+  }
+
   function prjtIng(){
     //console.log(engrStep2Detl.value.crntProjPrgsYn)
     if(engrStep2Detl.value.crntProjPrgsYn == "Y"){
@@ -357,11 +376,18 @@
   async function saveData(){
     
     //TODO 커리어 등록
-    var api = "/v1/my/engineer/???";
-    var getParams = {};
+    
+    
+    let api = ""
+    // 수정인 경우
+    //api = "/v1/my/modify/engineer/step2"
+    // 등록인 경우
+    api = "/v1/my/submit/engineer/step2";
+    var params = engrStep2Detl.value;
+    params.engrId = "";
     let rtn = await gfnUtils.axiosGet(
       api,
-      getParams
+      params
     );
     if(rtn.rtnCd == "00"){
       let res = rtn.rtnData

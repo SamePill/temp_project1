@@ -828,6 +828,7 @@
     } else {
       console.log("파일없음")
       document.getElementById('preview').src = "";
+      logoFile.value = {}
     }
     
   }
@@ -848,6 +849,7 @@
     } else {
       console.log("파일없음")
       document.getElementById('preview').src = "";
+      bizNoFile.value = {}
     }
     btnStatChng()
   }

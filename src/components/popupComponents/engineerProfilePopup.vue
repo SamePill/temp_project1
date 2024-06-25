@@ -268,7 +268,7 @@
       <div
         class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494]"
       >
-        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1')">수정하기</button>
+        <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" @click="$emit('popBtn1',props.profile.engrId)">수정하기</button>
       </div>
     </div>
     <!-- 등록프로젝트 엔지니어 선택.... -->

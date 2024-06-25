@@ -207,9 +207,9 @@
               <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">업무스킬 </span>
               <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
             </p>
-            <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]">
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">작성 TIP</p>
-            </div>
+            <button @click="popup('$SkillTip')"  class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]">
+              작성 TIP</button>
+              <SkillTip ref="$SkillTip" ></SkillTip>
           </div>
           <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.taskSkil">
         </div>
@@ -277,11 +277,19 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
-  import {  ref } from "vue";
+  import { ref, onMounted } from "vue";
+  import SkillTip from "@/components/popupComponents/SkillTip.vue";
+  import * as gfnUtils from "@/utils/gfnUtils.js";
+  import * as gfnRules from "@/utils/gfnRules.js";
 
+  const { dataObj } = history.state; 
+  const engrInfo = ref({});
+  const userMail = ref(window.$cookies.get("loginUserMail"));
   const router = useRouter()
   const showImg = ref(false)
-
+  const $SkillTip = ref();
+  const engrPhoto = ref({})
+  const editMode = ref(false)
   const engrStep1 = ref(
     {
       crtdUserMail: "",
@@ -303,10 +311,90 @@
       ]
     }
   )
+  
+  onMounted(() => {
 
+    console.log(dataObj)
+    if( dataObj != undefined ){
+      console.log("수정모드...")
+      engrInfo.value = JSON.parse(dataObj)
 
-  function nextStep(){
-    router.push({name: "AddEngineerCareerList"})
+      if(!gfnRules.isNull(engrInfo.value.engrId)){
+        editMode.value = true
+        loadData();
+      } 
+
+    }
+    
+       
+  })
+
+  async function loadData(){
+    
+    var api = "/v1/my/engineer/step1";
+    var getParams = {userMail: userMail.value, engrId:engrInfo.value.engrId};
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+
+    if(rtn.rtnCd == "00"){
+      console.log(rtn.rtnData)
+      engrStep1.value = rtn.rtnData   
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
+  }
+
+  function popup(div){
+  
+    if(div == '$SkillTip'){
+      $SkillTip.value.show();
+    }
+    return false
+
+  }
+
+  async function nextStep(){
+
+    let formData = new FormData();
+    let api = "";
+    console.log(engrStep1.value)
+    console.log(editMode.value)
+    if(editMode.value){
+      //수정
+      api = "/v1/my/modify/engineer/step1";
+      formData.append("userMail", userMail.value);
+      formData.append("modifyEngrOneStepInputJson ", new Blob([JSON.stringify(engrStep1.value)])  ); // , { type: "application/json" }
+    }else{
+      //등록
+      api = "/v1/my/submit/engineer/step1";
+      formData.append("userMail", userMail.value);
+      formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)])  ); //, { type: "application/json" }
+    }
+    
+    if(!gfnRules.isNull(engrPhoto)){
+      formData.append("engrPhotMultiFile",engrPhoto)
+    }
+    console.log(formData)
+
+    let rtn = await gfnUtils.axiosPost(
+      api,
+      formData
+    );
+    if(rtn.rtnCd == "00"){
+      let res = rtn.rtnData
+      console.log(res)
+      res.editMode = editMode.value
+      router.push({
+         name: "AddEngineerCareerList"
+        ,state: {dataObj : JSON.stringify(res)}     
+      })
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
+
+    
   }
 
   function readURL(input) {
@@ -318,10 +406,12 @@
         document.getElementById('preview').src = e.target.result;
       };
       reader.readAsDataURL(input.target.files[0]);
+      engrPhoto.value = input.target.files[0]
       showImg.value = true;
     } else {
       console.log("파일없음")
       document.getElementById('preview').src = "";
+      engrPhoto.value = {}
     }
   }
 
