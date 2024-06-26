@@ -360,7 +360,8 @@ async function saveInfo(){
 
   let res = await gfnUtils.axiosPost(
       "/v1/my/modify/comp-info",
-      formData
+      formData,
+      null, true, true, true
   );         
   console.log(res);
   if(res.rtnCd == "00"){

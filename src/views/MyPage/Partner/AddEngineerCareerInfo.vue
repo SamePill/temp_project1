@@ -22,12 +22,12 @@
             <div class="flex-grow-0 flex-shrink-0 w-[519px] h-px bg-[#191919]"></div>
           </div>
         </div>
-        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+        <!-- <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
           <div class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-[520px] relative">
             <p class="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#1ba494]">
               등록한 프로젝트 2개
             </p>
-            <!-- <svg
+            <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -43,10 +43,10 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               ></path>
-            </svg> -->
+            </svg>
           </div>
-        </div>
-        <div class="flex-grow-0 flex-shrink-0 w-[520px] h-px bg-[#ddd]"></div>
+        </div> -->
+        <!-- <div class="flex-grow-0 flex-shrink-0 w-[520px] h-px bg-[#ddd]"></div> -->
         <div
           class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5"
         >
@@ -309,11 +309,18 @@
   import { useRouter } from 'vue-router'
   import Chipset       from '@/components/uiComponents/Chipset.vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
-  import { ref } from "vue";
+  import { onMounted, ref } from "vue";
   import TaskTip from "@/components/popupComponents/TaskTip.vue";
   import SkillTip from "@/components/popupComponents/SkillTip.vue";
   import ToolTip from "@/components/popupComponents/ToolTip.vue";
-
+  
+  onMounted(() => {
+    loadData();
+  })
+  
+  const { dataObj } = history.state; 
+  const engrInfo = ref(JSON.parse(dataObj))
+  const userMail = ref(window.$cookies.get("loginUserMail"));
   const $TaskTip = ref();
   const $SkillTip = ref();
   const $ToolTip = ref();
@@ -344,6 +351,32 @@
       }
     ]
   })
+
+  async function loadData(){
+    console.log("load Data.............")
+
+    console.log(engrInfo.value)
+
+    if(engrInfo.value.editMode == true){
+      console.log("수정모드")
+      var api = "/v1/my/engineer/step2";
+      var getParams = {userMail : userMail.value ,  engrId:engrInfo.value.engrId, engrProjHstrSeq:engrInfo.value.engrProjHstrSeq };
+      let rtn = await gfnUtils.axiosGet(
+        api,
+        getParams
+      );
+      if(rtn.rtnCd == "00"){
+        let res = rtn.rtnData
+        console.log(res)
+        engrStep2Detl.value = res
+        
+      }else{
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      }
+    }else{
+      console.log("등록모드")
+    }
+  }   
 
   function popup(div){
     if(div == '$TaskTip'){
@@ -379,19 +412,23 @@
     
     
     let api = ""
-    // 수정인 경우
-    //api = "/v1/my/modify/engineer/step2"
-    // 등록인 경우
-    api = "/v1/my/submit/engineer/step2";
+
+    if(engrInfo.value.editMode == true){
+      // 수정인 경우
+      api = "/v1/my/modify/engineer/step2"
+    }else{
+      // 등록인 경우
+      api = "/v1/my/submit/engineer/step2";
+    }
     var params = engrStep2Detl.value;
     params.engrId = "";
-    let rtn = await gfnUtils.axiosGet(
+    let rtn = await gfnUtils.axiosPost(
       api,
       params
     );
     if(rtn.rtnCd == "00"){
-      let res = rtn.rtnData
-      console.log(res.rtnCd)
+      //let res = rtn.rtnData
+      router.back()
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

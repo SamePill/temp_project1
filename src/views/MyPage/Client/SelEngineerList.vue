@@ -466,7 +466,7 @@
         //선정탈락
         profileMode.value = "50"
       }
-
+      console.log(engrProfile.value)
       showModalProfile()
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)

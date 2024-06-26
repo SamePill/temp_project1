@@ -72,7 +72,7 @@
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">초급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                      <span class="mr-[5px]">{{projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)}}</span>
+                      <span class="mr-[5px]">{{ gfnUtils.formattedNumber(projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric) / 10000) }}</span>
                       <span>만원</span>
                     </p>
                 </div>
@@ -81,7 +81,7 @@
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#0b6bdc]">중급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                      <span class="mr-[5px]">{{projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)}}</span>
+                      <span class="mr-[5px]">{{ gfnUtils.formattedNumber(projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric) / 10000) }}</span>
                       <span>만원</span>
                     </p>
                 </div>
@@ -90,7 +90,7 @@
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc0b56]">고급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                      <span class="mr-[5px]">{{projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)}}</span>
+                      <span class="mr-[5px]">{{ gfnUtils.formattedNumber(projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric) / 10000) }}</span>
                       <span>만원</span>
                     </p>
                 </div>
@@ -99,7 +99,7 @@
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc630b]">특급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                      <span class="mr-[5px]">{{projStep.projThreeStep.spclEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)}}</span>
+                      <span class="mr-[5px]">{{ gfnUtils.formattedNumber( projStep.projThreeStep.spclEngrCnt * (projStep.projThreeStep.spclEngrUnitPric) / 10000 )}}</span>
                       <span>만원</span>
                     </p>
                 </div>
@@ -112,10 +112,11 @@
                                                                                           }} 명</p>
                 <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2 text-[#333] text-xl">
                   <span>총 금액</span>
-                  <span>{{(projStep.projThreeStep.bgnrEngrCnt * (bgnrEngrUnitPricInput)) +
+                  <span>{{gfnUtils.formattedNumber(
+                          (projStep.projThreeStep.bgnrEngrCnt * (bgnrEngrUnitPricInput)) +
                           (projStep.projThreeStep.intrEngrCnt * (intrEngrUnitPricInput)) +
                           (projStep.projThreeStep.advnEngrCnt * (advnEngrUnitPricInput)) +
-                          (projStep.projThreeStep.bgnrEngrCnt * (spclEngrUnitPricInput)) 
+                          (projStep.projThreeStep.bgnrEngrCnt * (spclEngrUnitPricInput)) )
                         }}</span>
                   <span>만원</span>
                 </div>
@@ -345,6 +346,7 @@ import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
 import * as gfnRules      from "@/utils/gfnRules.js";
 import BudgetTip from "@/components/popupComponents/BudgetTip.vue";
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const router = useRouter();
   const pageNo = ref(3)

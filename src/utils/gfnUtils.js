@@ -141,7 +141,7 @@ export const axiosGet = (api, getParams, loading ) => {
  * @param {*} postParams //파라메터
  * @param {*} loading //로딩바(프로그레스바) 표시 여부
  */
-export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
+export const axiosPost = (api, postParams, queryParam, loading, isErr, withFile) => {
   const sysStore = systemStore();
 
   if (typeof loading == "undefined") {
@@ -157,6 +157,9 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
   if (typeof queryParam == "undefined") {
     queryParam = "";
   }
+  if (typeof withFile == "undefined") {
+    withFile = false;
+  }
 
   //var apiUrl = baseUrl + api + ".app";
   var apiUrl = baseUrl + api;
@@ -167,12 +170,19 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
 
   // console.log("gogo");
   // console.log(api);
-  // console.log("api post url::::" + apiUrl);
+  console.log("api post url::::" + apiUrl);
   // console.log("-------param-------");
   // console.log(postParams);
   // console.log(window.$cookies.get("loginAccToken"));
 
-  axios.defaults.headers.common["Content-Type"] = "application/json"
+  if(withFile){
+    axios.defaults.headers.common["Content-Type"] = "multipart/form-data"
+  }else{
+    axios.defaults.headers.common["Content-Type"] = "application/json"
+  }
+  
+  
+  
   if (window.$cookies.get("loginAccToken") != null) {
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + window.$cookies.get("loginAccToken") || "";
@@ -190,10 +200,6 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
         if (resData.rtnCd == "00") {          
           if(api == "/v1/auth/login"){
             setCookiesLoginUserInfo(resData.rtnData)
-            // console.log("login success")
-            // console.log(window.$cookies.get("loginAccToken"))
-            // console.log(window.$cookies.get("loginYn"))
-            // console.log(window.$cookies)
           } 
           //resolve(resData.rtnData);
           resolve(resData);
@@ -211,7 +217,7 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr) => {
         if (loading) {
           sysStore.setProgress(false);
         }
-        console.log(err.response.data);
+        console.log(err.response);
         if (isErr) {
           console.log("Error -----------------------")
           console.log(err.response.data)
@@ -659,6 +665,14 @@ export const calDate = (date, div, num) => {
     return moment(rtnDt).format("YYYY-MM-DD");
   }
 };
+
+
+/**
+ * 숫자 천단위 , 표시
+ */
+export const formattedNumber = (value) => {
+  return new Intl.NumberFormat().format(value);
+}
 
 /**
  * 페이지 표시 제목 설정

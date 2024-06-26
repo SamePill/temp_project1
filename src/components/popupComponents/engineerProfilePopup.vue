@@ -73,16 +73,16 @@
               </button>
             </div>
             <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-4">
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+              <div v-show="props.profile.engrSprtStatCd!=null" class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                 <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">상태</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">선정대기</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">선정탈락</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">선정합격</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">미팅예정</p>
+                <p v-show="props.profile.engrSprtStatCd==20" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">선정대기</p>
+                <p v-show="props.profile.engrSprtStatCd==40" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">선정탈락</p>
+                <p v-show="props.profile.engrSprtStatCd==10" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494]">선정합격</p>
+                <p v-show="props.profile.engrSprtStatCd==30" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">미팅예정</p>
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                 <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">생년월일</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">2000.02.22</p>
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{props.profile.bith}}</p>
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                 <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">주소</p>
@@ -109,7 +109,7 @@
           >
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
               <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">등급</p>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">초급 엔지니어</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{ props.profile.engrRtngDivCdNm }}</p>
             </div>
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
               <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">경력</p>

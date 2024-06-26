@@ -290,7 +290,7 @@ const sumPrice = computed(() => {
         }
       }
     }  
-    val =  '월 ' + sumPrice/10000 + '만원' + '<br/>' + val 
+    val =  '월 ' + gfnUtils.formattedNumber(sumPrice/10000) + '만원' + '<br/>' + val 
   } 
   return val;
 });

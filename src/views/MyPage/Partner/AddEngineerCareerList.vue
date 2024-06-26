@@ -250,14 +250,17 @@
 
   function editCareer(idx){
     console.log(idx)
+    projSmryHstrList.value[idx].editMode = true
     router.push({
       name: "AddEngineerCareerInfo",
-      state : { dataObj : JSON.stringify(projSmryHstrList.value[idx].value) }
+      state : { dataObj : JSON.stringify(projSmryHstrList.value[idx]) }
     })
   }
 
   function addCareer(){
-    router.push({name: "AddEngineerCareerInfo"})
+    router.push({name: "AddEngineerCareerInfo"
+      ,state : { dataObj : JSON.stringify({editMode : false}) }
+    })
   }
 
   function back(){

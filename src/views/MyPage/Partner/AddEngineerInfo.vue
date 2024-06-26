@@ -323,9 +323,7 @@
         editMode.value = true
         loadData();
       } 
-
-    }
-    
+    }   
        
   })
 
@@ -380,12 +378,17 @@
 
     let rtn = await gfnUtils.axiosPost(
       api,
-      formData
+      formData,
+      null, true, true, true
     );
     if(rtn.rtnCd == "00"){
       let res = rtn.rtnData
-      console.log(res)
+      if(res == null){
+        res = {}
+        res.engrId =  engrInfo.value.engrId
+      }
       res.editMode = editMode.value
+
       router.push({
          name: "AddEngineerCareerList"
         ,state: {dataObj : JSON.stringify(res)}     
