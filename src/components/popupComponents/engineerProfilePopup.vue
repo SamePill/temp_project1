@@ -158,7 +158,7 @@
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">수행기간</p>
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">
-                    {{ el.strtYm }} ~ {{ el.endYm }}
+                    {{ gfnUtils.formatYYYYMM(el.strtYm) }} ~ {{ gfnUtils.formatYYYYMM(el.endYm) }}
                   </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
@@ -317,6 +317,7 @@
 import { defineProps, ref } from 'vue'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const showMore = ref(false)
 //테스트중

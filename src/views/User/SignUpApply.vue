@@ -793,7 +793,8 @@
    
     let rtn = await gfnUtils.axiosPost(
       api,
-      formData
+      formData,
+      null, true, true, true
     );
 
     if(rtn.rtnCd == "00"){

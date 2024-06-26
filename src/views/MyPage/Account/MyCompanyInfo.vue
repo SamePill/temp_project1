@@ -46,8 +46,10 @@
                 <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">사업자번호</p>
                 <input
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[360px] h-[51px] relative overflow-hidden gap-12 p-4 rounded border border-[#ddd]"
-                  v-model="companyInfo.bizRegNo"
+                  :value="bizNoFormatted"
+                  @input="updateBizNo($event.target.value)"
                 />
+                <!-- v-model="companyInfo.bizRegNo" -->
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
                 <div
@@ -237,7 +239,7 @@ import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 onMounted(() => {
   loadData();
@@ -271,6 +273,18 @@ const bizRegFile = ref(File | null)
 const compLogoFile = ref(File | null)
 const bizRegFileNm =ref('')
 const compLogoFileNm = ref('')
+const bizNoFormatted = computed( () => {
+  return gfnUtils.formattedBizNo(companyInfo.value.bizRegNo);
+})
+
+function updateBizNo(value) {
+  const cleanedValue = value.replace(/-/g, '');
+  if (cleanedValue.length === 10) {
+    companyInfo.value.bizRegNo = cleanedValue;
+  }
+}
+
+
 
 function showFileName(div){
   if(div == "bizReg"){

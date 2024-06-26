@@ -261,7 +261,7 @@ async function reqLogin() {
     console.log(rtn)
     router.replace("/");
   } else {
-    console.log("에러처리...");
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }
 }
 

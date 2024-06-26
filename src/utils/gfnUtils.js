@@ -188,7 +188,7 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr, withFile)
       "Bearer " + window.$cookies.get("loginAccToken") || "";
   }
   
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     axios
       .post(apiUrl, postParams , { params: queryParam })
       .then(res => {
@@ -208,8 +208,8 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr, withFile)
           // console.log("오류");
           //store.commit("setAlertDialog", true);
           //openAlertDiaolog("ERROR", resData.rtnMsg);
-          reject(resData);
-          // resolve(resData);
+          // reject(resData);
+          resolve(resData);
         }
       })
       .catch(err => {
@@ -673,6 +673,48 @@ export const calDate = (date, div, num) => {
 export const formattedNumber = (value) => {
   return new Intl.NumberFormat().format(value);
 }
+
+/**
+ * YYYYMM -> YYYY.MM
+ */
+export const formatYYYYMM = (value) => {
+  // 숫자를 문자열로 변환
+  const valueStr = value.toString();
+  // 연도와 월을 분리
+  const year = valueStr.slice(0, 4);
+  const month = valueStr.slice(4, 6);
+  // 원하는 형식으로 반환
+  return `${year}.${month}`;
+}
+
+/**
+ * YYYYMMDD -> YYYY-MM-DD
+ */
+export const formatYYYYMMDD = (value) => {
+  // 숫자를 문자열로 변환
+  const valueStr = value.toString();
+  // 연도, 월, 일을 분리
+  const year = valueStr.slice(0, 4);
+  const month = valueStr.slice(4, 6);
+  const day = valueStr.slice(6, 8);
+  // 원하는 형식으로 반환
+  return `${year}-${month}-${day}`;
+}
+
+export const formattedBizNo = (numberStr) => {
+  const part1 = numberStr.slice(0, 2);
+  const part2 = numberStr.slice(2, 5);
+  const part3 = numberStr.slice(5);
+  return `${part1}-${part2}-${part3}`;
+}
+
+export const formattedHpNo = (phoneStr) => {
+  const part1 = phoneStr.slice(0, 3);
+  const part2 = phoneStr.slice(3, 7);
+  const part3 = phoneStr.slice(7);
+  return `${part1}-${part2}-${part3}`;
+}
+
 
 /**
  * 페이지 표시 제목 설정

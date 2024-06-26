@@ -43,8 +43,10 @@
                 <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">연락처</p>
                 <input
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[360px] h-[51px] relative overflow-hidden gap-12 p-4 rounded border border-[#ddd]"
-                  v-model="userInfo.hp"
+                  :value="hpNoFormatted"
+                  @input="updateHpNo($event.target.value)"
                 />
+                <!-- v-model="userInfo.hp" -->
               </div>
               <div
                 class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
@@ -260,7 +262,7 @@
   import deleteUserPopup from '@/components/popupComponents/deleteUserPopup.vue'  
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import { useRouter } from 'vue-router'
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, computed } from 'vue'
 
   onMounted(() => {
     loadData();
@@ -296,6 +298,16 @@
       cpltProjCnt: 0
     })
 
+  const hpNoFormatted = computed( () => {
+    return gfnUtils.formattedHpNo(userInfo.value.hp);
+  })
+
+  function updateHpNo(value) {
+    const cleanedValue = value.replace(/-/g, '');
+    if (cleanedValue.length === 11) {
+      userInfo.value.hp = cleanedValue;
+    }
+  }
 
   function goToPage(pageNm){
 

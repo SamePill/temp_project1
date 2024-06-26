@@ -164,6 +164,18 @@
           </div>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] gap-5">
             <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">년</p>
+            </div>
+            <div
+              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+            >
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">개월</p>
+            </div>
+            <div
               class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded border border-[#ddd]"
             >
               <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
@@ -186,18 +198,6 @@
                   stroke-linejoin="round"
                 ></path>
               </svg>
-            </div>
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">년</p>
-            </div>
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">개월</p>
             </div>
           </div>
         </div>
@@ -236,7 +236,10 @@
                   class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
                 >
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">취득일자</p>
-                  <input type="date" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="el.acqsDt">
+                  <input type="date" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]"
+                    :value="gfnUtils.formatYYYYMMDD(el.acqsDt)"
+                    @input="updateAcqsDt($event.target.value, idx)" >
+                    <!-- v-model="el.acqsDt" -->
                 </div>
               </div>
             </div>
@@ -312,6 +315,15 @@
     }
   )
   
+  function updateAcqsDt(value, idx) {
+    const cleanedValue = value.replace(/-/g, '');
+    if (cleanedValue.length === 8) {
+      engrStep1.value.crtfList[idx].acqsDt = cleanedValue;
+    }
+  }
+  
+
+  
   onMounted(() => {
 
     console.log(dataObj)
@@ -355,6 +367,9 @@
 
   async function nextStep(){
 
+    //TODO 필수 입력 값 체크...
+
+
     let formData = new FormData();
     let api = "";
     console.log(engrStep1.value)
@@ -363,12 +378,12 @@
       //수정
       api = "/v1/my/modify/engineer/step1";
       formData.append("userMail", userMail.value);
-      formData.append("modifyEngrOneStepInputJson ", new Blob([JSON.stringify(engrStep1.value)])  ); // , { type: "application/json" }
+      formData.append("modifyEngrOneStepInputJson ", new Blob([JSON.stringify(engrStep1.value)]) , { type: "application/json" }); // , 
     }else{
       //등록
       api = "/v1/my/submit/engineer/step1";
       formData.append("userMail", userMail.value);
-      formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)])  ); //, { type: "application/json" }
+      formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)]), { type: "application/json" } ); //, 
     }
     
     if(!gfnRules.isNull(engrPhoto)){

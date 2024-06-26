@@ -49,7 +49,7 @@
     <!-- 하단정보 -->
     <div class="justify-between mt-4  text-text-1">
       
-      <span>예상금액 : {{props.prj.expcPric/10000}}만원</span>
+      <span>예상금액 : {{ gfnUtils.formattedNumber(props.prj.expcPric/10000) }}만원</span>
       <span class="ml-2 py-[2px] px-1 border-solid border border-line-0 text-[10px] text-[#555] rounded-sm"> 월 단위 </span>
       <span class="px-2">|</span>
       <span>투입기간 : {{props.prj.pirdVal}}개월</span>
@@ -64,6 +64,7 @@
 <script setup>
 import { computed, defineProps } from 'vue'
 import { useRouter } from 'vue-router';
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const router = useRouter()
 const props = defineProps({
