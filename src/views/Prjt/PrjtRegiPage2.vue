@@ -27,6 +27,9 @@
               <textarea v-model="projStep.projTwoStep.projCtntTask" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="프로젝트 설명을 입력해주세요."/>
             </div>
           </div>
+          <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+            프로젝트설명을 입력해주세요.
+          </p>
           <div class="mt-[40px]">
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">요구스킬
@@ -39,6 +42,9 @@
               <textarea v-model="projStep.projTwoStep.projDmndSkil" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="요구스킬을 입력해주세요."/>
             </div>
           </div>
+          <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+            요구스킬을 입력해주세요.
+          </p>
           <div class="mt-[40px]">
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">활용 Tool
@@ -51,6 +57,9 @@
               <textarea v-model="projStep.projTwoStep.projUseTool" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="활용 Tool 스킬을 입력해주세요."/>
             </div>
           </div>
+          <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+            활용Tool을 입력해주세요.
+          </p>
           <div class="mt-[40px]">
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">기타 전달사항 및 우대사항
@@ -176,6 +185,13 @@ onMounted(() => {
 async function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
+    console.log(projStep.value.fileList)
+    console.log(projStep.value.fileList)
+    console.log(projStep.value.fileList)
+    console.log(projStep.value.fileList)
+    if(projStep.value.fileList != undefined){
+      fileList.value = projStep.value.fileList; 
+    }
   }
 }
 
@@ -194,7 +210,8 @@ function popup(div){
 }
 
 function nextPage(div){
-
+  projStep.value['fileList'] = fileList.value;
+  console.log(projStep.value)
   if(div == 'next'){  
     router.push({ 
       name: "PrjtRegiPage3"
@@ -211,16 +228,11 @@ function nextPage(div){
     });
   }
 }
-// function scrollToTop(){
-//   var location = document.querySelector("#top").offsetTop;
-//   window.scrollTo({location, behavior: 'smooth' });
-// }
 
 function showFileName(){
   if(fileList.value.length < 3){
     let input = document.getElementById('file');
     fileList.value.push(input.files[0])
-    // console.log(fileList.value)
   }
 }
 

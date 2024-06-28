@@ -17,13 +17,16 @@
         <div>
           <div class="mt-[30px]">
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
-              <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로젝트 예산
+              <p class=" flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로젝트 예산
                 <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
               </p>
               <button @click="popup('$BudgetTip')" class="px-2.5 height-[23px] width-[69px] rounded-[100px] border border-[#1ba494]  text-[#1ba494]">작성 TIP</button>
               <BudgetTip ref="$BudgetTip" ></BudgetTip>
             </div>
-            <div>
+            <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+              엔지니어 인원수와 월 지급액을 입력해주세요.
+            </p>
+            <div class="mt-[20px]">
               <div class="flex flex-col justify-start items-start self-stretch gap-4">
                 <div class="flex justify-start items-start gap-5 relative	">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#ddf2ef] text-[#1ba494]">
@@ -32,9 +35,13 @@
                   <div>
                     <input type="number" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                     <span class="absolute" style="top:17px; right:190px">명</span>  
+                    <!-- <p class="mt-[10px] mb-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                      인원수를 입력해주세요.
+                    </p> -->
                   </div>
                   <input type="text" v-model="bgnrEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:10px">만원</span>  
+                  
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#dbe9fa] text-[#0b6bdc]">
@@ -370,6 +377,8 @@ onMounted(() => {
 function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
+    console.log('33')
+    console.log(projStep.value)
     bgnrEngrUnitPricInput.value = projStep.value.projThreeStep.bgnrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.bgnrEngrUnitPric/10000;
     intrEngrUnitPricInput.value = projStep.value.projThreeStep.intrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.intrEngrUnitPric/10000;
     advnEngrUnitPricInput.value = projStep.value.projThreeStep.advnEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.advnEngrUnitPric/10000;

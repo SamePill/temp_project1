@@ -37,9 +37,7 @@ const filteredCdList = computed( () => {
 
 async function loadData(){
   cdList.value = await gfnUtils.getCommCode(props.listDivCd)
-  if(cdList.value != undefined){
-    cdList.value[0].chkVal = true;
-  }
+  
   if(props.cdList.length > 0 && cdList.value.length >0){
     cdList.value.forEach(el=>{
       props.cdList.forEach(props=>{
@@ -48,6 +46,10 @@ async function loadData(){
         }
       });
     });
+  }else{
+    if(cdList.value != undefined){
+        cdList.value[0].chkVal = true;
+    }
   }
 }
 

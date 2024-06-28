@@ -29,6 +29,12 @@
             <input type="text" v-model="projStep.projFourStep.rprsNm" class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이름을 입력해주세요."/>
           </div>
         </div>
+        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          담당자 이름을 입력해주세요.
+        </p>
+        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          담당자 이름이 올바르지 않습니다. 다시 한번 확인해주세요
+        </p>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
           <p class="text-xl text-left text-[#191919]">담당자 휴대폰 번호
             <span class="text-[#ff5252]">*</span>
@@ -37,6 +43,12 @@
             <input type="text" v-model="projStep.projFourStep.rprsHp"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 휴대폰 번호를 입력해주세요."/>
           </div>
         </div>
+        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          휴대폰 번호를 입력해주세요.
+        </p>
+        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          휴대폰 번호가 올바르지 않습니다. 다시 한번 확인해주세요
+        </p>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
           <p class="text-xl text-left text-[#191919]">담당자 이메일
             <span class="text-[#ff5252]">*</span>
@@ -45,6 +57,12 @@
             <input type="text" v-model="projStep.projFourStep.rprsMail"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이메일을 입력해주세요."/>
           </div>
         </div>
+        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          이메일이 올바르지 않습니다. 다시 한번 확인해주세요
+        </p>
+        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          담당자 이메일을 입력해주세요.
+        </p>
         
         <div class="mt-[40px] flex flex-col justify-start items-start relative">
           <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor:pointer" @click="trmsClick('useTrmsYn')">
@@ -133,6 +151,7 @@
 <script setup>
 import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
+import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const router = useRouter()
 // const projFourStep = ref({
@@ -159,8 +178,31 @@ async function loadData(){
   }
 }
 
-function nextPage(div){
+async function nextPage(div){
   if(div == 'next'){  
+    const userMail = ref(window.$cookies.get("loginUserMail"));
+    var api = "/v1/project/support";
+    let formData = new FormData();
+    formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
+    formData.append("userMail ",userMail) //usermail
+    formData.append("fileList",projStep.value.projTwoStep.fileList) //file
+    //fileList
+    console.log('?')
+    console.log(formData)
+    
+    let rtn = await gfnUtils.axiosPost(
+      api,
+      formData,
+      null, true, true, true
+    );
+
+    if(rtn.rtnCd == "00"){
+      gfnUtils.openAlert("프로젝트 등록이 완료 되었습니다.","", 2000)
+      router.replace("/")
+    }else{
+      gfnUtils.openAlert("프로젝트 등록중 오류가 발생하였습니다.","", 2000)
+    }
+    console.log(projStep.value)
     console.log('등록완료');
     // projStep.value.projOneStep.jobDivCdList.forEach(el=>{
     //   el = {'jobDivCd':el.cd}
