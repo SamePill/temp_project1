@@ -214,6 +214,7 @@
 
   function getAplPrjtSort(data){
     AplPrjtSort.value = data;
+    loadData();
   }
 
   async function cancelConfirm(){

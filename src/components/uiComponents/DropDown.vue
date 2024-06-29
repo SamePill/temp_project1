@@ -1,17 +1,19 @@
 <template>
   <div style="display: inline-block; position:relative" class="z-20">
     <div @click="showItem()"
-      :class="['py-[10px] px-[10px] border-solid border border-line-1 rounded text-base inline-flex items-center hover:cursor-pointer hover:border-main-0', $attrs.class]">
+      :class="['inline-flex py-[10px] px-[10px] border-solid border border-line-1 rounded text-base items-center hover:cursor-pointer hover:border-main-0', $attrs.class]">
       <div v-if="!gfnRules.isNull(title)" class="text-text-0 text-sm ">{{title}}</div>
       <div class="inline-flex" style="text-align: right;">
         <div class="px-1 text-sm text-main-0" style="text-align: right;">{{ cdNm }}</div>
-        <img v-if="isShow" class="h-4" src="@/assets/ic_small_arrow.png" style=" position:relative; top:-2px" alt="">
-        <img v-if="!isShow" style="transform: scaleY(-1);" class="w-4 h-4" src="@/assets/ic_small_arrow.png" alt="">
+      </div>
+      <div class=" float-right mt-[5px]">
+        <img v-if="isShow" class="h-4" src="@/assets/ic_small_arrow.png" style="float:right; top:-2px" alt="">
+        <img v-if="!isShow" style="transform: scaleY(-1);float:right;" class="w-4 h-4" src="@/assets/ic_small_arrow.png" alt="">
       </div>
     </div>
 
     <div v-if="isShow" style="position: absolute" @mouseleave="noShowItem()" class="pl-4 mt-2 w-[130px] border-solid border border-line-1 rounded text-base flex-col bg-[#fff]">
-      <div v-if="props.div != null && props.div !='N'" class="my-3 text-sm mr-[10px] hover:cursor-pointer" :class="cdVal =='' ? 'text-main-0' : ''" @click="selectVal({cd:'',cdNm:'전체'})" >{{'전체'}}</div>
+      <div v-if="props.div !='N'" class="my-3 text-sm mr-[10px] hover:cursor-pointer" :class="cdVal =='' ? 'text-main-0' : ''" @click="selectVal({cd:'',cdNm:'전체'})" >{{'전체'}}</div>
       <div v-for="(el) in cdList" :key="el.cd" :value="el.cd" :class="cdVal == el.cd ? 'text-main-0' : ''" class="my-3 text-sm mr-[10px] hover:cursor-pointer" @click="selectVal(el)">{{ el.cdNm }}</div>
     </div>
 </div>
@@ -45,6 +47,9 @@ async function loadData(){
   if(props.div =='N'){
     cdVal.value = cdList.value[0].cdVal;
     cdNm.value = cdList.value[0].cdNm;
+  }else {
+    cdVal.value = '';
+    cdNm.value = '전체';
   }
 }
 
