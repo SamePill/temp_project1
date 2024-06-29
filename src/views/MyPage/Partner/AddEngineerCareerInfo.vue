@@ -151,7 +151,7 @@
                   class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[519px] relative"
                 >
                   <div
-                    class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5"
+                    class="cursor-pointer flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-0.5"
                   >
                     <svg
                       width="24"
