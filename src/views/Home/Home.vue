@@ -4,7 +4,7 @@
   <!-- 배너 -->
   <div style="display: flex; justify-content: center;">
     <div class="w-[1060px] h-[360px] rounded-[10px] mt-[40px] mb-[40px] bg-[#e9efff] flex flex-col relative justify-start items-start pt-[60px] pl-[60px]">
-      <div>
+      <div style=" z-index: 1; ">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] font-base text-left text-[#191919]">
           <span class="font-semibold text-[#191919] ">{{ bnnrInfo.homeBnnrTitl }}</span>
         </p>

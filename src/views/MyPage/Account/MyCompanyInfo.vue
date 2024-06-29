@@ -361,16 +361,6 @@ async function saveInfo(){
   }
   formData.append("userMail", userMail.value )
   formData.append("modifyCompInfoInputJson ",  JSON.stringify(companyInfo.value) )
-  // formData.append(
-  //   "params",
-  //   new Blob([JSON.stringify(params)], { type: "application/json" })
-  // );
-
-  // FormData 내용 확인하기
-  // for (let key of formData.keys()) {
-  //   console.log(key, ":", formData.get(key));
-  // }
-  // console.log(formData);
 
   let res = await gfnUtils.axiosPost(
       "/v1/my/modify/comp-info",

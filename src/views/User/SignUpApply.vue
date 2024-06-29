@@ -100,6 +100,7 @@
               class="text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
               type="text"
               placeholder="상세주소"
+              v-model="signUp.joinTwoStep.compDtlAddr"
             />
             <div
               class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[430px] gap-5"
@@ -779,15 +780,20 @@
 
   async function regiUser(){
 
+    console.log(JSON.stringify(signUp.value))
+    
     var api = "/v1/auth/join";
     let formData = new FormData();
-    formData.append("bizReqMultiFile",bizNoFile)
-    formData.append("compLogoMultiFile",logoFile)
-    formData.append(
-      "joinInputJson ",
-      new Blob([JSON.stringify(signUp)], { type: "application/json" })
-    );
-   
+    if(bizNoFile.value != null){
+      formData.append("bizReqMultiFile",bizNoFile.value)
+    }
+    if(bizNoFile.value != null){
+      formData.append("compLogoMultiFile",logoFile.value)
+    }
+    
+    //formData.append("joinInputJson", new Blob([JSON.stringify(signUp)], { type: "application/json" }) );
+    formData.append("joinInputJson", JSON.stringify(signUp.value) );
+    
     let rtn = await gfnUtils.axiosPost(
       api,
       formData,
@@ -853,10 +859,10 @@
   }
 
   function delFile(div){
-    if ('bizNo' == div){
+    if ('logo' == div){
       logoFile.value = {}
       logoFileYn.value = false
-    }else if ('logo' == div){
+    }else if ('bizNo' == div){
       bizNoFile.value = {}
       bizNoFileYn.value = false
     }
@@ -873,11 +879,11 @@
 
 
   function btnStatChng() {
-    // console.log(bizNoFileYn.value)
-    // console.log(signUp.value.joinTwoStep.privTrmsYn)
-    // console.log(signUp.value.joinTwoStep.useTrmsYn)
-    // console.log(signUp.value.joinTwoStep.compNm)
-    // console.log(signUp.value.joinTwoStep.bizRegNo)
+    console.log(bizNoFileYn.value)
+    console.log(signUp.value.joinTwoStep.privTrmsYn)
+    console.log(signUp.value.joinTwoStep.useTrmsYn)
+    console.log(signUp.value.joinTwoStep.compNm)
+    console.log(signUp.value.joinTwoStep.bizRegNo)
     if (!bizNoFileYn.value  
       || signUp.value.joinTwoStep.privTrmsYn != "Y" || signUp.value.joinTwoStep.useTrmsYn != "Y" 
       || signUp.value.joinTwoStep.compNm == "" || signUp.value.joinTwoStep.bizRegNo == "" 

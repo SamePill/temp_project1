@@ -317,7 +317,7 @@
   const $EngrRtngDivCd = ref()
   const SelEngrSort = ref("")
   const $SelEngrSort = ref("")
-
+  const srchKeyWord = ref("")
 
   const projInfo = ref({
     // "projId": "string",
@@ -435,7 +435,7 @@
     }
 
     var api = "/v1/my/support-project-engineer-info";
-    var getParams = {userMail: userMail.value, projId:projParam.value.projId, projSprtSeq:projParam.value.projSprtSeq ,engrNm:"", engrRtngDivCd:EngrRtngDivCd.value, engrSortDiv:"", pageNo:pageNo.value};
+    var getParams = {userMail: userMail.value, projId:projParam.value.projId, projSprtSeq:projParam.value.projSprtSeq ,engrNm:srchKeyWord.value, engrRtngDivCd:EngrRtngDivCd.value, engrSortDiv:"", pageNo:pageNo.value};
     let rtn = await gfnUtils.axiosGet(
       api,
       getParams

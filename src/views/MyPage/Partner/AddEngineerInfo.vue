@@ -93,17 +93,17 @@
           </p>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
             <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="YYYY" min="1" max="31" style="border:none"/>
+              <input type="number" placeholder="YYYY" min="1" max="31" style="border:none" v-model="birthY"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
             </div>
             <div
               class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
             >
-              <input type="number" placeholder="MM" min="1" max="12" style="border:none"/>
+              <input type="number" placeholder="MM" min="1" max="12" style="border:none" v-model="birthM"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">월</p>
             </div>
             <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="DD" min="1" max="31" style="border:none"/>
+              <input type="number" placeholder="DD" min="1" max="31" style="border:none" v-model="birthD"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">일</p>
             </div>
           </div>
@@ -278,6 +278,10 @@ const $EdctDivCd = ref()
 const $EngrRtngDivCd = ref()
 const srchAddrShow = ref(null);
 
+const birthY = ref("")
+const birthM = ref("")
+const birthD = ref("")
+
 function updateAcqsDt(value, idx) {
   const cleanedValue = value.replace(/-/g, '');
   if (cleanedValue.length === 8) {
@@ -295,7 +299,9 @@ onMounted(() => {
       editMode.value = true
       loadData();
     } 
-  }   
+  }else{
+    console.log("등록모드...")
+  }
       
 })
 
@@ -340,7 +346,41 @@ function popup(div){
 async function nextStep(){
 
   //TODO 필수 입력 값 체크...
+  if(gfnRules.isNull(engrStep1.value.engrNm)){
+    //이름 검사 > 오류처리
+    return;
+  }
 
+  if(!gfnRules.isNull(birthY.value) && !gfnRules.isNull(birthY.value) && !gfnRules.isNull(birthY.value)){
+    //생년월일 검사 
+    engrStep1.value.bith = birthY.value + birthM.value + birthD.value;
+  }else{
+     //생년월일 검사 > 오류처리
+    return;
+  }
+
+  if(gfnUtils.isNull(engrStep1.value.baseAddr)){
+    //주소 검사 > 오류처리
+    return;
+  }
+
+  if(gfnUtils.isNull(engrStep1.value.schlNm)){
+    //최종학력 검사 > 오류처리
+    return;
+  }
+
+  if(gfnUtils.isNull(engrStep1.value.taskSkil)){
+    //업무스킬 검사 > 오류처리
+    return;
+  }
+
+  // if(gfnUtils.isNull(engrStep1.value.taskSkil)){
+  //   //경력 검사 > 오류처리
+  //   return;
+  // }
+
+
+  let getParam = "";
 
   let formData = new FormData();
   let api = "";
@@ -354,19 +394,20 @@ async function nextStep(){
   }else{
     //등록
     api = "/v1/my/submit/engineer/step1";
-    formData.append("userMail", userMail.value);
-    formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)]), { type: "application/json" } ); //, 
+    getParam = { "userMail": userMail.value}
+    formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)]) , { type: "application/json" }); //, 
   }
   
   if(!gfnRules.isNull(engrPhoto)){
-    formData.append("engrPhotMultiFile",engrPhoto)
+    console.log("사진첨부")
+    formData.append("engrPhotMultiFile",engrPhoto.value)
   }
   console.log(formData)
 
   let rtn = await gfnUtils.axiosPost(
     api,
     formData,
-    null, true, true, true
+    getParam, true, true, true
   );
   if(rtn.rtnCd == "00"){
     let res = rtn.rtnData

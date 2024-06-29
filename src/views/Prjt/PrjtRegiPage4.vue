@@ -185,9 +185,11 @@ async function nextPage(div){
     var api = "/v1/project/submit";
     let formData = new FormData();
     formData.append("userMail ",userMail) //usermail
-    formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
+    //formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
+    formData.append("submitProjectInputJson ", JSON.stringify(projStep.value) ) 
 
-    formData.append("fileList",projStep.value.projTwoStep.fileList) //file
+    // TODO 파일 첨부 수정 step2페이지에서 파일 전달 필요??
+    //formData.append("fileList",projStep.value.projTwoStep.fileList) //file
     //fileList
     
     let rtn = await gfnUtils.axiosPost(

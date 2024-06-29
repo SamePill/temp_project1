@@ -494,6 +494,7 @@ const confirm = function () {
 };
 
 onMounted(() => {
+  console.log(props.prj)
   //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
   //로그인 후 - 지원 후(projectSprtInfo유무)
   //hopeStrtDay.value = today;
@@ -627,25 +628,28 @@ async function apply() {
   var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
   if (rtn.rtnCd == "00") {
     gfnUtils.openAlert("정상적으로 처리되었습니다.", "", 2000);
+    window.location.reload();
   } else {
     gfnUtils.openAlert(rtn.rtnMsg, "", 2000);
   }
 }
 
 async function cancelApply() {
-  //TODO 지원 취소 API 확인 필요
-  console.log("지원 취소 API 확인 필요!!!!!!!!!!!");
-  
-  // let api = "";
-  // let postParams = {};
-  // let getParams = {};
 
-  // var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
-  // if (rtn.rtnCd == "00") {
-  //   gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
-  // } else {
-  //   gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-  // }
+  console.log("지원 취소 API 확인 필요!!!!!!!!!!!");
+
+  let api = "/v1/my/cancel/support-project";
+  let postParams = {projSprtSeqList : [{ projSprtSeq : props.prj.projectSprtInfo.projSprtSeq}]};
+  let getParams = {userMail : userMail.value};
+
+  console.log(postParams)
+  var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
+  if (rtn.rtnCd == "00") {
+    gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
+    window.location.reload();
+  } else {
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  }
 }
 
 function selectEngr(applEngrList, sel10Cnt, sel20Cnt, sel30Cnt, sel40Cnt) {

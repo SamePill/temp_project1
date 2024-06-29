@@ -176,16 +176,21 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr, withFile)
   // console.log(window.$cookies.get("loginAccToken"));
 
   if(withFile){
+    console.log("Multipart")
     axios.defaults.headers.common["Content-Type"] = "multipart/form-data"
   }else{
+    console.log("Json")
     axios.defaults.headers.common["Content-Type"] = "application/json"
   }
   
   
   
   if (window.$cookies.get("loginAccToken") != null) {
+    console.log("Singed....")
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + window.$cookies.get("loginAccToken") || "";
+  }else{
+    console.log("UnSinged....")
   }
   
   return new Promise(function(resolve) {

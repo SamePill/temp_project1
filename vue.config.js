@@ -8,10 +8,10 @@ module.exports = defineConfig({
         target: "https://business.juso.go.kr",
         changeOrigin: true
       },
-      "/v1" : {
-        target: "http://dev.l-walk.com:29080",
-        changeOrigin: true
-      }
+      // "/v1" : {
+      //   target: "http://dev.l-walk.com:29080",
+      //   changeOrigin: true
+      // }
     }
   },
   // server: {
