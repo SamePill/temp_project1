@@ -28,7 +28,7 @@
       <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-20">
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
           <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]">큐밋</p>
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">큐밋소개</p>
+          <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]"  @click="goToPage('WhatIsQm')">큐밋소개</button>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
@@ -36,15 +36,15 @@
             <div
               class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2"
             >
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">클라이언트 이용방법</p>
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">QA파트너스 이용방법</p>
-              <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">이용요금</p>
+              <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="goToPage('WhatIsQm')">클라이언트 이용방법</button>
+              <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="goToPage('WhatIsQm2')"> QA파트너스 이용방법</button>
+              <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="goToPage('WhatIsQm3')">이용요금</button>
             </div>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
           <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]">고객센터</p>
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">자주하는질문</p>
+          <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="goToPage('CstmSrvcCntr')">자주하는질문</button>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
           <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]">약관동의</p>
@@ -57,8 +57,28 @@
     </div>
   </div>
 </template>
-<script>
-export default {
+<script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
+function goToPage(url){
+  if(url == 'WhatIsQm2' ){
+    router.push({ 
+      name: "WhatIsQm"
+      ,state: {
+        dataObj : {i:1,tabId:'ptns'}
+      },
+    });
+  }else if(url == 'WhatIsQm3'){
+    router.push({ 
+      name: "WhatIsQm"
+      ,state: {
+        dataObj : {i: 2, tabId: 'price'}
+      },
+    });
+  }else{
+    router.push({name: url})
+  }
 }
+
 </script>
