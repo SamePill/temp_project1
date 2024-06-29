@@ -382,12 +382,13 @@
 
 
   async function saveInfo(){
-
-    var api = "/v1/my/myinfo";
-    var getParams = {userMail: userMail.value};
-    let rtn = await gfnUtils.axiosGet(
+    //TODO 기본정보 수정 API 확인 필요.
+    var api = "";
+    //var getParams = {userMail: userMail.value};
+    var postParams = userInfo.value;
+    let rtn = await gfnUtils.axiosPost(
       api,
-      getParams
+      postParams
     );
     
     console.log(rtn);

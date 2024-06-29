@@ -318,6 +318,7 @@
       prgsProjCnt: 0,
       cpltProjCnt: 0
     })
+  const srchKeyWord = ref("")
   const EngrRtngDivCd = ref("")
   const $EngrRtngDivCd = ref()
   const SrvdStatCd = ref("")
@@ -429,7 +430,7 @@
     }
 
     var api = "/v1/my/engineer/management";
-    var getParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:"", srvdStatCd:"", engrRtngDivCd:"", engrSortDiv:"", };
+    var getParams = {userMail: userMail.value, pageNo:pageNo.value, engrNm:srchKeyWord.value, srvdStatCd:SrvdStatCd.value , engrRtngDivCd:EngrRtngDivCd.value, engrSortDiv:MngEngrSort.value };
     let rtn = await gfnUtils.axiosGet(
       api,
       getParams

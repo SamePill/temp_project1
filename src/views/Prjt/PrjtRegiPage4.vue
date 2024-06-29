@@ -181,14 +181,14 @@ async function loadData(){
 async function nextPage(div){
   if(div == 'next'){  
     const userMail = ref(window.$cookies.get("loginUserMail"));
-    var api = "/v1/project/support";
+    console.log(JSON.stringify(projStep.value))
+    var api = "/v1/project/submit";
     let formData = new FormData();
-    formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
     formData.append("userMail ",userMail) //usermail
+    formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
+
     formData.append("fileList",projStep.value.projTwoStep.fileList) //file
     //fileList
-    console.log('?')
-    console.log(formData)
     
     let rtn = await gfnUtils.axiosPost(
       api,

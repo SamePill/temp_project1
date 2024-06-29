@@ -34,7 +34,7 @@
   <div class="h-[560px] py-[40px]">
     <p class="text-[28px] text-center text-text-0 font-semibold">QA 구하기가 힘들다고??<br/>큐밋에서 쉽게 구해봐!</p>
     <div class="w-[1060px] mx-auto font-basic mt-5 flex justify-between">
-      <div class="w-[340px] h-[340px] relative overflow-hidden rounded-[10px] bg-[#ddf2ef]" style="cursor: pointer" @click="goToPage('PrjtRegiPage1')">
+      <div class="w-[340px] h-[340px] relative overflow-hidden rounded-[10px] bg-[#ddf2ef]" style="cursor: pointer" @click="goToPage('PrjtSrch')">
         <p class="absolute left-[93px] top-[218px] text-[28px] font-semibold text-center text-[#191919] font-basic">
           프로젝트 찾기
         </p>
@@ -43,7 +43,7 @@
         </p>
         <img src="@/assets/ic_project_003.png" class="w-80 h-40 absolute left-[0px] top-[37px] object-none" />
       </div>
-      <div class="w-[340px] h-[340px] relative overflow-hidden rounded-[10px] bg-[#ddf2ef]" style="cursor: pointer"  @click="goToPage('PrjtSrch')">
+      <div class="w-[340px] h-[340px] relative overflow-hidden rounded-[10px] bg-[#ddf2ef]" style="cursor: pointer"  @click="goToPage('PrjtRegiPage1')">
         <p class="absolute left-[93px] top-[218px] text-[28px] font-semibold text-center text-[#191919]">
           프로젝트 등록
         </p>

@@ -78,7 +78,7 @@
             
             <div
               class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-              @click="showAddrPop"
+              @click="showAddrPop" 
             >
               <p
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
@@ -94,13 +94,6 @@
                 class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
                 preserveAspectRatio="none"
               >
-                <path
-                  d="M9 19.5L15 12.5L9 5.5"
-                  stroke="#191919"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
               </svg>
             </div>
             <input
@@ -666,8 +659,8 @@
         </div>
       </div>
     </div>
-    <modal ref="srchAddrShow" :width="1060">
-      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="closeAddrPop" />
+    <modal ref="srchAddrShow" :width="700">
+      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="returnArrd"  />
     </modal>
   </div>
 </template>
@@ -698,6 +691,10 @@
   //닫기
   const closeAddrPop = function (){
     srchAddrShow.value.close()
+  }
+  //주소팝업 리턴
+  function returnArrd(addrVal){
+    signUp.value.joinTwoStep.compBaseAddr = addrVal.roadAddr;
   }
   // {
   //   "joinOneStep":

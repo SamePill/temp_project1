@@ -354,7 +354,7 @@ async function saveInfo(){
   }
   if(compLogoFile.value != null  ){
     console.log("회사 로그 있음....")
-    formData.append("compLogoMultiFile", bizRegFile.value);
+    formData.append("compLogoMultiFile", compLogoFile.value);
     companyInfo.value.compLogoFileSeq = ""
     companyInfo.value.compLogoFileUrl = ""
     companyInfo.value.compLogoFileNm = compLogoFileNm.value

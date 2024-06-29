@@ -385,8 +385,9 @@
     );
 
     if(rtn.rtnCd == "00"){
-      //TODO 정상시 메세지 리턴되는가??
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      
+      gfnUtils.openAlert("정상 처리 되었습니다.","", 2000)
+      loadData()
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
@@ -420,8 +421,8 @@
     );
 
     if(rtn.rtnCd == "00"){
-      //TODO 정상시 메세지 리턴되는가??
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      gfnUtils.openAlert("정상 처리 되었습니다.","", 2000)
+      loadData()
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
