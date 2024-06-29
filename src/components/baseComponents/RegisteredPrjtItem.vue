@@ -49,7 +49,7 @@
           >
         </p>
         <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
-          등록날짜 : {{ props.projItem.regDttm }}
+          등록날짜 : {{ gfnUtils.formatYMDHMS(props.projItem.regDttm) }}
         </p>
       </div>
     </div>
@@ -407,6 +407,7 @@
 <script setup>
   import { defineProps } from 'vue'
   import { useRouter } from 'vue-router';
+  import * as gfnUtils from "@/utils/gfnUtils.js";
 
   const router = useRouter()
   const props = defineProps({

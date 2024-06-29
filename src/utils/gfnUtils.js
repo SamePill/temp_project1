@@ -715,6 +715,17 @@ export const formattedHpNo = (phoneStr) => {
   return `${part1}-${part2}-${part3}`;
 }
 
+export const formatYMDHMS = (dateString) => {
+  const year = dateString.substring(0, 4);
+  const month = dateString.substring(4, 6);
+  const day = dateString.substring(6, 8);
+  const hour = dateString.substring(8, 10);
+  const minute = dateString.substring(10, 12);
+  const second = dateString.substring(12, 14);
+  
+  // 포맷팅된 문자열 생성
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+}
 
 /**
  * 페이지 표시 제목 설정
