@@ -184,7 +184,6 @@
   const totalCnt = ref()
   // const boolSort = ref(false)
   const userMail = ref(window.$cookies.get("loginUserMail"))
-  const sortDiv = ref()
   const projList = ref()
   const topInfo = ref({
       compNm: "",
@@ -293,7 +292,7 @@
       pageNo.value = selPage;
     }
     var api = "/v1/my/support-project-list";
-    var getParams = {userMail:userMail.value, sortDiv:sortDiv.value, pageNo: pageNo.value};
+    var getParams = {userMail:userMail.value, sortDiv:AplPrjtSort.value, pageNo: pageNo.value};
     let rtn = await gfnUtils.axiosGet(
       api,
       getParams
