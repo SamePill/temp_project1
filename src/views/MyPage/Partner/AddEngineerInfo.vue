@@ -114,7 +114,7 @@
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <input type="text" placeholder="주소를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.baseAddr">
+            <input @click="showAddrPop" type="text" placeholder="주소를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.baseAddr">
             <input type="text" placeholder="상세주소를 입력해주세요.." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.dtlAddr">
           </div>
         </div>
@@ -123,30 +123,9 @@
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">최종학력 </span
             ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
-          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <div
-              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">대학교</p>
-              <svg
-                width="24"
-                height="25"
-                viewBox="0 0 24 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M5 9.5L12 15.5L19 9.5"
-                  stroke="#191919"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </div>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5 ">
             <input type="text" placeholder="학교명을 입력해주세요." class="h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.schlNm">
+            <DropDown @click="documentClick('EdctDivCd','dropDown')" id="EdctDivCd" ref="$EdctDivCd" @setData="getEdctDivCd" class="h-[51px] w-[160px]" :div="'N'" :title="''" :listDivCd="'EDCT_DIV_CD'"/>
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
             <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
@@ -162,43 +141,16 @@
               ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
             </p>
           </div>
-          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] gap-5">
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">년</p>
+          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] h-[51px] gap-5">
+            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
+              <input type="number" placeholder="" min="0" max="99" style="border:none"/>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
             </div>
-            <div
-              class="flex justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">0</p>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">개월</p>
+            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
+              <input type="number" placeholder="" min="0" max="99" style="border:none"/>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개월</p>
             </div>
-            <div
-              class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded border border-[#ddd]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]">
-                초급 엔지니어
-              </p>
-              <svg
-                width="16"
-                height="17"
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M3 6.5L8 10.5L13 6.5"
-                  stroke="#191919"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </div>
+            <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" class="flex justify-start items-start flex-grow-0 flex-shrink-0 h-[51px] w-40" :div="'N'" :title="''" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -220,8 +172,8 @@
               <p v-show="idx > 0"  class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">자격증 {{ idx }}</p>
               <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
                 <div class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"></div>
-                <p v-show="idx == 0" class="flex-grow-0 flex-shrink-0 text-sm text-left" @click="addCert">추가하기</p>
-                <p v-show="idx > 0" class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]" @click="removeCert(idx)">삭제하기</p>
+                <p v-show="idx == 0" class="cursor-pointer flex-grow-0 flex-shrink-0 text-sm text-left" @click="addCert">추가하기</p>
+                <p v-show="idx > 0" class="cursor-pointer flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]" @click="removeCert(idx)">삭제하기</p>
               </div>
             </div>
             <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -275,173 +227,212 @@
         </div>
       </div>
     </div>
+    <modal ref="srchAddrShow" :width="700">
+      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="returnArrd" />
+    </modal>
   </div>
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router'
-  import { ref, onMounted } from "vue";
-  import SkillTip from "@/components/popupComponents/SkillTip.vue";
-  import * as gfnUtils from "@/utils/gfnUtils.js";
-  import * as gfnRules from "@/utils/gfnRules.js";
 
-  const { dataObj } = history.state; 
-  const engrInfo = ref({});
-  const userMail = ref(window.$cookies.get("loginUserMail"));
-  const router = useRouter()
-  const showImg = ref(false)
-  const $SkillTip = ref();
-  const engrPhoto = ref({})
-  const editMode = ref(false)
-  const engrStep1 = ref(
-    {
-      crtdUserMail: "",
-      engrNm: "",
-      bith: "",
-      baseAddr: "",
-      dtlAddr: "",
-      edctDivCd: "",
-      edctDivCdNm: "",
-      schlNm: "",
-      dprt: "",
-      engrRtngDivCd: "",
-      taskSkil: "",
-      crtfList: [
-        {
-          crtfNm: "",
-          acqsDt: ""
-        }
-      ]
-    }
-  )
-  
-  function updateAcqsDt(value, idx) {
-    const cleanedValue = value.replace(/-/g, '');
-    if (cleanedValue.length === 8) {
-      engrStep1.value.crtfList[idx].acqsDt = cleanedValue;
-    }
-  }
-  
-
-  
-  onMounted(() => {
-
-    console.log(dataObj)
-    if( dataObj != undefined ){
-      console.log("수정모드...")
-      engrInfo.value = JSON.parse(dataObj)
-
-      if(!gfnRules.isNull(engrInfo.value.engrId)){
-        editMode.value = true
-        loadData();
-      } 
-    }   
-       
-  })
-
-  async function loadData(){
-    
-    var api = "/v1/my/engineer/step1";
-    var getParams = {userMail: userMail.value, engrId:engrInfo.value.engrId};
-    let rtn = await gfnUtils.axiosGet(
-      api,
-      getParams
-    );
-
-    if(rtn.rtnCd == "00"){
-      console.log(rtn.rtnData)
-      engrStep1.value = rtn.rtnData   
-    }else{
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-    }
-  }
-
-  function popup(div){
-  
-    if(div == '$SkillTip'){
-      $SkillTip.value.show();
-    }
-    return false
-
-  }
-
-  async function nextStep(){
-
-    //TODO 필수 입력 값 체크...
-
-
-    let formData = new FormData();
-    let api = "";
-    console.log(engrStep1.value)
-    console.log(editMode.value)
-    if(editMode.value){
-      //수정
-      api = "/v1/my/modify/engineer/step1";
-      formData.append("userMail", userMail.value);
-      formData.append("modifyEngrOneStepInputJson ", new Blob([JSON.stringify(engrStep1.value)]) , { type: "application/json" }); // , 
-    }else{
-      //등록
-      api = "/v1/my/submit/engineer/step1";
-      formData.append("userMail", userMail.value);
-      formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)]), { type: "application/json" } ); //, 
-    }
-    
-    if(!gfnRules.isNull(engrPhoto)){
-      formData.append("engrPhotMultiFile",engrPhoto)
-    }
-    console.log(formData)
-
-    let rtn = await gfnUtils.axiosPost(
-      api,
-      formData,
-      null, true, true, true
-    );
-    if(rtn.rtnCd == "00"){
-      let res = rtn.rtnData
-      if(res == null){
-        res = {}
-        res.engrId =  engrInfo.value.engrId
+import Modal from "@/components/baseComponents/Modal.vue";
+import { useRouter } from 'vue-router'
+import { ref, onMounted } from "vue";
+import SkillTip from "@/components/popupComponents/SkillTip.vue";
+import * as gfnUtils from "@/utils/gfnUtils.js";
+import * as gfnRules from "@/utils/gfnRules.js";
+import DropDown from '@/components/uiComponents/DropDown.vue';
+import SrchAddrApiPopup from "@/components/popupComponents/SrchAddrApiPopup.vue";
+const { dataObj } = history.state; 
+const engrInfo = ref({});
+const userMail = ref(window.$cookies.get("loginUserMail"));
+const router = useRouter()
+const showImg = ref(false)
+const $SkillTip = ref();
+const engrPhoto = ref({})
+const editMode = ref(false)
+const engrStep1 = ref(
+  {
+    crtdUserMail: "",
+    engrNm: "",
+    bith: "",
+    baseAddr: "",
+    dtlAddr: "",
+    edctDivCd: "",
+    edctDivCdNm: "",
+    schlNm: "",
+    dprt: "",
+    engrRtngDivCd: "",
+    taskSkil: "",
+    crtfList: [
+      {
+        crtfNm: "",
+        acqsDt: ""
       }
-      res.editMode = editMode.value
-
-      router.push({
-         name: "AddEngineerCareerList"
-        ,state: {dataObj : JSON.stringify(res)}     
-      })
-    }else{
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-    }
-
-    
+    ]
   }
+)
+const edctDivCd = ref("")
+const engrRtngDivCd = ref("")
+const $EdctDivCd = ref()
+const $EngrRtngDivCd = ref()
+const srchAddrShow = ref(null);
 
-  function readURL(input) {
-
-    if (input.target.files && input.target.files[0]) {
-      console.log("파일있음")
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById('preview').src = e.target.result;
-      };
-      reader.readAsDataURL(input.target.files[0]);
-      engrPhoto.value = input.target.files[0]
-      showImg.value = true;
-    } else {
-      console.log("파일없음")
-      document.getElementById('preview').src = "";
-      engrPhoto.value = {}
-    }
+function updateAcqsDt(value, idx) {
+  const cleanedValue = value.replace(/-/g, '');
+  if (cleanedValue.length === 8) {
+    engrStep1.value.crtfList[idx].acqsDt = cleanedValue;
   }
+}
+onMounted(() => {
 
-  function addCert(){
-    engrStep1.value.crtfList.push({
-      crtfNm: "",
-      acqsDt: ""
+  console.log(dataObj)
+  if( dataObj != undefined ){
+    console.log("수정모드...")
+    engrInfo.value = JSON.parse(dataObj)
+
+    if(!gfnRules.isNull(engrInfo.value.engrId)){
+      editMode.value = true
+      loadData();
+    } 
+  }   
+      
+})
+
+async function loadData(){
+  
+  var api = "/v1/my/engineer/step1";
+  var getParams = {userMail: userMail.value, engrId:engrInfo.value.engrId};
+  let rtn = await gfnUtils.axiosGet(
+    api,
+    getParams
+  );
+
+  if(rtn.rtnCd == "00"){
+    console.log(rtn.rtnData)
+    engrStep1.value = rtn.rtnData   
+  }else{
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+  }
+}
+
+//주소팝업 열기
+const showAddrPop = () => {
+  srchAddrShow.value.open();
+}
+//주소팝업 닫기
+const closeAddrPop = function (){
+  srchAddrShow.value.close();
+}
+//주소팝업 리턴
+function returnArrd(addrVal){
+  engrStep1.value.baseAddr = addrVal.roadAddr;
+}
+function popup(div){
+
+  if(div == '$SkillTip'){
+    $SkillTip.value.show();
+  }
+  return false
+
+}
+
+async function nextStep(){
+
+  //TODO 필수 입력 값 체크...
+
+
+  let formData = new FormData();
+  let api = "";
+  console.log(engrStep1.value)
+  console.log(editMode.value)
+  if(editMode.value){
+    //수정
+    api = "/v1/my/modify/engineer/step1";
+    formData.append("userMail", userMail.value);
+    formData.append("modifyEngrOneStepInputJson ", new Blob([JSON.stringify(engrStep1.value)]) , { type: "application/json" }); // , 
+  }else{
+    //등록
+    api = "/v1/my/submit/engineer/step1";
+    formData.append("userMail", userMail.value);
+    formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)]), { type: "application/json" } ); //, 
+  }
+  
+  if(!gfnRules.isNull(engrPhoto)){
+    formData.append("engrPhotMultiFile",engrPhoto)
+  }
+  console.log(formData)
+
+  let rtn = await gfnUtils.axiosPost(
+    api,
+    formData,
+    null, true, true, true
+  );
+  if(rtn.rtnCd == "00"){
+    let res = rtn.rtnData
+    if(res == null){
+      res = {}
+      res.engrId =  engrInfo.value.engrId
+    }
+    res.editMode = editMode.value
+
+    router.push({
+        name: "AddEngineerCareerList"
+      ,state: {dataObj : JSON.stringify(res)}     
     })
+  }else{
+    gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }
 
-  function removeCert(idx){
-    console.log(idx)
-    engrStep1.value.crtfList.splice(idx, 1);
+  
+}
+
+function readURL(input) {
+
+  if (input.target.files && input.target.files[0]) {
+    console.log("파일있음")
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('preview').src = e.target.result;
+    };
+    reader.readAsDataURL(input.target.files[0]);
+    engrPhoto.value = input.target.files[0]
+    showImg.value = true;
+  } else {
+    console.log("파일없음")
+    document.getElementById('preview').src = "";
+    engrPhoto.value = {}
   }
+}
+
+function addCert(){
+  engrStep1.value.crtfList.push({
+    crtfNm: "",
+    acqsDt: ""
+  })
+}
+
+function removeCert(idx){
+  console.log(idx)
+  engrStep1.value.crtfList.splice(idx, 1);
+}
+
+function documentClick(div,eventTarget){
+  if(eventTarget == 'dropDown'){
+    if(div != 'EdctDivCd'){
+      $EdctDivCd.value.noShowItem();
+    }
+    if(div != 'EngrRtngDivCd'){
+      $EngrRtngDivCd.value.noShowItem();
+    }
+  }
+}
+
+function getEdctDivCd(data){
+  edctDivCd.value = data;
+}
+
+function getEngrRtngDivCd(data){
+  engrRtngDivCd.value = data;
+}
 </script>

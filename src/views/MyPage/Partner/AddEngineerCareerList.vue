@@ -104,7 +104,7 @@
                   <p
                     class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#555]"
                   >
-                    {{ el.strtYm }} ~ {{ el.endYm }}
+                    {{ gfnUtils.formatYYYYMM(el.strtYm) }} ~ {{ gfnUtils.formatYYYYMM(el.endYm) }}
                   </p>
                   <p
                     class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]"
