@@ -33,19 +33,26 @@
                     초급 엔지니어
                   </div>
                   <div>
-                    <input type="number" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <input type="number" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] w-40 flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                     <span class="absolute" style="top:17px; right:190px">명</span>  
-                    <!-- <p class="mt-[10px] mb-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                    <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
                       인원수를 입력해주세요.
-                    </p> -->
+                    </p>
                   </div>
-                  <input type="text"                     
-                    :value="bgnrEngrUnitPricFormatted"
-                    @input="updateBgnrPric($event.target.value)"
-                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                    <!-- v-model="projStep.projThreeStep.bgnrEngrUnitPric"  -->
-                    <span class="absolute" style="top:17px; right:10px">만원</span>  
-                  
+                  <div>
+                    <input type="text"                     
+                      :value="bgnrEngrUnitPricFormatted"
+                      @input="updateBgnrPric($event.target.value)"
+                      class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                      <!-- v-model="projStep.projThreeStep.bgnrEngrUnitPric"  -->
+                      <span class="absolute" style="top:17px; right:10px">만원</span>    
+                      <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                        최소 지급액을 확인해주세요.
+                      </p>    
+                      <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                        월 지급액을 입력해주세요.
+                      </p>    
+                  </div>              
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#dbe9fa] text-[#0b6bdc]">
