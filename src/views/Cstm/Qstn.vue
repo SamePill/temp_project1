@@ -1,8 +1,8 @@
 <template>
   <div class="w-[1060px] my-10 mx-auto font-basic">
     <!--Top items-->
-    <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5 cursor-pointer">
-      <div @click="goToPage(i)" v-for="(el,i) in topItemList" :key = "i" class="py-[30px] px-[20px] flex-grow-0 flex-shrink-0 w-[340px] h-[200px] relative overflow-hidden rounded-[10px] bg-white border border-[#ddd]">
+    <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5 cursor-pointer" @click="goToPage(el)">
+      <div v-for="el in topItemList" :key = "el" class="py-[30px] px-[20px] flex-grow-0 flex-shrink-0 w-[340px] h-[200px] relative overflow-hidden rounded-[10px] bg-white border border-[#ddd]">
         <img :src="require(`@/assets/${el.img}`)" class="object-none" />
         <p class="mt-[20px] text-2xl font-bold text-left text-[#191919]">{{ el.title }}</p>
         <p class="mt-[10px] text-sm text-left text-[#555]">
@@ -107,12 +107,11 @@ function loadData(){
 }
 
 //상단아이템 선택
-function goToPage(i){
-  if(i != ''){
-    let path = '';
-    path = i==0 ? 'QmNews' : (i==1 ? 'ApplyPtnSrve' : 'Qstn');
-    router.push({name :path});
-  }
+function goToPage(path){
+  //company news
+  //ApplyPtnSrve
+  //Questions,inquire
+  router.push({name :path})
 }
 
 //리스트조회

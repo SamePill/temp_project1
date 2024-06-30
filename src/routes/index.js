@@ -45,6 +45,9 @@ import WhatIsQm from '@/views/AboutQm/WhatIsQm.vue'
 
 //고객센터
 import CstmSrvcCntr from '@/views/Cstm/CstmSrvcCntr.vue'
+import QmNews from '@/views/Cstm/QmNews.vue'
+import ApplyPtnSrve from '@/views/Cstm/ApplyPtnSrve.vue'
+import Qstn from '@/views/Cstm/Qstn.vue'
 
 //테스트
 import Test from "@/views/Prjt/Test.vue";
@@ -230,13 +233,30 @@ export default createRouter({
     component: WhatIsQm,
     name: 'WhatIsQm'
   },
-
   
   /*********************** 고객센터 ***********************/
   {
     path: '/cstmSrvcCntr',
     component: CstmSrvcCntr,
     name: 'CstmSrvcCntr'
+  },
+  //큐밋소식
+  {
+    path: '/qmNews',
+    component: QmNews,
+    name: 'QmNews'
+  },
+  //제휴서비스입점신청
+  {
+    path: '/applyPtnSrve',
+    component: ApplyPtnSrve,
+    name: 'ApplyPtnSrve'
+  },
+  //문의하기
+  {
+    path: '/qstn',
+    component: Qstn,
+    name: 'Qstn'
   },
 
    /*********************** 테스트 페이지 ***********************/

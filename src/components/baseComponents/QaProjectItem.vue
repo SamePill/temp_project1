@@ -130,9 +130,6 @@ const getViewType = computed(() => {
 function goToPage(){
   router.push({ 
     name: "PrjtSrchDetl"
-    ,state : {
-              dataObj : {projId: props.prj.projId}
-            }
   });
 }
 </script>
