@@ -26,13 +26,18 @@
           <p class="text-xl text-left text-[#191919]">담당자 이름
             <span class="text-[#ff5252]">*</span></p>
           <div class="flex flex-col justify-center items-start gap-2">
-            <input type="text" v-model="projStep.projFourStep.rprsNm" class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이름을 입력해주세요."/>
+            <input type="text" v-model="projStep.projFourStep.rprsNm" 
+              :class='(rprsNmChk1 && rprsNmChk2 ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border "' 
+              @blur="rprsNmRule()"
+              placeholder="담당자 이름을 입력해주세요."/>
           </div>
         </div>
-        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+        <p v-show="!rprsNmChk1"
+           class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
           담당자 이름을 입력해주세요.
         </p>
-        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+        <p  v-show="!rprsNmChk2" 
+           class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
           담당자 이름이 올바르지 않습니다. 다시 한번 확인해주세요
         </p>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
@@ -40,13 +45,16 @@
             <span class="text-[#ff5252]">*</span>
           </p>
           <div class="flex justify-start items-start gap-5">
-            <input type="text" v-model="projStep.projFourStep.rprsHp"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 휴대폰 번호를 입력해주세요."/>
+            <input type="text" v-model="projStep.projFourStep.rprsHp"  
+              :class='(rprsHpChk1 && rprsHpChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border "' 
+              @blur="rprsHpRule()"
+              placeholder="담당자 휴대폰 번호를 입력해주세요."/>
           </div>
         </div>
-        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+        <p v-show="!rprsHpChk1"  class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
           휴대폰 번호를 입력해주세요.
         </p>
-        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+        <p v-show="!rprsHpChk2"  class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
           휴대폰 번호가 올바르지 않습니다. 다시 한번 확인해주세요
         </p>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
@@ -54,13 +62,16 @@
             <span class="text-[#ff5252]">*</span>
           </p>
           <div class="flex justify-start items-start gap-5">
-            <input type="text" v-model="projStep.projFourStep.rprsMail"  class="w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border border-[#ddd]" placeholder="담당자 이메일을 입력해주세요."/>
+            <input type="text" v-model="projStep.projFourStep.rprsMail" 
+              :class='(rprsMailChk1 && rprsMailChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border "'
+              @blur="rprsMailRule()"
+              placeholder="담당자 이메일을 입력해주세요."/>
           </div>
         </div>
-        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+        <p v-show="!rprsMailChk1" class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
           이메일이 올바르지 않습니다. 다시 한번 확인해주세요
         </p>
-        <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+        <p v-show="!rprsMailChk2" class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
           담당자 이메일을 입력해주세요.
         </p>
         
@@ -152,6 +163,7 @@
 import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import * as gfnRules from "@/utils/gfnRules.js";
 
 const router = useRouter()
 // const projFourStep = ref({
@@ -167,6 +179,28 @@ const totPageNo = ref(4)
 const { dataObj } = history.state; 
 const projStep = ref(JSON.parse(dataObj));
 const compNm = ref(window.$cookies.get("loginCompNm"));
+
+const rprsNmChk1 = ref(true);
+const rprsNmChk2 = ref(true);
+const rprsHpChk1 = ref(true);
+const rprsHpChk2 = ref(true);
+const rprsMailChk1 = ref(true);
+const rprsMailChk2 = ref(true);
+
+function rprsNmRule(){
+  rprsNmChk1.value = !gfnRules.isNull(projStep.value.projFourStep.rprsNm);
+  rprsNmChk2.value = gfnRules.validName(projStep.value.projFourStep.rprsNm);
+}
+
+function rprsHpRule(){
+  rprsHpChk1.value = !gfnRules.isNull(projStep.value.projFourStep.rprsHp);
+  rprsHpChk2.value = gfnRules.validHp(projStep.value.projFourStep.rprsHp);
+}
+
+function rprsMailRule(){
+  rprsMailChk1.value = !gfnRules.isNull(projStep.value.projFourStep.rprsMail);
+  rprsMailChk2.value = gfnRules.validEmail(projStep.value.projFourStep.rprsMail);
+}
 
 onMounted(() => {
   loadData();

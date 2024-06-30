@@ -265,8 +265,8 @@ const projStep = ref({
     rprsNm    : '',
     rprsHp    : '',
     rprsMail  : '',
-    useTrmsYn : 'Y',
-    privTrmsYn: 'Y'
+    useTrmsYn : 'N',
+    privTrmsYn: 'N'
   },fileList:[]
 
   })
