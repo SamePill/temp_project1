@@ -108,7 +108,7 @@ function loadData(){
 
 //상단아이템 선택
 function goToPage(i){
-  if(i != ''){
+  if(i != null){
     let path = '';
     path = i==0 ? 'QmNews' : (i==1 ? 'ApplyPtnSrve' : 'Qstn');
     router.push({name :path});
