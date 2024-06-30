@@ -39,15 +39,22 @@
                 <span class="text-sm text-left text-[#777]">/50</span>
               </p>
             </div>
-            <input maxlength='100' tye="text" v-model="projStep.projOneStep.projTitl" class="w-[520px] h-[51px] text-[#191919] p-4 rounded border border-[#ddd]" placeholder="프로젝트명을 입력주세요."/>
-              <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+            <input maxlength='100' tye="text" 
+                  v-model="projStep.projOneStep.projTitl" 
+                  @blur="projTitlChkRule()"
+                  :class='(projTitlChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#191919] p-4 rounded border"' placeholder="프로젝트명을 입력주세요."/>
+              <p v-show="!projTitlChk"
+                 class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                 프로젝트명을 입력해주세요.
               </p>
           </div>
           <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
             <p class="text-xl text-left text-[#191919]">희망 시작일 <span class="text-[#ff5252]">*</span></p>
             <div class="flex flex-col justify-center items-start gap-2">
-              <input type="date" v-model="projStep.projOneStep.strtDay" :min="today" class="w-[520px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" dataplaceholder="프로젝트 시작 희망일을 선택해 주세요."/>
+              <input type="date" v-model="projStep.projOneStep.strtDay" :min="today" 
+                :class='(strtDayChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#999] p-4 rounded border "' 
+                @blur="strtDayChkRule()"
+                dataplaceholder="프로젝트 시작 희망일을 선택해 주세요."/>
               <div class="flex justify-start items-center relative gap-0.5">
                 <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor: pointer;" @click="strtDayCnslYnClick()">
                   <svg
@@ -70,7 +77,8 @@
                     <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-text-2">
                       협의가능
                     </p>
-                    <p class="ml-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                    <p v-show="!strtDayChk"
+                       class="ml-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                       희망 시작일을 선택해주세요.
                     </p>
                 </div>
@@ -85,9 +93,13 @@
               <div class="flex justify-between items-center w-40 h-[51px] relative  p-4 rounded border border-[#ddd]">
                 <p class="text-base text-left text-[#191919]">월 단위</p>
               </div>
-              <input v-model="projStep.projOneStep.pirdVal" type="number" min="0" class="w-[340px] h-[51px] text-[#999] p-4 rounded border border-[#ddd]" placeholder="예상 근무기간을 입력해주세요."/>
+              <input v-model="projStep.projOneStep.pirdVal" type="number" min="0" 
+                  :class='(pirdValChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[340px] h-[51px] text-[#999] p-4 rounded border"'
+                  @blur="pirdValChkRule()"
+                  placeholder="예상 근무기간을 입력해주세요."/>
             </div>
-            <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+            <p  v-show="!pirdValChk"
+                class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                 예상 근무기간을 입력해주세요.
             </p>
           </div>
@@ -142,23 +154,34 @@
               </div>
               <div class="flex flex-col justify-start items-start relative gap-2">
                 <p class="text-base text-left text-[#777]">근무지</p>
-                <input @click="showAddrPop" v-model="projStep.projOneStep.workAddr" type="text" class="w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border border-[#ddd]" placeholder="예시) 서울특별시 강남구 테헤란로 000-0"/>
+                <input @click="showAddrPop" v-model="projStep.projOneStep.workAddr" type="text" 
+                  :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
+                  @blur="workAddrChkRule()"
+                  placeholder="예시) 서울특별시 강남구 테헤란로 000-0"/>
                 <input v-model="projStep.projOneStep.workDtlAddr" type="text" class="w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border border-[#ddd]" placeholder="예시) 큐밋빌딩 1층"/>
               </div>
-              <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+              <p v-show="!workAddrChk"
+                class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                 근무지를 입력해주세요.
               </p>
               <div class="flex justify-start items-start gap-5 mt-[20px]">
                 <div class="flex flex-col justify-start items-start relative gap-2">
                   <p class="text-base text-left text-[#777]">출근시간</p>
-                  <input  v-model="projStep.projOneStep.atndTime"  type="time" class="cursor-pointer w-[250px] h-[51px] text-base text-left text-[#191919] p-4 rounded border border-[#ddd]" placeholder="예시) 09:00"/>
+                  <input  v-model="projStep.projOneStep.atndTime"  type="time" 
+                    :class='(atndTimeChk ? "border-[#ddd]" : "border-[#ff5252]") + " cursor-pointer w-[250px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
+                    @blur="workTimeChkRule()"
+                    placeholder="예시) 09:00"/>
                 </div>
                 <div class="flex flex-col justify-start items-start relative gap-2">
                   <p class="text-base text-left text-[#777]">퇴근시간</p>
-                  <input  v-model="projStep.projOneStep.lvwkTime"  type="time" class="cursor-pointer w-[250px] h-[51px] text-base text-left text-[#191919] p-4 rounded border border-[#ddd]" placeholder="예시) 18:00"/>
+                  <input  v-model="projStep.projOneStep.lvwkTime"  type="time" 
+                    :class='(lvwkTimeChk ? "border-[#ddd]" : "border-[#ff5252]") + " cursor-pointer w-[250px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
+                    @blur="workTimeChkRule()"
+                    placeholder="예시) 18:00"/>
                 </div>
               </div>
-              <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+              <p v-show = "!atndTimeChk || !lvwkTimeChk"
+                class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                 출근시간,퇴근시간을 입력해주세요.
               </p>
             </div>
@@ -184,6 +207,7 @@ import * as gfnUtils       from "@/utils/gfnUtils.js";
 import { useRouter, onBeforeRouteLeave } from 'vue-router';
 import SrchAddrApiPopup from "@/components/popupComponents/SrchAddrApiPopup.vue";
 import Modal from "@/components/baseComponents/Modal.vue";
+import * as gfnRules from "@/utils/gfnRules.js";
 
 const $jobChipset = ref(null);
 const $taskChipset = ref(null);
@@ -250,6 +274,13 @@ const pageNo = ref(1)
 const totPageNo = ref(4) 
 const today = gfnUtils.getToday()
 
+const projTitlChk = ref(true)
+const strtDayChk = ref(true)
+const pirdValChk = ref(true)
+const workAddrChk = ref(true)
+const atndTimeChk = ref(true)
+const lvwkTimeChk = ref(true)
+
 onMounted(() => {
   // jobDivCdList.value = []
   loadData();
@@ -273,6 +304,14 @@ async function loadData(){
 }
 
 function nextPage(){
+
+  if(!projTitlChk.value || !strtDayChk.value || !pirdValChk.value 
+      || !workAddrChk.value || !atndTimeChk.value || !lvwkTimeChk.value){
+    console.log("필수 입력값 미입력... ")
+    //return
+  }
+
+
   projStep.value.projOneStep.jobDivCdList = $jobChipset.value.returnCdList();
   projStep.value.projOneStep.taskDivCdList = $taskChipset.value.returnCdList();
   router.push({ 
@@ -300,6 +339,36 @@ function scrollToTop(){
     top: 0,
     behavior: 'smooth' });
 }
+
+
+
+function projTitlChkRule(){
+  projTitlChk.value = !gfnRules.isNull(projStep.value.projOneStep.projTitl);
+  //btnStatChng()
+}
+
+function strtDayChkRule(){
+  strtDayChk.value = !gfnRules.isNull(projStep.value.projOneStep.strtDay);
+  //btnStatChng()
+}
+
+function pirdValChkRule(){
+  pirdValChk.value = !gfnRules.isNull(projStep.value.projOneStep.pirdVal);
+  //btnStatChng()
+}
+
+function workAddrChkRule(){
+  workAddrChk.value = !gfnRules.isNull(projStep.value.projOneStep.workAddr);
+  //btnStatChng()
+}
+
+function workTimeChkRule(){
+  atndTimeChk.value = !gfnRules.isNull(projStep.value.projOneStep.atndTime);
+  lvwkTimeChk.value = !gfnRules.isNull(projStep.value.projOneStep.lvwkTime);
+    
+  //btnStatChng()
+}
+
 </script>
 <style scoped>
 input[type="checkbox"]{

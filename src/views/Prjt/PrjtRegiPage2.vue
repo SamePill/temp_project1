@@ -24,10 +24,14 @@
                 <TaskTip ref="$TaskTip" ></TaskTip>
             </div>
             <div>
-              <textarea v-model="projStep.projTwoStep.projCtntTask" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="프로젝트 설명을 입력해주세요."/>
+              <textarea v-model="projStep.projTwoStep.projCtntTask" style="resize: none;" type="text" 
+                :class='(projCtntTaskChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border "' 
+                @blur="projCtntTaskRule()"
+                placeholder="프로젝트 설명을 입력해주세요."/>
             </div>
           </div>
-          <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          <p v-show="!projCtntTaskChk"
+             class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
             프로젝트설명을 입력해주세요.
           </p>
           <div class="mt-[40px]">
@@ -39,10 +43,14 @@
                 <SkillTip ref="$SkillTip" ></SkillTip>
             </div>
             <div>
-              <textarea v-model="projStep.projTwoStep.projDmndSkil" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="요구스킬을 입력해주세요."/>
+              <textarea v-model="projStep.projTwoStep.projDmndSkil" style="resize: none;" type="text"
+                :class='(projDmndSkilChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border "' 
+                @blur="projDmndSkilRule()"
+                placeholder="요구스킬을 입력해주세요."/>
             </div>
           </div>
-          <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          <p v-show="!projDmndSkilChk"
+             class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
             요구스킬을 입력해주세요.
           </p>
           <div class="mt-[40px]">
@@ -54,10 +62,14 @@
                 <ToolTip ref="$ToolTip" ></ToolTip>
             </div>
             <div>
-              <textarea v-model="projStep.projTwoStep.projUseTool" style="resize: none;" type="text" class="flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]" placeholder="활용 Tool 스킬을 입력해주세요."/>
+              <textarea v-model="projStep.projTwoStep.projUseTool" style="resize: none;" type="text" 
+                :class='(projUseToolChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]"' 
+                @blur="projUseToolRule()"
+                placeholder="활용 Tool 스킬을 입력해주세요."/>
             </div>
           </div>
-          <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+          <p v-show="!projUseToolChk"
+             class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" >
             활용Tool을 입력해주세요.
           </p>
           <div class="mt-[40px]">
@@ -158,7 +170,7 @@ import { useRouter } from 'vue-router';
 import TaskTip from "@/components/popupComponents/TaskTip.vue";
 import SkillTip from "@/components/popupComponents/SkillTip.vue";
 import ToolTip from "@/components/popupComponents/ToolTip.vue";
-
+import * as gfnRules from "@/utils/gfnRules.js";
 
 
 const router = useRouter()
@@ -178,9 +190,25 @@ const $SkillTip = ref();
 const $ToolTip = ref();
 const fileList = ref([]);
 
+const projCtntTaskChk = ref(true)
+const projDmndSkilChk = ref(true)
+const projUseToolChk = ref(true)
+
 onMounted(() => {
   loadData();
 });
+
+function projCtntTaskRule(){
+  projCtntTaskChk.value = !gfnRules.isNull(projStep.value.projTwoStep.projCtntTask);
+}
+
+function projDmndSkilRule(){
+  projDmndSkilChk.value = !gfnRules.isNull(projStep.value.projTwoStep.projDmndSkil);
+}
+
+function projUseToolRule(){
+  projUseToolChk.value = !gfnRules.isNull(projStep.value.projTwoStep.projUseTool);
+}
 
 async function loadData(){
   if(dataObj != undefined){
@@ -213,6 +241,12 @@ function nextPage(div){
   projStep.value['fileList'] = fileList.value;
   console.log(projStep.value)
   if(div == 'next'){  
+
+    if(!projCtntTaskChk.value || !projDmndSkilChk.value || !projUseToolChk.value){
+      console.log("필수 값체크")
+      // return;
+    }
+
     router.push({ 
       name: "PrjtRegiPage3"
       ,state: {

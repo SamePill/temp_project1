@@ -39,8 +39,12 @@
                       인원수를 입력해주세요.
                     </p> -->
                   </div>
-                  <input type="text" v-model="bgnrEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                  <span class="absolute" style="top:17px; right:10px">만원</span>  
+                  <input type="text"                     
+                    :value="bgnrEngrUnitPricFormatted"
+                    @input="updateBgnrPric($event.target.value)"
+                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <!-- v-model="projStep.projThreeStep.bgnrEngrUnitPric"  -->
+                    <span class="absolute" style="top:17px; right:10px">만원</span>  
                   
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
@@ -49,7 +53,11 @@
                   </div>
                   <input type="number" v-model="projStep.projThreeStep.intrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:190px">명</span>  
-                  <input type="text" v-model="intrEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <input type="text" 
+                    :value="intrEngrUnitPricFormatted"
+                    @input="updateIntrPric($event.target.value)"                     
+                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <!-- v-model="projStep.projThreeStep.intrEngrUnitPric"  -->
                   <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
@@ -58,7 +66,11 @@
                   </div>
                   <input type="number" v-model="projStep.projThreeStep.advnEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:190px">명</span>  
-                  <input type="text" v-model="advnEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <input type="text" 
+                    :value="advnEngrUnitPricFormatted"
+                    @input="updateAdvnPric($event.target.value)"  
+                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <!-- v-model="projStep.projThreeStep.advnEngrUnitPric" -->
                   <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
@@ -67,7 +79,11 @@
                   </div>
                   <input type="number" v-model="projStep.projThreeStep.spclEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:190px">명</span>  
-                  <input type="text" v-model="spclEngrUnitPricInput" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <input type="text" 
+                    :value="spclEngrUnitPricFormatted"
+                    @input="updateSpclPric($event.target.value)"
+                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <!-- v-model="projStep.projThreeStep.spclEngrUnitPric" -->
                   <span class="absolute" style="top:17px; right:10px">만원</span>  
                 </div>
               </div>
@@ -115,15 +131,15 @@
                 <p class="flex-grow-0 flex-shrink-0 text-lg text-left text-[#333]">총인원 {{projStep.projThreeStep.bgnrEngrCnt +
                                                                                            projStep.projThreeStep.intrEngrCnt +
                                                                                            projStep.projThreeStep.advnEngrCnt +
-                                                                                           projStep.projThreeStep.bgnrEngrCnt 
+                                                                                           projStep.projThreeStep.spclEngrCnt 
                                                                                           }} 명</p>
                 <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2 text-[#333] text-xl">
                   <span>총 금액</span>
                   <span>{{gfnUtils.formattedNumber(
-                          (projStep.projThreeStep.bgnrEngrCnt * (bgnrEngrUnitPricInput)) +
-                          (projStep.projThreeStep.intrEngrCnt * (intrEngrUnitPricInput)) +
-                          (projStep.projThreeStep.advnEngrCnt * (advnEngrUnitPricInput)) +
-                          (projStep.projThreeStep.bgnrEngrCnt * (spclEngrUnitPricInput)) )
+                        ((projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)) +
+                          (projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)) +
+                          (projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)) +
+                          (projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)) ) /10000)
                         }}</span>
                   <span>만원</span>
                 </div>
@@ -349,49 +365,87 @@
   </div>
 </template>
 <script setup>
-import {  ref,onMounted } from "vue";
+import {  ref,onMounted, computed } from "vue";
 import { useRouter } from 'vue-router';
 import * as gfnRules      from "@/utils/gfnRules.js";
 import BudgetTip from "@/components/popupComponents/BudgetTip.vue";
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
 const router = useRouter();
-  const pageNo = ref(3)
-  const totPageNo = ref(4) 
-  const $BudgetTip = ref();      
-  const { dataObj } = history.state; 
-  const projStep = ref(JSON.parse(dataObj));
-  const bgnrEngrUnitPricInput = ref(0);
-  const intrEngrUnitPricInput = ref(0);
-  const advnEngrUnitPricInput = ref(0);
-  const spclEngrUnitPricInput = ref(0);
-  const projChckDivCd10 = ref('');
-  const projChckDivCd20 = ref('');
-  const projChckDivCd30 = ref('');
-  const projChckDivCd40 = ref('');
+const pageNo = ref(3)
+const totPageNo = ref(4) 
+const $BudgetTip = ref();      
+const { dataObj } = history.state; 
+const projStep = ref(JSON.parse(dataObj));
+// const bgnrEngrUnitPricInput = ref(0);
+// const intrEngrUnitPricInput = ref(0);
+// const advnEngrUnitPricInput = ref(0);
+// const spclEngrUnitPricInput = ref(0);
+const projChckDivCd10 = ref('');
+const projChckDivCd20 = ref('');
+const projChckDivCd30 = ref('');
+const projChckDivCd40 = ref('');
+
+
 
 onMounted(() => {
   loadData();
 });
+
+const bgnrEngrUnitPricFormatted = computed( () => {
+  return gfnUtils.formattedNumber(projStep.value.projThreeStep.bgnrEngrUnitPric / 10000);
+})
+
+function updateBgnrPric(value) {
+  const cleanedValue = value.replace(/,/g, '');
+  projStep.value.projThreeStep.bgnrEngrUnitPric = cleanedValue * 10000;
+}
+
+const intrEngrUnitPricFormatted = computed( () => {
+  return gfnUtils.formattedNumber(projStep.value.projThreeStep.intrEngrUnitPric / 10000);
+})
+
+function updateIntrPric(value) {
+  const cleanedValue = value.replace(/,/g, '');
+  projStep.value.projThreeStep.intrEngrUnitPric = cleanedValue * 10000;
+}
+
+const advnEngrUnitPricFormatted = computed( () => {
+  return gfnUtils.formattedNumber(projStep.value.projThreeStep.advnEngrUnitPric / 10000);
+})
+
+function updateAdvnPric(value) {
+  const cleanedValue = value.replace(/,/g, '');
+  projStep.value.projThreeStep.advnEngrUnitPric = cleanedValue * 10000;
+}
+
+const spclEngrUnitPricFormatted = computed( () => {
+  return gfnUtils.formattedNumber(projStep.value.projThreeStep.spclEngrUnitPric / 10000);
+})
+
+function updateSpclPric(value) {
+  const cleanedValue = value.replace(/,/g, '');
+  projStep.value.projThreeStep.spclEngrUnitPric = cleanedValue * 10000;
+}
 
 function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
     console.log('33')
     console.log(projStep.value)
-    bgnrEngrUnitPricInput.value = projStep.value.projThreeStep.bgnrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.bgnrEngrUnitPric/10000;
-    intrEngrUnitPricInput.value = projStep.value.projThreeStep.intrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.intrEngrUnitPric/10000;
-    advnEngrUnitPricInput.value = projStep.value.projThreeStep.advnEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.advnEngrUnitPric/10000;
-    spclEngrUnitPricInput.value = projStep.value.projThreeStep.spclEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.spclEngrUnitPric/10000;
+    // bgnrEngrUnitPricInput.value = projStep.value.projThreeStep.bgnrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.bgnrEngrUnitPric/10000;
+    // intrEngrUnitPricInput.value = projStep.value.projThreeStep.intrEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.intrEngrUnitPric/10000;
+    // advnEngrUnitPricInput.value = projStep.value.projThreeStep.advnEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.advnEngrUnitPric/10000;
+    // spclEngrUnitPricInput.value = projStep.value.projThreeStep.spclEngrUnitPric == 0 ? 0 : projStep.value.projThreeStep.spclEngrUnitPric/10000;
   }
 }
 
 function nextPage(div){
   if(div == 'next'){  
-    projStep.value.projThreeStep.bgnrEngrUnitPric = bgnrEngrUnitPricInput.value * 10000;
-    projStep.value.projThreeStep.intrEngrUnitPric = intrEngrUnitPricInput.value * 10000;
-    projStep.value.projThreeStep.advnEngrUnitPric = advnEngrUnitPricInput.value * 10000;
-    projStep.value.projThreeStep.spclEngrUnitPric = spclEngrUnitPricInput.value * 10000;
+    // projStep.value.projThreeStep.bgnrEngrUnitPric = bgnrEngrUnitPricInput.value * 10000;
+    // projStep.value.projThreeStep.intrEngrUnitPric = intrEngrUnitPricInput.value * 10000;
+    // projStep.value.projThreeStep.advnEngrUnitPric = advnEngrUnitPricInput.value * 10000;
+    // projStep.value.projThreeStep.spclEngrUnitPric = spclEngrUnitPricInput.value * 10000;
 
     if(!gfnRules.isNull(projChckDivCd10.value)){
       projStep.value.projThreeStep.projChckDivCdList.push({projChckDivCd:projChckDivCd10.value});
