@@ -75,7 +75,7 @@
           <div class="mt-[40px]">
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
               <p class="mb-[20px] flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">기타 전달사항 및 우대사항
-                <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
+                <!-- <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span> -->
               </p>
             </div>
             <div>
@@ -242,9 +242,18 @@ function nextPage(div){
   console.log(projStep.value)
   if(div == 'next'){  
 
+    if(gfnRules.isNull(projStep.value.projTwoStep.projCtntTask)){
+      projCtntTaskChk.value = false;
+    }
+    if(gfnRules.isNull(projStep.value.projTwoStep.projDmndSkil)){
+      projDmndSkilChk.value = false;
+    }
+    if(gfnRules.isNull(projStep.value.projTwoStep.projUseTool)){
+      projUseToolChk.value = false;
+    }
     if(!projCtntTaskChk.value || !projDmndSkilChk.value || !projUseToolChk.value){
       console.log("필수 값체크")
-      // return;
+      return false;
     }
 
     router.push({ 

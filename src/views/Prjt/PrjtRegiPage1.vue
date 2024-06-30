@@ -158,7 +158,9 @@
                   :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
                   @blur="workAddrChkRule()"
                   placeholder="예시) 서울특별시 강남구 테헤란로 000-0"/>
-                <input v-model="projStep.projOneStep.workDtlAddr" type="text" class="w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border border-[#ddd]" placeholder="예시) 큐밋빌딩 1층"/>
+                <input v-model="projStep.projOneStep.workDtlAddr" type="text" 
+                :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
+                placeholder="예시) 큐밋빌딩 1층"/>
               </div>
               <p v-show="!workAddrChk"
                 class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
@@ -304,14 +306,31 @@ async function loadData(){
 }
 
 function nextPage(){
+  if(gfnRules.isNull(projStep.value.projOneStep.projTitl)){
+    projTitlChk.value = false;
+  }
+  if(gfnRules.isNull(projStep.value.projOneStep.strtDay)){
+    strtDayChk.value = false;
+  }
+  if(gfnRules.isNull(projStep.value.projOneStep.pirdVal)){
+    pirdValChk.value = false;
+  }
+  if(gfnRules.isNull(projStep.value.projOneStep.workDtlAddr)){
+    workAddrChk.value = false;
+  }
+  if(gfnRules.isNull(projStep.value.projOneStep.atndTime)){
+    atndTimeChk.value = false;
+  }
+  if(gfnRules.isNull(projStep.value.projOneStep.lvwkTime)){
+    lvwkTimeChk.value = false;
+  }
+
 
   if(!projTitlChk.value || !strtDayChk.value || !pirdValChk.value 
       || !workAddrChk.value || !atndTimeChk.value || !lvwkTimeChk.value){
     console.log("필수 입력값 미입력... ")
-    //return
+    return false;
   }
-
-
   projStep.value.projOneStep.jobDivCdList = $jobChipset.value.returnCdList();
   projStep.value.projOneStep.taskDivCdList = $taskChipset.value.returnCdList();
   router.push({ 
@@ -320,6 +339,7 @@ function nextPage(){
       dataObj : JSON.stringify(projStep.value),
     },
   });
+
 }
 
 function changeWorkDivCd(cdVal){
