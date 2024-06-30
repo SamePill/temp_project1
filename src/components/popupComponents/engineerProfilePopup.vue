@@ -82,7 +82,7 @@
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                 <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">생년월일</p>
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{props.profile.bith}}</p>
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{gfnUtils.formatYYYYMMDD(props.profile.bith)}}</p>
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
                 <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">주소</p>

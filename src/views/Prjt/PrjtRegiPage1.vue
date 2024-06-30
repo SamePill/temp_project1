@@ -302,6 +302,16 @@ const { dataObj } = history.state;
 async function loadData(){
   if(dataObj != undefined){
     projStep.value = JSON.parse(dataObj);
+
+    for(var i=0; i<projStep.value.projOneStep.jobDivCdList.length; i++){
+      projStep.value.projOneStep.jobDivCdList[i].chkVal = true;
+      projStep.value.projOneStep.jobDivCdList[i].cd = projStep.value.projOneStep.jobDivCdList[i].jobDivCd
+    }
+    for(var j=0; j<projStep.value.projOneStep.taskDivCdList.length; j++){
+      projStep.value.projOneStep.taskDivCdList[j].chkVal = true;
+      projStep.value.projOneStep.taskDivCdList[j].cd = projStep.value.projOneStep.taskDivCdList[j].taskDivCd
+    } 
+
   }
 }
 

@@ -359,7 +359,6 @@
   async function profileBtn1(){
     modalShowProfile.value.close()      
 
-    // TODO 프로젝트 지원취소 API 확인필요
     var api = "/v1/my/cancel/support-project-engineer";
     var getParams = {userMail : userMail.value};
     var postParams = profileProcess.value;
@@ -372,8 +371,8 @@
     );
 
     if(rtn.rtnCd == "00"){
-      //TODO 정상시 메세지 리턴되는가??
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      gfnUtils.openAlert("정상처리 되었습니다.","", 2000)
+      loadData()
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

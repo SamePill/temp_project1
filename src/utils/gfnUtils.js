@@ -697,13 +697,18 @@ export const formatYYYYMM = (value) => {
  */
 export const formatYYYYMMDD = (value) => {
   // 숫자를 문자열로 변환
-  const valueStr = value.toString();
-  // 연도, 월, 일을 분리
-  const year = valueStr.slice(0, 4);
-  const month = valueStr.slice(4, 6);
-  const day = valueStr.slice(6, 8);
-  // 원하는 형식으로 반환
-  return `${year}-${month}-${day}`;
+  if(value != null){
+    const valueStr = value.toString();
+    // 연도, 월, 일을 분리
+    const year = valueStr.slice(0, 4);
+    const month = valueStr.slice(4, 6);
+    const day = valueStr.slice(6, 8);
+    // 원하는 형식으로 반환
+    return `${year}-${month}-${day}`;
+  }else{
+    return value
+  }
+  
 }
 
 export const formattedBizNo = (numberStr) => {

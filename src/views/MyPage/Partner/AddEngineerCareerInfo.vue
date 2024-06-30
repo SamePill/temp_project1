@@ -179,7 +179,7 @@
                     </p>
                   </div>
                   <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]">
-                    프로젝트 {{ 0 }}개월 수행
+                    프로젝트 {{ months }}개월 수행
                   </p>
                 </div>
               </div>
@@ -191,7 +191,7 @@
                   ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
                 </p>
                 <!-- 직군 chips -->
-                <Chipset ref="$jobChipset"  :cdList="engrStep2Detl.jobDivCdList" :listDivCd="'JOB_DIV_CD'" class="mt-[10px]"/>
+                <Chipset ref="$jobChipset"  :cdList="engrStep2Detl.jobDivCdList" :listDivCd="'JOB_DIV_CD'" />
               </div>
               <div
                 class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
@@ -203,7 +203,7 @@
                   ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"> </span>
                 </p>
                 <!-- 업무영역 chips -->
-                <Chipset ref="$taskChipset" :cdList="engrStep2Detl.taskDivCdList" :listDivCd="'TASK_DIV_CD'" class="mt-[10px]"/>
+                <Chipset ref="$taskChipset" :cdList="engrStep2Detl.taskDivCdList" :listDivCd="'TASK_DIV_CD'" />
               </div>
               <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
                 <div
@@ -309,7 +309,7 @@
   import { useRouter } from 'vue-router'
   import Chipset       from '@/components/uiComponents/Chipset.vue'
   import * as gfnUtils from "@/utils/gfnUtils.js";
-  import { onMounted, ref } from "vue";
+  import { onMounted, ref, computed } from "vue";
   import TaskTip from "@/components/popupComponents/TaskTip.vue";
   import SkillTip from "@/components/popupComponents/SkillTip.vue";
   import ToolTip from "@/components/popupComponents/ToolTip.vue";
@@ -352,6 +352,24 @@
     ]
   })
 
+  const months = computed(() =>  {
+    let year1 = parseInt(engrStep2Detl.value.strtYm.slice(0, 4));
+    let month1 = parseInt(engrStep2Detl.value.strtYm.slice(4, 6));
+
+    let year2 = parseInt(engrStep2Detl.value.endYm.slice(0, 4));
+    let month2 = parseInt(engrStep2Detl.value.endYm.slice(4, 6));
+
+    // 개월수 계산
+    let totalMonths1 = (year1 * 12) + month1;
+    let totalMonths2 = (year2 * 12) + month2;
+    if(totalMonths2 - totalMonths1 > 0){
+      return totalMonths2 - totalMonths1;  
+    }else{
+      return 0
+    }
+    
+  })
+
   async function loadData(){
     console.log("load Data.............")
 
@@ -367,9 +385,19 @@
       );
       if(rtn.rtnCd == "00"){
         let res = rtn.rtnData
-        console.log(res)
         engrStep2Detl.value = res
-        
+        for(var i=0; i<engrStep2Detl.value.jobDivCdList.length; i++){
+          engrStep2Detl.value.jobDivCdList[i].chkVal = true;
+          engrStep2Detl.value.jobDivCdList[i].cd = engrStep2Detl.value.jobDivCdList[i].jobDivCd
+        }
+        for(var j=0; j<engrStep2Detl.value.taskDivCdList.length; j++){
+          engrStep2Detl.value.taskDivCdList[j].chkVal = true;
+          engrStep2Detl.value.taskDivCdList[j].cd = engrStep2Detl.value.taskDivCdList[j].taskDivCd
+        } 
+
+        $jobChipset.value.loadData();
+        $taskChipset.value.loadData();
+        console.log(engrStep2Detl.value)
       }else{
         gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
       }
@@ -397,6 +425,16 @@
     if(engrStep2Detl.value.crntProjPrgsYn == "Y"){
       engrStep2Detl.value.crntProjPrgsYn = "N"
     }else{
+      // 현재 날짜 객체 생성
+      let currentDate = new Date();
+
+      // 현재 연도와 월 구하기
+      let currentYear = currentDate.getFullYear();
+      let currentMonth = currentDate.getMonth() + 1;
+      if (currentMonth < 10) {
+          currentMonth = '0' + currentMonth;
+      }
+      engrStep2Detl.value.endYm = currentYear + currentMonth
       engrStep2Detl.value.crntProjPrgsYn = "Y"
     }
   }
@@ -408,23 +446,32 @@
 
   async function saveData(){
     
-    //TODO 커리어 등록
-    
-    
     let api = ""
-
+    var params = engrStep2Detl.value;
     if(engrInfo.value.editMode == true){
       // 수정인 경우
+      params.engrId = engrInfo.value.engrId;
       api = "/v1/my/modify/engineer/step2"
     }else{
       // 등록인 경우
       api = "/v1/my/submit/engineer/step2";
     }
-    var params = engrStep2Detl.value;
-    params.engrId = "";
+    
+    params.jobDivCdList = $jobChipset.value.returnCdList();
+    for(var i=0; i<params.jobDivCdList.length; i++){
+      params.jobDivCdList[i].jobDivCd = params.jobDivCdList[i].cd;
+    }
+    params.taskDivCdList = $taskChipset.value.returnCdList();
+    for(var j=0; j<params.taskDivCdList.length; j++){
+      params.taskDivCdList[j].taskDivCd = params.taskDivCdList[j].cd;
+    } 
+
+    var getParams = {userMail :  userMail.value}
+    console.log(params)
     let rtn = await gfnUtils.axiosPost(
       api,
-      params
+      params,
+      getParams
     );
     if(rtn.rtnCd == "00"){
       //let res = rtn.rtnData

@@ -129,7 +129,7 @@
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
             <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
-            <input type="text" placeholder="전공학과를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]">
+            <input type="text" placeholder="전공학과를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.dprt">
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -143,11 +143,11 @@
           </div>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] h-[51px] gap-5">
             <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="" min="0" max="99" style="border:none"/>
+              <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrYear"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
             </div>
             <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="" min="0" max="99" style="border:none"/>
+              <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrMon"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개월</p>
             </div>
             <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" class="flex justify-start items-start flex-grow-0 flex-shrink-0 h-[51px] w-40" :div="'N'" :title="''" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
@@ -317,6 +317,10 @@ async function loadData(){
   if(rtn.rtnCd == "00"){
     console.log(rtn.rtnData)
     engrStep1.value = rtn.rtnData   
+
+    birthY.value = engrStep1.value.bith.slice(0, 4)
+    birthM.value = engrStep1.value.bith.slice(4, 6)
+    birthD.value = engrStep1.value.bith.slice(6, 8)
   }else{
     gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }
@@ -359,17 +363,17 @@ async function nextStep(){
     return;
   }
 
-  if(gfnUtils.isNull(engrStep1.value.baseAddr)){
+  if(gfnRules.isNull(engrStep1.value.baseAddr)){
     //주소 검사 > 오류처리
     return;
   }
 
-  if(gfnUtils.isNull(engrStep1.value.schlNm)){
+  if(gfnRules.isNull(engrStep1.value.schlNm)){
     //최종학력 검사 > 오류처리
     return;
   }
 
-  if(gfnUtils.isNull(engrStep1.value.taskSkil)){
+  if(gfnRules.isNull(engrStep1.value.taskSkil)){
     //업무스킬 검사 > 오류처리
     return;
   }

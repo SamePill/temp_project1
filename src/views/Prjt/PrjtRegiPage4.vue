@@ -214,6 +214,14 @@ async function loadData(){
 
 async function nextPage(div){
   if(div == 'next'){  
+
+    for(var i=0; i<projStep.value.projOneStep.jobDivCdList.length; i++){
+      projStep.value.projOneStep.jobDivCdList[i].jobDivCd = projStep.value.projOneStep.jobDivCdList[i].cd
+    }
+    for(var j=0; j<projStep.value.projOneStep.taskDivCdList.length; j++){
+      projStep.value.projOneStep.taskDivCdList[j].taskDivCd = projStep.value.projOneStep.taskDivCdList[j].cd;
+    } 
+
     const userMail = ref(window.$cookies.get("loginUserMail"));
     console.log(JSON.stringify(projStep.value))
     var api = "/v1/project/submit";
