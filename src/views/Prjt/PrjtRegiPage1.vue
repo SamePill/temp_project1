@@ -330,16 +330,16 @@ function nextPage(){
       || !workAddrChk.value || !atndTimeChk.value || !lvwkTimeChk.value){
     console.log("필수 입력값 미입력... ")
     return false;
-  }else{
-    projStep.value.projOneStep.jobDivCdList = $jobChipset.value.returnCdList();
-    projStep.value.projOneStep.taskDivCdList = $taskChipset.value.returnCdList();
-    router.push({ 
-      name: "PrjtRegiPage2"
-      ,state: {
-        dataObj : JSON.stringify(projStep.value),
-      },
-    });
   }
+  projStep.value.projOneStep.jobDivCdList = $jobChipset.value.returnCdList();
+  projStep.value.projOneStep.taskDivCdList = $taskChipset.value.returnCdList();
+  router.push({ 
+    name: "PrjtRegiPage2"
+    ,state: {
+      dataObj : JSON.stringify(projStep.value),
+    },
+  });
+
 }
 
 function changeWorkDivCd(cdVal){
