@@ -48,7 +48,7 @@
         </div>
         <div v-if="i < (showIdx-1)" class="mt-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
       </div>
-      <div class="flex justify-center items-center ">
+      <div class="flex justify-center items-center mb-[60px]">
         <button v-show="!isShowMore" @click="showMore()"  class="text-center w-[250px] h-[51px]  px-2.5 rounded border border-[#dbdbdb] font-medium text-left text-[#191919]">
             더보기
         </button>
