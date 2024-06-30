@@ -73,6 +73,10 @@
 </script>
 <style>
 body{
+  /* height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto; */
   overflow-y:none;
   overflow: hidden !important; 
   font-family: 'Pretendard-Regular', sans-serif !important;

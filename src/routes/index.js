@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from '@/views/Home/Home.vue'
 
 //프로젝트 등록
@@ -52,7 +52,8 @@ import TestPage from "@/views/Test/TestPage.vue";
 import TestPageSetup from "@/views/Test/TestPageSetup.vue";
 
 export default createRouter({
-  history: createWebHashHistory(),
+  //history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -258,7 +259,7 @@ export default createRouter({
     
   ],
   scrollBehavior(to, from, savedPosition) { // eslint-disable-line no-unused-vars
-    // 항상 맨 위로 스크롤
-    return { top: 0 }
-  },
+    // Always scroll to top
+    return { top: 0 };
+  }
 });
