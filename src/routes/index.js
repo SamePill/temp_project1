@@ -46,6 +46,7 @@ import WhatIsQm from '@/views/AboutQm/WhatIsQm.vue'
 //고객센터
 import CstmSrvcCntr from '@/views/Cstm/CstmSrvcCntr.vue'
 import QmNews from '@/views/Cstm/QmNews.vue'
+import NotiDetl from '@/views/Cstm/NotiDetl.vue'
 import ApplyPtnSrve from '@/views/Cstm/ApplyPtnSrve.vue'
 import Qstn from '@/views/Cstm/Qstn.vue'
 
@@ -245,6 +246,12 @@ export default createRouter({
     path: '/qmNews',
     component: QmNews,
     name: 'QmNews'
+  },
+  //공지사항 상세
+  {
+    path: '/notiDetl',
+    component: NotiDetl,
+    name: 'NotiDetl'
   },
   //제휴서비스입점신청
   {

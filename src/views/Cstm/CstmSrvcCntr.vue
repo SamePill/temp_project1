@@ -41,18 +41,18 @@
             <img class="w-[25px]" src="@/assets/ic_small_arrow_001.png"/>
           </button>
         </div>
-        <div v-show ="i < showIdx && showFaqRepyTxtIdx == i" class="w-[1060px] mt-[20px] gap-2.5 px-[34px] py-[30px] bg-[#ededed]">
+        <div v-if ="i < showIdx && showFaqRepyTxtIdx == i" class="w-[1060px] mt-[20px] gap-2.5 px-[34px] py-[30px] bg-[#ededed]">
           <p class="self-stretch  w-[992px] text-base text-left text-black">
             {{ el.faqRepyTxt }}
           </p>
         </div>
         <div v-if="i < (showIdx-1)" class="mt-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
       </div>
-      <div class="flex justify-center items-center mb-[60px]">
+      <div  v-if="faqList.length > 4" class="flex justify-center items-center mb-[60px] mt-[60px]">
         <button v-show="!isShowMore" @click="showMore()"  class="text-center w-[250px] h-[51px]  px-2.5 rounded border border-[#dbdbdb] font-medium text-left text-[#191919]">
             더보기
         </button>
-        <div v-show="faqList.length  > 0 && isShowMore" class="mt-[60px] paginationDiv w-[1060px] h-10 mx-auto font-basic" style="text-align:center">
+        <div v-show="faqList.length  > 0 && isShowMore" class="paginationDiv w-[1060px] h-10 mx-auto font-basic" style="text-align:center">
           <vue-awesome-paginate
             :total-items=totalCnt
             v-model="pageNo"
@@ -124,8 +124,17 @@ function srchFaqList(){
                    ,pageNo:pageNo.value};
   gfnUtils.axiosGet("/v1/common/faq",getParams).then(function(res){
     if(res.rtnCd=='00'){
-      faqList.value = res.rtnData.faqList;
-      totalCnt.value = res.rtnData.faqTotCnt;
+      if(showIdx.value == 5){
+        res.rtnData.faqList.forEach((el,i)=>{
+          if(i < 5){
+            faqList.value.push(el);            
+          }
+          totalCnt.value = res.rtnData.faqTotCnt;
+        });  
+      }else{
+        faqList.value = res.rtnData.faqList; 
+        totalCnt.value = res.rtnData.faqTotCnt;
+      }
     }else{
       gfnUtils.openAlert(res.rtnMsg);
     }
@@ -145,6 +154,7 @@ function showFaqRepyTxt(idx){
 function showMore(){
   isShowMore.value = true;
   showIdx.value = totalCnt.value;
+  loadData();
 }
 
 //탭선택

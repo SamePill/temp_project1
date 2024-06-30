@@ -5,17 +5,46 @@
     </div>
     <div class="mt-[10px] flex flex-col justify-start flex-grow-0 flex-shrink-0 w-[1060px]">
       <div v-for="(el,i) in notiList" :key = "i" class="mt-[20px] flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative">
-        <div v-if="i < (showIdx-1)" class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>        
+        <div v-if="i < (showIdx-1)" class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
+
+
+        <div v-if="showNotiRepyTxtIdx != null && detlData != {}" class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{detlData.regDttm}}</p>
+          <p class="flex-grow-0 flex-shrink-0 w-[800px] text-xl text-left text-[#333]">
+            {{detlData.notiTitl}}
+          </p>
+          <div v-show ="i < showIdx && showNotiRepyTxtIdx == i && !gfnRules.isNull(el.notiRepyTxt) " class="w-[1060px] mt-[10px] mb-[60px] gap-2.5 px-[34px] py-[30px] bg-[#ededed]">
+            <p class="self-stretch  w-[992px] text-base text-left text-black">
+              {{ detlData.notiTxt }}
+            </p>
+          </div>
+        </div>
+        <div v-if="showNotiRepyTxtIdx != null" class="w-[1060px] mt-[60px] mb-[100px]">
+          <div class="mx-auto flex justify-between items-center flex-grow-0 flex-shrink-0 w-[400px] relative">
+            <img class="w-[20px]" src="@/assets/ic_small_arrow_002.png"/>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">이전글</p>
+            <img src="@/assets/line_001.png"/>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">목록</p>
+            <img src="@/assets/line_001.png"/>
+            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">다음글</p>
+            <img class="w-[20px]" src="@/assets/ic_small_arrow_003.png"/>
+          </div>
+        </div>
+
+
+
+
+        
         <div v-if="i < showIdx" class="flex w-[1060px] relative pl-px pr-2.5" >
           <div class="flex w-[1025px] relative">
             <p class="flex w-[150px] font-bold text-left text-[#191919]">
               {{ el.notiDivCdNm }}
             </p>
-            <button @click="goToPage(i,el.notiSeq)" class="flex-grow-0 flex-shrink-0 w-[875px] text-base text-left text-[#333]">
+            <button @click="showNotiRepyTxt(i,el.notiSeq)" class="flex-grow-0 flex-shrink-0 w-[875px] text-base text-left text-[#333]">
               {{ el.notiTitl }}
             </button>
           </div>
-          <button @click="goToPage(i,el.notiSeq)">
+          <button @click="showNotiRepyTxt(i,el.notiSeq)">
             <img class="w-[25px]" src="@/assets/ic_small_arrow_001.png"/>
           </button>
         </div>
@@ -65,6 +94,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import * as gfnRules from "@/utils/gfnRules.js";
 
 const router = useRouter()
 const topItemList = ref([ {title:'큐밋 소식', contents1:`큐밋 소식에서`, contents2:'공지사항과 이벤트를 빠르게 볼 수 있어요!', img:'cstmSrvc_qm.png'}
@@ -75,6 +105,7 @@ const pageNo   = ref(1);
 const notiList = ref([]);
 const totalCnt = ref(0);
 const showNotiRepyTxtIdx = ref(null)
+const detlData = ref({})
 const showIdx = ref(5);
 const isShowMore = ref(false);
 // const notiSeq = ref();
@@ -90,15 +121,13 @@ function loadData(){
   srchNotiList();
 }
 
-//상세보기
-function goToPage(i,notiSeqVal){
-  let getParam = {idx: i, notiSeq:notiSeqVal }
-  router.push({
-    name :'NotiDetl'
-    ,state:{
-      dataObj : JSON.stringify(getParam),
-    }
-  });
+//상단아이템 선택
+function goToPage(path){
+  console.log(path)
+  //company news
+  //ApplyPtnSrve
+  //Questions,inquire
+  router.push({name :path})
 }
 
 //리스트조회
@@ -123,6 +152,26 @@ function srchNotiList(){
     
     console.log(notiList.value)
   });
+}
+
+//답변보기
+function showNotiRepyTxt(idx,notiSeqVal){
+  if(showNotiRepyTxtIdx.value === idx){
+    showNotiRepyTxtIdx.value = null;
+  }else{
+    showNotiRepyTxtIdx.value = idx;
+  }
+  
+  let getParams = {notiSeq: notiSeqVal};
+  gfnUtils.axiosGet("/v1/common/notice-detail",getParams).then(function(res){
+    if(res.rtnCd=='00'){
+      detlData.value = res.rtnData;
+    }else{
+      gfnUtils.openAlert(res.rtnMsg);
+    }
+    console.log(detlData.value)
+  });
+
 }
 
 //더보기
