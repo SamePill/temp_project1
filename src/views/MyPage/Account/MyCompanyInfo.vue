@@ -351,6 +351,7 @@ async function saveInfo(){
     companyInfo.value.bizRegFileUrl = ""
     companyInfo.value.bizRegFileSeq = ""
     companyInfo.value.bizRegFileNm = bizRegFileNm.value
+    companyInfo.value.delBizRegFileSeq = companyInfo.value.bizRegFileSeq
   }
   if(compLogoFile.value != null  ){
     console.log("회사 로그 있음....")
@@ -358,6 +359,7 @@ async function saveInfo(){
     companyInfo.value.compLogoFileSeq = ""
     companyInfo.value.compLogoFileUrl = ""
     companyInfo.value.compLogoFileNm = compLogoFileNm.value
+    companyInfo.value.delCompLogoFileSeq = companyInfo.value.compLogoFileSeq
   }
   formData.append("userMail", userMail.value )
   formData.append("modifyCompInfoInputJson ",  JSON.stringify(companyInfo.value) )

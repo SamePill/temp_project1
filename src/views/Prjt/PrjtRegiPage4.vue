@@ -244,10 +244,9 @@ async function nextPage(div){
       gfnUtils.openAlert("프로젝트 등록이 완료 되었습니다.","", 2000)
       router.replace("/")
     }else{
-      gfnUtils.openAlert("프로젝트 등록중 오류가 발생하였습니다.","", 2000)
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
     console.log(projStep.value)
-    console.log('등록완료');
     // projStep.value.projOneStep.jobDivCdList.forEach(el=>{
     //   el = {'jobDivCd':el.cd}
 

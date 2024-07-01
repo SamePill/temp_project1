@@ -619,6 +619,11 @@ async function apply() {
   if (gfnRules.isNull(props.prj.projectSprtInfo)) {
     api = "/v1/project/support";
   } else {
+    if(engrList.value.length == 0){
+      postParams.isEngrChangeYn = "N"
+    }else{
+      postParams.isEngrChangeYn = "Y"
+    }
     postParams.projSprtSeq = props.prj.projectSprtInfo.projSprtSeq;
     api = "/v1/project/modify/support";
   }

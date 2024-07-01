@@ -31,6 +31,7 @@ const props = defineProps({
   title : String
   ,listDivCd : String
   ,div: String
+  ,selCd: String
 })
 const emit = defineEmits([
   'setData'
@@ -45,12 +46,30 @@ const isShow = ref(false);
 async function loadData(){
   cdList.value = await gfnUtils.getCommCode(props.listDivCd);
   if(props.div =='N'){
-    cdVal.value = cdList.value[0].cdVal;
+    // cdVal.value = cdList.value[0].cdVal;
+    // cdNm.value = cdList.value[0].cdNm;
+    cdVal.value = cdList.value[0].cd;
     cdNm.value = cdList.value[0].cdNm;
   }else {
     cdVal.value = '';
     cdNm.value = '전체';
   }
+
+  if(!gfnRules.isNull(props.selCd)){
+    for(var i = 0; i < cdList.value.length; i++ ){
+      // console.log(cdList.value[i].cd + " :: "  + props.selCd)
+      if(cdList.value[i].cd == props.selCd){
+        selectDefaultVal(cdList.value[i])
+      }      
+    }    
+    cdVal.value = props.selCd;
+  }
+}
+
+function selectDefaultVal(el){
+  cdVal.value = el.cd;
+  cdNm.value = el.cdNm;
+  emit('setData',el.cd);
 }
 
 function selectVal(el){

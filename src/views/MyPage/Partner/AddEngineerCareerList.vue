@@ -229,23 +229,24 @@
 
   async function loadData(){
     
-    if(engrInfo.value.editMode == true){
-      console.log("수정모드")
-      var api = "/v1/my/engineer/projet-summary-list";
-      var getParams = {userMail : userMail.value ,  engrId:engrInfo.value.engrId };
-      let rtn = await gfnUtils.axiosGet(
-        api,
-        getParams
-      );
-      if(rtn.rtnCd == "00"){
-        let res = rtn.rtnData
-        projSmryHstrList.value = res.projSmryHstrList
-      }else{
-        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
-      }
+    var api = "/v1/my/engineer/projet-summary-list";
+    var getParams = {userMail : userMail.value ,  engrId:engrInfo.value.engrId };
+    let rtn = await gfnUtils.axiosGet(
+      api,
+      getParams
+    );
+    if(rtn.rtnCd == "00"){
+      let res = rtn.rtnData
+      projSmryHstrList.value = res.projSmryHstrList
     }else{
-      console.log("등록모드")
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
+
+    // if(engrInfo.value.editMode == true){
+    //   console.log("수정모드")
+    // }else{
+    //   console.log("등록모드")
+    // }
   }      
 
   function editCareer(idx){
@@ -258,8 +259,9 @@
   }
 
   function addCareer(){
+    var param = {editMode : false, engrId:engrInfo.value.engrId }
     router.push({name: "AddEngineerCareerInfo"
-      ,state : { dataObj : JSON.stringify({editMode : false}) }
+      ,state : { dataObj : JSON.stringify(param) }
     })
   }
 

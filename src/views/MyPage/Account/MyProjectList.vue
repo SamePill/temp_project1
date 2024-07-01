@@ -102,11 +102,14 @@
                 <div
                   class="flex justify-start items-center flex-grow-0 flex-shrink-0 h-8 relative gap-20"
                 >
-                  <p class="flex-grow-0 flex-shrink-0 w-[60px] text-sm text-left text-[#191919]">
+                  <p v-if="gfnRules.isNull(el.projSprtSeq)" class="flex-grow-0 flex-shrink-0 w-[60px] text-sm text-left text-[#191919]">
                     등록
                   </p>
+                  <p v-else class="flex-grow-0 flex-shrink-0 w-[60px] text-sm text-left text-[#191919]">
+                    지원
+                  </p>
                   <p class="flex-grow-0 flex-shrink-0 w-[60px] text-sm text-left text-[#191919]">
-                    {{el.projStatCd}}
+                    {{el.projStatCdNm}}
                   </p>
                   <p class="flex-grow-0 flex-shrink-0 w-60 text-sm text-left text-[#191919]">
                     {{el.projTitl}}
@@ -115,7 +118,7 @@
                     {{el.pirdVal}}개월
                   </p>
                   <p class="flex-grow-0 flex-shrink-0 w-[140px] text-sm text-left text-[#191919]">
-                    {{el.expcPric/10000}} 만원
+                    {{gfnUtils.formattedNumber(el.expcPric/10000)}} 만원
                   </p>
                 </div>
                 <!--  반복부 끝 -->
@@ -158,6 +161,7 @@ import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import { ref, onMounted } from 'vue'
 //import { useRouter } from 'vue-router'
+import * as gfnRules from "@/utils/gfnRules.js";
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
 onMounted(() => {
@@ -193,7 +197,7 @@ async function loadData(selPage){
   
   if(rtn.rtnCd == "00"){
     let res = rtn.rtnData
-
+    console.log(res)
     projList.value = res.projList
     topInfo.value = res.topInfo
     totalCnt.value = res.projTotlCnt

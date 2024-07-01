@@ -241,7 +241,7 @@
                 <textarea
                   class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                   placeholder="업무스킬을 입력해주세요."
-                  v-model="engrStep2Detl.projCtntTask"
+                  v-model="engrStep2Detl.projDmndSkil"
                 >
                 </textarea>
               </div>
@@ -448,9 +448,9 @@
     
     let api = ""
     var params = engrStep2Detl.value;
+    params.engrId = engrInfo.value.engrId;
     if(engrInfo.value.editMode == true){
       // 수정인 경우
-      params.engrId = engrInfo.value.engrId;
       api = "/v1/my/modify/engineer/step2"
     }else{
       // 등록인 경우

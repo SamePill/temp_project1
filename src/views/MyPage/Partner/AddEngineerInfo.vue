@@ -125,7 +125,7 @@
           </p>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5 ">
             <input type="text" placeholder="학교명을 입력해주세요." class="h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.schlNm">
-            <DropDown @click="documentClick('EdctDivCd','dropDown')" id="EdctDivCd" ref="$EdctDivCd" @setData="getEdctDivCd" class="h-[51px] w-[160px]" :div="'N'" :title="''" :listDivCd="'EDCT_DIV_CD'"/>
+            <DropDown @click="documentClick('EdctDivCd','dropDown')" id="EdctDivCd" ref="$EdctDivCd" @setData="getEdctDivCd" class="h-[51px] w-[160px]" :div="'N'" :title="''" :listDivCd="'EDCT_DIV_CD'" :selCd="engrStep1.edctDivCd"/>
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
             <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
@@ -150,7 +150,7 @@
               <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrMon"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개월</p>
             </div>
-            <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" class="flex justify-start items-start flex-grow-0 flex-shrink-0 h-[51px] w-40" :div="'N'" :title="''" :listDivCd="'ENGR_RTNG_DIV_CD'"/>
+            <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" class="flex justify-start items-start flex-grow-0 flex-shrink-0 h-[51px] w-40" :div="'N'" :title="''" :listDivCd="'ENGR_RTNG_DIV_CD'"  :selCd="engrStep1.engrRtngDivCd"/>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -398,6 +398,7 @@ async function nextStep(){
   }else{
     //등록
     api = "/v1/my/submit/engineer/step1";
+    engrStep1.value.crtdUserMail = userMail.value;
     getParam = { "userMail": userMail.value}
     formData.append("inputJson", new Blob([JSON.stringify(engrStep1.value)]) , { type: "application/json" }); //, 
   }
@@ -475,9 +476,11 @@ function documentClick(div,eventTarget){
 
 function getEdctDivCd(data){
   edctDivCd.value = data;
+  engrStep1.value.edctDivCd = data
 }
 
 function getEngrRtngDivCd(data){
   engrRtngDivCd.value = data;
+  engrStep1.value.engrRtngDivCd = data
 }
 </script>
