@@ -11,16 +11,16 @@
             <p class="flex w-[150px] font-bold text-left text-[#191919]">
               {{ el.notiDivCdNm }}
             </p>
-            <button @click="goToPage(i,el.notiSeq)" class="flex-grow-0 flex-shrink-0 w-[875px] text-base text-left text-[#333]">
+            <button @click="goToPage(el.notiSeq,i)" class="flex-grow-0 flex-shrink-0 w-[875px] text-base text-left text-[#333]">
               {{ el.notiTitl }}
             </button>
           </div>
-          <button @click="goToPage(i,el.notiSeq)">
-            <img class="w-[25px]" src="@/assets/ic_small_arrow_001.png"/>
+          <button @click="goToPage(el.notiSeq,i)">
+            <img class="w-[25px] rotate-[-90deg]" src="@/assets/ic_small_arrow_001.png"/>
           </button>
         </div>
       </div>
-      <div v-if="notiList.length > 4" class="flex justify-center items-center mt-[60px]">
+      <div v-if="notiList.length > 3" class="flex justify-center items-center mt-[60px]">
         <button v-show="!isShowMore" @click="showMore()"  class="text-center w-[250px] h-[51px]  px-2.5 rounded border border-[#dbdbdb] font-medium text-left text-[#191919]">
             더보기
         </button>
@@ -66,6 +66,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
 
+const { dataObj } = history.state; 
 const router = useRouter()
 const topItemList = ref([ {title:'큐밋 소식', contents1:`큐밋 소식에서`, contents2:'공지사항과 이벤트를 빠르게 볼 수 있어요!', img:'cstmSrvc_qm.png'}
 ,{title:'제휴 서비스 입점신청', contents1:'제휴 서비스 입점신청에서', contents2:'입점관련 상담을 받아보세요!', img:'cstmSrvc_af.png'}
@@ -74,7 +75,6 @@ const topItemList = ref([ {title:'큐밋 소식', contents1:`큐밋 소식에서
 const pageNo   = ref(1);
 const notiList = ref([]);
 const totalCnt = ref(0);
-const showNotiRepyTxtIdx = ref(null)
 const showIdx = ref(5);
 const isShowMore = ref(false);
 // const notiSeq = ref();
@@ -87,18 +87,16 @@ onUnmounted(()=>{
 });
 
 function loadData(){
-  srchNotiList();
-}
-
-//상세보기
-function goToPage(i,notiSeqVal){
-  let getParam = {idx: i, notiSeq:notiSeqVal }
-  router.push({
-    name :'NotiDetl'
-    ,state:{
-      dataObj : JSON.stringify(getParam),
+  
+  if(dataObj != undefined && dataObj != null){
+    let params = JSON.parse(dataObj);  
+    if(params != undefined){
+      pageNo.value   = params.pageNo;
+      showIdx.value  = params.showIdx;
+      isShowMore.value = params.isShowMore;
     }
-  });
+  }
+  srchNotiList();
 }
 
 //리스트조회
@@ -120,9 +118,27 @@ function srchNotiList(){
     }else{
       gfnUtils.openAlert(res.rtnMsg);
     }
-    
-    console.log(notiList.value)
   });
+}
+
+//상세보기
+function goToPage(notiSeqVal,i){
+  if(notiSeqVal != undefined && notiSeqVal != null){
+    let getParam = {notiSeq    :notiSeqVal
+                    ,notiList  :notiList.value
+                    ,pageNo    :pageNo.value
+                    ,showNotiRepyTxtIdx: i
+                    ,showIdx   :showIdx.value
+                    ,isShowMore:isShowMore.value
+                    ,totalCnt  :totalCnt.value
+    }
+    router.push({
+      name :'NotiDetl'
+      ,state:{
+        dataObj : JSON.stringify(getParam),
+      }
+    });
+  }
 }
 
 //더보기
@@ -134,7 +150,6 @@ function showMore(){
 
 //페이지네이션
 function pagenation(){
-  showNotiRepyTxtIdx.value = null;
   loadData();
 }
 </script>
