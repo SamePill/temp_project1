@@ -21,9 +21,9 @@
             <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('CstmSrvcCntr')">
               고객센터
             </button>
-            <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('TestPageSetup')">
+            <!-- <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]" @click="goToPage('TestPageSetup')">
               test
-            </button>          
+            </button>           -->
           </div>
         </div>
         <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-5" v-if="loginYn == null">
