@@ -222,15 +222,14 @@ export const axiosPost = (api, postParams, queryParam, loading, isErr, withFile)
         if (loading) {
           sysStore.setProgress(false);
         }
-        console.log(err.response);
         if (isErr) {
           console.log("Error -----------------------")
-          console.log(err.response.data)
-          console.log(err.response.status)
+          // console.log(err.response.data)
+          // console.log(err.response.status)
           //alert(err.response.status);     
           // console.log("오류");
-          console.log(err.response.data.rtnMsg)
-          console.log(err.response.data.rtnData)
+          // console.log(err.response.data.rtnMsg)
+          // console.log(err.response.data.rtnData)
           if (err.response.status == "404") {
             // goto 404 page
             //응답코드별 처리...
@@ -288,7 +287,6 @@ export const axiosGetEx = (api, getParams, div, loading) => {
   if(div == "addr"){
     getParams.confmKey = addrApiKey
   }
-  console.log(getParams)
 
   var apiUrl =  api;
   axios.defaults.headers.common["Content-Type"] = "application/json"
@@ -318,8 +316,7 @@ export const axiosGetEx = (api, getParams, div, loading) => {
         if (loading) {
           sysStore.setProgress(false);
         }
-        console.log("err catch 에러!!!!!!!!!!!!!!!!" + isErr);
-        console.log(err.response);
+        
         if (isErr) {
           // console.log("Error -----------------------")
           // console.log(err.response.data)

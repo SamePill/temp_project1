@@ -4,11 +4,9 @@ export const ValidationDirective = {
         // const value = context.attrs['onUpdate:modelValue'];
 
         const btn = document.getElementById('btn');
-        console.log('??',document.getElementById('btn'))
-
 
         btn.addEventListener('click', () => {
-                console.log('????',context.dirs[0].value)
+
             if(context.dirs[0].value == ''){
                 el.style.border = '1.5px solid #ff5252'
                 let stmt = ' 선택해주세요'

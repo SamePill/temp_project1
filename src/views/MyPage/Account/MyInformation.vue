@@ -336,9 +336,7 @@
       api,
       getParams
     );
-    
-    console.log(rtn);
-    
+        
     if(rtn.rtnCd == "00"){
       userInfo.value = rtn.rtnData
 
@@ -390,8 +388,7 @@
       api,
       postParams
     );
-    
-    console.log(rtn);
+   
     
     if(rtn.rtnCd == "00"){
       userInfo.value = rtn.rtnData

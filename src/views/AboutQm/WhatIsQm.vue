@@ -134,7 +134,6 @@ function loadData(dataObj){
 
 function clickMainTab(el,i){
   slctMainTabIdx.value = {i:i ,tabId:el.tabId};
-  console.log(slctMainTabIdx.value)
   if(i==0){
     slctSpecTab.value = 'prjtRegi';
     scroll('prjtRegi');

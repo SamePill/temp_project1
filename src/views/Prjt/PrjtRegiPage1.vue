@@ -209,7 +209,9 @@ import { useRouter, onBeforeRouteLeave } from 'vue-router';
 import SrchAddrApiPopup from "@/components/popupComponents/SrchAddrApiPopup.vue";
 import Modal from "@/components/baseComponents/Modal.vue";
 import * as gfnRules from "@/utils/gfnRules.js";
+import { prjtFileStore } from '@/stores'
 
+const fileStore = prjtFileStore();
 const $jobChipset = ref(null);
 const $taskChipset = ref(null);
 const srchAddrShow = ref(null);
@@ -224,7 +226,7 @@ const closeAddrPop = function (){
 }
 //주소팝업 리턴
 function returnArrd(addrVal){
-  console.log(addrVal)
+
   projStep.value.projOneStep.workAddr = addrVal.roadAddr;
   workAddrChkRule()
 }
@@ -285,6 +287,7 @@ const lvwkTimeChk = ref(true)
 
 onMounted(() => {
   // jobDivCdList.value = []
+  fileStore.setFiles([])
   loadData();
   $jobChipset.value.loadData();
   $taskChipset.value.loadData();
@@ -315,7 +318,7 @@ async function loadData(){
         projStep.value.projOneStep.taskDivCdList[j].cd = projStep.value.projOneStep.taskDivCdList[j].taskDivCd
       }
     } 
-    console.log(projStep.value)
+    
   }
 }
 

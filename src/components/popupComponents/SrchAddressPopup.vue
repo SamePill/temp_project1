@@ -19,7 +19,6 @@
   const inputYn = ref('N')
 
   function init(){
-    console.log("Xxx");
 
     var url = location.href +"/";
     alert(url);
@@ -37,7 +36,6 @@
       //inputYn.value = 'Y'
     }else{
 
-      console.log("ddddd");
     //   //sendMsgToParent()
       
     //   /** API 서비스 제공항목 확대 (2017.02) **/
@@ -50,11 +48,7 @@
     }
   }
 
-  function test() {
-    console.log("ddddd-------------------------------------");
-  }
-
-
+  
   async function initAxios(){
     console.log("axios....");
     

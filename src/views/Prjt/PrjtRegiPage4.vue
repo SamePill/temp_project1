@@ -259,14 +259,7 @@ async function nextPage(div){
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
-    console.log(projStep.value)
-    // projStep.value.projOneStep.jobDivCdList.forEach(el=>{
-    //   el = {'jobDivCd':el.cd}
-
-
-
-    // });
-    console.log(projStep.value)
+    
   }else{
     router.push({ 
       name: "PrjtRegiPage3"

@@ -494,7 +494,7 @@ const confirm = function () {
 };
 
 onMounted(() => {
-  console.log(props.prj)
+
   //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
   //로그인 후 - 지원 후(projectSprtInfo유무)
   //hopeStrtDay.value = today;
@@ -535,12 +535,10 @@ function checkTrmsYn(div) {
 
 function clickSideMenuBtn(div) {
   if (div == "cancel") {
-    console.log(props.prj);
     showConfirm();
     //컨펌띄우기
   } else {
     isShowDetl.value = true;
-    console.log(props.prj);
     // if (props.prj.projectSprtInfo != null) {
     // }
   }
@@ -554,7 +552,6 @@ async function editProject() {
     .axiosGet("/v1/project/step-all", getParams)
     .then(function (rtn) {
       if (rtn.rtnCd == "00") {
-        console.log(rtn);
 
         let projStep = rtn.rtnData;
 
@@ -566,7 +563,6 @@ async function editProject() {
           projStep.projOneStep.taskDivCdList[key].chkVal = true;
         }
 
-        console.log(projStep);
         router.push({
           name: "PrjtRegiPage1",
           state: {
@@ -574,7 +570,7 @@ async function editProject() {
           },
         });
       } else {
-        console.log(rtn);
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
       }
     });
 }
@@ -605,13 +601,10 @@ async function apply() {
   };
 
   if (engrList.value.length > 0) {
-    console.log("엔지니어 추가");
     for (let i = 0; i < engrList.value.length; i++) {
       postParams.engrList.push({ engrId: engrList.value[i].engrId });
     }
   } else {
-    console.log("엔지니어 선택확인 필요..");
-    //TODO 수정인경우 엔지니어 목록 처리 방법 확인필요
     gfnUtils.openAlert("엔지니어 목록을 확인해주세요.", "", 2000);
     return;
   }
@@ -628,8 +621,6 @@ async function apply() {
     api = "/v1/project/modify/support";
   }
 
-  console.log(postParams);
-
   var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
   if (rtn.rtnCd == "00") {
     gfnUtils.openAlert("정상적으로 처리되었습니다.", "", 2000);
@@ -641,13 +632,10 @@ async function apply() {
 
 async function cancelApply() {
 
-  console.log("지원 취소 API 확인 필요!!!!!!!!!!!");
-
   let api = "/v1/my/cancel/support-project";
   let postParams = {projSprtSeqList : [{ projSprtSeq : props.prj.projectSprtInfo.projSprtSeq}]};
   let getParams = {userMail : userMail.value};
 
-  console.log(postParams)
   var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
   if (rtn.rtnCd == "00") {
     gfnUtils.openAlert("정상적으로 처리되었습니다.","", 2000)
@@ -664,7 +652,7 @@ function selectEngr(applEngrList, sel10Cnt, sel20Cnt, sel30Cnt, sel40Cnt) {
   engr20Cnt.value = sel20Cnt;
   engr30Cnt.value = sel30Cnt;
   engr40Cnt.value = sel40Cnt;
-  console.log("지원 엔지니어 정보");
+
 }
 
 /*

@@ -197,7 +197,6 @@ async function loadData(selPage){
   
   if(rtn.rtnCd == "00"){
     let res = rtn.rtnData
-    console.log(res)
     projList.value = res.projList
     topInfo.value = res.topInfo
     totalCnt.value = res.projTotlCnt

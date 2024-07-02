@@ -216,10 +216,7 @@ async function loadData(){
 
     projStep.value = JSON.parse(dataObj);
     fileList.value = fileStore.getAttachFiles
-    // console.log(projStep.value.fileList)
-    // console.log(projStep.value.fileList)
-    // console.log(projStep.value.fileList)
-    // console.log(projStep.value.fileList)
+
     // if(projStep.value.fileList != undefined){
     //   fileList.value = projStep.value.fileList; 
     // }

@@ -290,7 +290,7 @@ function updateAcqsDt(value, idx) {
 }
 onMounted(() => {
 
-  console.log(dataObj)
+
   if( dataObj != undefined ){
     console.log("수정모드...")
     engrInfo.value = JSON.parse(dataObj)
@@ -315,7 +315,6 @@ async function loadData(){
   );
 
   if(rtn.rtnCd == "00"){
-    console.log(rtn.rtnData)
     engrStep1.value = rtn.rtnData   
 
     birthY.value = engrStep1.value.bith.slice(0, 4)

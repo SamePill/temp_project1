@@ -250,7 +250,6 @@
   }      
 
   function editCareer(idx){
-    console.log(idx)
     projSmryHstrList.value[idx].editMode = true
     router.push({
       name: "AddEngineerCareerInfo",

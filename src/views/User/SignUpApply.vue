@@ -707,15 +707,11 @@
   // signUp.value.joinTwoStep.privTrmsYn = "N"
   // signUp.value.joinTwoStep.useTrmsYn = "N"
 
-  console.log(dataObj); 
-  console.log(signUp.value)
-
   function selEmail(){
     console.log("check!!!!!!!!!!!!!!!!!!")
   }
 
   function checkBox(id){
-    console.log(id);
     
     if(id == "privTrmsYn"){
     
@@ -780,8 +776,7 @@
 
   async function regiUser(){
 
-    console.log(JSON.stringify(signUp.value))
-    
+        
     var api = "/v1/auth/join";
     let formData = new FormData();
     if(bizNoFile.value != null){
@@ -819,8 +814,7 @@
   function readLogo(input) {
 
     if (input.target.files && input.target.files[0]) {
-      console.log("파일있음")
-      console.log(input.target.files[0].name)
+      // console.log(input.target.files[0].name)
       logoFile.value = input.target.files[0]
       logoFileYn.value = true
       // var reader = new FileReader();
@@ -830,7 +824,6 @@
       // reader.readAsDataURL(input.target.files[0]);
       // showImg.value = true;
     } else {
-      console.log("파일없음")
       document.getElementById('preview').src = "";
       logoFile.value = {}
     }
@@ -879,11 +872,7 @@
 
 
   function btnStatChng() {
-    console.log(bizNoFileYn.value)
-    console.log(signUp.value.joinTwoStep.privTrmsYn)
-    console.log(signUp.value.joinTwoStep.useTrmsYn)
-    console.log(signUp.value.joinTwoStep.compNm)
-    console.log(signUp.value.joinTwoStep.bizRegNo)
+
     if (!bizNoFileYn.value  
       || signUp.value.joinTwoStep.privTrmsYn != "Y" || signUp.value.joinTwoStep.useTrmsYn != "Y" 
       || signUp.value.joinTwoStep.compNm == "" || signUp.value.joinTwoStep.bizRegNo == "" 
@@ -898,10 +887,6 @@
 
   function prevPage(){
 
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    console.log(dataObj)
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  
     router.replace({ name: "SignUp"
               ,state : {
                           //dataObj : { a:1, b:'string', c:true },

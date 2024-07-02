@@ -89,7 +89,6 @@ export default {
             var api = this.apiUrl;
             var postParams = JSON.parse(this.apiParam);
             //var postParams = this.apiParam;
-            console.log("val ::"+postParams);
 
             //var loading = "";
             //var isErr = "";
@@ -97,7 +96,7 @@ export default {
             api,
             postParams
             );
-            console.log(res);
+            
             this.apiResult = JSON.stringify(res);
         },
         async Login(){
@@ -107,7 +106,7 @@ export default {
                                                         api,
                                                         postParams
                                                         );
-            console.log(res);
+            
             this.apiResult = JSON.stringify(res);
         }
     }

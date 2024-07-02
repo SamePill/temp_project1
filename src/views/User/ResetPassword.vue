@@ -223,9 +223,6 @@
       // }
       var postParams = { hp: hp.value, reqAuthHpDivCd: "30", userMail: "" };
 
-      console.log("val ::" + postParams);
-      console.log(api);
-
       var rtn = await gfnUtils.axiosPost(api, postParams);
       //var rtn = {}
       //rtn.rtnCd = "00"
@@ -254,9 +251,6 @@
 
     var api = "/v1/auth/join/step1/verify-auth-hp";
     var postParams = { hp: hp.value, authNo: authNo.value };
-
-    console.log("api ::" + api);
-    console.log("val ::" + postParams);
 
     //var loading = "";
     //var isErr = "";

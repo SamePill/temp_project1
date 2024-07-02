@@ -151,8 +151,6 @@
       queryParams
     );
 
-    console.log(rtn);
-
     if(rtn.rtnCd == "00"){
       
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)

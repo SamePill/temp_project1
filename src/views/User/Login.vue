@@ -246,19 +246,13 @@ async function reqLogin() {
     return
   } 
 
-  console.log(email.value);
-  console.log(pswd.value);
-
   var api = "/v1/auth/login";
   var postParams = { userMail: email.value, pass: pswd.value };
-
-  console.log("val ::" + postParams);
 
   //var loading = "";
   //var isErr = "";
   var rtn = await gfnUtils.axiosPost(api, postParams);
   if (rtn.rtnCd == "00") {
-    console.log(rtn)
     router.replace("/");
   } else {
     gfnUtils.openAlert(rtn.rtnMsg,"", 2000)

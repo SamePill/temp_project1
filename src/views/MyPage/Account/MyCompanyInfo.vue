@@ -346,7 +346,6 @@ async function saveInfo(){
   // 파일이 단건인 경우
 
   if(bizRegFile.value != null ){
-    console.log("회사 사업자등록증 있음....")
     formData.append("bizReqMultiFile", bizRegFile.value);
     companyInfo.value.bizRegFileUrl = ""
     companyInfo.value.bizRegFileSeq = ""
@@ -354,7 +353,6 @@ async function saveInfo(){
     companyInfo.value.delBizRegFileSeq = companyInfo.value.bizRegFileSeq
   }
   if(compLogoFile.value != null  ){
-    console.log("회사 로그 있음....")
     formData.append("compLogoMultiFile", compLogoFile.value);
     companyInfo.value.compLogoFileSeq = ""
     companyInfo.value.compLogoFileUrl = ""
@@ -369,7 +367,7 @@ async function saveInfo(){
       formData,
       null, true, true, true
   );         
-  console.log(res);
+
   if(res.rtnCd == "00"){
     companyInfo.value = res.rtnData
 

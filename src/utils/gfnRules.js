@@ -80,7 +80,6 @@ export const  validBizRegNo = businessNumber => {
 
 
 export const number = value => {
-  console.log("number  :::::::::" + value);
   if(value == null ){
     return ;
   }
@@ -95,7 +94,6 @@ export const number = value => {
 };
 
 export const num = value => {
-  console.log("number  :::::::::" + value);
   if(value == null ){
     return ;
   }

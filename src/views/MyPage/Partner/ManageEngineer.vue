@@ -437,9 +437,7 @@
     );
     
     if(rtn.rtnCd == "00"){
-      console.log(rtn);
       let res = rtn.rtnData
-      console.log(res);
 
       engineerList.value = res.engrList
       topInfo.value = res.topInfo

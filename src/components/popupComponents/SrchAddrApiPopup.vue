@@ -127,7 +127,6 @@ async function getAddr(){
   
   //주소 선택 시
   function selectAddr(addrVal){
-    console.log('주소보내는곳',addrVal)
     emit('selAddr',addrVal);
     close();
   }
@@ -139,8 +138,6 @@ async function getAddr(){
   //   } 
   // }
   function checkSearchedWord(obj){
-
-    console.log("체크...")
 
     if(obj.value.length >0){
       //특수문자 제거

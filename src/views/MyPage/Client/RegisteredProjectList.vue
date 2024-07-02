@@ -217,7 +217,6 @@
 
   async function loadData(selPage){
     
-    console.log(selPage)
     if(selPage != null){
       pageNo.value = selPage;
     }

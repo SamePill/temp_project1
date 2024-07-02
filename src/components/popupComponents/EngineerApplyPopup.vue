@@ -447,11 +447,8 @@ function chkRemove(idx){
 function addEngr(){
   //checkedEngrList(engrList) -> checkedEngrSprtList(engrSprtList)
 
-  console.log(checkedEngrList.value)
-  console.log("추가")
-
   for(var i=0; i<checkedEngrList.value.length; i++){
-    console.log(checkedEngrList.value[i])
+    //console.log(checkedEngrList.value[i])
     engrSprtList.value.push(checkedEngrList.value[i]);    
   }
 
@@ -462,10 +459,9 @@ function addEngr(){
 function removeEngr(){
   //checkedEngrList(engrList) <- checkedEngrSprtList(engrSprtList)
   //engrSprtList에서 삭제
-  console.log("제외")
 
   for(var i=0; i<checkedEngrSprtList.value.length; i++){
-    console.log(checkedEngrSprtList.value[i])
+    //console.log(checkedEngrSprtList.value[i])
     engrList.value.push(checkedEngrSprtList.value[i]);    
   }
 
@@ -481,20 +477,16 @@ function srchEngrNm(){
 
 async function loadData() {
 
-  console.log(props.prj)
-
   var getParams = { projId: props.prj.projId, userMail: userMail.value };
   await gfnUtils
     .axiosGet("/v1/project/engineers", getParams)
     .then(function (rtn) {
       if (rtn.rtnCd == "00") {
-        console.log(rtn);
-
         prjEngrInfo.value = rtn.rtnData;
         engrSprtList.value = rtn.rtnData.sprtEngrList;
         engrList.value = rtn.rtnData.notSprtEngrList;
       }else{
-        console.log(rtn);
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
       }
     });
 }

@@ -452,10 +452,7 @@
   }
 
   function showLoading(){
-    console.log("------------------------------------")
-    console.log(sysStore.getProgress)
     sysStore.setProgress(true)
-    console.log(sysStore.getProgress)
   }
 
   function showAlert(){

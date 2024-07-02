@@ -307,9 +307,6 @@
       }
       var postParams = { "hp": signUp.value.joinOneStep.hp ,  "reqAuthHpDivCd": "10",   "userMail":  signUp.value.joinOneStep.userMail };
 
-      console.log( postParams);
-      console.log(api)
-
       var rtn = await gfnUtils.axiosPost(api, postParams);
       //var rtn = {}
       //rtn.rtnCd = "00"
@@ -427,16 +424,7 @@
 
   function nextPage(){
 
-    //FIXME 테스트용 주석!!!
-    // if( btnIsActv.value != true){
-    //   return false;
-    // }
-
-    console.log(authNo.value)
-
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    console.log(signUp.value.joinOneStep)
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+ 
     //const signUpdData = signUp.value.map(item => item);
     router.push({ name: "SignUpApply"
               // ,state: { data : signUp.value}
