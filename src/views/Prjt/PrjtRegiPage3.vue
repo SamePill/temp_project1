@@ -23,7 +23,7 @@
               <button @click="popup('$BudgetTip')" class="px-2.5 height-[23px] width-[69px] rounded-[100px] border border-[#1ba494]  text-[#1ba494]">작성 TIP</button>
               <BudgetTip ref="$BudgetTip" ></BudgetTip>
             </div>
-            <p class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+            <p v-show="!engrChk1 || !engrChk2" class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
               엔지니어 인원수와 월 지급액을 입력해주세요.
             </p>
             <div class="mt-[20px]">
@@ -33,11 +33,11 @@
                     초급 엔지니어
                   </div>
                   <div>
-                    <input type="number" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] w-40 flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <input type="number" min="0" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] w-40 flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                     <span class="absolute" style="top:17px; right:190px">명</span>  
-                    <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                    <!-- <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                       인원수를 입력해주세요.
-                    </p>
+                    </p> -->
                   </div>
                   <div>
                     <input type="text"                     
@@ -46,19 +46,19 @@
                       class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                       <!-- v-model="projStep.projThreeStep.bgnrEngrUnitPric"  -->
                       <span class="absolute" style="top:17px; right:10px">만원</span>    
-                      <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                      <!-- <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                         최소 지급액을 확인해주세요.
                       </p>    
-                      <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  v-show="!chkBizNo">
+                      <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                         월 지급액을 입력해주세요.
-                      </p>    
+                      </p>     -->
                   </div>              
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#dbe9fa] text-[#0b6bdc]">
                     중급 엔지니어
                   </div>
-                  <input type="number" v-model="projStep.projThreeStep.intrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <input type="number" min="0"  v-model="projStep.projThreeStep.intrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:190px">명</span>  
                   <input type="text" 
                     :value="intrEngrUnitPricFormatted"
@@ -71,7 +71,7 @@
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#fadbe6] text-[#dc0b56]">
                     고급 엔지니어
                   </div>
-                  <input type="number" v-model="projStep.projThreeStep.advnEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <input type="number" min="0"  v-model="projStep.projThreeStep.advnEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:190px">명</span>  
                   <input type="text" 
                     :value="advnEngrUnitPricFormatted"
@@ -84,7 +84,7 @@
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#faf1db] text-[#dc630b]">
                     특급 엔지니어
                   </div>
-                  <input type="number" v-model="projStep.projThreeStep.spclEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                  <input type="number" min="0"  v-model="projStep.projThreeStep.spclEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                   <span class="absolute" style="top:17px; right:190px">명</span>  
                   <input type="text" 
                     :value="spclEngrUnitPricFormatted"
@@ -393,7 +393,8 @@ const projChckDivCd20 = ref('');
 const projChckDivCd30 = ref('');
 const projChckDivCd40 = ref('');
 
-
+const engrChk1 = ref(true)
+const engrChk2 = ref(true)
 
 onMounted(() => {
   loadData();
@@ -402,6 +403,24 @@ onMounted(() => {
 const bgnrEngrUnitPricFormatted = computed( () => {
   return gfnUtils.formattedNumber(projStep.value.projThreeStep.bgnrEngrUnitPric / 10000);
 })
+
+function chkEngr(){
+  if( 0 == projStep.value.projThreeStep.bgnrEngrCnt 
+  && 0 == projStep.value.projThreeStep.intrEngrCnt
+  && 0 == projStep.value.projThreeStep.advnEngrCnt
+  && 0 == projStep.value.projThreeStep.spclEngrCnt){
+    engrChk1.value = false 
+  }
+  if( 0 == projStep.value.projThreeStep.bgnrEngrUnitPric
+  && 0 == projStep.value.projThreeStep.intrEngrUnitPric
+  && 0 == projStep.value.projThreeStep.advnEngrUnitPric
+  && 0 == projStep.value.projThreeStep.spclEngrUnitPric){
+    engrChk2.value = false 
+  }
+}
+
+
+
 
 function updateBgnrPric(value) {
   const cleanedValue = value.replace(/,/g, '');
@@ -449,6 +468,10 @@ function loadData(){
 
 function nextPage(div){
   if(div == 'next'){  
+    chkEngr()
+    if(engrChk1.value == false || engrChk2.value == false){
+      return false
+    }
     // projStep.value.projThreeStep.bgnrEngrUnitPric = bgnrEngrUnitPricInput.value * 10000;
     // projStep.value.projThreeStep.intrEngrUnitPric = intrEngrUnitPricInput.value * 10000;
     // projStep.value.projThreeStep.advnEngrUnitPric = advnEngrUnitPricInput.value * 10000;

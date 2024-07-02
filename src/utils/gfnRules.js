@@ -127,7 +127,7 @@ export const korEng = value => {
 export const isNull = str => {
   var type = typeof str;
 
-  if (type === undefined || str === null) {
+  if (type === undefined || str === null || str === undefined) {
     return true;
   }
 

@@ -156,7 +156,6 @@
                 <p class="text-base text-left text-[#777]">근무지</p>
                 <input @click="showAddrPop" v-model="projStep.projOneStep.workAddr" type="text" 
                   :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
-                  @blur="workAddrChkRule()"
                   placeholder="예시) 서울특별시 강남구 테헤란로 000-0"/>
                 <input v-model="projStep.projOneStep.workDtlAddr" type="text" 
                 :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
@@ -227,6 +226,7 @@ const closeAddrPop = function (){
 function returnArrd(addrVal){
   console.log(addrVal)
   projStep.value.projOneStep.workAddr = addrVal.roadAddr;
+  workAddrChkRule()
 }
 
 const router = useRouter()
@@ -305,36 +305,26 @@ async function loadData(){
 
     for(var i=0; i<projStep.value.projOneStep.jobDivCdList.length; i++){
       projStep.value.projOneStep.jobDivCdList[i].chkVal = true;
-      projStep.value.projOneStep.jobDivCdList[i].cd = projStep.value.projOneStep.jobDivCdList[i].jobDivCd
+      if(!gfnRules.isNull(projStep.value.projOneStep.jobDivCdList[i].jobDivCd) ){
+        projStep.value.projOneStep.jobDivCdList[i].cd = projStep.value.projOneStep.jobDivCdList[i].jobDivCd
+      }
     }
     for(var j=0; j<projStep.value.projOneStep.taskDivCdList.length; j++){
       projStep.value.projOneStep.taskDivCdList[j].chkVal = true;
-      projStep.value.projOneStep.taskDivCdList[j].cd = projStep.value.projOneStep.taskDivCdList[j].taskDivCd
+      if(gfnRules.isNull(projStep.value.projOneStep.taskDivCdList[j].taskDivCd) == false ){
+        projStep.value.projOneStep.taskDivCdList[j].cd = projStep.value.projOneStep.taskDivCdList[j].taskDivCd
+      }
     } 
-
+    console.log(projStep.value)
   }
 }
 
 function nextPage(){
-  if(gfnRules.isNull(projStep.value.projOneStep.projTitl)){
-    projTitlChk.value = false;
-  }
-  if(gfnRules.isNull(projStep.value.projOneStep.strtDay)){
-    strtDayChk.value = false;
-  }
-  if(gfnRules.isNull(projStep.value.projOneStep.pirdVal)){
-    pirdValChk.value = false;
-  }
-  if(gfnRules.isNull(projStep.value.projOneStep.workDtlAddr)){
-    workAddrChk.value = false;
-  }
-  if(gfnRules.isNull(projStep.value.projOneStep.atndTime)){
-    atndTimeChk.value = false;
-  }
-  if(gfnRules.isNull(projStep.value.projOneStep.lvwkTime)){
-    lvwkTimeChk.value = false;
-  }
-
+  projTitlChkRule()
+  strtDayChkRule()
+  pirdValChkRule()
+  workAddrChkRule()
+  workTimeChkRule()
 
   if(!projTitlChk.value || !strtDayChk.value || !pirdValChk.value 
       || !workAddrChk.value || !atndTimeChk.value || !lvwkTimeChk.value){
@@ -362,6 +352,7 @@ function strtDayCnslYnClick(){
     projStep.value.projOneStep.strtDayCnslYn = 'N';
   }else{
     projStep.value.projOneStep.strtDayCnslYn = 'Y';
+    // strtDayChk.value = true 
   }
 }
 function scrollToTop(){

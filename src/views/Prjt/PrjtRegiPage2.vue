@@ -242,15 +242,10 @@ function nextPage(div){
   console.log(projStep.value)
   if(div == 'next'){  
 
-    if(gfnRules.isNull(projStep.value.projTwoStep.projCtntTask)){
-      projCtntTaskChk.value = false;
-    }
-    if(gfnRules.isNull(projStep.value.projTwoStep.projDmndSkil)){
-      projDmndSkilChk.value = false;
-    }
-    if(gfnRules.isNull(projStep.value.projTwoStep.projUseTool)){
-      projUseToolChk.value = false;
-    }
+    projCtntTaskRule()
+    projDmndSkilRule()
+    projUseToolRule()
+    
     if(!projCtntTaskChk.value || !projDmndSkilChk.value || !projUseToolChk.value){
       console.log("필수 값체크")
       return false;

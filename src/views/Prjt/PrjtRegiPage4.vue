@@ -215,6 +215,18 @@ async function loadData(){
 async function nextPage(div){
   if(div == 'next'){  
 
+    rprsNmRule()
+    rprsHpRule()
+    rprsMailRule()
+    if(!rprsNmChk1.value || !rprsNmChk2.value || !rprsHpChk1.value || !rprsHpChk2.value || !rprsMailChk1.value || !rprsMailChk2.value){
+      return false
+    }
+
+    if(projStep.value.projFourStep.useTrmsYn != 'Y' || projStep.value.projFourStep.privTrmsYn != 'Y'){
+      gfnUtils.openAlert("필수 약관에 동의해야 합니다.","", 2000)
+      return false
+    }
+
     for(var i=0; i<projStep.value.projOneStep.jobDivCdList.length; i++){
       projStep.value.projOneStep.jobDivCdList[i].jobDivCd = projStep.value.projOneStep.jobDivCdList[i].cd
     }
