@@ -171,8 +171,9 @@ import TaskTip from "@/components/popupComponents/TaskTip.vue";
 import SkillTip from "@/components/popupComponents/SkillTip.vue";
 import ToolTip from "@/components/popupComponents/ToolTip.vue";
 import * as gfnRules from "@/utils/gfnRules.js";
+import { prjtFileStore } from '@/stores'
 
-
+const fileStore = prjtFileStore();
 const router = useRouter()
 // const projTwoStep =ref({
 //   projCtntTask:''  //프로젝트 설명 및 주요 담당 업무
@@ -212,14 +213,19 @@ function projUseToolRule(){
 
 async function loadData(){
   if(dataObj != undefined){
+
     projStep.value = JSON.parse(dataObj);
-    console.log(projStep.value.fileList)
-    console.log(projStep.value.fileList)
-    console.log(projStep.value.fileList)
-    console.log(projStep.value.fileList)
-    if(projStep.value.fileList != undefined){
-      fileList.value = projStep.value.fileList; 
-    }
+    fileList.value = fileStore.getAttachFiles
+    // console.log(projStep.value.fileList)
+    // console.log(projStep.value.fileList)
+    // console.log(projStep.value.fileList)
+    // console.log(projStep.value.fileList)
+    // if(projStep.value.fileList != undefined){
+    //   fileList.value = projStep.value.fileList; 
+    // }
+
+  }else{
+    fileStore.setFiles(fileList)
   }
 }
 
@@ -239,6 +245,8 @@ function popup(div){
 
 function nextPage(div){
   projStep.value['fileList'] = fileList.value;
+  fileStore.setFiles(fileList)
+
   console.log(projStep.value)
   if(div == 'next'){  
 

@@ -75,6 +75,29 @@ export const commonStore = defineStore('common', {
     }
 })
 
+export const prjtFileStore = defineStore('prjtFile', {
+    state: () => ({
+        // 이 모든 속성은 자동으로 유형이 유추됨.
+        attachFile : []
+    }),
+    getters: {
+        getAttachFiles(state){
+            //파일 Array 리턴
+            return state.attachFile;
+        },
+    },
+    actions: {
+        addFile(item) {
+            //개별파일 추가
+            this.attachFile.push(item);
+        },
+        setFiles(items) {
+            //Array 치환
+            this.attachFile = items;
+        }
+    }
+})
+
 export const systemStore = defineStore('system', {
     // 화살표 함수는 전체 유형 유추을 위해 권장됨. 
     state: () => ({

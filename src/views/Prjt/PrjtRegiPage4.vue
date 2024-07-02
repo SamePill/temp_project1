@@ -164,7 +164,9 @@ import {  ref,onMounted } from "vue";
 import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
+import { prjtFileStore } from '@/stores'
 
+const fileStore = prjtFileStore();
 const router = useRouter()
 // const projFourStep = ref({
 //   rprsNm:''
@@ -233,7 +235,7 @@ async function nextPage(div){
     for(var j=0; j<projStep.value.projOneStep.taskDivCdList.length; j++){
       projStep.value.projOneStep.taskDivCdList[j].taskDivCd = projStep.value.projOneStep.taskDivCdList[j].cd;
     } 
-
+    let fileList = fileStore.getAttachFiles
     const userMail = ref(window.$cookies.get("loginUserMail"));
     console.log(JSON.stringify(projStep.value))
     var api = "/v1/project/submit";
@@ -242,9 +244,8 @@ async function nextPage(div){
     //formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
     formData.append("submitProjectInputJson ", JSON.stringify(projStep.value) ) 
 
-    // TODO 파일 첨부 수정 step2페이지에서 파일 전달 필요??
-    //formData.append("fileList",projStep.value.projTwoStep.fileList) //file
-    //fileList
+    formData.append("fileList",fileList) //file
+
     
     let rtn = await gfnUtils.axiosPost(
       api,
