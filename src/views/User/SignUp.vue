@@ -123,9 +123,12 @@
               placeholder="비밀번호"
               v-model="signUp.joinOneStep.pass"
               @blur="ruleChkPwd()"
+              @focus="focusPwd()"
             />
-
-            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" v-show="!pwdChk">
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left " v-show="showHint">
+              8자 ~ 16자 이하의 영문 대소문자, 숫자, 특수문자를 조합하여 입력해 주세요.
+            </p>
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" v-show="!pwdChk && !showHint">
               비밀번호가 올바르지 않습니다. 비밀번호를 다시 확인해주세요.
             </p>
           </div>
@@ -213,7 +216,7 @@
   import { useRouter } from 'vue-router';
 
   const { dataObj } = history.state; 
-
+  const showHint = ref(false)
   const isButtonDisabled = ref(false)
   const isInputReadonly = ref(false)
   //const chkCertNo = ref(false) //인증번호 일치 확인 후 true
@@ -260,7 +263,12 @@
     console.log(signUp.value)
   }
 
+  function focusPwd(){
+    showHint.value = true
+  }
+  
   function ruleChkPwd(){
+    showHint.value = false
     pwdChk.value = gfnRules.validPwd(signUp.value.joinOneStep.pass);
     btnStatChng()
   }
