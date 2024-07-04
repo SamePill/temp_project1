@@ -1,6 +1,5 @@
 <template>
-  <div  >
-
+  <div style="display: flex; justify-content: center;" >
     <div class="flex flex-col justify-start items-center w-[1920px] h-[1080px] overflow-hidden gap-[60px] px-[745px] py-[110px] bg-white">
       <div
         class="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5"
@@ -92,13 +91,21 @@
         class="flex flex-col justify-start items-center self-stretch flex-grow-0 flex-shrink-0 gap-20"
       >
         <button 
-          class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999]"
+          :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded text-white"'
           @click="findEmail()"
         >
+        <!-- class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative overflow-hidden w-[430px] gap-2.5 px-2.5 py-4 rounded bg-[#999]" -->
             이메일 찾기
         </button>
-        <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5">
-          <p class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]">이용약관</p>
+        <div
+          style="display: flex; justify-content: center;" 
+          class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5"
+        >
+          <button
+            class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
+          >
+            이용약관
+          </button>
           <svg
             width="1"
             height="14"
@@ -110,9 +117,11 @@
           >
             <path d="M0.5 1V13" stroke="#DDDDDD" stroke-linecap="round"></path>
           </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]">
+          <button
+            class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
+          >
             개인정보처리방침
-          </p>
+          </button>
           <svg
             width="1"
             height="14"
@@ -124,7 +133,9 @@
           >
             <path d="M0.5 1V13" stroke="#DDDDDD" stroke-linecap="round"></path>
           </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]">
+          <p
+            class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
+          >
             문의: 1000-0000
           </p>
           <svg
@@ -138,7 +149,9 @@
           >
             <path d="M0.5 1V13" stroke="#DDDDDD" stroke-linecap="round"></path>
           </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]">
+          <p
+            class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
+          >
             © L-walk Corp
           </p>
         </div>
@@ -150,7 +163,9 @@
   import { ref } from "vue";
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import * as gfnRules from "@/utils/gfnRules.js";
+  import { useRouter } from "vue-router";
 
+  const router = useRouter();
   const hp = ref("");
   const authNo = ref("");
   // const isAuthFail = ref(false);
@@ -161,7 +176,7 @@
   const certNoChk = ref('NONE') //인증번호 일치 확인 후 true 
   const blSendCertNo = ref(false) //발송요청 상태
   const countdown = ref('03:00')
-
+  const btnIsActv =  ref(false)
   //인증번호 요청
   async function reqCertNo(){
     if(chkHp.value != true || hp.value.length != 11){
@@ -207,7 +222,7 @@
         countdown.value = '03:00'
         startCount()
       } else {
-        gfnUtils.openAlert("인증 SMS요청중 오류가 발생하였습니다.","", 2000)
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
       }
 
     }
@@ -241,6 +256,7 @@
       isButtonDisabled.value = true //인증버튼 비활성
       isInputReadonly.value = true //전화번호 수정불가
       blSendCertNo.value = false   //인증번호 입력 부분 비노출
+      btnIsActv.value = true
       gfnUtils.openAlert("인증이 완료 되었습니다.","", 2000)
 
     } else {

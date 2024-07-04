@@ -201,7 +201,6 @@ import { ref } from "vue";
 import * as gfnRules from "@/utils/gfnRules.js";
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { useRouter } from "vue-router";
-// import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter();
 // const route = useRoute()

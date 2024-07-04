@@ -182,7 +182,9 @@
   import { ref } from "vue";
   import * as gfnUtils from "@/utils/gfnUtils.js";
   import * as gfnRules from "@/utils/gfnRules.js";
+  import { useRouter } from "vue-router";
 
+  const router = useRouter();
   const hp = ref("");
   const authNo = ref("");
   // const isAuthFail = ref(false);

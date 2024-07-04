@@ -41,6 +41,7 @@
               placeholder="이메일"
               v-model="signUp.joinOneStep.userMail"
               @blur="ruleChkEmail()"
+              @input="regexEmail()"
               />
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" v-show="!chkEmail">
               이메일이 올바르지 않습니다. 다시 한번 확인해주세요.
@@ -55,6 +56,7 @@
               placeholder="이름"
               v-model="signUp.joinOneStep.userNm"
               @blur="ruleChkName()"
+              maxlength="30"
             />
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" v-show="!chkName">
               이름이 올바르지 않습니다. 다시 한번 확인해주세요.
@@ -78,7 +80,7 @@
                     @input="validateHp"
                   />
                   <button
-                    :class='(blSendCertNo ? " bg-white border-[#ddd] text-[#191919]" :  (chkHp && signUp.joinOneStep.hp != null ? " border-[#1ba494] bg-[#1BA494]  text-white" : "bg-[#999]  text-white")) + " flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[125px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded border "'
+                    :class='(blSendCertNo && !reSend ? " bg-white border-[#ddd] text-[#191919]" :  (chkHp && signUp.joinOneStep.hp != null ? " border-[#1ba494] bg-[#1BA494]  text-white" : "bg-[#999]  text-white")) + " flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-center items-center flex-grow-0 flex-shrink-0 w-[125px] h-[51px] relative overflow-hidden gap-2.5 p-2.5 rounded border "'
                     @click = "reqCertNo()"
                     :disabled="isButtonDisabled"
                   >
@@ -95,7 +97,7 @@
               
               <div style="position:relative" class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-2.5" v-show="blSendCertNo">
                 <input style="padding-right:100px" maxlength="6"
-                  :class='(certNoChk ? "border-[#ddd]" : "border-[#ff5252]")  + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919] flex justify-between items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden p-4 rounded bg-white border "'
+                  :class='(certNoChk  ? "border-[#ddd]" : "border-[#ff5252]")  + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919] flex justify-between items-center flex-grow-0 flex-shrink-0 w-[300px] h-[51px] relative overflow-hidden p-4 rounded bg-white border "'
                   type="text"
                   placeholder="인증번호"
                   v-model="authNo"
@@ -229,6 +231,7 @@
   const pwdChk = ref(true) //패스워드 정합성
   const pwdCmprChk = ref(true) //패스워드 재입력 정합성
   const certNoChk = ref('NONE') //인증번호 일치 확인 후 true 
+  const reSend = ref(false)
   const router = useRouter()
   const authNo = ref('')
   const btnIsActv = ref(false)
@@ -291,23 +294,11 @@
       return false;
     }
 
-    let blReq = true
-
-    if(blSendCertNo.value == true){
-      //재요청
-      if(countdown.value != '0:00') {
-        //제한시간 초과전
-        blReq = false
-        return;
-      }else{
-        blReq = true
-      }
-
-    }else{
-      //처음요청
-      blReq = true
+    if(reSend.value  == false ){
+      return false;
     }
 
+    let blReq = true
     // 요청가능 상태 인경우
     if(blReq){
       var api = "/v1/auth/req-auth-hp";
@@ -320,21 +311,25 @@
       var rtn = await gfnUtils.axiosPost(api, postParams);
       //var rtn = {}
       //rtn.rtnCd = "00"
-
       if (rtn.rtnCd == "00") {
-        //요청 완료 되면 입력창 표시여부
         blSendCertNo.value = true
+        reSend.value = false
+        blReq = true
+
         //카운트 다운 시간 초기화
         countdown.value = '03:00'
         startCount()
       } else {
-        gfnUtils.openAlert("인증 SMS요청중 오류가 발생하였습니다.","", 2000)
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
       }
 
     }
   }
 
   async function checkCertNo(){
+    if(countdown.value == "00:00"){
+      return false;
+    }
 
     if(authNo.value == ""){
       gfnUtils.openAlert("인증번호를 입력해주세요.","", 2000)
@@ -367,6 +362,10 @@
     }
   }
 
+  function regexEmail(){
+    // 입력값에서 허용되지 않는 문자를 제거
+    signUp.value.joinOneStep.userMail = signUp.value.joinOneStep.userMail.replace(/[^a-zA-Z0-9@.]/g, '');
+  }
   function ruleChkEmail(){
     chkEmail.value = gfnRules.validEmail(signUp.value.joinOneStep.userMail);
     btnStatChng()
@@ -403,7 +402,8 @@
             clearInterval(countdownInterval);
             countdown.value = '00:00';
 
-            //TODO 버튼 잠금 처리 필요...(인증번호 확인 잠금, 인증 재요청 열기)???
+            //요청 완료 되면 입력창 표시여부
+            reSend.value = true
             return;
         }
 
