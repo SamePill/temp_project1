@@ -9,11 +9,12 @@
         <div
           class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[430px] relative gap-5"
         >
-          <p
+          <button
             class="flex-grow-0 flex-shrink-0 text-3xl font-bold text-left text-[#191919]"
+            @click="router.push({name: 'Home'})"
           >
             로고 영역
-          </p>
+          </button>
           <div
             class="flex justify-between items-end flex-grow-0 flex-shrink-0 w-[430px] relative"
           >

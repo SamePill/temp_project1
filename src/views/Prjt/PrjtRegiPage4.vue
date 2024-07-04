@@ -240,7 +240,7 @@ async function nextPage(div){
     console.log(JSON.stringify(projStep.value))
     var api = "/v1/project/submit";
     let formData = new FormData();
-    formData.append("userMail ",userMail) //usermail
+    formData.append("userMail ",userMail.value) //usermail
     //formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
     formData.append("submitProjectInputJson ", JSON.stringify(projStep.value) ) 
 

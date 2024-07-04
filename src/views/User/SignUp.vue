@@ -7,7 +7,9 @@
         <div
           class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[430px] relative gap-5"
         >
-          <p class="flex-grow-0 flex-shrink-0 text-3xl font-bold text-left text-[#191919]">로고 영역</p>
+          <button class="flex-grow-0 flex-shrink-0 text-3xl font-bold text-left text-[#191919]"
+          @click="router.push({name: 'Home'})"
+          >로고 영역</button>
           <div class="flex justify-between items-end flex-grow-0 flex-shrink-0 w-[430px] relative">
             <p class="flex-grow-0 flex-shrink-0 text-xl font-medium text-left text-[#191919]">
               <span class="flex-grow-0 flex-shrink-0 text-xl font-medium text-left text-[#191919]"
@@ -357,7 +359,7 @@
       isButtonDisabled.value = true //인증버튼 비활성
       isInputReadonly.value = true //전화번호 수정불가
       blSendCertNo.value = false   //인증번호 입력 부분 비노출
-      gfnUtils.openAlert("인증 되었습니다.","", 2000)
+      gfnUtils.openAlert("인증이 완료 되었습니다.","", 2000)
     
     } else {
       certNoChk.value = "ERROR"
