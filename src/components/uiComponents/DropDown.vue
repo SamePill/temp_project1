@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div v-if="isShow" style="position: absolute" @mouseleave="noShowItem()" class="pl-4 mt-2 w-[130px] border-solid border border-line-1 rounded text-base flex-col bg-[#fff]">
+    <div v-if="isShow" style="position: absolute" @mouseleave="noShowItem()" class="pl-4 mt-2 w-[140px] border-solid border border-line-1 rounded text-base flex-col bg-[#fff]">
       <div v-if="props.div !='N'" class="my-3 text-sm mr-[10px] hover:cursor-pointer" :class="cdVal =='' ? 'text-main-0' : ''" @click="selectVal({cd:'',cdNm:'전체'})" >{{'전체'}}</div>
       <div v-for="(el) in cdList" :key="el.cd" :value="el.cd" :class="cdVal == el.cd ? 'text-main-0' : ''" class="my-3 text-sm mr-[10px] hover:cursor-pointer" @click="selectVal(el)">{{ el.cdNm }}</div>
     </div>

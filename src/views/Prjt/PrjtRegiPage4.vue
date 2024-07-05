@@ -20,14 +20,14 @@
           <div class="flex justify-between items-center w-[520px] relative">
             <p class="text-xl text-left text-[#191919] mb-[20px;]">회사명</p>
           </div>
-          <input tye="text" v-model="compNm" class="w-[520px] h-[51px] text-base text-left text-[#777] p-4 rounded bg-[#ddd] border border-[#ddd]" disabled="disabled"/>
+          <input tye="text" v-model="compNm" class="w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded bg-[#ddd] border border-[#ddd]" disabled="disabled"/>
         </div>
         <div class="mt-[40px] flex flex-col justify-start items-start relative gap-5">
           <p class="text-xl text-left text-[#191919]">담당자 이름
             <span class="text-[#ff5252]">*</span></p>
           <div class="flex flex-col justify-center items-start gap-2">
             <input type="text" v-model="projStep.projFourStep.rprsNm" 
-              :class='(rprsNmChk1 && rprsNmChk2 ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border "' 
+              :class='(rprsNmChk1 && rprsNmChk2 ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded border "' 
               @blur="rprsNmRule()"
               placeholder="담당자 이름을 입력해주세요."/>
           </div>
@@ -46,7 +46,7 @@
           </p>
           <div class="flex justify-start items-start gap-5">
             <input type="text" v-model="projStep.projFourStep.rprsHp"  
-              :class='(rprsHpChk1 && rprsHpChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border "' 
+              :class='(rprsHpChk1 && rprsHpChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded border "' 
               @blur="rprsHpRule()"
               placeholder="담당자 휴대폰 번호를 입력해주세요."/>
           </div>
@@ -63,7 +63,7 @@
           </p>
           <div class="flex justify-start items-start gap-5">
             <input type="text" v-model="projStep.projFourStep.rprsMail" 
-              :class='(rprsMailChk1 && rprsMailChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left text-[#999] p-4 rounded border "'
+              :class='(rprsMailChk1 && rprsMailChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded border "'
               @blur="rprsMailRule()"
               placeholder="담당자 이메일을 입력해주세요."/>
           </div>

@@ -17,7 +17,7 @@
       <Header/>
     </template>
 
-    <div style=" height:calc(100vh - 80px); overflow-y: auto;">
+    <div  class="content"  style=" height:calc(100vh - 80px); overflow-y: auto;">
       <router-view ></router-view>
       <template
         v-if="

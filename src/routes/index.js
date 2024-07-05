@@ -55,7 +55,8 @@ import Test from "@/views/Prjt/Test.vue";
 import TestPage from "@/views/Test/TestPage.vue";
 import TestPageSetup from "@/views/Test/TestPageSetup.vue";
 
-export default createRouter({
+
+const router = createRouter({
   //history: createWebHashHistory(),
   history: createWebHistory(),
   routes: [
@@ -290,3 +291,24 @@ export default createRouter({
     return { top: 0 };
   }
 });
+
+// router.beforeEach((to, from, next) => {
+//   console.log("?????")
+//   window.scroll(0, 0);
+//   window.scrollTo(0, 0);
+//   document.documentElement.scrollTop = 0;
+//   document.body.scrollTop = 0;
+//   next();
+// });
+
+router.afterEach(() => {
+  const contentDiv = document.querySelector('.content');
+  if (contentDiv) {
+    contentDiv.scrollTo({
+      top: 0
+    });
+  }
+});
+
+
+export default router;
