@@ -110,7 +110,7 @@
               <div class="mt-[20px]">
                 <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                   <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
-                    문구 변경: 필요한 내용을 정리한 문서를 추가해 주세요.(최대 3갸)</span><br />
+                    문구 변경: 필요한 내용을 정리한 문서를 추가해 주세요.(최대 3개)</span><br />
                   <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">
                     프로젝트 예산 및 일정 산정에 활용되며, 문서 및 이미지 파일만 추가 가능합니다.
                   </span>

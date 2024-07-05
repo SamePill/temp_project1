@@ -39,7 +39,7 @@
                 <span class="text-sm text-left text-[#777]">/50</span>
               </p>
             </div>
-            <input maxlength='100' tye="text" 
+            <input maxlength='50' tye="text" 
                   v-model="projStep.projOneStep.projTitl" 
                   @blur="projTitlChkRule()"
                   :class='(projTitlChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#191919] p-4 rounded border"' placeholder="프로젝트명을 입력주세요."/>
@@ -93,7 +93,7 @@
               <div class="flex justify-between items-center w-40 h-[51px] relative  p-4 rounded border border-[#ddd]">
                 <p class="text-base text-left text-[#191919]">월 단위</p>
               </div>
-              <input v-model="projStep.projOneStep.pirdVal" type="number" min="0" 
+              <input v-model="projStep.projOneStep.pirdVal" type="text" min="0" 
                   :class='(pirdValChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[340px] h-[51px] text-[#999] p-4 rounded border"'
                   @blur="pirdValChkRule()"
                   placeholder="예상 근무기간을 입력해주세요."/>
@@ -365,7 +365,6 @@ function scrollToTop(){
 }
 
 
-
 function projTitlChkRule(){
   projTitlChk.value = !gfnRules.isNull(projStep.value.projOneStep.projTitl);
   //btnStatChng()
@@ -377,6 +376,7 @@ function strtDayChkRule(){
 }
 
 function pirdValChkRule(){
+  projStep.value.projOneStep.pirdVal = String(projStep.value.projOneStep.pirdVal).replace(/[^0-9]/g,'');
   pirdValChk.value = !gfnRules.isNull(projStep.value.projOneStep.pirdVal);
   //btnStatChng()
 }
