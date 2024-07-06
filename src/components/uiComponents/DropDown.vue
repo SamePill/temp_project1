@@ -23,7 +23,7 @@
 import { ref, defineProps, onMounted, onBeforeUnmount, defineEmits, defineExpose }  from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
-defineExpose({noShowItem}) 
+defineExpose({noShowItem, selectDefaultVal, loadData}) 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
   loadData();

@@ -424,6 +424,10 @@ async function loadData(){
     birthY.value = engrStep1.value.bith.slice(0, 4)
     birthM.value = engrStep1.value.bith.slice(4, 6)
     birthD.value = engrStep1.value.bith.slice(6, 8)
+    $EdctDivCd.value.loadData();
+    $EngrRtngDivCd.value.loadData();
+    // $EdctDivCd.value.loadData();
+    // $EngrRtngDivCd.value.selectDefaultVal({ cd : engrStep1.value.engrRtngDivCd , cdNm : engrStep1.value.engrRtngDivCdNm});
   }else{
     gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }
