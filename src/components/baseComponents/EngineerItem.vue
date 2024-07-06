@@ -37,7 +37,10 @@
     <p class="flex-grow-0 flex-shrink-0 w-[77px] text-sm text-left text-[#191919]">
       {{props.engineerInfo.crrYear}}년{{props.engineerInfo.crrMon}}개월
     </p>
-    <p class="flex-grow-0 flex-shrink-0 w-[99px] text-sm text-left text-[#191919]">
+    <p v-if="props.engineerInfo.baseAddr.length > 10" class="flex-grow-0 flex-shrink-0 w-[99px] text-sm text-left text-[#191919]">
+      {{props.engineerInfo.baseAddr.substring(0, 10) + " ..."}}
+    </p>
+    <p v-else class="flex-grow-0 flex-shrink-0 w-[99px] text-sm text-left text-[#191919]">
       {{props.engineerInfo.baseAddr}}
     </p>
     <p class="flex-grow-0 flex-shrink-0 w-[52px] text-sm text-left text-[#1ba494]">

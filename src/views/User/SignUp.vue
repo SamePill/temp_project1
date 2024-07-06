@@ -264,6 +264,7 @@
   function loadData(){
     if(dataObj != undefined){
       signUp.value = JSON.parse(dataObj);
+      btnStatChng()
     }
     console.log(signUp.value)
   }

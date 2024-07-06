@@ -113,7 +113,7 @@
             </div>
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
               <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">경력</p>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{props.profile.crrMon}}년 {{props.profile.crrYear}}개월</p>
+              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">{{props.profile.crrYear}}년 {{props.profile.crrMon}}개월</p>
             </div>
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
               <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">최종학력</p>

@@ -1,5 +1,5 @@
 <template>
-  <div style="display: inline-block; position:relative" class="z-20">
+  <div style="display: inline-block; position:relative" class="z-20"  ref="dropDown">
     <div @click="showItem()"
       :class="['inline-flex py-[10px] px-[10px] border-solid border border-line-1 rounded text-base items-center hover:cursor-pointer hover:border-main-0', $attrs.class]">
       <div v-if="!gfnRules.isNull(title)" class="text-text-0 text-sm ">{{title}}</div>
@@ -20,12 +20,16 @@
 </template>
 <script setup>
 
-import { ref, defineProps, onMounted, defineEmits, defineExpose }  from 'vue'
+import { ref, defineProps, onMounted, onBeforeUnmount, defineEmits, defineExpose }  from 'vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
 defineExpose({noShowItem}) 
 onMounted(() => {
+  document.addEventListener('click', handleClickOutside);
   loadData();
+})
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside);
 })
 const props = defineProps({
   title : String
@@ -42,6 +46,14 @@ const cdList = ref({});
 const cdVal = ref('');
 const cdNm = ref('');
 const isShow = ref(false);
+const dropDown = ref(null);
+
+function handleClickOutside(event) {
+  if (dropDown.value && !dropDown.value.contains(event.target)) {
+    noShowItem()
+  }
+
+}
 
 async function loadData(){
   cdList.value = await gfnUtils.getCommCode(props.listDivCd);

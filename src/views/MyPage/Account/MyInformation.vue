@@ -299,12 +299,19 @@
     })
 
   const hpNoFormatted = computed( () => {
-    return gfnUtils.formattedHpNo(userInfo.value.hp);
+    if (userInfo.value.hp.length === 11){
+      return gfnUtils.formattedHpNo(userInfo.value.hp);
+    }else{
+      return userInfo.value.hp;
+    }  
+    
   })
 
   function updateHpNo(value) {
     const cleanedValue = value.replace(/-/g, '');
     if (cleanedValue.length === 11) {
+      userInfo.value.hp = cleanedValue;
+    }else{
       userInfo.value.hp = cleanedValue;
     }
   }

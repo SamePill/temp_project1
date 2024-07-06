@@ -30,7 +30,7 @@
               >
                 <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">회사주소</p>
                 <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2.5">
-                  <input
+                  <input  @click="showAddrPop"
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[360px] h-[51px] relative overflow-hidden gap-12 p-4 rounded border border-[#ddd]"
                     v-model="companyInfo.compBaseAddr"
                   />
@@ -230,6 +230,9 @@
         </div>
       </div>
     </div>
+    <modal ref="srchAddrShow" :width="700">
+      <SrchAddrApiPopup @closeAddrPop="closeAddrPop" @selAddr="returnArrd" />
+    </modal>
   </div>
 </template>
 
@@ -240,7 +243,8 @@ import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import { useRouter } from 'vue-router'
 import { onMounted, ref, computed } from 'vue'
-
+import Modal from "@/components/baseComponents/Modal.vue";
+import SrchAddrApiPopup from "@/components/popupComponents/SrchAddrApiPopup.vue";
 onMounted(() => {
   loadData();
 })
@@ -276,6 +280,19 @@ const compLogoFileNm = ref('')
 const bizNoFormatted = computed( () => {
   return gfnUtils.formattedBizNo(companyInfo.value.bizRegNo);
 })
+const srchAddrShow = ref(null);
+//주소팝업 열기
+const showAddrPop = () => {
+  srchAddrShow.value.open();
+}
+//주소팝업 닫기
+const closeAddrPop = function (){
+  srchAddrShow.value.close();
+}
+//주소팝업 리턴
+function returnArrd(addrVal){
+  companyInfo.value.compBaseAddr = addrVal.roadAddr;
+}
 
 function updateBizNo(value) {
   const cleanedValue = value.replace(/-/g, '');

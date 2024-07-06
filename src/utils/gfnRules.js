@@ -1,16 +1,17 @@
 export const required = value => {
-  return !!value ||  false//"필수입력입니다.";
+  return !!value ||  false //"필수입력입니다.";
 };
 
 export const maxLength = (value, ln) => {
-  return ((value || "") + "").length <= ln || ln + "자 이내로 입력하세요.";
+  return ((value || "") + "").length <= ln 
+  || false //ln + "자 이내로 입력하세요.";
 };
 
 export const minLength = (value, ln) => {
   return (
     ((value || "") + "").length >= ln ||
     ((value || "") + "").length == 0 ||
-    ln + "자 이상으로 입력하세요."
+    false //ln + "자 이상으로 입력하세요."
   );
 };
 

@@ -265,7 +265,9 @@
   }
 
   function back(){
-    router.back()
+    router.replace({name: "AddEngineerInfo"
+      ,state : { dataObj : JSON.stringify(engrInfo.value) }
+    })
   }
 
 

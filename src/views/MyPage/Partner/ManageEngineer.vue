@@ -223,7 +223,7 @@
             <vue-awesome-paginate
               :total-items=totalCnt
               v-model="pageNo"
-              :items-per-page="10"
+              :items-per-page="20"
               :max-pages-shown="10"
               :on-click="loadData"
             >

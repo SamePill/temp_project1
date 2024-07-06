@@ -76,36 +76,51 @@
               <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
             </p>
           </div>
-          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <input type="text" class="flex h-[51px] w-[340px] p-4 rounded border border-[#ddd] text-left text-[#191919]" 
-              placeholder="이름을 입력해주세요."
-              v-model="engrStep1.engrNm"
-            />
-            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-[#ddd]">
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">재직</p>
+          <div>
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
+              <input type="text" 
+                :class='(engrNmChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex h-[51px] w-[340px] p-4 rounded border text-left text-[#191919]"'
+                placeholder="이름을 입력해주세요."
+                v-model="engrStep1.engrNm"
+              />
+              <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-40 h-[51px] relative overflow-hidden p-4 rounded bg-[#ddd]">
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">재직</p>
+              </div>            
             </div>
-          </div>
+            <p v-show="!engrNmChk"
+              class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+              이름을을 입력해주세요.
+            </p>
+        </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
           <p class="flex-grow-0 flex-shrink-0 text-xl text-left">
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">생년월일 </span
             ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
+          <div>
           <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
-            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="YYYY" min="1" max="31" style="border:none" v-model="birthY"/>
+            <div :class='(birtChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"'>
+              <input type="number" placeholder="YYYY" min="1" max="31" 
+                style="border:none"
+                v-model="birthY"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
             </div>
             <div
-              class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
+              :class='(birtChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"'
             >
               <input type="number" placeholder="MM" min="1" max="12" style="border:none" v-model="birthM"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">월</p>
             </div>
-            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
+            <div :class='(birtChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"'>
               <input type="number" placeholder="DD" min="1" max="31" style="border:none" v-model="birthD"/>
               <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">일</p>
             </div>
+          </div>
+          <p v-show="!birtChk"
+            class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+            생년월일을 입력해주세요.
+          </p>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
@@ -113,9 +128,19 @@
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">주소 </span>
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
-          <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
-            <input @click="showAddrPop" type="text" placeholder="주소를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.baseAddr">
-            <input type="text" placeholder="상세주소를 입력해주세요.." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.dtlAddr">
+          <div>
+            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-2">
+              <input @click="showAddrPop" type="text" placeholder="주소를 입력해주세요." 
+                :class='(addrChk ? "border-[#ddd]" : "border-[#ff5252]") + " h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]"' 
+                v-model="engrStep1.baseAddr">
+              <input type="text" placeholder="상세주소를 입력해주세요.." 
+                :class='(addrChk ? "border-[#ddd]" : "border-[#ff5252]") + " h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]"' 
+                v-model="engrStep1.dtlAddr">
+            </div>
+            <p v-show="!addrChk"
+              class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+              주소를 입력해주세요.
+            </p>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
@@ -123,13 +148,29 @@
             <span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">최종학력 </span
             ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
           </p>
-          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5 ">
-            <input type="text" placeholder="학교명을 입력해주세요." class="h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.schlNm">
-            <DropDown @click="documentClick('EdctDivCd','dropDown')" id="EdctDivCd" ref="$EdctDivCd" @setData="getEdctDivCd" class="h-[51px] w-[160px]" :div="'N'" :title="''" :listDivCd="'EDCT_DIV_CD'" :selCd="engrStep1.edctDivCd"/>
+          <div>
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5 ">
+              <input type="text" placeholder="학교명을 입력해주세요." 
+                :class='(schlNmChk ? "border-[#ddd]" : "border-[#ff5252]") + " h-[51px] w-[340px] p-4 rounded bg-white border border-[#ddd]"' 
+                v-model="engrStep1.schlNm">
+              <DropDown @click="documentClick('EdctDivCd','dropDown')" id="EdctDivCd" ref="$EdctDivCd" @setData="getEdctDivCd" class="h-[51px] w-[160px]" :div="'N'" :title="''" :listDivCd="'EDCT_DIV_CD'" :selCd="engrStep1.edctDivCd"/>
+            </div>
+            <p v-show="!schlNmChk"
+              class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+              전공학과를 입력해주세요.
+            </p>
           </div>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
             <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">학과</p>
-            <input type="text" placeholder="전공학과를 입력해주세요." class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.dprt">
+            <div>
+              <input type="text" placeholder="전공학과를 입력해주세요." 
+                :class='(dprtChk ? "border-[#ddd]" : "border-[#ff5252]") + " h-[51px] w-[520px] p-4 rounded bg-white border"' 
+                v-model="engrStep1.dprt">
+              <p v-show="!dprtChk"
+                class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                전공학과를 입력해주세요.
+              </p>
+            </div>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -141,16 +182,22 @@
               ><span class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#ff5252]">*</span>
             </p>
           </div>
-          <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] h-[51px] gap-5">
-            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrYear"/>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
+          <div>
+            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] h-[51px] gap-5">
+              <div :class='(crrChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"'>
+                <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrYear"/>
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">년</p>
+              </div>
+              <div :class='(crrChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"'>
+                <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrMon"/>
+                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개월</p>
+              </div>
+              <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" class="flex justify-start items-start flex-grow-0 flex-shrink-0 h-[51px] w-40" :div="'N'" :title="''" :listDivCd="'ENGR_RTNG_DIV_CD'"  :selCd="engrStep1.engrRtngDivCd"/>
             </div>
-            <div class="flex h-[51px] justify-between items-start flex-grow-0 flex-shrink-0 w-40 relative overflow-hidden p-4 rounded bg-white border border-[#ddd]">
-              <input type="number" placeholder="" min="0" max="99" style="border:none" v-model="engrStep1.crrMon"/>
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#777]">개월</p>
-            </div>
-            <DropDown @click="documentClick('EngrRtngDivCd','dropDown')" id="EngrRtngDivCd" ref="$EngrRtngDivCd" @setData="getEngrRtngDivCd" class="flex justify-start items-start flex-grow-0 flex-shrink-0 h-[51px] w-40" :div="'N'" :title="''" :listDivCd="'ENGR_RTNG_DIV_CD'"  :selCd="engrStep1.engrRtngDivCd"/>
+            <p v-show="!crrChk"
+              class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+              경력을 입력해주세요.
+            </p>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -163,7 +210,15 @@
               작성 TIP</button>
               <SkillTip ref="$SkillTip" ></SkillTip>
           </div>
-          <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" class="h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]" v-model="engrStep1.taskSkil">
+          <div>
+            <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" 
+              :class='(taskSkilChk ? "border-[#ddd]" : "border-[#ff5252]") + " h-[51px] w-[520px] p-4 rounded bg-white border border-[#ddd]"'
+              v-model="engrStep1.taskSkil">
+            <p v-show="!taskSkilChk"
+              class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+              업무스킬을 입력해주세요.
+            </p>
+          </div>
         </div>
         <div v-for="el, idx in engrStep1.crtfList" :key="el">
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -258,11 +313,11 @@ const engrStep1 = ref(
     bith: "",
     baseAddr: "",
     dtlAddr: "",
-    edctDivCd: "",
+    edctDivCd: "10",
     edctDivCdNm: "",
     schlNm: "",
     dprt: "",
-    engrRtngDivCd: "",
+    engrRtngDivCd: "10",
     taskSkil: "",
     crtfList: [
       {
@@ -282,6 +337,53 @@ const birthY = ref("")
 const birthM = ref("")
 const birthD = ref("")
 
+const engrNmChk = ref(true)
+const birtChk = ref(true)
+const addrChk = ref(true)
+const schlNmChk = ref(true)
+const dprtChk = ref(true)
+const crrChk = ref(true)
+const taskSkilChk = ref(true)
+
+function engrNmChkRule(){
+
+  console.log(!gfnRules.isNull(engrStep1.value.engrNm))
+  console.log(gfnRules.validName(engrStep1.value.engrNm))
+  console.log(gfnRules.minLength(engrStep1.value.engrNm , 2)  )
+  if(!gfnRules.isNull(engrStep1.value.engrNm) 
+  && gfnRules.validName(engrStep1.value.engrNm)
+  && gfnRules.minLength(engrStep1.value.engrNm, 2)){
+    console.log("정상")
+    engrNmChk.value = true
+  }else{
+    console.log("오류")
+    engrNmChk.value = false
+  }  
+}
+function birtChkRule(){
+  birtChk.value = !gfnRules.isNull(engrStep1.value.bith)
+}
+function addrChkRule(){
+  addrChk.value = !gfnRules.isNull(engrStep1.value.baseAddr)
+}
+function schlNmChkRule(){
+  schlNmChk.value = !gfnRules.isNull(engrStep1.value.schlNm)
+}
+function dprtChkRule(){
+  dprtChk.value = !gfnRules.isNull(engrStep1.value.dprt)
+}
+function crrChkRule(){
+  if(gfnRules.isNull(engrStep1.value.crrYear) || gfnRules.isNull(engrStep1.value.crrMon)){
+    crrChk.value = false
+  }else{
+    crrChk.value = true
+  }
+}
+function taskSkilChkRule(){
+  taskSkilChk.value = !gfnRules.isNull(engrStep1.value.taskSkil)
+}
+
+
 function updateAcqsDt(value, idx) {
   const cleanedValue = value.replace(/-/g, '');
   if (cleanedValue.length === 8) {
@@ -293,8 +395,10 @@ onMounted(() => {
 
   if( dataObj != undefined ){
     console.log("수정모드...")
-    engrInfo.value = JSON.parse(dataObj)
 
+    engrInfo.value = JSON.parse(dataObj)
+    console.log(engrInfo.value)
+    console.log(engrInfo.value.engrId)
     if(!gfnRules.isNull(engrInfo.value.engrId)){
       editMode.value = true
       loadData();
@@ -316,7 +420,7 @@ async function loadData(){
 
   if(rtn.rtnCd == "00"){
     engrStep1.value = rtn.rtnData   
-
+    console.log(engrStep1.value )
     birthY.value = engrStep1.value.bith.slice(0, 4)
     birthM.value = engrStep1.value.bith.slice(4, 6)
     birthD.value = engrStep1.value.bith.slice(6, 8)
@@ -348,39 +452,24 @@ function popup(div){
 
 async function nextStep(){
 
-  //TODO 필수 입력 값 체크...
-  if(gfnRules.isNull(engrStep1.value.engrNm)){
-    //이름 검사 > 오류처리
-    return;
-  }
-
   if(!gfnRules.isNull(birthY.value) && !gfnRules.isNull(birthY.value) && !gfnRules.isNull(birthY.value)){
     //생년월일 검사 
     engrStep1.value.bith = birthY.value + birthM.value + birthD.value;
-  }else{
-     //생년월일 검사 > 오류처리
-    return;
+    console.log(engrStep1.value.bith)
   }
+  
+  engrNmChkRule()
+  birtChkRule()
+  addrChkRule()
+  schlNmChkRule()
+  dprtChkRule()
+  crrChkRule()
+  taskSkilChkRule()
 
-  if(gfnRules.isNull(engrStep1.value.baseAddr)){
-    //주소 검사 > 오류처리
-    return;
+  if(!engrNmChk.value || !birtChk.value  || !addrChk.value  
+    || !schlNmChk.value  || !dprtChk.value || !crrChk.value  || !taskSkilChk.value ){
+    return false;
   }
-
-  if(gfnRules.isNull(engrStep1.value.schlNm)){
-    //최종학력 검사 > 오류처리
-    return;
-  }
-
-  if(gfnRules.isNull(engrStep1.value.taskSkil)){
-    //업무스킬 검사 > 오류처리
-    return;
-  }
-
-  // if(gfnUtils.isNull(engrStep1.value.taskSkil)){
-  //   //경력 검사 > 오류처리
-  //   return;
-  // }
 
 
   let getParam = "";
@@ -420,7 +509,7 @@ async function nextStep(){
       res.engrId =  engrInfo.value.engrId
     }
     res.editMode = editMode.value
-
+    console.log(res)
     router.push({
         name: "AddEngineerCareerList"
       ,state: {dataObj : JSON.stringify(res)}     

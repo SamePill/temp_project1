@@ -62,7 +62,7 @@
                     ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
                   </p>
                   <p class="flex-grow-0 flex-shrink-0 text-sm text-left">
-                    <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">1</span
+                    <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">{{engrStep2Detl.projTitl != undefined ? engrStep2Detl.projTitl.length : 0}}</span
                     ><span class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#191919]">
                     </span
                     ><span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">/50</span>
@@ -71,6 +71,7 @@
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
                   <input
                     type="text"
+                    maxlength='50'
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                     placeholder="프로젝트명을 입력해주세요."
                     v-model="engrStep2Detl.projTitl"
@@ -109,7 +110,7 @@
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left">
                       <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                        >수행 시작월 </span
+                        >수행 시작 년월 </span
                       ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]"
                         >*</span
                       >
@@ -126,7 +127,7 @@
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left">
                       <span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]"
-                        >수행 종료월 </span
+                        >수행 종료 년월 </span
                       ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]"
                         >*</span
                       >
@@ -221,7 +222,7 @@
                     <TaskTip ref="$TaskTip" ></TaskTip>
                 </div>
                 <textarea
-                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                   placeholder="업무내용을 입력해주세요."
                   v-model="engrStep2Detl.projCtntTask"
                 >
@@ -239,7 +240,7 @@
                     <SkillTip ref="$SkillTip" ></SkillTip>
                 </div>
                 <textarea
-                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                   placeholder="업무스킬을 입력해주세요."
                   v-model="engrStep2Detl.projDmndSkil"
                 >
@@ -257,7 +258,7 @@
                 </div>
                 <input 
                   type="text"
-                  class="flex-grow-0 flex-shrink-0 w-[161px] text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                  class="flex-grow-0 flex-shrink-0 w-[161px] text-base text-left text-[#191919] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                   placeholder="활용Tool을 입력해주세요."
                   v-model="engrStep2Detl.projUseTool"
                 />
@@ -274,7 +275,7 @@
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">기타사항</p>
               </div>
               <textarea
-                class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+                class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                 placeholder="기타사항을 입력해주세요."
                 v-model="engrStep2Detl.projEtcInfo"
               >
