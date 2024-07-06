@@ -88,7 +88,7 @@
                     ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
                   </p>
                   <p class="flex-grow-0 flex-shrink-0 text-sm text-left">
-                    <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">1</span
+                    <span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494]">{{engrStep2Detl.clntNm != undefined ? engrStep2Detl.clntNm.length : 0}}</span
                     ><span class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#191919]">
                     </span
                     ><span class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">/30</span>
@@ -97,6 +97,7 @@
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
                   <input
                     type="text"
+                    maxlength="30"
                     class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
                     placeholder="클라이언트명을 입력해주세요."
                     v-model="engrStep2Detl.clntNm"
