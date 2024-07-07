@@ -103,6 +103,7 @@
         >
           <button
             class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
+            @click="goToPage('UseTerms')"
           >
             이용약관
           </button>
@@ -119,6 +120,7 @@
           </svg>
           <button
             class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
+            @click="goToPage('PrivacyPolicy')"
           >
             개인정보처리방침
           </button>
@@ -177,6 +179,8 @@
   const blSendCertNo = ref(false) //발송요청 상태
   const countdown = ref('03:00')
   const btnIsActv =  ref(false)
+  const userMail = ref("")
+
   //인증번호 요청
   async function reqCertNo(){
     if(chkHp.value != true || hp.value.length != 11){
@@ -240,8 +244,8 @@
       return false;
     }
 
-    var api = "/v1/auth/join/step1/verify-auth-hp"
-    var postParams = {   "hp": hp.value,   "authNo": authNo.value };
+    var api = "/v1/auth/find-hp"
+    var postParams = { "hp": hp.value,   "authNo": authNo.value };
 
     //var loading = "";
     //var isErr = "";
@@ -257,6 +261,8 @@
       isInputReadonly.value = true //전화번호 수정불가
       blSendCertNo.value = false   //인증번호 입력 부분 비노출
       btnIsActv.value = true
+
+      userMail.value = rtn.rtnData.userMail 
       gfnUtils.openAlert("인증이 완료 되었습니다.","", 2000)
 
     } else {
@@ -266,7 +272,12 @@
   }
 
 function findEmail(){
-  console.log("이메일 찾기")
+  router.push({ 
+    name: "FindIdResult"
+    ,state: {
+      dataObj : {userMail : userMail.value},
+    },
+  });
 }
 
 function startCount(){
@@ -288,6 +299,10 @@ function startCount(){
      totalSeconds--;
  }, 1000);
             
+}
+
+function goToPage(pageName){
+  router.push({name :pageName})
 }
 
 </script>

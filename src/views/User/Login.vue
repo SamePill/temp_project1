@@ -140,7 +140,8 @@
         >
           <button
             class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
-          >
+            @click="goToPage('UseTerms')"
+            >
             이용약관
           </button>
           <svg
@@ -156,7 +157,8 @@
           </svg>
           <button
             class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
-          >
+            @click="goToPage('PrivacyPolicy')"
+            >
             개인정보처리방침
           </button>
           <svg
@@ -270,6 +272,13 @@ function findId() {
 function signUp() {
   router.push({name: 'SignUp'});
 }
+
+
+
+function goToPage(pageName){
+  router.push({name :pageName})
+}
+
 </script>
 <style scoped>
 </style>

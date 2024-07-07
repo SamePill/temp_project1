@@ -35,7 +35,9 @@ import Login from "@/views/User/Login.vue";
 import SignUp from "@/views/User/SignUp.vue";
 import SignUpApply from "@/views/User/SignUpApply.vue";
 import FindId from "@/views/User/FindId.vue";
+import FindIdResult from "@/views/User/FindIdResult.vue";
 import ResetPassword from "@/views/User/ResetPassword.vue";
+import NewPassword from "@/views/User/NewPassword.vue";
 
 //주소검색
 import SrchAddrPop from '@/components/popupComponents/SrchAddressPopup.vue'
@@ -137,15 +139,27 @@ const router = createRouter({
       component: FindId,
       name: 'FindId'
     },
+    //아이디찾기결과
+    {
+      path: '/findIdResult',
+      component: FindIdResult,
+      name: 'FindIdResult'
+    },
     //비밀번호초기화
     {
       path: '/resetPassword',
       component: ResetPassword,
       name: 'ResetPassword'
     },
+    //비밀번호초기화
+    {
+      path: '/newPassword',
+      component: NewPassword,
+      name: 'NewPassword'
+    },
+    
 
     /*********************** 마이페이지 ***********************/
-    //비밀번호초기화
     {
       path: '/myCompanyInfo',
       component: MyCompanyInfo,
@@ -226,7 +240,7 @@ const router = createRouter({
       component: ManageEngineer,
       name: 'ManageEngineer'
     },
-  /*********************** 주소검색 ***********************/
+    /*********************** 주소검색 ***********************/
     {
       path: '/addressPopup',
       component: SrchAddrPop,
@@ -234,69 +248,69 @@ const router = createRouter({
     },
 
 
-  /*********************** 큐밋이란 ***********************/
-  {
-    path: '/whatIsQmeet',
-    component: WhatIsQm,
-    name: 'WhatIsQm'
-  },
-  
+    /*********************** 큐밋이란 ***********************/
+    {
+      path: '/whatIsQmeet',
+      component: WhatIsQm,
+      name: 'WhatIsQm'
+    },
+    
 
-  /*********************** 약관 ***********************/
-  //테스트
-  {
-    path: '/privacyPolicy',
-    component: PrivacyPolicy,
-    name: 'PrivacyPolicy'
-  },
-  {
-    path: '/terms_1',
-    component: Terms_1,
-    name: 'Terms_1'
-  },
-  {
-    path: '/terms_2',
-    component: Terms_2,
-    name: 'Terms_2'
-  },
-  {
-    path: '/useTerms',
-    component: UseTerms,
-    name: 'UseTerms'
-  },
+    /*********************** 약관 ***********************/
+    //테스트
+    {
+      path: '/privacyPolicy',
+      component: PrivacyPolicy,
+      name: 'PrivacyPolicy'
+    },
+    {
+      path: '/terms_1',
+      component: Terms_1,
+      name: 'Terms_1'
+    },
+    {
+      path: '/terms_2',
+      component: Terms_2,
+      name: 'Terms_2'
+    },
+    {
+      path: '/useTerms',
+      component: UseTerms,
+      name: 'UseTerms'
+    },
 
-  /*********************** 고객센터 ***********************/
-  {
-    path: '/cstmSrvcCntr',
-    component: CstmSrvcCntr,
-    name: 'CstmSrvcCntr'
-  },
-  //큐밋소식
-  {
-    path: '/qmNews',
-    component: QmNews,
-    name: 'QmNews'
-  },
-  //공지사항 상세
-  {
-    path: '/notiDetl',
-    component: NotiDetl,
-    name: 'NotiDetl'
-  },
-  //제휴서비스입점신청
-  {
-    path: '/applyPtnSrve',
-    component: ApplyPtnSrve,
-    name: 'ApplyPtnSrve'
-  },
-  //문의하기
-  {
-    path: '/qstn',
-    component: Qstn,
-    name: 'Qstn'
-  },
+    /*********************** 고객센터 ***********************/
+    {
+      path: '/cstmSrvcCntr',
+      component: CstmSrvcCntr,
+      name: 'CstmSrvcCntr'
+    },
+    //큐밋소식
+    {
+      path: '/qmNews',
+      component: QmNews,
+      name: 'QmNews'
+    },
+    //공지사항 상세
+    {
+      path: '/notiDetl',
+      component: NotiDetl,
+      name: 'NotiDetl'
+    },
+    //제휴서비스입점신청
+    {
+      path: '/applyPtnSrve',
+      component: ApplyPtnSrve,
+      name: 'ApplyPtnSrve'
+    },
+    //문의하기
+    {
+      path: '/qstn',
+      component: Qstn,
+      name: 'Qstn'
+    },
 
-   /*********************** 테스트 페이지 ***********************/
+    /*********************** 테스트 페이지 ***********************/
     {
      path: '/Test',
       component: Test,

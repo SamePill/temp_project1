@@ -37,6 +37,19 @@
         <div
           class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2"
         >
+          <div class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2">
+            <input
+              :class='(chkEmail ? "border-[#ddd]" : "border-[#ff5252]") + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border "'
+              type="text"
+              placeholder="이메일"
+              v-model="userMail"
+              @blur="ruleChkEmail()"
+              @input="regexEmail()"
+              />
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]" v-show="!chkEmail">
+              이메일이 올바르지 않습니다. 다시 한번 확인해주세요.
+            </p>
+          </div>
           <div
             class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-2.5"
           >
@@ -109,22 +122,25 @@
         </div>
       </div>
       <div
-        class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#999]"
+        class="flex flex-col justify-start items-center self-stretch flex-grow-0 flex-shrink-0 gap-20"
       >
-        <p
-          class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white"
+        <button
+          :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + "  flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded text-white"'
+          @click="goToReset()"
         >
           비밀번호 찾기
-        </p>
+        </button>
       </div>
       <div
+        style="display: flex; justify-content: center;" 
         class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5"
       >
-        <p
+        <button
           class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
-        >
+          @click="goToPage('UseTerms')"
+          >
           이용약관
-        </p>
+        </button>
         <svg
           width="1"
           height="14"
@@ -136,11 +152,12 @@
         >
           <path d="M0.5 1V13" stroke="#DDDDDD" stroke-linecap="round"></path>
         </svg>
-        <p
+        <button
           class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
-        >
+          @click="goToPage('PrivacyPolicy')"
+          >
           개인정보처리방침
-        </p>
+        </button>
         <svg
           width="1"
           height="14"
@@ -187,6 +204,7 @@
   const router = useRouter();
   const hp = ref("");
   const authNo = ref("");
+  const userEmail = ref("");
   // const isAuthFail = ref(false);
   // const sendHpBtn = ref("인증번호 전송");
   const chkHp = ref(true); //휴대폰번호 정합성
@@ -195,6 +213,17 @@
   const certNoChk = ref("NONE"); //인증번호 일치 확인 후 true
   const blSendCertNo = ref(false); //발송요청 상태
   const countdown = ref("03:00");
+  const btnIsActv =  ref(false)
+  const chkEmail = ref(true)  //이메일 정합성
+
+  function regexEmail(){
+    // 입력값에서 허용되지 않는 문자를 제거
+    userEmail.value = userEmail.value.replace(/[^a-zA-Z0-9@.]/g, '');
+  }
+  function ruleChkEmail(){
+    chkEmail.value = gfnRules.validEmail(userEmail.value);
+    //btnStatChng()
+  }
 
   //인증번호 요청
   async function reqCertNo() {
@@ -227,7 +256,7 @@
       //   gfnUtils.openAlert("이메일을 입력해주세요.","", 2000)
       //   return false;
       // }
-      var postParams = { hp: hp.value, reqAuthHpDivCd: "30", userMail: "" };
+      var postParams = { hp: hp.value, reqAuthHpDivCd: "30", userMail: userEmail.value };
 
       var rtn = await gfnUtils.axiosPost(api, postParams);
       //var rtn = {}
@@ -240,7 +269,7 @@
         countdown.value = "03:00";
         startCount();
       } else {
-        gfnUtils.openAlert("인증 SMS요청중 오류가 발생하였습니다.", "", 2000);
+        gfnUtils.openAlert(rtn.rtnMsg, "", 2000);
       }
     }
   }
@@ -254,9 +283,9 @@
       gfnUtils.openAlert("인증번호를 입력해주세요.", "", 2000);
       return false;
     }
-
-    var api = "/v1/auth/join/step1/verify-auth-hp";
-    var postParams = { hp: hp.value, authNo: authNo.value };
+    
+    var api = "/v1/auth/find-pass/verify-auth-hp";
+    var postParams = { hp: hp.value, authNo: authNo.value, userMail: userEmail.value };
 
     //var loading = "";
     //var isErr = "";
@@ -270,6 +299,8 @@
       isButtonDisabled.value = true; //인증버튼 비활성
       isInputReadonly.value = true; //전화번호 수정불가
       blSendCertNo.value = false; //인증번호 입력 부분 비노출
+      btnIsActv.value = true
+      //userMail.value = rtn.rtnData.userMail 
       gfnUtils.openAlert("인증이 완료 되었습니다.", "", 2000);
 
     } else {
@@ -297,5 +328,18 @@
 
       totalSeconds--;
     }, 1000);
+  }
+
+  function goToPage(pageName){
+    router.push({name :pageName})
+  }
+
+  function goToReset(){
+    router.push({ 
+    name: "NewPassword"
+    ,state: {
+      dataObj : {userMail : userEmail.value,  pass : "", confirmPass : "" },
+    },
+  });
   }
 </script>

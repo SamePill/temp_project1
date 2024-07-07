@@ -734,6 +734,22 @@ export const formatYMDHMS = (dateString) => {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
+
+export const maskEmail = (email) => {
+  // '@'의 위치를 찾음
+  const atIndex = email.indexOf('@');
+  
+  // '@' 앞의 문자열과 뒤의 문자열을 나눔
+  const localPart = email.substring(0, atIndex);
+  const domainPart = email.substring(atIndex);
+  
+  // 앞 두 글자와 '*'로 대체할 문자열을 구성
+  const maskedLocalPart = localPart.substring(0, 2) + '*'.repeat(localPart.length - 2);
+  
+  // 최종 마스킹된 이메일 주소를 반환
+  return maskedLocalPart + domainPart;
+}
+
 /**
  * 페이지 표시 제목 설정
  * @param {*} pageTitle //페이지 제목

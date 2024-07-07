@@ -604,11 +604,12 @@
           <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-2.5"
           >
-            <p
+            <button
+              @click="goToPage('UseTerms')"
               class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
             >
               이용약관
-            </p>
+            </button>
             <svg
               width="1"
               height="14"
@@ -620,11 +621,12 @@
             >
               <path d="M0.5 1V13" stroke="#DDDDDD" stroke-linecap="round"></path>
             </svg>
-            <p
+            <button
+              @click="goToPage('PrivacyPolicy')"
               class="flex-grow-0 flex-shrink-0 text-xs font-medium text-left text-[#777]"
             >
               개인정보처리방침
-            </p>
+            </button>
             <svg
               width="1"
               height="14"
