@@ -255,7 +255,7 @@ async function nextPage(div){
 
     if(rtn.rtnCd == "00"){
       gfnUtils.openAlert("프로젝트 등록이 완료 되었습니다.","", 2000)
-      router.replace("/")
+      router.replace({name : 'PrjtSrch'})
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

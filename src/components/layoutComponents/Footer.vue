@@ -49,8 +49,8 @@
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
           <p class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#555]">약관동의</p>
           <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
-            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">이용약관</p>
-            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]">개인정보 처리방침</p>
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="goToPage('UseTerms')">이용약관</p>
+            <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="goToPage('PrivacyPolicy')">개인정보 처리방침</p>
           </div>
         </div>
       </div>

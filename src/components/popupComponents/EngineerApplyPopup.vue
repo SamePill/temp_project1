@@ -174,11 +174,38 @@
                       경력 : {{ el.crrYear }}년 {{ el.crrMon }} 개월
                     </p>
                   </div>
-                  <div
+                  <div v-show="el.engrRtngDivCd == 10"
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#ddf2ef]"
                   >
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#1ba494]"
+                    >
+                      {{ el.engrRtngDivCdNm }}
+                    </p>
+                  </div>
+                  <div v-show="el.engrRtngDivCd == 20"
+                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dbe9fa]"
+                  >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#0b6bdc]"
+                    >
+                      {{ el.engrRtngDivCdNm }}
+                    </p>
+                  </div>
+                  <div v-show="el.engrRtngDivCd == 30"
+                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#fadbe6]"
+                  >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc0b56]"
+                    >
+                      {{ el.engrRtngDivCdNm }}
+                    </p>
+                  </div>
+                  <div v-show="el.engrRtngDivCd == 40"
+                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#faf1db]"
+                  >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc630b]"
                     >
                       {{ el.engrRtngDivCdNm }}
                     </p>
@@ -280,7 +307,7 @@
                       경력 : {{ el.crrYear }}년 {{ el.crrMon }}개월
                     </p>
                   </div>
-                  <div
+                  <div  v-show="el.engrRtngDivCd == 10"
                     class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#ddf2ef]"
                   >
                     <p
@@ -289,6 +316,34 @@
                       {{ el.engrRtngDivCdNm }}
                     </p>
                   </div>
+                  <div  v-show="el.engrRtngDivCd == 20"
+                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#dbe9fa]"
+                  >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#0b6bdc]"
+                    >
+                      {{ el.engrRtngDivCdNm }}
+                    </p>
+                  </div>
+                  <div  v-show="el.engrRtngDivCd == 30"
+                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#fadbe6]"
+                  >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc0b56]"
+                    >
+                      {{ el.engrRtngDivCdNm }}
+                    </p>
+                  </div>
+                  <div  v-show="el.engrRtngDivCd == 40"
+                    class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2 py-1.5 rounded bg-[#faf1db]"
+                  >
+                    <p
+                      class="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#dc630b]"
+                    >
+                      {{ el.engrRtngDivCdNm }}
+                    </p>
+                  </div>
+              
                 </div>
               </div>
             </div>
@@ -370,7 +425,7 @@ const filteredEngrList = computed( () => {
     return engrList.value
   }
   return engrList.value.filter( item => 
-      item.engrNm.indexOf(srchEngr.value) == 0
+      item.engrNm.indexOf(srchEngr.value) >= 0
   )
 })
 
@@ -379,7 +434,7 @@ const filteredEngrSprtList = computed( () => {
     return engrSprtList.value  
   }
   return engrSprtList.value.filter( item => 
-      item.engrNm.indexOf(srchSprt.value) == 0
+      item.engrNm.indexOf(srchSprt.value) >= 0
   )
 })
 

@@ -55,6 +55,11 @@ import Test from "@/views/Prjt/Test.vue";
 import TestPage from "@/views/Test/TestPage.vue";
 import TestPageSetup from "@/views/Test/TestPageSetup.vue";
 
+//테스트
+import PrivacyPolicy from "@/views/Terms/PrivacyPolicy.vue";
+import Terms_1 from "@/views/Terms/Terms_1.vue";
+import Terms_2 from "@/views/Terms/Terms_2.vue";
+import UseTerms from "@/views/Terms/UseTerms.vue";
 
 const router = createRouter({
   //history: createWebHashHistory(),
@@ -236,6 +241,30 @@ const router = createRouter({
     name: 'WhatIsQm'
   },
   
+
+  /*********************** 약관 ***********************/
+  //테스트
+  {
+    path: '/privacyPolicy',
+    component: PrivacyPolicy,
+    name: 'PrivacyPolicy'
+  },
+  {
+    path: '/terms_1',
+    component: Terms_1,
+    name: 'Terms_1'
+  },
+  {
+    path: '/terms_2',
+    component: Terms_2,
+    name: 'Terms_2'
+  },
+  {
+    path: '/useTerms',
+    component: UseTerms,
+    name: 'UseTerms'
+  },
+
   /*********************** 고객센터 ***********************/
   {
     path: '/cstmSrvcCntr',
