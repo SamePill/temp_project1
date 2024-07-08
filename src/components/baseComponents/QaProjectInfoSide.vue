@@ -432,6 +432,7 @@
       :prj="JSON.parse(JSON.stringify(props.prj))"
       ref="$EngineerPopup"
       @selectEngr="selectEngr"
+      :slctEngrList = "engrList"
     ></EngineerApplyPopup>
     <Modal ref="modalConfirm" :width="340">
       <confirmPopup

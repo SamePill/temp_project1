@@ -7,24 +7,50 @@
       <div class="mt-[20px] flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative">
         <div class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{notiDetlData.regDttm}}</p>
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{notiInfo.regDttm}}</p>
           <p class="flex-grow-0 flex-shrink-0 w-[800px] text-xl text-left text-[#333]">
-            {{notiDetlData.notiTitl}}
+            {{notiInfo.notiTitl}}
           </p>
           <div class="w-[1060px] mt-[10px] mb-[60px] gap-2.5 px-[34px] py-[30px] bg-[#ededed]">
-            <p v-html="notiTxtVal" class="self-stretch  w-[992px] text-base text-left text-black">
+            <p v-html="notiInfo.notiTxt" class="self-stretch  w-[992px] text-base text-left text-black">
             </p>
           </div>
         </div>
         <div class="w-[1060px] mt-[60px] mb-[100px]">
           <div class="mx-auto flex justify-between items-center flex-grow-0 flex-shrink-0 w-[400px] relative">
-            <img @click="moveSeq('pre')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_002.png"/>
-            <button @click="moveSeq('pre')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">이전글</button>
-            <img src="@/assets/line_001.png"/>
+            <img 
+              v-show="!gfnRules.isNull(notiInfo.preNotiSeq)"
+              @click="moveSeq('pre')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_002.png"/>
+            <button 
+              v-show="!gfnRules.isNull(notiInfo.preNotiSeq)"
+              @click="moveSeq('pre')" 
+              :class='(gfnRules.isNull(notiInfo.preNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left"'>이전글</button>
+            <img 
+              v-show="gfnRules.isNull(notiInfo.preNotiSeq)"
+              @click="moveSeq('pre')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_002_grey.png"/>
+            <button 
+              v-show="gfnRules.isNull(notiInfo.preNotiSeq)"
+              @click="moveSeq('pre')" 
+              :class='(gfnRules.isNull(notiInfo.preNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left"'>이전글</button>
+
+
+            <img src="@/assets/line_001.png"/>            
             <button @click="goToPage('QmNews')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">목록</button>
             <img src="@/assets/line_001.png"/>
-            <button @click="moveSeq('next')" class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">다음글</button>
-            <img @click="moveSeq('next')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_003.png"/>
+            
+            <button 
+              v-show="!gfnRules.isNull(notiInfo.nextNotiSeq)"
+              @click="moveSeq('next')" 
+              :class='(gfnRules.isNull(notiInfo.nextNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left "'>다음글</button>
+            <img 
+              v-show="!gfnRules.isNull(notiInfo.nextNotiSeq)"
+              @click="moveSeq('next')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_003.png"/>
+            <button 
+              v-show="gfnRules.isNull(notiInfo.nextNotiSeq)"
+              :class='(gfnRules.isNull(notiInfo.nextNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left "'>다음글</button>
+            <img 
+              v-show="gfnRules.isNull(notiInfo.nextNotiSeq)"
+              class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_003_grey.png"/>
           </div>
         </div>
       </div>
@@ -32,17 +58,28 @@
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
 
-const { dataObj } = history.state; 
+
 const router = useRouter()
-const notiDetlData = ref({});
-const totalCnt = ref(null);
-const showNotiRepyTxtIdx = ref(null);
-const notiList = ref([])
+// const notiDetlData = ref({});
+// const totalCnt = ref(null);
+// const showNotiRepyTxtIdx = ref(null);
+
+const { dataObj } = history.state; 
+const viewNoti = ref(dataObj);
+const notiInfo = ref({
+  notiSeq: ""//"공지사항 순번"
+  ,regDttm: ""//"등록일시"
+  ,notiTitl: ""//"공지제목"
+  ,notiTxt: ""//"공지내용"
+  ,preNotiSeq: ""//"이전공지 순번"
+  ,nextNotiSeq: ""//"다음공지 순번"
+  
+})
 
 onMounted(() => {
   if(dataObj != undefined && dataObj != null){
@@ -54,43 +91,35 @@ onUnmounted(()=>{
 });
 
 function loadData(){
-    let params = JSON.parse(dataObj);
-    if(params != undefined && params != {}){
-      totalCnt.value = params.totalCnt;
-      showNotiRepyTxtIdx.value = params.showNotiRepyTxtIdx;
-      notiList.value = params.notiList;
-
-      let notiSeq = {'notiSeq':JSON.parse(dataObj).notiSeq}
-      srchNotiList(notiSeq);
-    }
+  
+  console.log(viewNoti.value.notiSeq)
+  srchNotiInfo(viewNoti.value.notiSeq)
 }
 
 //리스트조회
-function srchNotiList(notiSeq){
-  gfnUtils.axiosGet("/v1/common/notice-detail",notiSeq).then(function(res){
-    if(res.rtnCd=='00'){
-      notiDetlData.value = res.rtnData; 
-    }else{
-      gfnUtils.openAlert(res.rtnMsg);
-    }
-  });
+async function srchNotiInfo(notiSeq){
+
+  let param = {"notiSeq": notiSeq }
+  console.log("상세조회")
+  console.log(param)
+  let rtn = await gfnUtils.axiosGet("/v1/common/notice-detail",param);
+
+  if(rtn.rtnCd=='00'){    
+    console.log(rtn.rtnData)
+    notiInfo.value = rtn.rtnData; 
+  }else{
+    gfnUtils.openAlert(rtn.rtnMsg,"",2000);
+  }
+  
 }
 
 //이전글,다음글
 function moveSeq(div){
-  let notiSeq = {};
+
   if(div === 'pre'){
-    if(showNotiRepyTxtIdx.value > 0){
-      showNotiRepyTxtIdx.value = showNotiRepyTxtIdx.value-1;
-      notiSeq = {'notiSeq':notiList.value[showNotiRepyTxtIdx.value].notiSeq}
-      srchNotiList(notiSeq)
-    }
+    srchNotiInfo(notiInfo.value.preNotiSeq) 
   }else if(div === 'next'){
-    if(totalCnt.value > showNotiRepyTxtIdx.value+1){
-      showNotiRepyTxtIdx.value = showNotiRepyTxtIdx.value+1;
-      notiSeq = {'notiSeq':notiList.value[showNotiRepyTxtIdx.value].notiSeq}
-      srchNotiList(notiSeq)
-    }
+    srchNotiInfo(notiInfo.value.nextNotiSeq) 
   }
 }
 
@@ -98,19 +127,16 @@ function moveSeq(div){
 function goToPage(path){
   router.push({
       name :path
-      ,state:{
-        dataObj : dataObj,
-      }
   });
 }
 //TODO 줄바꿈필요
-const notiTxtVal = computed(() => {
-  // let val = ''
-  let val = notiDetlData.value.notiTxt
-  if (!gfnRules.isNull(notiDetlData.value.notiTxt)){
-      // val =  notiDetlData.value.notiTxt.replace("\n", "<br/>");
-    }
-  return val;
-});
+// const notiTxtVal = computed(() => {
+//   // let val = ''
+//   let val = notiDetlData.value.notiTxt
+//   if (!gfnRules.isNull(notiDetlData.value.notiTxt)){
+//       // val =  notiDetlData.value.notiTxt.replace("\n", "<br/>");
+//     }
+//   return val;
+// });
 
 </script>

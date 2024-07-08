@@ -48,9 +48,13 @@ import WhatIsQm from '@/views/AboutQm/WhatIsQm.vue'
 //고객센터
 import CstmSrvcCntr from '@/views/Cstm/CstmSrvcCntr.vue'
 import QmNews from '@/views/Cstm/QmNews.vue'
+import NotiList from '@/views/Cstm/NotiList.vue'
 import NotiDetl from '@/views/Cstm/NotiDetl.vue'
 import ApplyPtnSrve from '@/views/Cstm/ApplyPtnSrve.vue'
 import Qstn from '@/views/Cstm/Qstn.vue'
+import QstnList from '@/views/Cstm/QstnList.vue'
+import sendAsk from '@/views/Cstm/sendAsk.vue'
+
 
 //테스트
 import Test from "@/views/Prjt/Test.vue";
@@ -291,6 +295,12 @@ const router = createRouter({
       component: QmNews,
       name: 'QmNews'
     },
+     //공지사항
+     {
+      path: '/notiList',
+      component: NotiList,
+      name: 'NotiList'
+    },
     //공지사항 상세
     {
       path: '/notiDetl',
@@ -303,13 +313,25 @@ const router = createRouter({
       component: ApplyPtnSrve,
       name: 'ApplyPtnSrve'
     },
-    //문의하기
+    //faq
     {
       path: '/qstn',
       component: Qstn,
       name: 'Qstn'
     },
-
+    //faq list
+    {
+      path: '/qstnList',
+      component: QstnList,
+      name: 'QstnList'
+    },
+    //문의하기
+    {
+      path: '/sendAsk',
+      component: sendAsk,
+      name: 'sendAsk'
+    },
+    
     /*********************** 테스트 페이지 ***********************/
     {
      path: '/Test',

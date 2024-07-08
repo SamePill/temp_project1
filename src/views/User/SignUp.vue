@@ -142,7 +142,7 @@
             <input
               :class='(pwdCmprChk ? "border-[#ddd]" : "border-[#ff5252]")  + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919] flex justify-start items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden gap-12 p-4 rounded bg-white border"'
               type="password"
-              placeholder="비밀번호"
+              placeholder="비밀번호 확인"
               @blur="ruleCmprPwd()"
               v-model="signUp.joinOneStep.confirmPass"
               />
@@ -297,11 +297,15 @@
   }  
 
   async function reqCertNo(){
+    console.log(chkHp.value)
+    console.log(reSend.value)
+
+
     if(chkHp.value != true){
       return false;
     }
 
-    if(reSend.value  == false ){
+    if(reSend.value  == true ){
       return false;
     }
 
@@ -320,7 +324,7 @@
       //rtn.rtnCd = "00"
       if (rtn.rtnCd == "00") {
         blSendCertNo.value = true
-        reSend.value = false
+        reSend.value = true
         blReq = true
 
         //카운트 다운 시간 초기화

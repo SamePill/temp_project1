@@ -153,7 +153,12 @@
 
     if(rtn.rtnCd == "00"){
       
-      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      gfnUtils.openAlert("정상처리 되었습니다.","", 2000)
+      password.value ={  
+                        crntPass: "",
+                        newPass: "",
+                        newConfirmPass: ""
+                      }
       
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)

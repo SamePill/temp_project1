@@ -93,7 +93,7 @@
               <div class="flex justify-between items-center w-40 h-[51px] relative  p-4 rounded border border-[#ddd]">
                 <p class="text-base text-left text-[#191919]">월 단위</p>
               </div>
-              <input v-model="projStep.projOneStep.pirdVal" type="number" min="0" 
+              <input v-model="projStep.projOneStep.pirdVal" type="text" min="0" 
                   :class='(pirdValChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[340px] h-[51px] text-[#999] p-4 rounded border"'
                   @blur="pirdValChkRule()"
                   placeholder="예상 근무기간을 입력해주세요."/>

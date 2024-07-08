@@ -53,7 +53,7 @@
                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">전체선택</p>
               </div>
               <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                <DropDown style="z-index: 99" @click="documentClick('RegPrjtSort','dropDown')" id="RegPrjtSort" ref="$RegPrjtSort" @setData="getRegPrjtSort" :title="'정렬'" :listDivCd="'REG_PRJT_SORT'"/>
+                <DropDown style="z-index: 99" @click="documentClick('RegPrjtSort','dropDown')" id="RegPrjtSort" ref="$RegPrjtSort" @setData="getRegPrjtSort" :div="'N'"  :listDivCd="'REG_PRJT_SORT'"/>
                 <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 overflow-hidden gap-2.5 p-2.5 rounded bg-white border border-[#ddd]"
                 >
@@ -132,7 +132,7 @@
   const pageNo = ref(1)
   const totalCnt = ref()
   const userMail = ref(window.$cookies.get("loginUserMail"));
-  const sortDiv = ref(20)
+  //const sortDiv = ref(20)
   const chkAll = ref(false)
   const regProjList = ref([])
   const topInfo = ref({
@@ -143,7 +143,7 @@
       cpltProjCnt: 0
   })
   const alertMsg = ref("")
-  const RegPrjtSort = ref("")
+  const RegPrjtSort = ref("20")
   const $RegPrjtSort = ref()
 
 
@@ -153,6 +153,7 @@
 
   function getRegPrjtSort(data){
     RegPrjtSort.value = data;
+    loadData();
   }
 
   function documentClick(div,eventTarget){
@@ -194,25 +195,25 @@
       modalShow.value.close()
       finish()
   }
-
-  // Alert창 제어
-  const alertShow = ref(null)
-  const showAlert = () => {
-    if(filteredChkList.value.length > 0){
-      return
-    }else{
-      alertShow.value.open() 
-    }           
-  }
-
+  
   function openPopup(){  
     show();
   }
 
-  function openAlert(msg){  
-    alertMsg.value = msg
-    showAlert();
-  }
+
+  // Alert창 제어
+  // const alertShow = ref(null)
+  // const showAlert = () => {
+  //   if(filteredChkList.value.length > 0){
+  //     return
+  //   }else{
+  //     alertShow.value.open() 
+  //   }           
+  // }
+  // function openAlert(msg){  
+  //   alertMsg.value = msg
+  //   showAlert();
+  // }
 
 
   async function loadData(selPage){
@@ -222,7 +223,7 @@
     }
 
     var api = "/v1/my/reg-project-list";
-    var getParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:sortDiv.value};
+    var getParams = {userMail: userMail.value, pageNo:pageNo.value, sortDiv:RegPrjtSort.value};
     let rtn = await gfnUtils.axiosGet(
       api,
       getParams
@@ -294,11 +295,11 @@
 
 
   async function finish(){
-    console.log(filteredChkList);
+    console.log(filteredChkList.value);
 
     var api = "/v1/my/update/project-recruitment-terminate";
-    var postParams = {projIdList : filteredChkList};
-    var queryParams = { userMail: userMail.value , sortDiv:sortDiv.value};
+    var postParams = {projIdList : filteredChkList.value};
+    var queryParams = { userMail: userMail.value , sortDiv:RegPrjtSort.value};
     let rtn = await gfnUtils.axiosPost(
       api,
       postParams,
@@ -307,11 +308,12 @@
     
     if(rtn.rtnCd == "00"){
       console.log(rtn);
-      openAlert("엔지니어 모집이 종료되었습니다.")
+      gfnUtils.openAlert("정상처리 되었습니다.","", 2000)
+      loadData()
     }else{
       //TODO 공통Alert으로 변경 예정
       //alert(rtn.rtnMsg);
-      openAlert(rtn.rtnMsg)
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
     
 

@@ -383,7 +383,8 @@ const emit = defineEmits([
   'selEngrs'
 ]);
 
-const props = defineProps({ prj: {} });
+const props = defineProps({ prj: {} 
+                           ,slctEngrList:[]});
 const prjEngrInfo = ref([]);
 
 // onMounted(() => {
@@ -475,6 +476,8 @@ const show = () => {
 };
 
 const cancel = () => {
+  srchEngr.value = ""
+  srchSprt.value = ""
   baseModal.value.close();
 }
 
@@ -537,18 +540,37 @@ async function loadData() {
     .axiosGet("/v1/project/engineers", getParams)
     .then(function (rtn) {
       if (rtn.rtnCd == "00") {
+        console.log("엔지니어 조회..")
         prjEngrInfo.value = rtn.rtnData;
-        engrSprtList.value = rtn.rtnData.sprtEngrList;
-        engrList.value = rtn.rtnData.notSprtEngrList;
+        engrList.value = rtn.rtnData.notSprtEngrList; //좌
+        engrSprtList.value = rtn.rtnData.sprtEngrList;//우
+
+        console.log(props.slctEngrList.length)
+        //추가 선택 리스트가 있는경우
+        if(props.slctEngrList.length > 0){
+          engrSprtList.value = props.slctEngrList;
+
+          console.log(engrList.value.length)
+          if(engrList.value.length > 0){          
+            console.log("미선택 엔지니어 정리...")
+
+            let idsInEngrSprtList = new Set(engrSprtList.value.map(item => item.engrId));
+            engrList.value = engrList.value.filter(engrEl => !idsInEngrSprtList.has(engrEl.engrId));
+
+          } 
+        }
+      
+
       }else{
-        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000);
       }
     });
 }
 
 
 async function saveData() {
-
+  srchEngr.value = ""
+  srchSprt.value = ""
   // console.log(engr10Cnt.value)
   // console.log(engr20Cnt.value)
   // console.log(engr30Cnt.value)

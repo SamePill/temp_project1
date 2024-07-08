@@ -142,8 +142,13 @@ function showFaqRepyTxt(idx){
 
 //더보기
 function showMore(){
-  isShowMore.value = true;
-  showIdx.value = totalCnt.value;
+  // isShowMore.value = true;
+  // showIdx.value = totalCnt.value;
+  router.push({name : "QstnList"
+  ,state: {
+      dataObj : {div : faqDivCd.value},
+    }
+  })
 }
 
 //탭선택
