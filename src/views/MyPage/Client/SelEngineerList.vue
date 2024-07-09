@@ -456,10 +456,10 @@
 
       if(engrProfile.value.engrSprtStatCd == '10'){
         //선정합격
-        profileMode.value = "30"
+        profileMode.value = "50"
       }else if(engrProfile.value.engrSprtStatCd == '20'){
         //선정대기
-        profileMode.value = "40"
+        profileMode.value = "30"
       }else if(engrProfile.value.engrSprtStatCd == '30'){
         //미팅예정
         profileMode.value = "40"

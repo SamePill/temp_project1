@@ -563,7 +563,8 @@ async function editProject() {
         for (let key in projStep.projOneStep.taskDivCdList) {
           projStep.projOneStep.taskDivCdList[key].chkVal = true;
         }
-
+        projStep.editMode = true;
+        projStep.projId = props.prj.projId;
         router.push({
           name: "PrjtRegiPage1",
           state: {

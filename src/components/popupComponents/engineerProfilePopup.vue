@@ -271,6 +271,7 @@
         <button class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1ba494]" >수정하기</button>
       </div>
     </div>
+    
     <!-- 등록프로젝트 엔지니어 선택.... -->
     <!-- 선정후 -->
     <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 gap-5" v-show="props.mode == '30'">

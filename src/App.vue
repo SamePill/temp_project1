@@ -18,7 +18,16 @@
     </template>
 
     <div  class="content"  style=" height:calc(100vh - 80px); overflow-y: auto;">
-      <router-view ></router-view>
+      <router-view v-slot="{ Component, route }">
+        <keep-alive v-if="route.meta.keepAlive">
+          <component :is="Component" />
+        </keep-alive>
+        <component v-else :is="Component" />
+      </router-view>
+      <!-- <keep-alive>
+        <component :is="Component" />
+      </keep-alive>       -->
+      <!-- <router-view></router-view> -->
       <template
         v-if="
           $route.path.indexOf('/login') >= 0 ||

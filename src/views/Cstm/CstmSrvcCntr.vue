@@ -49,29 +49,10 @@
         <div v-if="i < (showIdx-1)" class="mt-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
       </div>
       <div  v-if="faqList.length > 4" class="flex justify-center items-center mb-[60px] mt-[60px]">
-        <button v-show="!isShowMore" @click="showMore()"  class="text-center w-[250px] h-[51px]  px-2.5 rounded border border-[#dbdbdb] font-medium text-left text-[#191919]">
+        <button  @click="showMore()"  class="text-center w-[250px] h-[51px]  px-2.5 rounded border border-[#dbdbdb] font-medium text-left text-[#191919]">
             더보기
         </button>
-        <div v-show="faqList.length  > 0 && isShowMore" class="paginationDiv w-[1060px] h-10 mx-auto font-basic" style="text-align:center">
-          <vue-awesome-paginate
-            :total-items=totalCnt
-            v-model="pageNo"
-            :items-per-page="10"
-            :max-pages-shown="10"
-            :on-click="pagenation"
-          >
-            <template #prev-button>
-              <span>
-                <font-awesome-icon icon="chevron-right" color="black" />
-              </span>
-            </template>
-            <template #next-button>
-              <span>
-                <font-awesome-icon icon="chevron-right" color="black" />
-              </span>
-            </template>
-          </vue-awesome-paginate>
-        </div> 
+        
       </div>
     </div>
   </div>
@@ -90,10 +71,9 @@ const topItemList = ref([ {title:'큐밋 소식', contents1:`큐밋 소식에서
 const pageNo   = ref(1);
 const faqDivCd = ref('');
 const faqList = ref([]);
-const totalCnt = ref(0);
 const showFaqRepyTxtIdx = ref(null)
 const showIdx = ref(5);
-const isShowMore = ref(false);
+// const isShowMore = ref(false);
 
 onMounted(() => {
   loadData();
@@ -116,29 +96,25 @@ function goToPage(i){
 }
 
 //리스트조회
-function srchFaqList(){
+async function srchFaqList(){
   if(faqDivCd.value == ''){
     faqDivCd.value = '10';
   }
+  faqList.value = [];
   let getParams = {faqDivCd: faqDivCd.value
                    ,pageNo:pageNo.value};
-  gfnUtils.axiosGet("/v1/common/faq",getParams).then(function(res){
-    if(res.rtnCd=='00'){
-      if(showIdx.value == 5){
-        res.rtnData.faqList.forEach((el,i)=>{
-          if(i < 5){
-            faqList.value.push(el);            
-          }
-          totalCnt.value = res.rtnData.faqTotCnt;
-        });  
-      }else{
-        faqList.value = res.rtnData.faqList; 
-        totalCnt.value = res.rtnData.faqTotCnt;
+  let res = await gfnUtils.axiosGet("/v1/common/faq",getParams)
+  if(res.rtnCd=='00'){
+    res.rtnData.faqList.forEach((el,i)=>{
+      if(i < 5){
+        faqList.value.push(el);            
       }
-    }else{
-      gfnUtils.openAlert(res.rtnMsg);
-    }
-  });
+      //totalCnt.value = res.rtnData.faqTotCnt;
+    });  
+  }else{
+    gfnUtils.openAlert(res.rtnMsg,"",2000);
+  }
+  
 }
 
 //답변보기
@@ -152,9 +128,14 @@ function showFaqRepyTxt(idx){
 
 //더보기
 function showMore(){
-  isShowMore.value = true;
-  showIdx.value = totalCnt.value;
-  loadData();
+  // isShowMore.value = true;
+  // showIdx.value = totalCnt.value;
+  // loadData();
+  router.push({name : "QstnList"
+  ,state: {
+      dataObj : {div : faqDivCd.value},
+    }
+  })  
 }
 
 //탭선택
@@ -162,12 +143,12 @@ function clickTapItem(faqDivCdVal){
   faqDivCd.value = faqDivCdVal;  
   showFaqRepyTxtIdx.value = null;
   pageNo.value = 1;
-  loadData();
+  srchFaqList()
 }
 
 //페이지네이션
-function pagenation(){
-  showFaqRepyTxtIdx.value = null;
-  loadData();
-}
+// function pagenation(){
+//   showFaqRepyTxtIdx.value = null;
+//   loadData();
+// }
 </script>

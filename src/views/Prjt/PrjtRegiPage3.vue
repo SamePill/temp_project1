@@ -225,7 +225,7 @@
                       stroke-linejoin="round"
                     ></path>
                   </svg>
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">
                     연장 / 휴일 근무 발생 시 대체휴무 제공합니다.
                   </p>
                 </div>
@@ -255,7 +255,7 @@
                       stroke-linejoin="round"
                     ></path>
                   </svg>
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">
                     월차 및 반차 제공 합니다.
                   </p>
                 </div>
@@ -285,7 +285,7 @@
                       stroke-linejoin="round"
                     ></path>
                   </svg>
-                  <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#191919]">
                     최초 의뢰 클라이언트가 있습니다. (예: 에이전시, 정부 과제 등)
                   </p>
                 </div>

@@ -238,13 +238,26 @@ async function nextPage(div){
     let fileList = fileStore.getAttachFiles
     const userMail = ref(window.$cookies.get("loginUserMail"));
     console.log(JSON.stringify(projStep.value))
-    var api = "/v1/project/submit";
+    var api = "";
     let formData = new FormData();
     formData.append("userMail ",userMail.value) //usermail
     //formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
-    formData.append("submitProjectInputJson ", JSON.stringify(projStep.value) ) 
-
     formData.append("fileList",fileList) //file
+    projStep.value.projOneStep.strtDay = projStep.value.projOneStep.strtDay.replaceAll("-","")
+    projStep.value.projOneStep.atndTime = projStep.value.projOneStep.atndTime.replaceAll(":","")
+    projStep.value.projOneStep.lvwkTime = projStep.value.projOneStep.lvwkTime.replaceAll(":","")
+    if(projStep.value.editMode){
+      //프로젝트 수정
+      console.log("수정!!!!")
+      formData.append("projId ", projStep.value.projId) 
+      formData.append("modifyProjInputJson", JSON.stringify(projStep.value) ) 
+      api = "/v1/project/modify";
+    }else{
+      //신규 등록
+      console.log("신규 등록!!!!")
+      formData.append("submitProjectInputJson", JSON.stringify(projStep.value) ) 
+      api = "/v1/project/submit"; 
+    }
 
     
     let rtn = await gfnUtils.axiosPost(

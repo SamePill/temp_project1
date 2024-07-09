@@ -277,9 +277,7 @@ const bizRegFile = ref(File | null)
 const compLogoFile = ref(File | null)
 const bizRegFileNm =ref('')
 const compLogoFileNm = ref('')
-const bizNoFormatted = computed( () => {
-  return gfnUtils.formattedBizNo(companyInfo.value.bizRegNo);
-})
+
 const srchAddrShow = ref(null);
 //주소팝업 열기
 const showAddrPop = () => {
@@ -294,11 +292,22 @@ function returnArrd(addrVal){
   companyInfo.value.compBaseAddr = addrVal.roadAddr;
 }
 
+const bizNoFormatted = computed( () => {
+  if (companyInfo.value.bizRegNo.length === 10){
+    return gfnUtils.formattedBizNo(companyInfo.value.bizRegNo);
+  }else{
+    return companyInfo.value.bizRegNo;
+  }
+  
+})
+
 function updateBizNo(value) {
   const cleanedValue = value.replace(/-/g, '');
   if (cleanedValue.length === 10) {
     companyInfo.value.bizRegNo = cleanedValue;
-  }
+  }else{
+    companyInfo.value.bizRegNo = cleanedValue;
+  }  
 }
 
 

@@ -51,7 +51,7 @@ import QmNews from '@/views/Cstm/QmNews.vue'
 import NotiList from '@/views/Cstm/NotiList.vue'
 import NotiDetl from '@/views/Cstm/NotiDetl.vue'
 import ApplyPtnSrve from '@/views/Cstm/ApplyPtnSrve.vue'
-import Qstn from '@/views/Cstm/Qstn.vue'
+import Qstn from '@/views/Cstm/X_Qstn.vue'
 import QstnList from '@/views/Cstm/QstnList.vue'
 import sendAsk from '@/views/Cstm/sendAsk.vue'
 
@@ -108,7 +108,8 @@ const router = createRouter({
     {
       path: '/project-list',
       component: PrjtSrch,
-      name: 'PrjtSrch'
+      name: 'PrjtSrch',
+      meta: { keepAlive: true }
     },
     //프로젝트 찾기 상세
     {
@@ -199,7 +200,8 @@ const router = createRouter({
     {
       path: '/registeredProjectList',
       component: RegisteredProjectList,
-      name: 'RegisteredProjectList'
+      name: 'RegisteredProjectList',
+      meta: { keepAlive: true }
     },
 
     {
@@ -236,7 +238,8 @@ const router = createRouter({
     {
       path: '/appliedProjectList',
       component: AppliedProjectList,
-      name: 'AppliedProjectList'
+      name: 'AppliedProjectList',
+      meta: { keepAlive: true }
     },
 
     {

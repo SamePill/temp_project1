@@ -211,6 +211,16 @@
     cancelApply();
   };
 
+  // function activated() {
+  //   console.log('컴포넌트가 활성화되었습니다.');
+  //   // 데이터 재로드 또는 기타 작업
+  // }
+  // function  deactivated() {
+  //   console.log('컴포넌트가 비활성화되었습니다.');
+  //   // 필요한 경우 상태 저장 또는 기타 작업
+  // }
+
+
   function getAplPrjtSort(data){
     AplPrjtSort.value = data;
     loadData();
