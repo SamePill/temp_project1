@@ -1,7 +1,14 @@
 <template>
   <div class="w-[1060px] my-10 mx-auto font-basic">
-    <div class="flex flex-grow-0 flex-shrink-0 relative">
-      <p class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#191919]">공지사항</p>
+    <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1060px] relative">
+      <div class="flex-grow-0 flex-shrink-0 w-[576.5px] h-[34px] relative">
+        <p class="absolute left-0 top-0 text-[28px] font-bold text-left text-[#191919] ">
+          공지사항
+        </p>
+      </div>
+      <p class="flex-grow-0 flex-shrink-0 text-[13px] font-medium text-left text-[#777]">
+        고객센터 - 큐밋소식 - 공지사항
+      </p>
     </div>
     <div class="mt-[10px] flex flex-col justify-start flex-grow-0 flex-shrink-0 w-[1060px]">
       <div class="mt-[20px] flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative">
