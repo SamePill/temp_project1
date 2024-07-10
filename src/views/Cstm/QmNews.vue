@@ -5,8 +5,8 @@
     </div>
     <div class="mt-[10px] flex flex-col justify-start flex-grow-0 flex-shrink-0 w-[1060px]">
       <div v-for="(el,i) in notiList" :key = "i" class="mt-[20px] flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative">
-        <div v-if="i < (showIdx-1)" class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>        
-        <div v-if="i < showIdx" class="flex w-[1060px] relative pl-px pr-2.5" >
+        <div v-if="i &lt; (showIdx-1)" class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>        
+        <div v-if="i &lt; showIdx" class="flex w-[1060px] relative pl-px pr-2.5" >
           <div class="flex w-[1025px] relative">
             <p class="flex w-[150px] font-bold text-left text-[#191919]">
               {{ el.notiDivCdNm }}
@@ -48,72 +48,17 @@
       
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">이벤트</p>
-        <div class="flex-grow-0 flex-shrink-0 w-[1060px] h-[267px] relative">
-          <div class="flex flex-col justify-start items-start absolute left-0 top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06 ~ 2024.07.22
-              </p>
+        <div class="justify-between items-center flex flex-grow-0 flex-shrink-0 w-[1060px] h-[267px]">
+          <div v-for="el in evtList" :key ="el" class="w-[250px] flex flex-col justify-start items-start  gap-3">
+            <div class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]">
+              <img :src="el.thmbPhotFileUrl">
             </div>
-          </div>
-          <div class="flex flex-col justify-start items-start absolute left-[270px] top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
+            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]">
+                {{el.evtTitl}}
               </p>
               <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06 ~ 2024.07.22
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start absolute left-[540px] top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06 ~ 2024.07.22
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start absolute left-[810px] top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06 ~ 2024.07.22
+                {{el.strtDttm + '~' + el.endDttm}}
               </p>
             </div>
           </div>
@@ -477,6 +422,8 @@ const router = useRouter()
 // ]);
 const pageNo   = ref(1);
 const notiList = ref([]);
+const evtList = ref([]);
+const newsList = ref([]);
 const totalCnt = ref(0);
 const showIdx = ref(5);
 const isShowMore = ref(false);
@@ -505,19 +452,17 @@ function loadData(){
 //리스트조회
 function srchNotiList(){
   let getParams = {pageNo:pageNo.value};
-  gfnUtils.axiosGet("/v1/common/notice",getParams).then(function(res){
+  // gfnUtils.axiosGet("/v1/common/notice",getParams).then(function(res){
+  gfnUtils.axiosGet("/v1/common/customer-center",getParams).then(function(res){
     if(res.rtnCd=='00'){
-      if(showIdx.value == 5){
-        res.rtnData.notiList.forEach((el,i)=>{
-          if(i < 5){
-            notiList.value.push(el);            
-          }
-          totalCnt.value = res.rtnData.notiTotCnt;
-        });  
-      }else{
-        notiList.value = res.rtnData.notiList; 
-        totalCnt.value = res.rtnData.notiTotCnt;
-      }
+      res.rtnData.notiList.forEach((el,i)=>{
+        if(i < 5){
+          notiList.value.push(el);            
+        }
+      });  
+      totalCnt.value = notiList.value.length;
+      evtList.value = res.rtnData.evtList;
+      newsList.value = res.rtnData.newsList;
     }else{
       gfnUtils.openAlert(res.rtnMsg);
     }
