@@ -50,6 +50,8 @@ import CstmSrvcCntr from '@/views/Cstm/CstmSrvcCntr.vue'
 import QmNews from '@/views/Cstm/QmNews.vue'
 import NotiList from '@/views/Cstm/NotiList.vue'
 import NotiDetl from '@/views/Cstm/NotiDetl.vue'
+import NewsDetl from '@/views/Cstm/NewsDetl.vue'
+import EvtDetl from '@/views/Cstm/EvtDetl.vue'
 import ApplyPtnSrve from '@/views/Cstm/ApplyPtnSrve.vue'
 import Qstn from '@/views/Cstm/X_Qstn.vue'
 import QstnList from '@/views/Cstm/QstnList.vue'
@@ -309,6 +311,18 @@ const router = createRouter({
       path: '/notiDetl',
       component: NotiDetl,
       name: 'NotiDetl'
+    },
+    //이벤트 상세
+    {
+      path: '/evtDetl',
+      component: EvtDetl,
+      name: 'EvtDetl'
+    },
+    //행사 및 기사 상세
+    {
+      path: '/newsDetl',
+      component: NewsDetl,
+      name: 'NewsDetl'
     },
     //제휴서비스입점신청
     {

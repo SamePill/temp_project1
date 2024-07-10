@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[1060px] my-10 mx-auto font-basic">
+  <div class="w-[1060px] mt-10 mx-auto font-basic mb-[100px]">
     <div class="flex flex-grow-0 flex-shrink-0 relative">
       <p class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#191919]">공지사항</p>
     </div>
@@ -49,8 +49,8 @@
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">이벤트</p>
         <div class="justify-between items-center flex flex-grow-0 flex-shrink-0 w-[1060px] h-[267px]">
-          <img class="absolute top-[130px] left-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_l_btn.png" @click="moveEvt('pre')">
-          <div v-for="(el,i) in showEvtList" :key ="i" class="w-[250px] flex flex-col justify-start items-start  gap-3">
+          <img class="absolute top-[130px] left-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_l_btn.png" @click="moveEvt('pre','Evt')">
+          <div v-for="(el,i) in showEvtList" :key ="i" class="w-[250px] flex flex-col justify-start items-start  gap-3" @click="showDetl(el.evtSeq,'Evt')">
             <div class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]">
               <img :src="el.thmbPhotFileUrl">
             </div>
@@ -59,220 +59,33 @@
                 {{el.evtTitl}}
               </p>
               <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                {{el.strtDttm + '~' + el.endDttm}}
+                {{gfnUtils.formatYYYYMM(el.strtDttm) + '~' + gfnUtils.formatYYYYMM(el.endDttm)}}
               </p>
             </div>
           </div>
-          <img class="absolute top-[130px] right-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_r_btn.png" @click="moveEvt('nxt')">
+          <img class="absolute top-[130px] right-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_r_btn.png" @click="moveEvt('nxt','Evt')">
         </div>
       </div>
-      <div
-        class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 h-[321px] relative gap-5"
-      >
+      <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 h-[321px] relative gap-5 mt-[80px]">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">
           행사 및 기사
         </p>
-        <div class="flex-grow-0 flex-shrink-0 w-[1060px] h-[261px] relative">
-          <div class="flex flex-col justify-start items-start absolute left-0 top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
+        <div class="justify-between items-center flex flex-grow-0 flex-shrink-0 w-[1060px] h-[267px]">
+          <img class="absolute top-[130px] left-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_l_btn.png" @click="moveEvt('pre','News')">
+          <div v-for="(el,i) in showNewsList" :key ="i" class="w-[250px] flex flex-col justify-start items-start  gap-3" @click="showDetl(el.newsSeq,'News')">
+            <div class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]">
+              <img :src="el.thmbPhotFileUrl">
+            </div>
+            <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
+              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]">
+                {{el.newsTitl}}
               </p>
               <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06
+                {{gfnUtils.formatYYYYMM(el.newsCrtdDttm)}}
               </p>
             </div>
           </div>
-          <div class="flex flex-col justify-start items-start absolute left-[270px] top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start absolute left-[540px] top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col justify-start items-start absolute left-[810px] top-0 gap-3">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] relative overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]"
-            ></div>
-            <div
-              class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"
-            >
-              <p
-                class="flex-grow-0 flex-shrink-0 w-[250px] text-base font-medium text-left text-[#191919]"
-              >
-                큐밋을 이용하기!! 회원가입하고 치킨 쿠폰 받아가자!
-              </p>
-              <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                2024.04.06
-              </p>
-            </div>
-          </div>
-          <svg
-            width="78"
-            height="78"
-            viewBox="0 0 78 78"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12 absolute left-[-38px] top-[66px]"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <g filter="url(#filter0_d_4043_1039)">
-              <rect
-                x="15"
-                y="11"
-                width="48"
-                height="48"
-                rx="24"
-                fill="white"
-                fill-opacity="0.5"
-                shape-rendering="crispEdges"
-              ></rect>
-              <path
-                d="M43 24L33 35L43 46"
-                stroke="#191919"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-            <defs>
-              <filter
-                id="filter0_d_4043_1039"
-                x="0"
-                y="0"
-                width="78"
-                height="78"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                ></feColorMatrix>
-                <feOffset dy="4"></feOffset>
-                <feGaussianBlur stdDeviation="7.5"></feGaussianBlur>
-                <feComposite in2="hardAlpha" operator="out"></feComposite>
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0.15 0"
-                ></feColorMatrix>
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_4043_1039"
-                ></feBlend>
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_4043_1039"
-                  result="shape"
-                ></feBlend>
-              </filter>
-            </defs></svg
-          ><svg
-            width="78"
-            height="78"
-            viewBox="0 0 78 78"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12 absolute left-[1098px] top-[114px]"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <g filter="url(#filter0_d_4043_1041)">
-              <rect
-                x="63"
-                y="59"
-                width="48"
-                height="48"
-                rx="24"
-                transform="rotate(-180 63 59)"
-                fill="white"
-                fill-opacity="0.5"
-                shape-rendering="crispEdges"
-              ></rect>
-              <path
-                d="M35 46L45 35L35 24"
-                stroke="#191919"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-            <defs>
-              <filter
-                id="filter0_d_4043_1041"
-                x="0"
-                y="0"
-                width="78"
-                height="78"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                ></feColorMatrix>
-                <feOffset dy="4"></feOffset>
-                <feGaussianBlur stdDeviation="7.5"></feGaussianBlur>
-                <feComposite in2="hardAlpha" operator="out"></feComposite>
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0.15 0"
-                ></feColorMatrix>
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_4043_1041"
-                ></feBlend>
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_4043_1041"
-                  result="shape"
-                ></feBlend>
-              </filter>
-            </defs>
-          </svg>
+          <img class="absolute top-[130px] right-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_r_btn.png" @click="moveEvt('nxt','News')">
         </div>
       </div>
     </div>
@@ -297,9 +110,15 @@ const newsList = ref([]);
 const totalCnt = ref(0);
 const showIdx = ref(5);
 
-const showEvtList = ref([]); //보여지는 이미지
+//evtList
+const showEvtList = ref([]); 
 const showEvtFrstIdx = ref();
 const showEvtLastIdx = ref();
+
+//newsList
+const showNewsList = ref([]); 
+const showNewsFrstIdx = ref();
+const showNewsLastIdx = ref();
 
 const isShowMore = ref(false);
 // const notiSeq = ref();
@@ -338,39 +157,26 @@ function srchNotiList(){
       totalCnt.value = notiList.value.length;
       evtList.value = res.rtnData.evtList;
       newsList.value = res.rtnData.newsList;
-
+      console.log(evtList)
+      console.log(newsList)
       if(evtList.value.length > 0){
         evtList.value.forEach((el,i)=>{
           if(i < 4){
             showEvtList.value.push(el);
           }
         });
-
-        let data = {endDttm: "20250625",
-evtSeq
-: 
-"4",
-evtTitl
-: 
-"큐밋 테스트 이벤트_004",
-strtDttm
-: 
-"20240625",
-thmbPhotFileUrl
-: 
-"https://d2o04aboxunrcy.cloudfront.net/evt/202406/test_event_004.png"}
-
-evtList.value.push(data);
-evtList.value.push(data);
-evtList.value.push(data);
-evtList.value.push(data);
-evtList.value.push(data);
-evtList.value.push(data);
-evtList.value.push(data);
-
         showEvtFrstIdx.value = 0;
         showEvtLastIdx.value = showEvtList.value.length;
-        
+      }
+      
+      if(newsList.value.length > 0){
+        newsList.value.forEach((el,i)=>{
+          if(i < 4){
+            showNewsList.value.push(el);
+          }
+        });
+        showNewsFrstIdx.value = 0;
+        showNewsLastIdx.value = showNewsList.value.length;
       }
     }else{
       gfnUtils.openAlert(res.rtnMsg);
@@ -379,26 +185,65 @@ evtList.value.push(data);
 }
 
 //이벤트 이전,이후 버튼
-function moveEvt(div){
-  showEvtList.value = [];
-  if(div == 'pre'){
-    if(showEvtFrstIdx.value > 0){
-      showEvtFrstIdx.value = showEvtFrstIdx.value - 1;
-      showEvtLastIdx.value = showEvtLastIdx.value - 1;
+function moveEvt(moveDiv,listDiv){
+  if(listDiv == 'Evt'){
+    showEvtList.value = [];
+    if(moveDiv == 'pre'){
+      if(showEvtFrstIdx.value > 0){
+        showEvtFrstIdx.value = showEvtFrstIdx.value - 1;
+        showEvtLastIdx.value = showEvtLastIdx.value - 1;
+      }
+    }else{
+      if(showEvtLastIdx.value < evtList.value.length){
+        showEvtFrstIdx.value = showEvtFrstIdx.value + 1;
+        showEvtLastIdx.value = showEvtLastIdx.value + 1;
+      }
     }
-  }else{
-    if(showEvtLastIdx.value < evtList.value.length){
-      showEvtFrstIdx.value = showEvtFrstIdx.value + 1;
-      showEvtLastIdx.value = showEvtLastIdx.value + 1;
+    evtList.value.forEach((el,i)=>{
+      if(showEvtFrstIdx.value <= i && i < showEvtLastIdx.value){
+        showEvtList.value.push(el);
+      }
+    });
+  }else if(listDiv == 'News'){
+    showNewsList.value = [];
+    if(moveDiv == 'pre'){
+      if(showNewsFrstIdx.value > 0){
+        showNewsFrstIdx.value = showNewsFrstIdx.value - 1;
+        showNewsLastIdx.value = showNewsLastIdx.value - 1;
+      }
+    }else{
+      if(showNewsLastIdx.value < newsList.value.length){
+        showNewsFrstIdx.value = showNewsFrstIdx.value + 1;
+        showNewsLastIdx.value = showNewsLastIdx.value + 1;
+      }
     }
+    newsList.value.forEach((el,i)=>{
+      if(showNewsFrstIdx.value <= i && i < showNewsLastIdx.value){
+        showNewsList.value.push(el);
+      }
+    });
   }
-  evtList.value.forEach((el,i)=>{
-    if(showEvtFrstIdx.value <= i && i < showEvtLastIdx.value){
-      showEvtList.value.push(el);
-    }
-  });
 }
 
+function showDetl(seq,listDiv){
+  if(seq != undefined && seq != null){
+    if(listDiv == 'Evt'){
+      router.push({
+        name :'EvtDetl'
+        ,state:{
+          dataObj : {evtSeq : seq},
+        }
+      });
+    }else if(listDiv == 'News'){
+      router.push({
+        name :'NewsDetl'
+        ,state:{
+          dataObj : {newsSeq : seq}
+        }
+      });
+    }
+  }
+}
 //상세보기
 function goToPage(notiSeqVal,i){
   console.log(i)
