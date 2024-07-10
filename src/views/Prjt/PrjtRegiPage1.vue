@@ -19,7 +19,7 @@
             <p class="text-xl font-medium text-left text-[#191919]">직군 
               <span class="text-xl text-left text-[#ff5252]">*</span>
             </p>
-            <Chipset ref="$jobChipset"  :cdList="projStep.projOneStep.jobDivCdList" :listDivCd="'JOB_DIV_CD'" class="mt-[10px]"/>
+            <Chipset ref="$jobChipset"  :cdList="projStep.projOneStep.jobDivCdList" :listDivCd="'JOB_DIV_CD'" class="mt-[10px]" :radio=true />
             <!-- <Chips :cdList=jobDivCdList class="mt-[10px]"/> -->
           </div>
           <div class="mt-[40px]">
@@ -308,6 +308,16 @@ async function loadData(){
     projStep.value = JSON.parse(dataObj);
     console.log(projStep.value)
 
+    if(projStep.value.projOneStep.lvwkTime.indexOf(":") == -1){
+      projStep.value.projOneStep.lvwkTime = gfnUtils.convertToTimeFormat(projStep.value.projOneStep.lvwkTime)
+    }
+    if(projStep.value.projOneStep.atndTime.indexOf(":") == -1){
+      projStep.value.projOneStep.atndTime = gfnUtils.convertToTimeFormat(projStep.value.projOneStep.atndTime)
+    }
+    if(projStep.value.projOneStep.strtDay.indexOf("-") == -1){
+      projStep.value.projOneStep.strtDay = gfnUtils.formatYYYYMMDD(projStep.value.projOneStep.strtDay)
+    }
+    
     for(var i=0; i<projStep.value.projOneStep.jobDivCdList.length; i++){
       projStep.value.projOneStep.jobDivCdList[i].chkVal = true;
       if(!gfnRules.isNull(projStep.value.projOneStep.jobDivCdList[i].jobDivCd) ){
@@ -366,33 +376,36 @@ function scrollToTop(){
     behavior: 'smooth' });
 }
 
+function btnStatChng(){
+  console.log();
+}
 
 function projTitlChkRule(){
   projTitlChk.value = !gfnRules.isNull(projStep.value.projOneStep.projTitl);
-  //btnStatChng()
+  btnStatChng()
 }
 
 function strtDayChkRule(){
   strtDayChk.value = !gfnRules.isNull(projStep.value.projOneStep.strtDay);
-  //btnStatChng()
+  btnStatChng()
 }
 
 function pirdValChkRule(){
   projStep.value.projOneStep.pirdVal = String(projStep.value.projOneStep.pirdVal).replace(/[^0-9]/g,'');
   pirdValChk.value = !gfnRules.isNull(projStep.value.projOneStep.pirdVal);
-  //btnStatChng()
+  btnStatChng()
 }
 
 function workAddrChkRule(){
   workAddrChk.value = !gfnRules.isNull(projStep.value.projOneStep.workAddr);
-  //btnStatChng()
+  btnStatChng()
 }
 
 function workTimeChkRule(){
   atndTimeChk.value = !gfnRules.isNull(projStep.value.projOneStep.atndTime);
   lvwkTimeChk.value = !gfnRules.isNull(projStep.value.projOneStep.lvwkTime);
-    
-  //btnStatChng()
+ 
+  btnStatChng()
 }
 
 </script>

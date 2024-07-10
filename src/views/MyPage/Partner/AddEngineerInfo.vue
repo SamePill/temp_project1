@@ -536,11 +536,12 @@ function readURL(input) {
     reader.readAsDataURL(input.target.files[0]);
     engrPhoto.value = input.target.files[0]
     showImg.value = true;
-  } else {
-    console.log("파일없음")
-    document.getElementById('preview').src = "";
-    engrPhoto.value = {}
   }
+  // else {
+  //   console.log("파일없음")
+  //   document.getElementById('preview').src = "";
+  //   engrPhoto.value = {}
+  // }
 }
 
 function addCert(){

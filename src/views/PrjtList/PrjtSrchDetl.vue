@@ -41,18 +41,21 @@
 
     onMounted(() => {
     //   if(gfnRules.isNotNull(userMail.value)){
-    loadData();
+      loadData();
     //   }
     });
 
     async function loadData() {
       console.log(dataObj)
       var getParams = { projId: dataObj.projId, userMail: userMail.value };
-      await gfnUtils.axiosGet("/v1/project/detail", getParams).then(function (rtn) {
-          if (rtn.rtnCd == "00") {
-          projInfo.value = rtn.rtnData;
-          workDivCd.value = rtn.rtnData["workDivCd"];
-          }
-      } );
+      var rtn = await gfnUtils.axiosGet("/v1/project/detail", getParams)
+      if (rtn.rtnCd == "00") {
+        console.log(rtn.rtnData)
+        projInfo.value = rtn.rtnData;
+        workDivCd.value = rtn.rtnData["workDivCd"];
+      }else{
+        gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+      }
+      
     }
 </script>

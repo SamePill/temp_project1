@@ -193,7 +193,7 @@
                   ><span class="flex-grow-0 flex-shrink-0 text-base text-left text-[#ff5252]">*</span>
                 </p>
                 <!-- 직군 chips -->
-                <Chipset ref="$jobChipset"  :cdList="engrStep2Detl.jobDivCdList" :listDivCd="'JOB_DIV_CD'" />
+                <Chipset ref="$jobChipset"  :cdList="engrStep2Detl.jobDivCdList" :listDivCd="'JOB_DIV_CD'" :radio=true />
               </div>
               <div
                 class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5"

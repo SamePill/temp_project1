@@ -826,10 +826,11 @@
       // };
       // reader.readAsDataURL(input.target.files[0]);
       // showImg.value = true;
-    } else {
-      document.getElementById('preview').src = "";
-      logoFile.value = {}
-    }
+    } 
+    // else {
+    //   document.getElementById('preview').src = "";
+    //   logoFile.value = {}
+    // }
     
   }
 
@@ -846,11 +847,12 @@
       // };
       // reader.readAsDataURL(input.target.files[0]);
       // showImg.value = true;
-    } else {
-      console.log("파일없음")
-      document.getElementById('preview').src = "";
-      bizNoFile.value = {}
-    }
+    } 
+    // else {
+    //   console.log("파일없음")
+    //   document.getElementById('preview').src = "";
+    //   bizNoFile.value = {}
+    // }
     btnStatChng()
   }
 

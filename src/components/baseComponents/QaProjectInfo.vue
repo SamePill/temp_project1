@@ -118,23 +118,18 @@
                     <div
                         class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
                         <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                            {{props.prj.pirdVal}}
+                            {{props.prj.projEtcInfo}}
                         </p>
                     </div>
                     </div>
-                    <div v-if="props.prj['fileList'] != ''" class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-4">
+                    <div  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-4">
                         <p class="flex-grow-0 flex-shrink-0 w-[90px] text-base text-left text-[#777]">관련자료</p>
-                        <div
-                            class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
-                            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1585d7]">
-                            프로젝트 관련자료.docc
-                            </p>
-                            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1585d7]">
-                            프로젝트 관련자료.docc
-                            </p>
-                            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1585d7]">
-                            프로젝트 관련자료.docc
-                            </p>
+                        <div  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
+                            <div  v-for="el in props.prj.fileList" :key="el">
+                                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1585d7]">
+                                    {{ el }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

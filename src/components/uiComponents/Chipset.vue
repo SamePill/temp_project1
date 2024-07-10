@@ -13,6 +13,7 @@
 import { defineProps,defineExpose }    from 'vue'
 import { onMounted , ref, computed, onUnmounted} from 'vue'
 import * as gfnUtils      from "@/utils/gfnUtils.js";
+//import * as gfnRules      from "@/utils/gfnRules.js";
 defineExpose({loadData,returnCdList,saveList}) 
 
 onMounted(() => {
@@ -25,6 +26,7 @@ onUnmounted(()=>{
 const props = defineProps({
   listDivCd : String
   ,cdList :[]
+  ,radio : Boolean
 })
 
 const cdList = ref({});
@@ -74,11 +76,24 @@ function saveList (){
 }
 
 function chipClick(el){
-  if(el['chkVal'] == true && filteredCdList.value.length > 1){
-    el.chkVal = false
-  }else{
+
+  console.log(props.multi)
+
+  if(props.radio){
+    console.log("단건선택" + cdList.value.length )
+    for(let i = 0 ; i < cdList.value.length ; i++){
+      cdList.value[i].chkVal = false
+    }    
     el['chkVal'] = true
+  }else{
+    console.log("다건선택")
+    if(el['chkVal'] == true && filteredCdList.value.length > 1){
+      el.chkVal = false
+    }else{
+      el['chkVal'] = true
+    }
   }
+
 }
 
 </script>

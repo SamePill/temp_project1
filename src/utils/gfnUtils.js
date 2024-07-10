@@ -626,7 +626,21 @@ export const openAlert = ( msg, title, timeout) => {
 };
 
 
+export const convertToTimeFormat = (num)  => {
+  // 숫자를 문자열로 변환
+  let str = num.toString();
 
+  // 문자열 길이가 4인지 확인, 아니라면 앞에 0을 추가
+  while (str.length < 4) {
+    str = '0' + str;
+  }
+  // 문자열을 시간과 분으로 나눔
+  let hours = str.substring(0, 2);
+  let minutes = str.substring(2, 4);
+
+  // 원하는 형식으로 반환
+  return `${hours}:${minutes}`;
+}
 
 /**
  * 날짜 포멧 변환

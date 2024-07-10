@@ -140,10 +140,10 @@
         <div
           class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-[30px]"
         >
-          <div v-for="el in props.profile.engrProjHstrList" :key="el" >
+          <div v-for="el, idx in props.profile.engrProjHstrList" :key="idx" >
             <!-- 반복내용 1 -->
             <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[30px]">
-              <p class="flex-grow-0 flex-shrink-0 w-[150px] text-base font-bold text-left text-[#191919]">
+              <p v-show="idx == 0" class="flex-grow-0 flex-shrink-0 w-[150px] text-base font-bold text-left text-[#191919]">
                 프로젝트 수행 이력
               </p>
               <div
@@ -188,17 +188,17 @@
                 >
                   <p class="flex-grow-0 flex-shrink-0 w-20 text-base text-left text-[#555]">업무 내용</p>
                   <div
-                    v-show="!showMore"
+                    v-show="!el.showMore"
                     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[5px]"
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#333]">
                       프로젝트 설명 및 주요 담당 업무
                     </p>
-                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]"  @click="showMore=true">더보기</button>
+                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]"  @click="el.showMore=true">더보기</button>
                   </div>
                   <!-- 펼침 -->
                   <div 
-                    v-show="showMore"
+                    v-show="el.showMore"
                     class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[5px]"
                   >
                     <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-5">
@@ -239,7 +239,7 @@
                         </p>
                       </div>
                     </div>
-                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="showMore=false">접기</button>
+                    <button class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#777]" @click="el.showMore=false">접기</button>
                   </div>                  
                   <!-- 펼침 끝 -->
                 </div>
