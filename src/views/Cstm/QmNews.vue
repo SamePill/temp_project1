@@ -49,7 +49,8 @@
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-5">
         <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">이벤트</p>
         <div class="justify-between items-center flex flex-grow-0 flex-shrink-0 w-[1060px] h-[267px]">
-          <div v-for="el in evtList" :key ="el" class="w-[250px] flex flex-col justify-start items-start  gap-3">
+          <img class="absolute top-[130px] left-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_l_btn.png" @click="moveEvt('pre')">
+          <div v-for="(el,i) in showEvtList" :key ="i" class="w-[250px] flex flex-col justify-start items-start  gap-3">
             <div class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]">
               <img :src="el.thmbPhotFileUrl">
             </div>
@@ -62,138 +63,7 @@
               </p>
             </div>
           </div>
-          <svg
-            width="78"
-            height="78"
-            viewBox="0 0 78 78"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12 absolute left-[-38px] top-[66px]"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <g filter="url(#filter0_d_4043_1012)">
-              <rect
-                x="15"
-                y="11"
-                width="48"
-                height="48"
-                rx="24"
-                fill="white"
-                fill-opacity="0.5"
-                shape-rendering="crispEdges"
-              ></rect>
-              <path
-                d="M43 24L33 35L43 46"
-                stroke="#191919"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-            <defs>
-              <filter
-                id="filter0_d_4043_1012"
-                x="0"
-                y="0"
-                width="78"
-                height="78"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                ></feColorMatrix>
-                <feOffset dy="4"></feOffset>
-                <feGaussianBlur stdDeviation="7.5"></feGaussianBlur>
-                <feComposite in2="hardAlpha" operator="out"></feComposite>
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0.15 0"
-                ></feColorMatrix>
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_4043_1012"
-                ></feBlend>
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_4043_1012"
-                  result="shape"
-                ></feBlend>
-              </filter>
-            </defs></svg
-          ><svg
-            width="78"
-            height="78"
-            viewBox="0 0 78 78"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12 absolute left-[1098px] top-[114px]"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <g filter="url(#filter0_d_4043_1014)">
-              <rect
-                x="63"
-                y="59"
-                width="48"
-                height="48"
-                rx="24"
-                transform="rotate(-180 63 59)"
-                fill="white"
-                fill-opacity="0.5"
-                shape-rendering="crispEdges"
-              ></rect>
-              <path
-                d="M35 46L45 35L35 24"
-                stroke="#191919"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-            <defs>
-              <filter
-                id="filter0_d_4043_1014"
-                x="0"
-                y="0"
-                width="78"
-                height="78"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                ></feColorMatrix>
-                <feOffset dy="4"></feOffset>
-                <feGaussianBlur stdDeviation="7.5"></feGaussianBlur>
-                <feComposite in2="hardAlpha" operator="out"></feComposite>
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0 0.0980392 0 0 0 0.15 0"
-                ></feColorMatrix>
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_4043_1014"
-                ></feBlend>
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_4043_1014"
-                  result="shape"
-                ></feBlend>
-              </filter>
-            </defs>
-          </svg>
+          <img class="absolute top-[130px] right-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_r_btn.png" @click="moveEvt('nxt')">
         </div>
       </div>
       <div
@@ -426,6 +296,11 @@ const evtList = ref([]);
 const newsList = ref([]);
 const totalCnt = ref(0);
 const showIdx = ref(5);
+
+const showEvtList = ref([]); //보여지는 이미지
+const showEvtFrstIdx = ref();
+const showEvtLastIdx = ref();
+
 const isShowMore = ref(false);
 // const notiSeq = ref();
 
@@ -463,8 +338,63 @@ function srchNotiList(){
       totalCnt.value = notiList.value.length;
       evtList.value = res.rtnData.evtList;
       newsList.value = res.rtnData.newsList;
+
+      if(evtList.value.length > 0){
+        evtList.value.forEach((el,i)=>{
+          if(i < 4){
+            showEvtList.value.push(el);
+          }
+        });
+
+        let data = {endDttm: "20250625",
+evtSeq
+: 
+"4",
+evtTitl
+: 
+"큐밋 테스트 이벤트_004",
+strtDttm
+: 
+"20240625",
+thmbPhotFileUrl
+: 
+"https://d2o04aboxunrcy.cloudfront.net/evt/202406/test_event_004.png"}
+
+evtList.value.push(data);
+evtList.value.push(data);
+evtList.value.push(data);
+evtList.value.push(data);
+evtList.value.push(data);
+evtList.value.push(data);
+evtList.value.push(data);
+
+        showEvtFrstIdx.value = 0;
+        showEvtLastIdx.value = showEvtList.value.length;
+        
+      }
     }else{
       gfnUtils.openAlert(res.rtnMsg);
+    }
+  });
+}
+
+//이벤트 이전,이후 버튼
+function moveEvt(div){
+  showEvtList.value = [];
+  if(div == 'pre'){
+    if(showEvtFrstIdx.value > 0){
+      showEvtFrstIdx.value = showEvtFrstIdx.value - 1;
+      showEvtLastIdx.value = showEvtLastIdx.value - 1;
+    }
+  }else{
+    if(showEvtLastIdx.value < evtList.value.length){
+      showEvtFrstIdx.value = showEvtFrstIdx.value + 1;
+      showEvtLastIdx.value = showEvtLastIdx.value + 1;
+    }
+  }
+  evtList.value.forEach((el,i)=>{
+    if(showEvtFrstIdx.value <= i && i < showEvtLastIdx.value){
+      showEvtList.value.push(el);
     }
   });
 }
