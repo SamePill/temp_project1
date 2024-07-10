@@ -1,37 +1,42 @@
 <template>
   <div class="w-[1060px] my-10 mx-auto font-basic">
     <div class="flex flex-grow-0 flex-shrink-0 relative">
-      <p class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#191919]">공지사항</p>
+      <p class="flex-grow-0 flex-shrink-0 text-[28px] font-bold text-left text-[#191919]">이벤트</p>
     </div>
     <div class="mt-[10px] flex flex-col justify-start flex-grow-0 flex-shrink-0 w-[1060px]">
       <div class="mt-[20px] flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative">
         <div class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{notiInfo.regDttm}}</p>
-          <p class="flex-grow-0 flex-shrink-0 w-[800px] text-xl text-left text-[#333]">
-            {{notiInfo.notiTitl}}
-          </p>
-          <div class="w-[1060px] mt-[10px] mb-[60px] gap-2.5 px-[34px] py-[30px] bg-[#ededed]">
-            <p v-html="notiInfo.notiTxt" class="self-stretch  w-[992px] text-base text-left text-black">
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{gfnUtils.formatDttm(detlInfo.newsCrtdDttm)}}</p>
+          <div class="relative w-[1060px]">
+            <p class="flex-grow-0 flex-shrink-0 w-[800px] font-bold text-xl text-left text-[#333]">
+              {{detlInfo.newsTitl}}
             </p>
+            <div v-if="!gfnRules.isNull(detlInfo.newsUrl)" class=" absolute right-[0px] top-[0px] text-right  flex justify-start items-start flex-grow-0 flex-shrink-0  gap-4">
+              <p @click="newsUrl(detlInfo.newsUrl,'show')" class="cursor-pointer flex-grow-0 flex-shrink-0 text-base text-left text-[#1ba494] border-b border-b-[1px] border-b-[#1ba494]">기사보기</p>
+              <p @click="newsUrl(detlInfo.newsUrl,'copy')" class="cursor-pointer flex-grow-0 flex-shrink-0 text-base text-left text-[#333] border-b border-b-[1px] border-b-[#333]">링크복사</p>
+            </div>
+          </div>
+          <div class="w-[1060px] mt-[10px] mb-[60px] gap-2.5">
+            <div v-html="detlInfo.newsTxt"></div>
+            <!-- <img :src="detlInfo.dtlPhotFileUrl"> -->
           </div>
         </div>
         <div class="w-[1060px] mt-[60px] mb-[100px]">
           <div class="mx-auto flex justify-between items-center flex-grow-0 flex-shrink-0 w-[400px] relative">
             <img 
-              v-show="!gfnRules.isNull(notiInfo.preNotiSeq)"
-              @click="moveSeq('pre')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_002.png"/>
+              v-show="!gfnRules.isNull(detlInfo.preNewsSeq)"
+              @click="moveSeq('pre')" class="cursor-pointer w-[20px] mt-[5px]" src="@/assets/ic_small_arrow_002.png"/>
             <button 
-              v-show="!gfnRules.isNull(notiInfo.preNotiSeq)"
+              v-show="!gfnRules.isNull(detlInfo.preNewsSeq)"
               @click="moveSeq('pre')" 
-              :class='(gfnRules.isNull(notiInfo.preNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left"'>이전글</button>
+              :class='(gfnRules.isNull(detlInfo.preNewsSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left"'>이전글</button>
             <img 
-              v-show="gfnRules.isNull(notiInfo.preNotiSeq)"
-              @click="moveSeq('pre')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_002_grey.png"/>
+              v-show="gfnRules.isNull(detlInfo.preNewsSeq)"
+               class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_002_grey.png"/>
             <button 
-              v-show="gfnRules.isNull(notiInfo.preNotiSeq)"
-              @click="moveSeq('pre')" 
-              :class='(gfnRules.isNull(notiInfo.preNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left"'>이전글</button>
+              v-show="gfnRules.isNull(detlInfo.preNewsSeq)"
+              :class='(gfnRules.isNull(detlInfo.preNewsSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left"'>이전글</button>
 
 
             <img src="@/assets/line_001.png"/>            
@@ -39,17 +44,17 @@
             <img src="@/assets/line_001.png"/>
             
             <button 
-              v-show="!gfnRules.isNull(notiInfo.nextNotiSeq)"
+              v-show="!gfnRules.isNull(detlInfo.nextNewsSeq)"
               @click="moveSeq('next')" 
-              :class='(gfnRules.isNull(notiInfo.nextNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left "'>다음글</button>
+              :class='(gfnRules.isNull(detlInfo.nextNewsSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left "'>다음글</button>
             <img 
-              v-show="!gfnRules.isNull(notiInfo.nextNotiSeq)"
-              @click="moveSeq('next')" class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_003.png"/>
+              v-show="!gfnRules.isNull(detlInfo.nextNewsSeq)"
+              @click="moveSeq('next')" class="cursor-pointer w-[20px] mt-[5px]" src="@/assets/ic_small_arrow_003.png"/>
             <button 
-              v-show="gfnRules.isNull(notiInfo.nextNotiSeq)"
-              :class='(gfnRules.isNull(notiInfo.nextNotiSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left "'>다음글</button>
+              v-show="gfnRules.isNull(detlInfo.nextNewsSeq)"
+              :class='(gfnRules.isNull(detlInfo.nextNewsSeq) ? "text-[#999]" :  "text-[#191919]" ) + " flex-grow-0 flex-shrink-0 text-base text-left "'>다음글</button>
             <img 
-              v-show="gfnRules.isNull(notiInfo.nextNotiSeq)"
+              v-show="gfnRules.isNull(detlInfo.nextNewsSeq)"
               class="cursor-pointer w-[20px]" src="@/assets/ic_small_arrow_003_grey.png"/>
           </div>
         </div>
@@ -63,22 +68,16 @@ import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
 
-
 const router = useRouter()
-// const notiDetlData = ref({});
-// const totalCnt = ref(null);
-// const showNotiRepyTxtIdx = ref(null);
-
 const { dataObj } = history.state; 
-const viewNoti = ref(dataObj);
-const notiInfo = ref({
-  notiSeq: ""//"공지사항 순번"
-  ,regDttm: ""//"등록일시"
-  ,notiTitl: ""//"공지제목"
-  ,notiTxt: ""//"공지내용"
-  ,preNotiSeq: ""//"이전공지 순번"
-  ,nextNotiSeq: ""//"다음공지 순번"
-  
+const seq = ref(dataObj.seq);
+const detlInfo = ref({
+  newsCrtdDttm: ""
+  ,newsTitl: ""   
+  ,newsUrl: ""
+  ,newsTxt: ""
+  ,preNewsSeq: "" 
+  ,nextNewsSeq: ""
 })
 
 onMounted(() => {
@@ -91,35 +90,25 @@ onUnmounted(()=>{
 });
 
 function loadData(){
-  
-  console.log(viewNoti.value.notiSeq)
-  srchNotiInfo(viewNoti.value.notiSeq)
+  srchNotiInfo(seq.value);
 }
-
 //리스트조회
-async function srchNotiInfo(notiSeq){
-
-  let param = {"notiSeq": notiSeq }
-  console.log("상세조회")
-  console.log(param)
-  let rtn = await gfnUtils.axiosGet("/v1/common/notice-detail",param);
+async function srchNotiInfo(seq){
+  let param = {"newsSeq  ": seq }
+  let rtn = await gfnUtils.axiosGet("/v1/common/news-detail",param);
 
   if(rtn.rtnCd=='00'){    
-    console.log(rtn.rtnData)
-    notiInfo.value = rtn.rtnData; 
+    detlInfo.value = rtn.rtnData; 
   }else{
     gfnUtils.openAlert(rtn.rtnMsg,"",2000);
-  }
-  
+  }  
 }
-
 //이전글,다음글
 function moveSeq(div){
-
   if(div === 'pre'){
-    srchNotiInfo(notiInfo.value.preNotiSeq) 
+    srchNotiInfo(detlInfo.value.preNewsSeq);
   }else if(div === 'next'){
-    srchNotiInfo(notiInfo.value.nextNotiSeq) 
+    srchNotiInfo(detlInfo.value.nextNewsSeq) 
   }
 }
 
@@ -129,14 +118,12 @@ function goToPage(path){
       name :path
   });
 }
-//TODO 줄바꿈필요
-// const notiTxtVal = computed(() => {
-//   // let val = ''
-//   let val = notiDetlData.value.notiTxt
-//   if (!gfnRules.isNull(notiDetlData.value.notiTxt)){
-//       // val =  notiDetlData.value.notiTxt.replace("\n", "<br/>");
-//     }
-//   return val;
-// });
-
+function newsUrl(url,div){
+  if(div == 'copy'){
+    navigator.clipboard.writeText(url)
+    gfnUtils.openAlert("복사되었습니다.","", 1000)
+  }else if(div =='show'){
+    window.open(url, '_blank');
+  }
+}
 </script>

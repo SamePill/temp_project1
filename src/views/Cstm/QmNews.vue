@@ -11,7 +11,7 @@
             <p class="flex w-[150px] font-bold text-left text-[#191919]">
               {{ el.notiDivCdNm }}
             </p>
-            <button @click="goToPage(el.notiSeq,i)" class="flex-grow-0 flex-shrink-0 w-[875px] text-base text-left text-[#333]">
+            <button @click="goToPage(el.notiSeq)" class="flex-grow-0 flex-shrink-0 w-[875px] text-base text-left text-[#333]">
               {{ el.notiTitl }}
             </button>
           </div>
@@ -59,7 +59,7 @@
                 {{el.evtTitl}}
               </p>
               <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                {{gfnUtils.formatYYYYMM(el.strtDttm) + '~' + gfnUtils.formatYYYYMM(el.endDttm)}}
+                {{gfnUtils.formatDttm(el.strtDttm) + ' ~ ' + gfnUtils.formatDttm(el.endDttm)}}
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@
                 {{el.newsTitl}}
               </p>
               <p class="flex-grow-0 flex-shrink-0 w-[250px] text-sm text-left text-[#777]">
-                {{gfnUtils.formatYYYYMM(el.newsCrtdDttm)}}
+                {{gfnUtils.formatDttm(el.newsCrtdDttm)}}
               </p>
             </div>
           </div>
@@ -157,8 +157,6 @@ function srchNotiList(){
       totalCnt.value = notiList.value.length;
       evtList.value = res.rtnData.evtList;
       newsList.value = res.rtnData.newsList;
-      console.log(evtList)
-      console.log(newsList)
       if(evtList.value.length > 0){
         evtList.value.forEach((el,i)=>{
           if(i < 4){
@@ -231,32 +229,22 @@ function showDetl(seq,listDiv){
       router.push({
         name :'EvtDetl'
         ,state:{
-          dataObj : {evtSeq : seq},
+          dataObj : {seq : seq},
         }
       });
     }else if(listDiv == 'News'){
       router.push({
         name :'NewsDetl'
         ,state:{
-          dataObj : {newsSeq : seq}
+          dataObj : {seq : seq}
         }
       });
     }
   }
 }
 //상세보기
-function goToPage(notiSeqVal,i){
-  console.log(i)
-  console.log(notiSeqVal)
+function goToPage(notiSeqVal){
   if(notiSeqVal != undefined && notiSeqVal != null){
-    // let getParam = {notiSeq    :notiSeqVal
-    //                 ,notiList  :notiList.value
-    //                 ,pageNo    :pageNo.value
-    //                 ,showNotiRepyTxtIdx: i
-    //                 ,showIdx   :showIdx.value
-    //                 ,isShowMore:isShowMore.value
-    //                 ,totalCnt  :totalCnt.value
-    // }
     router.push({
       name :'NotiDetl'
       ,state:{

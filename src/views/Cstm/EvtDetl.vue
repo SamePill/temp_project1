@@ -7,15 +7,12 @@
       <div class="mt-[20px] flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative">
         <div class="mb-[20px] flex-grow-0 flex-shrink-0 w-[1060px] h-px bg-[#ddd]"></div>
         <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-3">
-          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{detlInfo.regDttm}}</p>
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]">{{gfnUtils.formatDttm(detlInfo.regDttm)}}</p>
           <p class="flex-grow-0 flex-shrink-0 w-[800px] font-bold text-xl text-left text-[#333]">
             {{detlInfo.evtTitl}}
           </p>
           <div class="w-[1060px] mt-[10px] mb-[60px] gap-2.5">
-            <!-- <p class="self-stretch  w-[992px] text-base text-left text-black">
-              {{ detlInfo.evtTxt }}
-            </p> -->
-            <img :src="detlInfo.dtlPhotFileUrl">
+            <div v-html="detlInfo.evtTxt"></div>
           </div>
         </div>
         <div class="w-[1060px] mt-[60px] mb-[100px]">
@@ -64,14 +61,9 @@ import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
 
-
 const router = useRouter()
-// const notiDetlData = ref({});
-// const totalCnt = ref(null);
-// const showNotiRepyTxtIdx = ref(null);
-
 const { dataObj } = history.state; 
-const seq = ref(dataObj.evtSeq);
+const seq = ref(dataObj.seq);
 const detlInfo = ref({
   evtSeq: ""//"이벤트 순번"
   ,regDttm: ""//"등록일시"
@@ -106,7 +98,6 @@ async function srchNotiInfo(seq){
   }else{
     gfnUtils.openAlert(rtn.rtnMsg,"",2000);
   }
-  
 }
 
 //이전글,다음글
@@ -124,14 +115,5 @@ function goToPage(path){
       name :path
   });
 }
-//TODO 줄바꿈필요
-// const notiTxtVal = computed(() => {
-//   // let val = ''
-//   let val = notiDetlData.value.notiTxt
-//   if (!gfnRules.isNull(notiDetlData.value.notiTxt)){
-//       // val =  notiDetlData.value.notiTxt.replace("\n", "<br/>");
-//     }
-//   return val;
-// });
 
 </script>
