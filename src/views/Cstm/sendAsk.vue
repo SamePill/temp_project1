@@ -175,19 +175,20 @@ onUnmounted(()=>{
 
 function chckQnaPrivTrmsYn(){
     qnaInfo.value.qnaPrivTrmsYn = qnaInfo.value.qnaPrivTrmsYn == 'Y' ? 'N' : 'Y';
+    ruleChk('qnaPrivTrmsYn');
 }
 
 async function sendQna(){
     ruleChk();
-    if(isNullQnaCompNm.value 
-       && isNullQnaUserNm.value 
-       && isNullQnaUserMail.value 
-       && chkQnaUserMail.value 
-       && isNullQnaTitl.value 
-       && isNullQnaTxt.value 
-       && isNullQnaHp.value 
-       && chkQnaHp.value 
-       && chkQnaPrivTrmsYn .value ){
+    if(!isNullQnaCompNm.value 
+       && !isNullQnaUserNm.value 
+       && !isNullQnaUserMail.value 
+       && !chkQnaUserMail.value 
+       && !isNullQnaTitl.value 
+       && !isNullQnaTxt.value 
+       && !isNullQnaHp.value 
+       && !chkQnaHp.value 
+       && !chkQnaPrivTrmsYn.value ){
         var api = "/v1/common/submit/qna";
         var params = qnaInfo.value;
         let rtn = await gfnUtils.axiosPost(
