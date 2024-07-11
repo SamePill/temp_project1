@@ -50,7 +50,7 @@
         <p class="flex-grow-0 flex-shrink-0 text-[28px] font-medium text-left text-[#191919]">이벤트</p>
         <div class="justify-between items-center flex flex-grow-0 flex-shrink-0 w-[1060px] h-[267px]">
           <img class="absolute top-[130px] left-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_l_btn.png" @click="moveEvt('pre','Evt')">
-          <div v-for="(el,i) in showEvtList" :key ="i" class="w-[250px] flex flex-col justify-start items-start  gap-3" @click="showDetl(el.evtSeq,'Evt')">
+          <div v-for="(el,i) in showEvtList" :key ="i" class="cursor-pointer w-[250px] flex flex-col justify-start items-start  gap-3" @click="showDetl(el.evtSeq,'Evt')">
             <div class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]">
               <img :src="el.thmbPhotFileUrl">
             </div>
@@ -72,7 +72,7 @@
         </p>
         <div class="justify-between items-center flex flex-grow-0 flex-shrink-0 w-[1060px] h-[267px]">
           <img class="absolute top-[130px] left-[-35px] w-[60px] cursor-pointer" src="@/assets/qmNews_l_btn.png" @click="moveEvt('pre','News')">
-          <div v-for="(el,i) in showNewsList" :key ="i" class="w-[250px] flex flex-col justify-start items-start  gap-3" @click="showDetl(el.newsSeq,'News')">
+          <div v-for="(el,i) in showNewsList" :key ="i" class="cursor-pointer w-[250px] flex flex-col justify-start items-start  gap-3" @click="showDetl(el.newsSeq,'News')">
             <div class="flex-grow-0 flex-shrink-0 w-[250px] h-[180px] overflow-hidden rounded bg-[#bab8b8] border border-[#ddd]">
               <img :src="el.thmbPhotFileUrl">
             </div>

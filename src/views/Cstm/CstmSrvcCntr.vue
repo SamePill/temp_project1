@@ -90,7 +90,7 @@ function loadData(){
 function goToPage(i){
   if(i != null){
     let path = '';
-    path = i==0 ? 'QmNews' : (i==1 ? 'ApplyPtnSrve' : 'Qstn');
+    path = i==0 ? 'QmNews' : (i==1 ? 'ApplyPtnSrve' : 'SendAsk');
     router.push({name :path});
   }
 }

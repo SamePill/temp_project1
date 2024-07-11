@@ -53,9 +53,8 @@ import NotiDetl from '@/views/Cstm/NotiDetl.vue'
 import NewsDetl from '@/views/Cstm/NewsDetl.vue'
 import EvtDetl from '@/views/Cstm/EvtDetl.vue'
 import ApplyPtnSrve from '@/views/Cstm/ApplyPtnSrve.vue'
-import Qstn from '@/views/Cstm/X_Qstn.vue'
 import QstnList from '@/views/Cstm/QstnList.vue'
-import sendAsk from '@/views/Cstm/sendAsk.vue'
+import SendAsk from '@/views/Cstm/SendAsk.vue'
 
 
 //테스트
@@ -330,12 +329,6 @@ const router = createRouter({
       component: ApplyPtnSrve,
       name: 'ApplyPtnSrve'
     },
-    //faq
-    {
-      path: '/qstn',
-      component: Qstn,
-      name: 'Qstn'
-    },
     //faq list
     {
       path: '/qstnList',
@@ -345,8 +338,8 @@ const router = createRouter({
     //문의하기
     {
       path: '/sendAsk',
-      component: sendAsk,
-      name: 'sendAsk'
+      component: SendAsk,
+      name: 'SendAsk'
     },
     
     /*********************** 테스트 페이지 ***********************/
