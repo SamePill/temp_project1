@@ -181,9 +181,18 @@
   const btnIsActv =  ref(false)
   const userMail = ref("")
 
+
+  function validateHp(event){
+    const value = event.target.value;
+    if (!/^\d*$/.test(value)) {
+      event.target.value = value.replace(/\D/g, '');
+      hp.value = event.target.value;
+    }
+  }
+
   //인증번호 요청
   async function reqCertNo(){
-    if(chkHp.value != true || hp.value.length != 11){
+    if(chkHp.value != true || hp.value.replaceAll("-","").length != 11){
       return false;
     }
 
@@ -212,7 +221,7 @@
       //   gfnUtils.openAlert("이메일을 입력해주세요.","", 2000)
       //   return false;
       // }
-      var postParams = { "hp": hp.value ,  "reqAuthHpDivCd": "20" };
+      var postParams = { "hp": hp.value.replaceAll("-","") ,  "reqAuthHpDivCd": "20" };
 
 
       var rtn = await gfnUtils.axiosPost(api, postParams);
@@ -235,6 +244,7 @@
   
   function ruleChkHp(){
     chkHp.value = gfnRules.validHp(hp.value);
+    hp.value = gfnUtils.formattedHpNo(hp.value)
   }
 
   async function checkCertNo(){

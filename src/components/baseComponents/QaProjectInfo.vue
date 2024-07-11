@@ -127,7 +127,7 @@
                         <div  class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
                             <div  v-for="el in props.prj.fileList" :key="el">
                                 <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#1585d7]">
-                                    {{ el }}
+                                    <a :href="el.fileUrl" download>{{ el.fileNm }}</a>
                                 </p>
                             </div>
                         </div>

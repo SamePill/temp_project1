@@ -38,7 +38,14 @@
     </div>
     <div style="height: 600px; overflow-y: auto">
       <div class="flex flex-col justify-center items-end flex-grow-0 flex-shrink-0 relative gap-[30px]" id="resume">
-        <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[30px]">
+        <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-[30px] "> 
+        <!-- <div class="mt-[20px] w-[150px] h-[200px] flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative border border-[#ddd] rounded overflow-hidden " > -->
+          <img v-show="!gfnRules.isNull(props.profile.engrPhotUrl)" 
+            width="150"
+            height="200"
+            viewBox="0 0 150 200"
+            class="flex-grow-0 flex-shrink-0 w-[150px] h-[200px] relative"
+            :src="props.profile.engrPhotUrl"/>
           <svg
             width="150"
             height="200"
@@ -47,6 +54,7 @@
             xmlns="http://www.w3.org/2000/svg"
             class="flex-grow-0 flex-shrink-0 w-[150px] h-[200px] relative"
             preserveAspectRatio="xMidYMid meet"
+            v-show="gfnRules.isNull(props.profile.engrPhotUrl)"
           >
             <rect x="0.5" y="0.5" width="149" height="199" fill="#DDDDDD"></rect>
             <rect x="0.5" y="0.5" width="149" height="199" stroke="#DDDDDD"></rect>
@@ -319,6 +327,14 @@ import { defineProps, ref } from 'vue'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as gfnUtils from "@/utils/gfnUtils.js";
+import * as gfnRules from "@/utils/gfnRules.js";
+
+// onMounted(() => {
+//   if(!gfnRules.isNull(props.engrPhotUrl)){
+//     document.getElementById('preview').src = props.engrPhotUrl 
+//   }  
+// })
+
 
 const showMore = ref(false)
 //테스트중

@@ -104,7 +104,7 @@
                     class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-2"
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1585d7]">
-                      {{companyInfo.bizRegFileNm}}
+                      <a :herf="companyInfo.bizRegFileUrl" download>{{companyInfo.bizRegFileNm}}</a>
                     </p>
                     <svg
                       width="16"
@@ -187,7 +187,7 @@
                     class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[520px] relative gap-2"
                   >
                     <p class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1585d7]">
-                      {{companyInfo.compLogoFileNm}}
+                      <a :herf="companyInfo.compLogoFileUrl" download>{{companyInfo.compLogoFileNm}}</a>
                     </p>
                     <svg
                       width="16"
@@ -221,11 +221,13 @@
             </div>
           </div>
           <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[790px] gap-5">
-            <div
-              class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
+            <button 
+            @click="saveInfo()"
+            class="flex-grow-0 flex-shrink-0 text-base text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[250px] h-[51px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
             >
-              <button class="flex-grow-0 flex-shrink-0 text-base text-left text-white" @click="saveInfo()">수정하기</button>
-            </div>
+              수정하기
+            </button>
+
           </div>
         </div>
       </div>
@@ -241,6 +243,7 @@
 import SubHeader from '@/components/layoutComponents/SubHeader.vue'
 import SideMenu from '@/components/layoutComponents/SideMenu.vue'
 import * as gfnUtils from "@/utils/gfnUtils.js";
+// import * as gfnRules from "@/utils/gfnRules.js";
 import { useRouter } from 'vue-router'
 import { onMounted, ref, computed } from 'vue'
 import Modal from "@/components/baseComponents/Modal.vue";
@@ -371,19 +374,22 @@ async function saveInfo(){
 
   // 파일이 단건인 경우
 
-  if(bizRegFile.value != null ){
+  
+  if(bizRegFile.value.name ){
+    console.log("사업자 파일변경")
     formData.append("bizReqMultiFile", bizRegFile.value);
     companyInfo.value.bizRegFileUrl = ""
-    companyInfo.value.bizRegFileSeq = ""
     companyInfo.value.bizRegFileNm = bizRegFileNm.value
     companyInfo.value.delBizRegFileSeq = companyInfo.value.bizRegFileSeq
+    companyInfo.value.bizRegFileSeq = ""
   }
-  if(compLogoFile.value != null  ){
+  if(compLogoFile.value.name ){
+    console.log("로고 파일변경")
     formData.append("compLogoMultiFile", compLogoFile.value);
-    companyInfo.value.compLogoFileSeq = ""
-    companyInfo.value.compLogoFileUrl = ""
+    companyInfo.value.compLogoFileUrl = ""    
     companyInfo.value.compLogoFileNm = compLogoFileNm.value
     companyInfo.value.delCompLogoFileSeq = companyInfo.value.compLogoFileSeq
+    companyInfo.value.compLogoFileSeq = ""
   }
   formData.append("userMail", userMail.value )
   formData.append("modifyCompInfoInputJson ",  JSON.stringify(companyInfo.value) )

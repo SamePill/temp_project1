@@ -159,7 +159,7 @@
                         newPass: "",
                         newConfirmPass: ""
                       }
-      
+      router.push({name : "MyInformation"})
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

@@ -208,7 +208,7 @@
             </p>
             <button @click="popup('$SkillTip')"  class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#1ba494] flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-2.5 py-[3px] rounded-[100px] bg-white border border-[#1ba494]">
               작성 TIP</button>
-              <SkillTip ref="$SkillTip" ></SkillTip>
+              <SkillTipEngr ref="$SkillTip" ></SkillTipEngr>
           </div>
           <div>
             <input type="text" placeholder="예) 지라, 레드마인, 포토샵, 일러스트" 
@@ -293,7 +293,7 @@
 import Modal from "@/components/baseComponents/Modal.vue";
 import { useRouter } from 'vue-router'
 import { ref, onMounted } from "vue";
-import SkillTip from "@/components/popupComponents/SkillTip.vue";
+import SkillTipEngr from "@/components/popupComponents/SkillTipEngr.vue";
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
 import DropDown from '@/components/uiComponents/DropDown.vue';

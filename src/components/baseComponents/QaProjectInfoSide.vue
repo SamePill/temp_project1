@@ -216,7 +216,7 @@
           <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">
             엔지니어 선택
           </p>
-          <div
+          <div v-show="engr10Cnt+engr20Cnt+engr30Cnt+engr40Cnt > 0"
             class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-3"
           >
             <div
@@ -422,7 +422,7 @@
         </div>
       </div>
       <button
-        class="flex justify-center text-base font-medium text-left text-white w-[300px] px-2.5 py-4 rounded bg-[#1ba494]"
+        :class='((engr10Cnt+engr20Cnt+engr30Cnt+engr40Cnt > 0) && privTrmsYn &&  useTrmsYn && !gfnRules.isNull(hopeStrtDay) ? "bg-[#1BA494]" : "bg-[#999]") + " flex justify-center text-base font-medium text-left text-white w-[300px] px-2.5 py-4 rounded "'
         @click="apply"
       >
         지원하기
@@ -582,6 +582,10 @@ async function apply() {
   // 지원 /v1/project/support
   // 수정 /v1/project/modify/support -> //projSprtSeq
 
+
+  if(!(engr10Cnt.value+engr20Cnt.value+engr30Cnt.value+engr40Cnt.value > 0) ||  !useTrmsYn.value || !privTrmsYn.value  || gfnRules.isNull(hopeStrtDay.value)){
+    return false;
+  }
   if (!useTrmsYn.value || !privTrmsYn.value) {
     gfnUtils.openAlert("동의하지 않은 약관이 있습니다.", "", 2000);
     return false;

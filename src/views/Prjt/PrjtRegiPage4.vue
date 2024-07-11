@@ -240,9 +240,12 @@ async function nextPage(div){
     console.log(JSON.stringify(projStep.value))
     var api = "";
     let formData = new FormData();
-    formData.append("userMail ",userMail.value) //usermail
     //formData.append("submitProjectInputJson ", new Blob([JSON.stringify(projStep.value)], { type: "application/json" })) 
-    formData.append("fileList",fileList) //file
+    for(let x = 0 ; x < fileList.length; x++){
+      console.log(fileList[x])
+      formData.append("fileList",fileList[x]) //file  
+    }
+    formData.append("userMail ",userMail.value) //usermail
     projStep.value.projOneStep.strtDay = projStep.value.projOneStep.strtDay.replaceAll("-","")
     projStep.value.projOneStep.atndTime = projStep.value.projOneStep.atndTime.replaceAll(":","")
     projStep.value.projOneStep.lvwkTime = projStep.value.projOneStep.lvwkTime.replaceAll(":","")
@@ -268,7 +271,13 @@ async function nextPage(div){
 
     if(rtn.rtnCd == "00"){
       gfnUtils.openAlert("프로젝트 등록이 완료 되었습니다.","", 2000)
-      router.replace({name : 'PrjtSrch'})
+      //router.replace({name : 'PrjtSrch'})
+      router.push({ 
+        name: "PrjtSrchDetl"
+        ,state : {
+                    dataObj : {projId: rtn.rtnData.projId}
+                  }
+      });
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
