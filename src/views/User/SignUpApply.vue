@@ -81,7 +81,11 @@
               class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[430px] h-[51px] relative overflow-hidden p-4 rounded bg-white border border-[#ddd]"
               @click="showAddrPop" 
             >
-              <p
+              <p v-if="signUp.joinTwoStep.compBaseAddr =='' || signUp.joinTwoStep.compBaseAddr == null "
+                class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#999]"  >
+                주소 입력해주세요.
+              </p>
+              <p v-else
                 class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#191919]"
               >
                 {{ signUp.joinTwoStep.compBaseAddr }} 
