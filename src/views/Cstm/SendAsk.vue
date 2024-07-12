@@ -145,7 +145,7 @@ const textList = ref([{text:'평일 2일 내, 답변드립니다.'}
                       ,{text:'문의하실 플랫폼을 선택해 주세요.'}
                       ,{text:'필요시 세부정보를 이메일로 보내드립니다. (서비스 제공, 솔루션 문의 등)'}
                       ,{text:`전화 상담을 원하신다면 </span><span class="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#1ba494]">02-2085-0606</span><span class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#333]">으로 연락 부탁드립니다.</span>`}
-])
+]);
 
 const qnaInfo = ref({  qnaCompNm:   ''
                     ,qnaUserNm:   ''
@@ -154,7 +154,7 @@ const qnaInfo = ref({  qnaCompNm:   ''
                     ,qnaTxt:      ''
                     ,qnaHp:       ''
                     ,qnaPrivTrmsYn: 'N'
-})
+});
 
 const isNullQnaCompNm   = ref(false);
 const isNullQnaUserNm   = ref(false);
@@ -166,8 +166,7 @@ const isNullQnaHp       = ref(false);
 const chkQnaHp          = ref(false);
 const chkQnaPrivTrmsYn  = ref(false);
 
-onMounted(() => {
-  
+onMounted(() => {  
 });
 
 onUnmounted(()=>{

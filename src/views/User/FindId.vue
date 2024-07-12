@@ -90,7 +90,7 @@
       <div
         class="flex flex-col justify-start items-center self-stretch flex-grow-0 flex-shrink-0 gap-20"
       >
-        <button 
+        <button :disabled="!btnIsActv"
           :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex justify-center items-center flex-grow-0 flex-shrink-0 w-[430px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded text-white"'
           @click="findEmail()"
         >
