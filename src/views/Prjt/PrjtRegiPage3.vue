@@ -35,63 +35,105 @@
                   <div>
                     <input type="number" min="0" v-model="projStep.projThreeStep.bgnrEngrCnt" class="pr-[40px] w-40 flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
                     <span class="absolute" style="top:17px; right:190px">명</span>  
-                    <!-- <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                    <p v-show="projStep.projThreeStep.bgnrEngrCnt == 0 && projStep.projThreeStep.bgnrEngrUnitPric > 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                       인원수를 입력해주세요.
-                    </p> -->
+                    </p> 
                   </div>
                   <div>
                     <input type="text"                     
                       :value="bgnrEngrUnitPricFormatted"
                       @input="updateBgnrPric($event.target.value)"
                       class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                      <!-- v-model="projStep.projThreeStep.bgnrEngrUnitPric"  -->
-                      <span class="absolute" style="top:17px; right:10px">만원</span>    
-                      <!-- <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
-                        최소 지급액을 확인해주세요.
-                      </p>    
-                      <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
-                        월 지급액을 입력해주세요.
-                      </p>     -->
+                    <!-- v-model="projStep.projThreeStep.bgnrEngrUnitPric"  -->
+                    <span class="absolute" style="top:17px; right:10px">만원</span>    
+                    <!-- <p class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      최소 지급액을 확인해주세요.
+                    </p>   -->
+                    <p 
+                      v-show="projStep.projThreeStep.bgnrEngrCnt > 0 && projStep.projThreeStep.bgnrEngrUnitPric == 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      월 지급액을 입력해주세요.
+                    </p>   
                   </div>              
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#dbe9fa] text-[#0b6bdc]">
                     중급 엔지니어
                   </div>
-                  <input type="number" min="0"  v-model="projStep.projThreeStep.intrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                  <span class="absolute" style="top:17px; right:190px">명</span>  
-                  <input type="text" 
-                    :value="intrEngrUnitPricFormatted"
-                    @input="updateIntrPric($event.target.value)"                     
-                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                    <!-- v-model="projStep.projThreeStep.intrEngrUnitPric"  -->
-                  <span class="absolute" style="top:17px; right:10px">만원</span>  
+                  <div>
+                    <input type="number" min="0"  v-model="projStep.projThreeStep.intrEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <span class="absolute" style="top:17px; right:190px">명</span>  
+                    <p v-show="projStep.projThreeStep.intrEngrCnt == 0 && projStep.projThreeStep.intrEngrUnitPric > 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      인원수를 입력해주세요.
+                    </p> 
+                  </div>  
+                  <div>
+                    <input type="text" 
+                      :value="intrEngrUnitPricFormatted"
+                      @input="updateIntrPric($event.target.value)"                     
+                      class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                      <!-- v-model="projStep.projThreeStep.intrEngrUnitPric"  -->
+                    <span class="absolute" style="top:17px; right:10px">만원</span>
+                    <p 
+                      v-show="projStep.projThreeStep.intrEngrCnt > 0 && projStep.projThreeStep.intrEngrUnitPric == 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      월 지급액을 입력해주세요.
+                    </p> 
+                  </div> 
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#fadbe6] text-[#dc0b56]">
                     고급 엔지니어
                   </div>
-                  <input type="number" min="0"  v-model="projStep.projThreeStep.advnEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                  <span class="absolute" style="top:17px; right:190px">명</span>  
-                  <input type="text" 
-                    :value="advnEngrUnitPricFormatted"
-                    @input="updateAdvnPric($event.target.value)"  
-                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                    <!-- v-model="projStep.projThreeStep.advnEngrUnitPric" -->
-                  <span class="absolute" style="top:17px; right:10px">만원</span>  
+                  <div>
+                    <input type="number" min="0"  v-model="projStep.projThreeStep.advnEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <span class="absolute" style="top:17px; right:190px">명</span>  
+                    <p v-show="projStep.projThreeStep.advnEngrCnt == 0 && projStep.projThreeStep.advnEngrUnitPric > 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      인원수를 입력해주세요.
+                    </p> 
+                  </div>
+                  <div>
+                    <input type="text" 
+                      :value="advnEngrUnitPricFormatted"
+                      @input="updateAdvnPric($event.target.value)"  
+                      class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                      <!-- v-model="projStep.projThreeStep.advnEngrUnitPric" -->
+                    <span class="absolute" style="top:17px; right:10px">만원</span>  
+                    <p 
+                      v-show="projStep.projThreeStep.advnEngrCnt > 0 && projStep.projThreeStep.advnEngrUnitPric == 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      월 지급액을 입력해주세요.
+                    </p> 
+                  </div>
                 </div>
                 <div class="flex justify-start items-start gap-5 relative">
                   <div class="flex justify-center w-40 relative gap-12 p-4 rounded bg-[#faf1db] text-[#dc630b]">
                     특급 엔지니어
                   </div>
-                  <input type="number" min="0"  v-model="projStep.projThreeStep.spclEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                  <span class="absolute" style="top:17px; right:190px">명</span>  
-                  <input type="text" 
-                    :value="spclEngrUnitPricFormatted"
-                    @input="updateSpclPric($event.target.value)"
-                    class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
-                    <!-- v-model="projStep.projThreeStep.spclEngrUnitPric" -->
-                  <span class="absolute" style="top:17px; right:10px">만원</span>  
+                  <div>
+                    <input type="number" min="0"  v-model="projStep.projThreeStep.spclEngrCnt" class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                    <span class="absolute" style="top:17px; right:190px">명</span>  
+                    <p v-show="projStep.projThreeStep.spclEngrCnt == 0 && projStep.projThreeStep.spclEngrUnitPric > 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      인원수를 입력해주세요.
+                    </p> 
+                  </div>
+                  <div>
+                    <input type="text" 
+                      :value="spclEngrUnitPricFormatted"
+                      @input="updateSpclPric($event.target.value)"
+                      class="pr-[40px] flex justify-start items-start w-40 relative gap-2 p-4 rounded bg-white border border-[#ddd] text-[#191919]" placeholder="0" />
+                      <!-- v-model="projStep.projThreeStep.spclEngrUnitPric" -->
+                    <span class="absolute" style="top:17px; right:10px">만원</span>  
+                    <p 
+                      v-show="projStep.projThreeStep.spclEngrCnt > 0 && projStep.projThreeStep.spclEngrUnitPric == 0"
+                      class="mt-[10px] w-40 mb-[5px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
+                      월 지급액을 입력해주세요.
+                    </p> 
+                  </div>
                 </div>
               </div>
             </div>
@@ -125,11 +167,29 @@
                     </p>
                 </div>
               </div>
-              <div v-if="!gfnRules.isNull(projStep.projThreeStep.spclEngrCnt) && projStep.projThreeStep.spclEngrCnt &gt; 0">
+              <div v-if="!gfnRules.isNull(projStep.projThreeStep.spclEngrCnt) && projStep.projThreeStep.spclEngrCnt > 0">
                 <div class="flex justify-between items-center self-stretch">
                   <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#dc630b]">특급 엔지니어</p>
                     <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
                       <span class="mr-[5px]">{{ gfnUtils.formattedNumber( projStep.projThreeStep.spclEngrCnt * (projStep.projThreeStep.spclEngrUnitPric) / 10000 )}}</span>
+                      <span>만원</span>
+                    </p>
+                </div>
+              </div>
+              <div v-if="
+              (!gfnRules.isNull(projStep.projThreeStep.bgnrEngrCnt) && projStep.projThreeStep.bgnrEngrCnt > 0) ||
+              (!gfnRules.isNull(projStep.projThreeStep.intrEngrCnt) && projStep.projThreeStep.intrEngrCnt > 0) ||
+              (!gfnRules.isNull(projStep.projThreeStep.advnEngrCnt) && projStep.projThreeStep.advnEngrCnt > 0) ||
+              (!gfnRules.isNull(projStep.projThreeStep.spclEngrCnt) && projStep.projThreeStep.spclEngrCnt > 0)">
+                <div class="flex justify-between items-center self-stretch">
+                  <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#333]">부가세</p>
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                      <span class="mr-[5px]">{{gfnUtils.formattedNumber(
+                        ((projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)) +
+                          (projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)) +
+                          (projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)) +
+                          (projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)) ) * 0.1 /10000)
+                        }}</span>
                       <span>만원</span>
                     </p>
                 </div>
@@ -143,11 +203,16 @@
                 <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-2 text-[#333] text-xl">
                   <span>총 금액</span>
                   <span>{{gfnUtils.formattedNumber(
+                      (((projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)) +
+                          (projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)) +
+                          (projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)) +
+                          (projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)) ) * 0.1 /10000 ) +
+                        (
                         ((projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)) +
                           (projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)) +
                           (projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)) +
                           (projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)) ) /10000)
-                        }}</span>
+                        )}}</span>
                   <span>만원</span>
                 </div>
               </div>
@@ -363,7 +428,16 @@
         <button @click="nextPage('pre')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494] text-[#1ba494]">
           이전 단계로 이동              
         </button>
-        <button @click="nextPage('next')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white">
+        <button 
+          @click="nextPage('next')" 
+          :disabled="!(((projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)) +
+                    (projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)) +
+                    (projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)) +
+                    (projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)) ) > 0)"
+          :class='(((projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.bgnrEngrUnitPric)) +
+                    (projStep.projThreeStep.intrEngrCnt * (projStep.projThreeStep.intrEngrUnitPric)) +
+                    (projStep.projThreeStep.advnEngrCnt * (projStep.projThreeStep.advnEngrUnitPric)) +
+                    (projStep.projThreeStep.bgnrEngrCnt * (projStep.projThreeStep.spclEngrUnitPric)) ) > 0 ? "bg-[#1BA494]" : "bg-[#999]") + " flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white"'>
           다음 단계로 이동 
         </button>
       </div>

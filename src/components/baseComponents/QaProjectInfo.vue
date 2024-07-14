@@ -117,9 +117,11 @@
                     </p>
                     <div
                         class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
-                        <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
-                            {{props.prj.projEtcInfo}}
-                        </p>
+                        <div  v-for="el in props.prj.projChckDivCdList " :key ="el">
+                            <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                                {{el.projChckDivCdNm  }}
+                            </p>
+                        </div>
                     </div>
                     </div>
                     <div  class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-4">

@@ -227,16 +227,21 @@
   }
 
   async function cancelConfirm(){
-    showConfirm
+    showConfirm();
   }
 
 
   async function cancelApply() {
     //TODO 지원 취소 API 확인 필요
-    console.log("지원 취소 API 확인 필요!!!!!!!!!!!");
+    let tmp = projList.value.filter(item => item.chkVal == true)
+    let prjSeqList = []
+    for(let i = 0;  i < tmp.length ; i++){
+      prjSeqList.push({projSprtSeq : tmp[i].projSprtSeq})
+    }
     let api = "/v1/my/cancel/support-project";
-    let postParams = {projSprtSeqList : [{ projSprtSeq : ""}]};
+    let postParams = {projSprtSeqList : prjSeqList};
     let getParams = {userMail : userMail.value};
+    console.log(postParams)
 
     var rtn = await gfnUtils.axiosPost(api, postParams, getParams);
     if (rtn.rtnCd == "00") {
@@ -245,6 +250,7 @@
     } else {
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }
+
   }
 
 

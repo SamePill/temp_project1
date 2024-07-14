@@ -366,6 +366,8 @@
     let totalMonths2 = (year2 * 12) + month2;
     if(totalMonths2 - totalMonths1 > 0){
       return totalMonths2 - totalMonths1 + 1;  
+    }else if(totalMonths2 - totalMonths1 == 0){
+      return  1;  
     }else{
       return 0
     }

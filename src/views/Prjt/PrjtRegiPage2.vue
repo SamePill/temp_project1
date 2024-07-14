@@ -26,7 +26,7 @@
             <div>
               <textarea v-model="projStep.projTwoStep.projCtntTask" style="resize: none;" type="text" 
                 :class='(projCtntTaskChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border "' 
-                @blur="projCtntTaskRule()"
+                @blur="btnStatChng()"
                 placeholder="프로젝트 설명을 입력해주세요."/>
             </div>
           </div>
@@ -45,7 +45,7 @@
             <div>
               <textarea v-model="projStep.projTwoStep.projDmndSkil" style="resize: none;" type="text"
                 :class='(projDmndSkilChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border "' 
-                @blur="projDmndSkilRule()"
+                @blur="btnStatChng()"
                 placeholder="요구스킬을 입력해주세요."/>
             </div>
           </div>
@@ -64,7 +64,7 @@
             <div>
               <textarea v-model="projStep.projTwoStep.projUseTool" style="resize: none;" type="text" 
                 :class='(projUseToolChk ? "border-[#ddd]" : "border-[#ff5252]") + " flex justify-start items-start h-[230px] w-[520px] px-4 pt-4 pb-6 rounded border border-[#ddd]"' 
-                @blur="projUseToolRule()"
+                @blur="btnStatChng()"
                 placeholder="활용 Tool 스킬을 입력해주세요."/>
             </div>
           </div>
@@ -156,7 +156,9 @@
           <button @click="nextPage('pre')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494] text-[#1ba494]">
             이전 단계로 이동              
           </button>
-          <button @click="nextPage('next')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white">
+          <button @click="nextPage('next')" 
+            :disabled="!btnIsActv"
+            :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white"'>
             다음 단계로 이동 
           </button>
         </div>
@@ -194,6 +196,7 @@ const fileList = ref([]);
 const projCtntTaskChk = ref(true)
 const projDmndSkilChk = ref(true)
 const projUseToolChk = ref(true)
+const btnIsActv = ref(false)
 
 onMounted(() => {
   loadData();
@@ -239,6 +242,21 @@ function popup(div){
   return false
 
 }
+
+function btnStatChng(){
+ 
+ let chk1 = !gfnRules.isNull(projStep.value.projTwoStep.projCtntTask); //프로젝트 설명
+ let chk2 = !gfnRules.isNull(projStep.value.projTwoStep.projDmndSkil) //요구스킬
+ let chk3 = !gfnRules.isNull(projStep.value.projTwoStep.projUseTool) //활용tool
+ 
+ if(chk1 && chk2 && chk3 ){
+   btnIsActv.value = true
+ }else{
+   btnIsActv.value = false
+ }
+
+}
+
 
 function nextPage(div){
   projStep.value['fileList'] = fileList.value;

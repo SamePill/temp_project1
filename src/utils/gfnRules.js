@@ -38,6 +38,7 @@ export const validName = value => {
   return pattern.test(value) || (value || "").length == 0 || false //"영문과 한글만 입력가능 합니다.";
 }
 
+
 export const validHp = value => {
   const pattern = /^010[0-9]{7,8}$/
   return pattern.test(value) || (value || "").length == 0 || false //"휴대전화번호 규칙이 어긋납니다.";
@@ -136,6 +137,15 @@ export const isNull = str => {
 
   return false;
 };
+
+export const regexEmail = value => {
+  return value.replace(/[^a-zA-Z0-9@.-_]/g, '');
+}
+
+
+export const regrexKoEnNo = value => {
+  return value.replace(/[^가-힣a-zA-Z0-9]/g, '')
+}
 
 
 export const isEmptyList = arr => {

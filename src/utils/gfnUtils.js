@@ -10,6 +10,7 @@ const addrApiKey = "devU01TX0FVVEgyMDI0MDYxMjEwMjY1MDExNDgzNjI="  //devKey
 
 //const baseUrl = process.env.NODE_ENV === "production" ? "http://drs.pe.kr:28080" : "";
 const baseUrl = "http://dev.l-walk.com:29080" ;
+//const baseUrl = "http://localhost:29080"
 
 export const getToday = () => {
   var today = new Date();
@@ -625,7 +626,6 @@ export const openAlert = ( msg, title, timeout) => {
  
 };
 
-
 export const convertToTimeFormat = (num)  => {
   // 숫자를 문자열로 변환
   let str = num.toString();
@@ -641,6 +641,9 @@ export const convertToTimeFormat = (num)  => {
   // 원하는 형식으로 반환
   return `${hours}:${minutes}`;
 }
+
+
+
 
 /**
  * 날짜 포멧 변환
@@ -680,6 +683,33 @@ export const calDate = (date, div, num) => {
 
     return moment(rtnDt).format("YYYY-MM-DD");
   }
+};
+
+/**
+ * 사업자 등록번호(xxx-xx-xxxxx) 
+ */
+export const formatterBizNo = (value) => {
+  let bizNo = value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+if (bizNo.length > 3 && bizNo.length <= 5) {
+  bizNo = `${bizNo.slice(0, 3)}-${bizNo.slice(3)}`;
+} else if (bizNo.length > 5 && bizNo.length <= 10) {
+  bizNo = `${bizNo.slice(0, 3)}-${bizNo.slice(3, 5)}-${bizNo.slice(5)}`;
+} else if (bizNo.length > 10) {
+  bizNo = `${bizNo.slice(0, 3)}-${bizNo.slice(3, 5)}-${bizNo.slice(5, 10)}`;
+}
+return bizNo;
+}
+
+export const formatterHp = (value) => {
+  let returnHp = value.replace(/\D/g, "");
+
+  if (returnHp.length > 3 && returnHp.length <= 7) {
+    returnHp = `${returnHp.slice(0, 3)}-${returnHp.slice(3)}`;
+  } else if (returnHp.length > 7) {
+    returnHp = `${returnHp.slice(0, 3)}-${returnHp.slice(3, 7)}-${returnHp.slice(7, 11)}`;
+  }
+
+  return returnHp;
 };
 
 

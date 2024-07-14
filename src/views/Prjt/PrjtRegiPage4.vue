@@ -28,7 +28,7 @@
           <div class="flex flex-col justify-center items-start gap-2">
             <input type="text" v-model="projStep.projFourStep.rprsNm" 
               :class='(rprsNmChk1 && rprsNmChk2 ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded border "' 
-              @blur="rprsNmRule()"
+              @blur="btnStatChng()"
               placeholder="담당자 이름을 입력해주세요."/>
           </div>
         </div>
@@ -45,9 +45,12 @@
             <span class="text-[#ff5252]">*</span>
           </p>
           <div class="flex justify-start items-start gap-5">
-            <input type="text" v-model="projStep.projFourStep.rprsHp"  
+            <input type="text" 
+              v-model="projStep.projFourStep.rprsHp"  
+              maxlength="11"
               :class='(rprsHpChk1 && rprsHpChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded border "' 
-              @blur="rprsHpRule()"
+              @blur="btnStatChng()"
+              @input="validateHp"
               placeholder="담당자 휴대폰 번호를 입력해주세요."/>
           </div>
         </div>
@@ -64,7 +67,8 @@
           <div class="flex justify-start items-start gap-5">
             <input type="text" v-model="projStep.projFourStep.rprsMail" 
               :class='(rprsMailChk1 && rprsMailChk2 ? "border-[#ddd]" : "border-[#ff5252]") + "  w-[520px] h-[51px] text-base text-left  text-[#191919] p-4 rounded border "'
-              @blur="rprsMailRule()"
+              @blur="btnStatChng()"
+              @input="regexEmail()"
               placeholder="담당자 이메일을 입력해주세요."/>
           </div>
         </div>
@@ -106,9 +110,11 @@
               (필수) 큐밋 이용약관에 동의합니다.
             </p>
           </div>
-          <div class="flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10">
-            <p class="flex-grow-0 flex-shrink-0 text-xs text-right text-[#777]">상세보기</p>
-          </div>
+          <button
+            @click="showTerm1()" 
+            class="flex-grow-0 flex-shrink-0 text-xs text-right text-[#777] flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10">
+            상세보기
+          </button>
           <div class="mt-[20px] flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor:pointer" @click="trmsClick('privTrmsYn')">
             <svg
               width="32"
@@ -136,12 +142,14 @@
                 ></path>
             </svg>
             <p class="flex-grow-0 flex-shrink-0 text-sm text-left text-[#191919]">
-              (필수) 큐밋 이용약관에 동의합니다.
+              (필수) 개인정보 제 3자 제공에 동의합니다.
             </p>
           </div>
-          <div class="flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10">
-            <p class="flex-grow-0 flex-shrink-0 text-xs text-right text-[#777]">상세보기</p>
-          </div>
+          <button
+            @click="showTerm2()"  
+            class="flex-grow-0 flex-shrink-0 text-xs text-right text-[#777] flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10">
+            상세보기
+          </button>
         </div>
       </div>
 
@@ -151,7 +159,10 @@
         <button @click="nextPage('pre')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded border border-[#1ba494] text-[#1ba494]">
           이전 단계로 이동              
         </button>
-        <button @click="nextPage('next')" class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white">
+        <button 
+          @click="nextPage('next')" 
+          :disabled="!btnIsActv"
+          :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white"'>
           등록완료
         </button>
       </div>
@@ -188,6 +199,7 @@ const rprsHpChk1 = ref(true);
 const rprsHpChk2 = ref(true);
 const rprsMailChk1 = ref(true);
 const rprsMailChk2 = ref(true);
+const btnIsActv =  ref(false)
 
 function rprsNmRule(){
   rprsNmChk1.value = !gfnRules.isNull(projStep.value.projFourStep.rprsNm);
@@ -204,9 +216,48 @@ function rprsMailRule(){
   rprsMailChk2.value = gfnRules.validEmail(projStep.value.projFourStep.rprsMail);
 }
 
+function showTerm1(){
+  router.push({name: 'UseTerms'})
+}
+function showTerm2(){
+  router.push({name: 'PrivacyPolicy'})
+}
+
 onMounted(() => {
   loadData();
 });
+
+function validateHp(event){
+  const value = event.target.value;
+  if (!/^\d*$/.test(value)) {
+    event.target.value = value.replace(/\D/g, '');
+    projStep.value.projFourStep.rprsHp = event.target.value;
+  }
+}
+
+function btnStatChng(){
+
+  projStep.value.projFourStep.rprsMail = projStep.value.projFourStep.rprsMail.replace(/[^a-zA-Z0-9@.]/g, '');
+
+  if(projStep.value.projFourStep.rprsHp.length == 11){
+    projStep.value.projFourStep.rprsHp = gfnUtils.formattedHpNo(projStep.value.projFourStep.rprsHp)
+  }
+
+  let chk1 = !gfnRules.isNull(projStep.value.projFourStep.rprsNm); //담당자 이름
+  let chk2 = !gfnRules.isNull(projStep.value.projFourStep.rprsHp) //담당자 휴대폰 번호
+  let chk3 = !gfnRules.isNull(projStep.value.projFourStep.rprsMail) //예상근무기간
+  let chk4 = projStep.value.projFourStep.useTrmsYn == 'Y'
+  let chk5 = projStep.value.projFourStep.privTrmsYn == 'Y'
+
+  if(chk1 && chk2 && chk3 && chk4 && chk5){
+    btnIsActv.value = true
+  }else{
+    btnIsActv.value = false
+  }
+
+}
+
+
 
 async function loadData(){
   if(dataObj != undefined){
@@ -220,6 +271,7 @@ async function nextPage(div){
     rprsNmRule()
     rprsHpRule()
     rprsMailRule()
+
     if(!rprsNmChk1.value || !rprsNmChk2.value || !rprsHpChk1.value || !rprsHpChk2.value || !rprsMailChk1.value || !rprsMailChk2.value){
       return false
     }
@@ -249,6 +301,7 @@ async function nextPage(div){
     projStep.value.projOneStep.strtDay = projStep.value.projOneStep.strtDay.replaceAll("-","")
     projStep.value.projOneStep.atndTime = projStep.value.projOneStep.atndTime.replaceAll(":","")
     projStep.value.projOneStep.lvwkTime = projStep.value.projOneStep.lvwkTime.replaceAll(":","")
+    projStep.value.projFourStep.rprsHp = projStep.value.projFourStep.rprsHp.replaceAll("-","")
     if(projStep.value.editMode){
       //프로젝트 수정
       console.log("수정!!!!")
@@ -292,6 +345,7 @@ async function nextPage(div){
   }
 }
 function trmsClick(div){
+  btnStatChng()
   if(projStep.value.projFourStep[div] == 'Y'){
     projStep.value.projFourStep[div] = 'N'
   }else{

@@ -41,8 +41,9 @@
             </div>
             <input maxlength='50' tye="text" 
                   v-model="projStep.projOneStep.projTitl" 
-                  @blur="projTitlChkRule()"
-                  :class='(projTitlChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#191919] p-4 rounded border"' placeholder="프로젝트명을 입력주세요."/>
+                  @blur="btnStatChng()"
+                  :class='(projTitlChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#191919] p-4 rounded border"' 
+                  placeholder="프로젝트명을 입력주세요."/>
               <p v-show="!projTitlChk"
                  class="mt-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
                 프로젝트명을 입력해주세요.
@@ -52,9 +53,8 @@
             <p class="text-xl text-left text-[#191919]">희망 시작일 <span class="text-[#ff5252]">*</span></p>
             <div class="flex flex-col justify-center items-start gap-2">
               <input type="date" v-model="projStep.projOneStep.strtDay" :min="today" 
-                :class='(strtDayChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#999] p-4 rounded border "' 
-                @blur="strtDayChkRule()"
-                dataplaceholder="프로젝트 시작 희망일을 선택해 주세요."/>
+                :class='(strtDayChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-[#191919] p-4 rounded border "' 
+                @blur="btnStatChng()" >
               <div class="flex justify-start items-center relative gap-0.5">
                 <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1" style="cursor: pointer;" @click="strtDayCnslYnClick()">
                   <svg
@@ -79,7 +79,7 @@
                     </p>
                     <p v-show="!strtDayChk"
                        class="ml-[10px] flex-grow-0 flex-shrink-0 text-sm text-left text-[#ff5252]"  >
-                      희망 시작일을 선택해주세요.
+                       프로젝트 희망 시작일을 선택해주세요.
                     </p>
                 </div>
               </div>
@@ -93,9 +93,9 @@
               <div class="flex justify-between items-center w-40 h-[51px] relative  p-4 rounded border border-[#ddd]">
                 <p class="text-base text-left text-[#191919]">월 단위</p>
               </div>
-              <input v-model="projStep.projOneStep.pirdVal" type="text" min="0" 
+              <input v-model="projStep.projOneStep.pirdVal" type="number" min="0" 
                   :class='(pirdValChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[340px] h-[51px] text-[#999] p-4 rounded border"'
-                  @blur="pirdValChkRule()"
+                  @blur="btnStatChng()"
                   placeholder="예상 근무기간을 입력해주세요."/>
             </div>
             <p  v-show="!pirdValChk"
@@ -156,6 +156,7 @@
                 <p class="text-base text-left text-[#777]">근무지</p>
                 <input @click="showAddrPop" v-model="projStep.projOneStep.workAddr" type="text" 
                   :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
+                  @blur="btnStatChng()"
                   placeholder="예시) 서울특별시 강남구 테헤란로 000-0"/>
                 <input v-model="projStep.projOneStep.workDtlAddr" type="text" 
                 :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
@@ -190,7 +191,8 @@
         </div>
         <div class="w-[520px] mt-[60px] flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
           <button @click="nextPage()" 
-            class="flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494] text-white">
+            :disabled="!btnIsActv"
+            :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex w-[180px] justify-center items-center flex-grow relative overflow-hidden gap-2.5 px-2.5 py-4 rounded text-white"'>
             다음 단계로 이동하기
           </button>
         </div>
@@ -285,6 +287,7 @@ const pirdValChk = ref(true)
 const workAddrChk = ref(true)
 const atndTimeChk = ref(true)
 const lvwkTimeChk = ref(true)
+const btnIsActv =  ref(false)
 
 onMounted(() => {
   // jobDivCdList.value = []
@@ -344,11 +347,11 @@ function nextPage(){
 
   if(!projTitlChk.value || !strtDayChk.value || !pirdValChk.value 
       || !workAddrChk.value || !atndTimeChk.value || !lvwkTimeChk.value){
-    console.log("필수 입력값 미입력... ")
     return false;
   }
   projStep.value.projOneStep.jobDivCdList = $jobChipset.value.returnCdList();
   projStep.value.projOneStep.taskDivCdList = $taskChipset.value.returnCdList();
+  
   router.push({ 
     name: "PrjtRegiPage2"
     ,state: {
@@ -378,35 +381,46 @@ function scrollToTop(){
 }
 
 function btnStatChng(){
-  console.log();
+ 
+  //projStep.value.projOneStep.jobDivCdList //직군
+  //projStep.value.projOneStep.taskDivCdList //업무영역
+
+  //projStep.value.projOneStep.projTitl = gfnRules.regrexKoEnNo(projStep.value.projOneStep.projTitl)
+
+  let chk1 = !gfnRules.isNull(projStep.value.projOneStep.projTitl); //프로젝트명
+  let chk2 = !gfnRules.isNull(projStep.value.projOneStep.strtDay) //희망식작일
+  let chk3 = !gfnRules.isNull(projStep.value.projOneStep.pirdVal) //예상근무기간
+  let chk4 = !gfnRules.isNull(projStep.value.projOneStep.workDivCd) //근무방식
+  let chk5 = !gfnRules.isNull(projStep.value.projOneStep.workAddr) //근무방식
+
+  if(chk1 && chk2 && chk3 && chk4 && chk5){
+    btnIsActv.value = true
+  }else{
+    btnIsActv.value = false
+  }
+
 }
 
 function projTitlChkRule(){
   projTitlChk.value = !gfnRules.isNull(projStep.value.projOneStep.projTitl);
-  btnStatChng()
 }
 
 function strtDayChkRule(){
   strtDayChk.value = !gfnRules.isNull(projStep.value.projOneStep.strtDay);
-  btnStatChng()
 }
 
 function pirdValChkRule(){
   projStep.value.projOneStep.pirdVal = String(projStep.value.projOneStep.pirdVal).replace(/[^0-9]/g,'');
   pirdValChk.value = !gfnRules.isNull(projStep.value.projOneStep.pirdVal);
-  btnStatChng()
 }
 
 function workAddrChkRule(){
   workAddrChk.value = !gfnRules.isNull(projStep.value.projOneStep.workAddr);
-  btnStatChng()
 }
 
 function workTimeChkRule(){
   atndTimeChk.value = !gfnRules.isNull(projStep.value.projOneStep.atndTime);
   lvwkTimeChk.value = !gfnRules.isNull(projStep.value.projOneStep.lvwkTime);
- 
-  btnStatChng()
 }
 
 </script>
