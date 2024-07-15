@@ -93,7 +93,7 @@
               <div class="flex justify-between items-center w-40 h-[51px] relative  p-4 rounded border border-[#ddd]">
                 <p class="text-base text-left text-[#191919]">월 단위</p>
               </div>
-              <input v-model="projStep.projOneStep.pirdVal" type="number" min="0" 
+              <input v-model="projStep.projOneStep.pirdVal" type="text" min="0" 
                   :class='(pirdValChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[340px] h-[51px] text-[#999] p-4 rounded border"'
                   @blur="btnStatChng()"
                   placeholder="예상 근무기간을 입력해주세요."/>
@@ -386,6 +386,8 @@ function btnStatChng(){
   //projStep.value.projOneStep.taskDivCdList //업무영역
 
   //projStep.value.projOneStep.projTitl = gfnRules.regrexKoEnNo(projStep.value.projOneStep.projTitl)
+
+  projStep.value.projOneStep.pirdVal = projStep.value.projOneStep.pirdVal.replace(/\D/g, ''); // 숫자 이외의 문자 제거
 
   let chk1 = !gfnRules.isNull(projStep.value.projOneStep.projTitl); //프로젝트명
   let chk2 = !gfnRules.isNull(projStep.value.projOneStep.strtDay) //희망식작일
