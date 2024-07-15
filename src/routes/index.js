@@ -116,7 +116,8 @@ const router = createRouter({
     {
       path: '/project-detail',
       component: PrjtSrchDetl,
-      name: 'PrjtSrchDetl'
+      name: 'PrjtSrchDetl',
+      meta: { keepAlive: false }
     },
 
     /*********************** 사용자 ***********************/
@@ -384,6 +385,5 @@ router.afterEach(() => {
     });
   }
 });
-
 
 export default router;

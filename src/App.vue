@@ -19,15 +19,11 @@
 
     <div  class="content"  style=" height:calc(100vh - 80px); overflow-y: auto;">
       <router-view v-slot="{ Component, route }">
-        <keep-alive v-if="route.meta.keepAlive">
-          <component :is="Component" />
+        <keep-alive :include="['PrjtSrch', 'RegisteredProjectList','AppliedProjectList']">
+          <component :is="Component"  v-show="route.meta.keepAlive" />
         </keep-alive>
-        <component v-else :is="Component" />
+        <component :is="Component"  v-show="!route.meta.keepAlive" />
       </router-view>
-      <!-- <keep-alive>
-        <component :is="Component" />
-      </keep-alive>       -->
-      <!-- <router-view></router-view> -->
       <template
         v-if="
           $route.path.indexOf('/login') >= 0 ||
