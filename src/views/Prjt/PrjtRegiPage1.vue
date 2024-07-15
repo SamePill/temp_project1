@@ -157,7 +157,7 @@
                 <input @click="showAddrPop" v-model="projStep.projOneStep.workAddr" type="text" 
                   :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
                   @blur="btnStatChng()"
-                  placeholder="예시) 서울특별시 강남구 테헤란로 000-0"/>
+                  placeholder="예시) 서울특별시 강남구 테헤란로 000-0" readonly/>
                 <input v-model="projStep.projOneStep.workDtlAddr" type="text" 
                 :class='(workAddrChk ? "border-[#ddd]" : "border-[#ff5252]") + " w-[520px] h-[51px] text-base text-left text-[#191919] p-4 rounded border "' 
                 placeholder="예시) 큐밋빌딩 1층"/>
