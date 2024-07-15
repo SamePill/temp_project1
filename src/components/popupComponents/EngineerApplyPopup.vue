@@ -111,15 +111,16 @@
                 class="flex-grow-0 flex-shrink-0 w-[460px] h-px bg-[#ddd]"
               ></div>
             </div>
-
-            <div
-              class="flex flex-col justify-start items-start mt-[20px] w-[460px] h-[500px] gap-3"
-              style="overflow-y: auto"
-            >
-              <div
-                v-for="el,idx in filteredEngrList" :key="el"
-                class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0"
-              >
+            <div class="flex items-center mt-[20px] w-[460px] gap-3" style="overflow-y: auto">
+              <div @click="selectEngrRtngCd('engrRtngCd','')" :class="engrRtngDivCd =='' ? 'gap-2.5 px-4 py-1.5 rounded-[100px] bg-[#1ba494]' :'cursor-pointer flex gap-2.5 px-4 py-1.5 rounded-[100px] border border-[#ddd]' ">
+                <p :class="engrRtngDivCd == ''? 'text-sm text-[#fff]' : 'text-sm text-[#555]'">전체</p>
+              </div>
+              <div @click="selectEngrRtngCd('engrRtngCd',el.cd)" v-for="el in engrRtngDivCdList" :key="el" :class="engrRtngDivCd == el.cd ? 'gap-2.5 px-4 py-1.5 rounded-[100px] bg-[#1ba494]' :'cursor-pointer flex gap-2.5 px-4 py-1.5 rounded-[100px] border border-[#ddd]' ">
+                <p :class="engrRtngDivCd == el.cd ? 'text-sm text-[#fff]' : 'text-sm text-[#555]'">{{el.cdNm.replace(' 엔지니어','')}}</p>
+              </div>
+            </div>
+            <div class="flex flex-col justify-start items-start mt-[20px] w-[460px] h-[500px] gap-3" style="overflow-y: auto">
+              <div v-for="el,idx in filteredEngrList" :key="el" class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0">
                 <div
                   class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1"
                 >
@@ -244,6 +245,14 @@
               ></div>
             </div>
 
+            <div class="flex items-center mt-[20px] w-[460px] gap-3" style="overflow-y: auto">
+              <div @click="selectEngrRtngCd('engrRtngDivCdSprt','')" :class="engrRtngDivCdSprt =='' ? 'gap-2.5 px-4 py-1.5 rounded-[100px] bg-[#1ba494]' :'cursor-pointer flex gap-2.5 px-4 py-1.5 rounded-[100px] border border-[#ddd]' ">
+                <p :class="engrRtngDivCdSprt == ''? 'text-sm text-[#fff]' : 'text-sm text-[#555]'">전체</p>
+              </div>
+              <div @click="selectEngrRtngCd('engrRtngDivCdSprt',el.cd)" v-for="el in engrRtngDivCdList" :key="el" :class="engrRtngDivCdSprt == el.cd ? 'gap-2.5 px-4 py-1.5 rounded-[100px] bg-[#1ba494]' :'cursor-pointer flex gap-2.5 px-4 py-1.5 rounded-[100px] border border-[#ddd]' ">
+                <p :class="engrRtngDivCdSprt == el.cd ? 'text-sm text-[#fff]' : 'text-sm text-[#555]'">{{el.cdNm.replace(' 엔지니어','')}}</p>
+              </div>
+            </div>
             <div
               class="flex flex-col justify-start items-start mt-[20px] w-[460px] h-[500px] gap-3"
               style="overflow-y: auto"
@@ -386,7 +395,7 @@ const emit = defineEmits([
 const props = defineProps({ prj: {} 
                            ,slctEngrList:[]});
 const prjEngrInfo = ref([]);
-
+const engrRtngDivCdList = ref([]);
 // onMounted(() => {
 //   //로그인 후 - 지원 전(projectSprtInfo유무),지원 중
 //   //로그인 후 - 지원 후(projectSprtInfo유무)
@@ -395,6 +404,8 @@ const prjEngrInfo = ref([]);
 const userMail = ref(window.$cookies.get("loginUserMail"));
 const baseModal = ref(null);
 
+const engrRtngDivCd = ref('');
+const engrRtngDivCdSprt = ref('');
 const srchEngr = ref("")
 const engrList = ref([])
 const srchSprt = ref("")
@@ -420,23 +431,34 @@ const engr40Cnt = computed( () => {
       item.engrRtngDivCd == 40
   ).length
 })
-
 const filteredEngrList = computed( () => {
-  if(srchEngr.value == ""){
-    return engrList.value
+  let result = engrList.value
+  if(srchEngr.value != "" && engrRtngDivCd.value == ""){
+    result =  engrList.value.filter( item => 
+      item.engrNm.indexOf(srchEngr.value) >= 0 );
+  }else if(srchEngr.value == "" && engrRtngDivCd.value != ""){
+    result =  engrList.value.filter( item => 
+     item.engrRtngDivCd == engrRtngDivCd.value );
+  }else if(srchEngr.value != "" && engrRtngDivCd.value != ""){
+    result =  engrList.value.filter( item => 
+     item.engrNm.indexOf(srchEngr.value) > -1 && item.engrRtngDivCd == engrRtngDivCd.value );
   }
-  return engrList.value.filter( item => 
-      item.engrNm.indexOf(srchEngr.value) >= 0
-  )
+  return result;
 })
 
 const filteredEngrSprtList = computed( () => {
-  if(srchSprt.value == ""){
-    return engrSprtList.value  
+  let result = engrSprtList.value
+  if(srchSprt.value != "" && engrRtngDivCdSprt.value == ""){
+    result =  engrSprtList.value.filter( item => 
+      item.engrNm.indexOf(srchSprt.value) >= 0 );
+  }else if(srchSprt.value == "" && engrRtngDivCdSprt.value != ""){
+    result =  engrSprtList.value.filter( item => 
+     item.engrRtngDivCd == engrRtngDivCdSprt.value );
+  }else if(srchSprt.value != "" && engrRtngDivCdSprt.value != ""){
+    result =  engrSprtList.value.filter( item => 
+     item.engrNm.indexOf(srchSprt.value) > -1 && item.engrRtngDivCd == engrRtngDivCdSprt.value );
   }
-  return engrSprtList.value.filter( item => 
-      item.engrNm.indexOf(srchSprt.value) >= 0
-  )
+  return result;
 })
 
 
@@ -481,6 +503,14 @@ const cancel = () => {
   baseModal.value.close();
 }
 
+
+function selectEngrRtngCd(div,cd){
+  if(div=='engrRtngCd'){
+    engrRtngDivCd.value = cd;
+  }else if(div=='engrRtngDivCdSprt'){
+    engrRtngDivCdSprt.value = cd;
+  }  
+}
 function chkAdd(idx){
 
   if(engrList.value[idx].chkVal == true){
@@ -534,7 +564,10 @@ function srchEngrNm(){
 
 
 async function loadData() {
-
+  engrRtngDivCd.value = "";
+  engrRtngDivCdSprt.value = "";
+  //등급코드
+  engrRtngDivCdList.value = await gfnUtils.getCommCode('ENGR_RTNG_DIV_CD');
   var getParams = { projId: props.prj.projId, userMail: userMail.value };
   await gfnUtils
     .axiosGet("/v1/project/engineers", getParams)
@@ -545,7 +578,6 @@ async function loadData() {
         engrList.value = rtn.rtnData.notSprtEngrList; //좌
         engrSprtList.value = rtn.rtnData.sprtEngrList;//우
 
-        console.log(props.slctEngrList.length)
         //추가 선택 리스트가 있는경우
         if(props.slctEngrList.length > 0){
           engrSprtList.value = props.slctEngrList;
