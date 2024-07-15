@@ -360,14 +360,11 @@
           </div>
           <button
             class="flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10 text-xs text-right text-[#777]"
-            @click="useTrmsYnIsShow = !useTrmsYnIsShow"
+            @click="router.push({name: 'UseTerms'})"
           >
             상세보기
             <!-- TO_DO 상세보기 구현 필요 -->
           </button>
-          <div class="pl-10 text-sm" v-if="useTrmsYnIsShow">
-            큐밋 이용약관 동의설명
-          </div>
         </div>
         <div
           class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 gap-0.5"
@@ -411,14 +408,11 @@
           </div>
           <button
             class="flex justify-center items-start flex-grow-0 flex-shrink-0 relative gap-2.5 pl-10 text-xs text-right text-[#777]"
-            @click="privTrmsYnIsShow = !privTrmsYnIsShow"
+            @click="router.push({name: 'PrivacyPolicy'})"
           >
             상세보기
             <!-- TO_DO 상세보기 구현 필요 -->
           </button>
-          <div class="pl-10 text-sm" v-if="privTrmsYnIsShow">
-            개인정보 제 3자 제공 동의설명
-          </div>
         </div>
       </div>
       <button
@@ -467,9 +461,6 @@ const userMail = ref(window.$cookies.get("loginUserMail"));
 const hopeStrtDay = ref("");
 const useTrmsYn = ref(false);
 const privTrmsYn = ref(false);
-
-const useTrmsYnIsShow = ref(false);
-const privTrmsYnIsShow = ref(false);
 
 const isShowDetl = ref(false);
 
@@ -701,5 +692,6 @@ function selectEngr(applEngrList, sel10Cnt, sel20Cnt, sel30Cnt, sel40Cnt) {
   , "fileList": [ { "fileUrl": "https://d2o04aboxunrcy.cloudfront.net/projFile/202404/FindEat.pdf", "fileNm": "FindEat.pdf", "projFileSeq": "28" }, { "fileUrl": "https://d2o04aboxunrcy.cloudfront.net/projFile/202404/%EB%A6%AC%EB%93%9C%EC%9B%8C%ED%81%AC+%ED%99%88%ED%99%94%EB%A9%B4.png", "fileNm": "리드워크 홈화면.png", "projFileSeq": "29" } ]
   , "projChckDivCdList": [ { "projChckDivCd": "10", "projChckDivCdNm": "프로젝트 수행 시 연장 및 휴일 근무가 필요합니다." }, { "projChckDivCd": "20", "projChckDivCdNm": "연장 / 휴일 근무 발생 시 대체휴무 제공합니다." } ] }
   */
+
 </script>
 
