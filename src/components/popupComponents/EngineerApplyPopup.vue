@@ -166,7 +166,7 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]"
                     >
-                      거주지 : {{ el.baseAddr }}
+                      주소 : {{ el.baseAddr }}
                     </p>
                     <span class="text-sm text-[#DBDBDB] px-2">|</span>
                     <p
@@ -307,7 +307,7 @@
                     <p
                       class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#777]"
                     >
-                      거주지 : {{ el.baseAddr }}
+                      주소 : {{ el.baseAddr }}
                     </p>
                     <span class="text-sm text-[#DBDBDB] px-2">|</span>
                     <p

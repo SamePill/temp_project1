@@ -167,7 +167,7 @@
   </div>
 </template>
 <script setup>
-import {  ref, onMounted } from "vue";
+import {  ref, onMounted, computed } from "vue";
 import { useRouter } from 'vue-router';
 import TaskTip from "@/components/popupComponents/TaskTip.vue";
 import SkillTip from "@/components/popupComponents/SkillTip.vue";
@@ -196,7 +196,7 @@ const fileList = ref([]);
 const projCtntTaskChk = ref(true)
 const projDmndSkilChk = ref(true)
 const projUseToolChk = ref(true)
-const btnIsActv = ref(false)
+//const btnIsActv = ref(false)
 
 onMounted(() => {
   loadData();
@@ -243,18 +243,21 @@ function popup(div){
 
 }
 
-function btnStatChng(){
- 
- let chk1 = !gfnRules.isNull(projStep.value.projTwoStep.projCtntTask); //프로젝트 설명
- let chk2 = !gfnRules.isNull(projStep.value.projTwoStep.projDmndSkil) //요구스킬
- let chk3 = !gfnRules.isNull(projStep.value.projTwoStep.projUseTool) //활용tool
- 
- if(chk1 && chk2 && chk3 ){
-   btnIsActv.value = true
- }else{
-   btnIsActv.value = false
- }
 
+const btnIsActv = computed( () => {
+  let chk1 = !gfnRules.isNull(projStep.value.projTwoStep.projCtntTask); //프로젝트 설명
+  let chk2 = !gfnRules.isNull(projStep.value.projTwoStep.projDmndSkil) //요구스킬
+  let chk3 = !gfnRules.isNull(projStep.value.projTwoStep.projUseTool) //활용tool
+
+  if(chk1 && chk2 && chk3 ){
+    return true
+  }else{
+    return false
+  }
+})
+
+function btnStatChng(){
+  console.log("")
 }
 
 

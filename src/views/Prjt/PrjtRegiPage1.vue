@@ -204,7 +204,7 @@
   </div>
 </template>
 <script setup>
-import {  ref, onMounted, onUnmounted } from "vue";
+import {  ref, onMounted, onUnmounted, computed } from "vue";
 import Chipset             from '@/components/uiComponents/Chipset.vue'
 // import Chips             from '@/components/uiComponents/Chips.vue'
 import * as gfnUtils       from "@/utils/gfnUtils.js";
@@ -287,7 +287,7 @@ const pirdValChk = ref(true)
 const workAddrChk = ref(true)
 const atndTimeChk = ref(true)
 const lvwkTimeChk = ref(true)
-const btnIsActv =  ref(false)
+//const btnIsActv =  ref(false)
 
 onMounted(() => {
   // jobDivCdList.value = []
@@ -380,27 +380,31 @@ function scrollToTop(){
     behavior: 'smooth' });
 }
 
-function btnStatChng(){
- 
+const btnIsActv = computed( () => {
+   
   //projStep.value.projOneStep.jobDivCdList //직군
   //projStep.value.projOneStep.taskDivCdList //업무영역
 
   //projStep.value.projOneStep.projTitl = gfnRules.regrexKoEnNo(projStep.value.projOneStep.projTitl)
-
-  projStep.value.projOneStep.pirdVal = projStep.value.projOneStep.pirdVal.replace(/\D/g, ''); // 숫자 이외의 문자 제거
 
   let chk1 = !gfnRules.isNull(projStep.value.projOneStep.projTitl); //프로젝트명
   let chk2 = !gfnRules.isNull(projStep.value.projOneStep.strtDay) //희망식작일
   let chk3 = !gfnRules.isNull(projStep.value.projOneStep.pirdVal) //예상근무기간
   let chk4 = !gfnRules.isNull(projStep.value.projOneStep.workDivCd) //근무방식
   let chk5 = !gfnRules.isNull(projStep.value.projOneStep.workAddr) //근무방식
+  let chk6 = !gfnRules.isNull(projStep.value.projOneStep.atndTime) 
+  let chk7 = !gfnRules.isNull(projStep.value.projOneStep.lvwkTime) 
 
-  if(chk1 && chk2 && chk3 && chk4 && chk5){
-    btnIsActv.value = true
+
+  if(chk1 && chk2 && chk3 && chk4 && chk5 && chk6 && chk7){
+    return true
   }else{
-    btnIsActv.value = false
+    return false
   }
+})
 
+function btnStatChng(){
+  projStep.value.projOneStep.pirdVal = projStep.value.projOneStep.pirdVal.replace(/\D/g, ''); // 숫자 이외의 문자 제거
 }
 
 function projTitlChkRule(){

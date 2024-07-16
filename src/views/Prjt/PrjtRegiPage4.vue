@@ -171,7 +171,7 @@
   </div>
 </template>
 <script setup>
-import {  ref,onMounted } from "vue";
+import {  ref, onMounted, computed } from "vue";
 import { useRouter } from 'vue-router';
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
@@ -199,7 +199,7 @@ const rprsHpChk1 = ref(true);
 const rprsHpChk2 = ref(true);
 const rprsMailChk1 = ref(true);
 const rprsMailChk2 = ref(true);
-const btnIsActv =  ref(false)
+//const btnIsActv =  ref(false)
 
 function rprsNmRule(){
   rprsNmChk1.value = !gfnRules.isNull(projStep.value.projFourStep.rprsNm);
@@ -235,13 +235,8 @@ function validateHp(event){
   }
 }
 
-function btnStatChng(){
 
-  projStep.value.projFourStep.rprsMail = projStep.value.projFourStep.rprsMail.replace(/[^a-zA-Z0-9@.]/g, '');
-
-  if(projStep.value.projFourStep.rprsHp.length == 11){
-    projStep.value.projFourStep.rprsHp = gfnUtils.formattedHpNo(projStep.value.projFourStep.rprsHp)
-  }
+const btnIsActv = computed( () => {
 
   let chk1 = !gfnRules.isNull(projStep.value.projFourStep.rprsNm); //담당자 이름
   let chk2 = !gfnRules.isNull(projStep.value.projFourStep.rprsHp) //담당자 휴대폰 번호
@@ -250,11 +245,21 @@ function btnStatChng(){
   let chk5 = projStep.value.projFourStep.privTrmsYn == 'Y'
 
   if(chk1 && chk2 && chk3 && chk4 && chk5){
-    btnIsActv.value = true
+    return true
   }else{
-    btnIsActv.value = false
+    return false
   }
 
+})
+
+function btnStatChng(){
+  
+  projStep.value.projFourStep.rprsMail = projStep.value.projFourStep.rprsMail.replace(/[^a-zA-Z0-9@.]/g, '');
+
+  if(projStep.value.projFourStep.rprsHp.length == 11){
+    projStep.value.projFourStep.rprsHp = gfnUtils.formattedHpNo(projStep.value.projFourStep.rprsHp)
+  }
+  
 }
 
 
