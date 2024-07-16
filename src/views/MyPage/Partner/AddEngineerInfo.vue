@@ -274,7 +274,8 @@
             </div>
           </div> -->
           <button
-            class="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"
+            :class='(btnIsActv ? "bg-[#1BA494]" : "bg-[#999]") + " flex-grow-0 flex-shrink-0 text-base font-medium text-left text-white flex justify-center items-center flex-grow-0 flex-shrink-0 w-[520px] relative overflow-hidden gap-2.5 px-2.5 py-4 rounded bg-[#1ba494]"'
+            :disabled="!btnIsActv"
             @click="nextStep()"
           >           
            다음 단계로 넘어가기
@@ -292,7 +293,7 @@
 
 import Modal from "@/components/baseComponents/Modal.vue";
 import { useRouter } from 'vue-router'
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import SkillTipEngr from "@/components/popupComponents/SkillTipEngr.vue";
 import * as gfnUtils from "@/utils/gfnUtils.js";
 import * as gfnRules from "@/utils/gfnRules.js";
@@ -360,6 +361,31 @@ function engrNmChkRule(){
     engrNmChk.value = false
   }  
 }
+
+
+const btnIsActv = computed( () => {
+   
+   //projStep.value.projOneStep.jobDivCdList //직군
+   //projStep.value.projOneStep.taskDivCdList //업무영역
+ 
+   //projStep.value.projOneStep.projTitl = gfnRules.regrexKoEnNo(projStep.value.projOneStep.projTitl)
+ 
+   let chk1 = !gfnRules.isNull(engrStep1.value.bith); 
+   let chk2 = !gfnRules.isNull(engrStep1.value.baseAddr)
+   let chk3 = !gfnRules.isNull(engrStep1.value.schlNm)
+   let chk4 = !gfnRules.isNull(engrStep1.value.dprt)
+   let chk5 = !gfnRules.isNull(engrStep1.value.dprt)
+   let chk6 = !gfnRules.isNull(engrStep1.value.crrYear) 
+   let chk7 = !gfnRules.isNull(engrStep1.value.crrMon) 
+ 
+ 
+   if(chk1 && chk2 && chk3 && chk4 && chk5 && chk6 && chk7){
+     return true
+   }else{
+     return false
+   }
+ })
+
 function birtChkRule(){
   birtChk.value = !gfnRules.isNull(engrStep1.value.bith)
 }
