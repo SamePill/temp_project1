@@ -71,6 +71,7 @@
         </div>
         <textarea
             class="flex-grow-0 flex-shrink-0 text-base text-left text-[#999] flex justify-start items-start flex-grow-0 flex-shrink-0 w-[580px] relative overflow-hidden gap-12 p-4 rounded bg-white border border-[#ddd]"
+            v-model="txt"
             placeholder="탈퇴하시는 사유를 입력해주세요."
           />
       </div>
@@ -95,15 +96,14 @@
 
 <script setup>
   import { ref, computed } from 'vue'
+  import * as gfnUtils from "@/utils/gfnUtils.js";
 
   const messages = ref(
-     [{cd:'01', cdNm:'사용하기 어려워요.1', chk:true},
-     {cd:'02', cdNm:'사용하기 어려워요.2', chk:false},
-     {cd:'03', cdNm:'사용하기 어려워요.3', chk:false},
-     {cd:'04', cdNm:'사용하기 어려워요.4', chk:false},
-     {cd:'99', cdNm:'기타', chk:false}]
+    gfnUtils.getCommCode("USER_OUT_DIV_CD")
   )
   const msgLength = computed(() => messages.value.length)
+  const userMail = ref(window.$cookies.get("loginUserMail"))
+  const txt = ref("")
 
   function check(idx){
     
@@ -116,11 +116,33 @@
     }  
 
   }
+  
+  async function process(){
+    
+    let selCd = ""
 
-  function process(){
-    alert("탈퇴처리....");
+    for (let i = 0; i< msgLength.value; i++){
+      if(messages.value[i].chk == true){
+        selCd = messages.value[i].cd
+      }
+    }  
+
+    var api = "/v1/my/out-receipt";
+    var getParams = {userMail: userMail.value};
+    var postParams = {outDivCd: selCd , outEtcTxt : txt.value}
+    let rtn = await gfnUtils.axiosPost(
+      api,
+      postParams,
+      getParams
+    );
+    if(rtn.rtnCd == "00"){
+      gfnUtils.openAlert("탈퇴 접수 되었습니다.","", 2000)
+    }else{
+      gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
+    }
     
   }
+
 
 // const props = defineProps({
 //   message:""

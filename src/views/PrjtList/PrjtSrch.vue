@@ -145,6 +145,13 @@ async function loadData(selPage){
     let res = rtn.rtnData
     projList.value = res.projList
     totalCnt.value = res.projTotlCnt
+
+    const contentDiv = document.querySelector('.content');
+    if (contentDiv) {
+      contentDiv.scrollTo({
+        top: 0
+      });
+    }
   }else{
     gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
   }

@@ -451,7 +451,13 @@
       console.log(engrList.value)
 
       totalCnt.value = res.engrTotlCnt
-  
+      
+      const contentDiv = document.querySelector('.content');
+      if (contentDiv) {
+        contentDiv.scrollTo({
+          top: 0
+        });
+      }
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

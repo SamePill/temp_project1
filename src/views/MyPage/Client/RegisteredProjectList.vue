@@ -239,9 +239,15 @@
       // TODO 총건수 필요..
       totalCnt.value = res.projTotlCnt
       // totalCnt.value = 0
-  
+      
+      const contentDiv = document.querySelector('.content');
+      if (contentDiv) {
+        contentDiv.scrollTo({
+          top: 0
+        });
+      }
     }else{
-      //TODO 공통Alert으로 변경 예정
+      
       alert(rtn.rtnMsg);
     }
     

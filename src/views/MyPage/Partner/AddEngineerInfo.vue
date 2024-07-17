@@ -26,7 +26,8 @@
               <p class="flex-grow-0 flex-shrink-0 text-xl text-left text-[#191919]">프로필 사진</p>
             </div>
             <div class="mt-[20px] w-[150px] h-[200px] flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 relative border border-[#ddd] rounded overflow-hidden " >
-              <img id="preview" v-show="showImg"/>
+              <img id="preview" v-show="showImg && !showImgUrl"/>
+              <img v-show="showImgUrl" :src="engrStep1.engrPhotUrl"/>
               <svg
                 width="150"
                 height="200"
@@ -35,7 +36,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 class="flex-grow-0 flex-shrink-0 w-[150px] h-[200px] relative"
                 preserveAspectRatio="xMidYMid meet"
-                v-show="!showImg"
+                v-show="!showImg && !showImgUrl"
               >
                 <rect x="0.5" y="0.5" width="149" height="199" fill="#DDDDDD"></rect>
                 <rect x="0.5" y="0.5" width="149" height="199" stroke="#DDDDDD"></rect>
@@ -304,6 +305,7 @@ const engrInfo = ref({});
 const userMail = ref(window.$cookies.get("loginUserMail"));
 const router = useRouter()
 const showImg = ref(false)
+const showImgUrl = ref(false)
 const $SkillTip = ref();
 const engrPhoto = ref({})
 const editMode = ref(false)
@@ -416,15 +418,13 @@ function updateAcqsDt(value, idx) {
     engrStep1.value.crtfList[idx].acqsDt = cleanedValue;
   }
 }
+
 onMounted(() => {
-
-
   if( dataObj != undefined ){
     console.log("수정모드...")
-
     engrInfo.value = JSON.parse(dataObj)
-    console.log(engrInfo.value)
-    console.log(engrInfo.value.engrId)
+    // console.log(engrInfo.value)
+    // console.log(engrInfo.value.engrId)
     if(!gfnRules.isNull(engrInfo.value.engrId)){
       editMode.value = true
       loadData();
@@ -445,13 +445,18 @@ async function loadData(){
   );
 
   if(rtn.rtnCd == "00"){
+
     engrStep1.value = rtn.rtnData   
-    console.log(engrStep1.value )
     birthY.value = engrStep1.value.bith.slice(0, 4)
     birthM.value = engrStep1.value.bith.slice(4, 6)
     birthD.value = engrStep1.value.bith.slice(6, 8)
     $EdctDivCd.value.loadData();
     $EngrRtngDivCd.value.loadData();
+
+    if(!gfnRules.isNull(rtn.rtnData.engrPhotUrl)){
+      showImgUrl.value = true;
+    }
+    
     // $EdctDivCd.value.loadData();
     // $EngrRtngDivCd.value.selectDefaultVal({ cd : engrStep1.value.engrRtngDivCd , cdNm : engrStep1.value.engrRtngDivCdNm});
   }else{

@@ -82,18 +82,28 @@
                     수정하기
                   </button>
                 </div>
+                <!-- <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
+                  <div
+                    v-for="el in props.projItem.taskDivCdNmList" :key="el"
+                    class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
+                  >
+                    <p class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]">
+                      {{el.taskDivCdNm}}
+                    </p>
+                  </div>          
+                </div>  -->
                 <div
                   class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3"
                 >
                   <!-- 반복부 # -->
-                  <div  v-for="el in jobDivCdList" :key="el">
+                  <div  v-for="el in taskDivCdList" :key="el">
                     <div
                       class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 px-4 py-2 rounded-[100px] bg-[#f2f4f7]"
                     >
                       <p
                         class="flex-grow-0 flex-shrink-0 text-base text-left text-[#555]"
                       >
-                        {{ el.jobDivCdNm }}
+                        {{ el.taskDivCdNm }}
                       </p>
                     </div>
                   </div>
@@ -236,8 +246,9 @@
       getParams
     );
     if(rtn.rtnCd == "00"){
+      console.log(rtn.rtnData)
       let res = rtn.rtnData
-      projSmryHstrList.value = res.projSmryHstrList
+      projSmryHstrList.value = res.projSmryHstrList      
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

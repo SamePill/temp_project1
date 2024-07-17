@@ -68,6 +68,8 @@ import Terms_1 from "@/views/Terms/Terms_1.vue";
 import Terms_2 from "@/views/Terms/Terms_2.vue";
 import UseTerms from "@/views/Terms/UseTerms.vue";
 
+import * as gfnRules from "@/utils/gfnRules.js";
+
 const router = createRouter({
   //history: createWebHashHistory(),
   history: createWebHistory(),
@@ -84,26 +86,30 @@ const router = createRouter({
       path: '/project-regi-1',
       component: PrjtRegiPage1,
       name:'PrjtRegiPage1',
-      props:true
+      props:true,
+      meta: { requiresAuth: true }
     },
     //프로젝트 등록 2단계
     {
       path: '/project-regi-2',
       component: PrjtRegiPage2,
       name:'PrjtRegiPage2',
-      props:true
+      props:true,
+      meta: { requiresAuth: true }
     },
     //프로젝트 등록 3단계
     {
       path: '/project-regi-3',
       component: PrjtRegiPage3,
-      name:'PrjtRegiPage3'
+      name:'PrjtRegiPage3',
+      meta: { requiresAuth: true }
     },
     //프로젝트 등록 4단계
     {
       path: '/project-regi-4',
       component: PrjtRegiPage4,
-      name:'PrjtRegiPage4'
+      name:'PrjtRegiPage4',
+      meta: { requiresAuth: true }
     },
     //프로젝트 찾기
     {
@@ -170,31 +176,36 @@ const router = createRouter({
     {
       path: '/myCompanyInfo',
       component: MyCompanyInfo,
-      name: 'MyCompanyInfo'
+      name: 'MyCompanyInfo',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/myInformation',
       component: MyInformation,
-      name: 'MyInformation'
+      name: 'MyInformation',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/myPasswordMng',
       component: MyPasswordMng,
-      name: 'MyPasswordMng'
+      name: 'MyPasswordMng',
+      meta: { requiresAuth: true }
     },
     
     {
       path: '/myIdDeactivation',
       component: MyIdDeactivation,
-      name: 'MyIdDeactivation'
+      name: 'MyIdDeactivation',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/myProjectList',
       component: MyProjectList,
-      name: 'MyProjectList'
+      name: 'MyProjectList',
+      meta: { requiresAuth: true }
     },
     
 
@@ -203,51 +214,57 @@ const router = createRouter({
       path: '/registeredProjectList',
       component: RegisteredProjectList,
       name: 'RegisteredProjectList',
-      meta: { keepAlive: true }
+      meta: { keepAlive: true, requiresAuth: true  }
     },
 
     {
       path: '/selEngineerList',
       component: SelEngineerList,
-      name: 'SelEngineerList'
+      name: 'SelEngineerList',
+      meta: { requiresAuth: true }
     },
 
     /*--------- 파트너 ----------*/
     {
       path: '/addEngineerCareerInfo',
       component: AddEngineerCareerInfo,
-      name: 'AddEngineerCareerInfo'
+      name: 'AddEngineerCareerInfo',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/addEngineerCareerList',
       component: AddEngineerCareerList,
-      name: 'AddEngineerCareerList'
+      name: 'AddEngineerCareerList',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/addEngineerInfo',
       component: AddEngineerInfo,
-      name: 'AddEngineerInfo'
+      name: 'AddEngineerInfo',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/appliedEngineerList',
       component: AppliedEngineerList,
-      name: 'AppliedEngineerList'
+      name: 'AppliedEngineerList',
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/appliedProjectList',
       component: AppliedProjectList,
       name: 'AppliedProjectList',
-      meta: { keepAlive: true }
+      meta: { keepAlive: true, requiresAuth: true }
     },
 
     {
       path: '/manageEngineer',
       component: ManageEngineer,
-      name: 'ManageEngineer'
+      name: 'ManageEngineer',
+      meta: { requiresAuth: true }
     },
     /*********************** 주소검색 ***********************/
     {
@@ -368,14 +385,20 @@ const router = createRouter({
   }
 });
 
-// router.beforeEach((to, from, next) => {
-//   console.log("?????")
-//   window.scroll(0, 0);
-//   window.scrollTo(0, 0);
-//   document.documentElement.scrollTop = 0;
-//   document.body.scrollTop = 0;
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  // console.log("?????")
+  // window.scroll(0, 0);
+  // window.scrollTo(0, 0);
+  // document.documentElement.scrollTop = 0;
+  // document.body.scrollTop = 0;
+  // next();
+  if (to.meta.requiresAuth && gfnRules.isNull(window.$cookies.get("loginUserMail"))) {
+    // 인증이 필요한 페이지에 접근하려고 할 때 로그인 페이지로 리디렉션
+    next('/login');
+  } else {
+    next();  // 그 외의 경우에는 그냥 진행
+  }
+});
 
 router.afterEach(() => {
   const contentDiv = document.querySelector('.content');

@@ -320,7 +320,12 @@
       topInfo.value = rtn.rtnData.topInfo
       totalCnt.value = rtn.rtnData.projTotlCnt
       // totalCnt.value = 0
-
+      const contentDiv = document.querySelector('.content');
+      if (contentDiv) {
+        contentDiv.scrollTo({
+          top: 0
+        });
+      }
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

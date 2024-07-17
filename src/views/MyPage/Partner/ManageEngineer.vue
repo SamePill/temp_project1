@@ -444,6 +444,13 @@
       totalCnt.value = res.engrTotlCnt
       // totalCnt.value = 0
       engrRtngCntInfo.value = res.engrRtngCntInfo
+      
+      const contentDiv = document.querySelector('.content');
+      if (contentDiv) {
+        contentDiv.scrollTo({
+          top: 0
+        });
+      }
     }else{
       gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
     }

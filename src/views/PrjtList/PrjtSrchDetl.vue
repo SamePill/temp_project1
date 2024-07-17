@@ -53,6 +53,7 @@
         console.log(rtn.rtnData)
         projInfo.value = rtn.rtnData;
         workDivCd.value = rtn.rtnData["workDivCd"];
+
       }else{
         gfnUtils.openAlert(rtn.rtnMsg,"", 2000)
       }
