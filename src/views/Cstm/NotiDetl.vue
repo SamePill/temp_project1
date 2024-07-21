@@ -19,8 +19,7 @@
             {{notiInfo.notiTitl}}
           </p>
           <div class="w-[1060px] mt-[10px] mb-[60px] gap-2.5 px-[34px] py-[30px] bg-[#ededed]">
-            <p class="self-stretch  w-[992px] text-base text-left text-black">
-              {{ notiInfo.notiTxt }}
+            <p v-html="notiInfo.notiTxt" class="self-stretch  w-[992px] text-base text-left text-black">
             </p>
           </div>
         </div>
